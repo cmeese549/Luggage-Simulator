@@ -8,6 +8,8 @@ const JUMP_VELOCITY = 4.5
 
 var mouse_sens = 1
 
+var camera_movement_this_frame : Vector2
+
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
@@ -16,11 +18,33 @@ func _unhandled_input(event):
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	if event.is_action_pressed("ui_cancel"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+			
+func _input(event: InputEvent) -> void:
 	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		if event is InputEventMouseMotion:
-			neck.rotate_y(-event.relative.x * mouse_sens / 800)
-			camera.rotate_x(-event.relative.y * mouse_sens / 800)
-			camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-90), deg_to_rad(90))
+			var viewport_transform: Transform2D = get_tree().root.get_final_transform()
+			camera_movement_this_frame += event.xformed_by(viewport_transform).relative / 1200
+			
+func gamepad_aim(delta: float) -> void:
+	var axis_vector = Vector2.ZERO
+	axis_vector.x = Input.get_action_strength("Look Right") - Input.get_action_strength("Look Left")
+	axis_vector.y = Input.get_action_strength("Look Up") - Input.get_action_strength("Look Down")
+	if camera_movement_this_frame == Vector2.ZERO and axis_vector != Vector2.ZERO:
+		camera_movement_this_frame = axis_vector * 10 * delta * mouse_sens
+		
+func _process(delta : float) -> void:
+	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
+		gamepad_aim(delta)
+		neck.rotate_y(-camera_movement_this_frame.x * mouse_sens)
+		camera.rotate_x(-camera_movement_this_frame.y * mouse_sens)
+		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-90), deg_to_rad(90))
+	
+	if camera_movement_this_frame == Vector2.ZERO:
+		#idle_sway_weapon(delta, bob_this_frame)
+		pass
+	else:
+		#camera_sway_weapon(delta, bob_this_frame)
+		camera_movement_this_frame = Vector2.ZERO
 
 func _physics_process(delta):
 	# Add the gravity.
