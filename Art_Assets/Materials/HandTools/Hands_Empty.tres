@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://h58o0lr3ej4u"]
+
+[ext_resource type="Texture2D" uid="uid://db8pobm6vxcrl" path="res://Art_Assets/Textures/HandTools/Hands_Empty.png" id="1_r33wm"]
+
+[resource]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+albedo_texture = ExtResource("1_r33wm")
+texture_filter = 0

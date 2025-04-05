@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://k16fcqlptxgg"
-path.s3tc="res://.godot/imported/WaterCan_Full.png-84a847bc86be350378598ffc43529f5d.s3tc.ctex"
+uid="uid://drysy7kt8y2lo"
+path.s3tc="res://.godot/imported/CoolerJug_Full.png-c674d9053e4c6392345b8363386e3fec.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Art_Assets/Textures/HandTools/WaterCan_Full.png"
-dest_files=["res://.godot/imported/WaterCan_Full.png-84a847bc86be350378598ffc43529f5d.s3tc.ctex"]
+source_file="res://Art_Assets/Textures/HandTools/CoolerJug_Full.png"
+dest_files=["res://.godot/imported/CoolerJug_Full.png-c674d9053e4c6392345b8363386e3fec.s3tc.ctex"]
 
 [params]
 
