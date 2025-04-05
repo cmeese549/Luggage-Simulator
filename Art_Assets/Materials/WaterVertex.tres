@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://cc3jyugw620gk"]
 
-[ext_resource type="Shader" uid="uid://5c4vpb3mgjuf" path="res://Art_Assets/Shaders/WaterShaderVertex.tres" id="1_ft1sj"]
+[ext_resource type="Shader" uid="uid://bvtd2d2vmcpix" path="res://Art_Assets/Shaders/WaterShaderVertex.tres" id="1_ft1sj"]
 
 [resource]
 render_priority = 0
@@ -8,6 +8,4 @@ shader = ExtResource("1_ft1sj")
 shader_parameter/ColorParameter = Color(0.033, 0.5764, 0.66, 1)
 shader_parameter/ColorScale = Vector2(15, 15)
 shader_parameter/FoamStrength = 0.59
-shader_parameter/RippleBreakupScale = Vector2(3, 3)
-shader_parameter/RippleStrength = 0.3
 shader_parameter/WaterOpacity = 0.95
