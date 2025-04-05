@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://d28sbjt0i0qst"]
+[gd_scene load_steps=5 format=3 uid="uid://d28sbjt0i0qst"]
 
 [ext_resource type="PackedScene" uid="uid://ddwtbnyshxxj3" path="res://Art_Assets/Levels/LevelGeometry.tscn" id="1_1wy1g"]
 [ext_resource type="PackedScene" uid="uid://bk7vc4usjt3od" path="res://Player/player.tscn" id="1_7ireg"]
+[ext_resource type="Material" uid="uid://cc3jyugw620gk" path="res://Art_Assets/Materials/WaterVertex.tres" id="3_vad1a"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_t065x"]
 
 [node name="MainLevel" type="Node3D"]
 
@@ -11,3 +14,11 @@
 
 [node name="Player" parent="." instance=ExtResource("1_7ireg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -12.0672)
+
+[node name="Node3D" type="Node3D" parent="."]
+
+[node name="WaterPlane" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(700, 0, 0, 0, -3.0598e-05, 1, 0, -700, -4.37114e-08, 68.2185, -1, 171.569)
+mesh = SubResource("QuadMesh_t065x")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("3_vad1a")
