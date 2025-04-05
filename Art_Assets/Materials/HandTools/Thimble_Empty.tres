@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://bx1fytfnw6rjd"]
+
+[ext_resource type="Texture2D" uid="uid://cp61ngcxgrlma" path="res://Art_Assets/Textures/HandTools/Thimble_Empty.png" id="1_towvm"]
+
+[resource]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+albedo_texture = ExtResource("1_towvm")
+texture_filter = 0
