@@ -1,4 +1,4 @@
-extends Node
+extends Node3D
 
 class_name Pump
 
@@ -53,7 +53,7 @@ func attempt_buy():
 func attempt_upgrade():
 	upgrade_menu.open(self)
 
-func apply_upgrde(new_upgrade: pump_upgrade):
+func apply_upgrade(new_upgrade: pump_upgrade):
 	var did_upgrade = false
 	var i = 0
 	for slot in upgrade_slots:
@@ -75,3 +75,5 @@ func apply_upgrde(new_upgrade: pump_upgrade):
 		i += 1
 	if not did_upgrade:
 		push_error("Tried to add an upgrade to a full pump")
+	if upgrade_menu.visible:
+		upgrade_menu.render_upgrades(self)

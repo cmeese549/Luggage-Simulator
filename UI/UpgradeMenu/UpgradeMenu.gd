@@ -4,6 +4,7 @@ class_name UpgradeMenu
 
 @onready var upgrade_entry : PackedScene = preload("res://UI/UpgradeMenu/UpgradeSlot.tscn")
 @onready var ui : UI = $".."
+@onready var hud : Control = $"../HUD"
 
 @onready var speed_upgrade_1 : Button = $PanelContainer/MarginContainer/Rows/HBoxContainer/SpeedUpgrades/VBoxContainer/Button
 @onready var speed_upgrade_2 : Button = $PanelContainer/MarginContainer/Rows/HBoxContainer/SpeedUpgrades/VBoxContainer/Button2
@@ -34,15 +35,23 @@ func _process(_delta: float) -> void:
 	update_affordability()
 
 func close() -> void:
+	hud.visible = true
 	current_pump = null
 	self.visible = false
 	get_tree().paused = false
 	disconnect_buttons()
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func open(pump: Pump) -> void:
+	hud.visible = false
 	current_pump = pump
 	self.visible = true
 	get_tree().paused = true
+	render_upgrades(pump)
+	connect_buttons(pump)
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	
+func render_upgrades(pump: Pump) -> void:
 	var i : int = 0
 	var applied_upgrades : int = 0
 	for entry: VBoxContainer in upgrade_slots.get_children():
@@ -55,15 +64,8 @@ func open(pump: Pump) -> void:
 			applied_upgrades += 1
 		i += 1
 	
-	
-	if applied_upgrades == 5:
-		disable_upgrade_buttons()
-	else:
-		if pump.speed_upgrades.size() == 3 and pump.quality_upgrades.size() == 3:
-			connect_upgrade_buttons()
-	connect_buttons(pump)
-	
 func connect_buttons(pump: Pump) -> void:
+	print(pump)
 	var i : int = 0
 	var speed_upgrade_buttons : Array[Button] = [
 		speed_upgrade_1,
