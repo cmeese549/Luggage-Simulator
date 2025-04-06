@@ -15,7 +15,7 @@ func _ready():
 	if !animation_player:
 		push_error("No animation player on tool: "+name)
 
-func use():
+func use(is_there_water: bool):
 	if !tool_ready:
 		#TODO put some rejection noise here
 		print("Tool not ready")
@@ -23,7 +23,10 @@ func use():
 	if unlocked and equiped and tool_ready:
 		tool_ready = false
 		if !tool_full:
-			animation_player.play("fill")
+			if is_there_water:
+				animation_player.play("good_fill")
+			else:
+				animation_player.play("bad_fill")
 		else:
 			animation_player.play("empty")
 
@@ -49,10 +52,11 @@ func _on_animation_player_animation_finished(anim_name):
 			equiped = true
 		"stow":
 			equiped = false
-		"fill":
+		"good_fill":
 			#TODO determine if near and facing water
 			tool_full = true
 		"empty":
 			#TODO determine if near and facing reciptical
 			tool_full = false
+
 	
