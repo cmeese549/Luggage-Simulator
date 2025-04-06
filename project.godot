@@ -35,7 +35,9 @@ enabled=PackedStringArray("res://addons/terrain_3d/plugin.cfg")
 
 folder_colors={
 "res://Art_Assets/": "teal",
+"res://Game_Management/": "purple",
 "res://Level/": "yellow",
+"res://Objects/": "orange",
 "res://Player/": "red",
 "res://UI/": "green",
 "res://addons/": "gray"
@@ -128,6 +130,7 @@ OpenShopDebug={
 3d_physics/layer_1="Main"
 3d_physics/layer_2="Water Surface"
 3d_physics/layer_3="Water Float"
+3d_physics/layer_4="Interactables"
 
 [physics]
 

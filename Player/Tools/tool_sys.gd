@@ -51,12 +51,15 @@ func _unhandled_input(event):
 			if interact_thing.name == "WaterTop" || interact_thing.name == "DepositArea":
 				equipped_tool.use(interact_thing.name)
 			elif interact_thing.name == "PumpBuy":
-				interact_thing.attempt_buy()
+				interact_thing.find_parent("Pump").attempt_buy()
+			elif interact_thing.name == "PumpUpgrade":
+				interact_thing.find_parent("Pump").attempt_upgrade()
 
 func check_for_interactable():
 	if look_at_cast.is_colliding():
 		var col = look_at_cast.get_collider()
-		print("Looking at "+col.name)
+		#print("Looking at "+col.name)
 		if "Interactable" in col.get_groups():
 			return col
 	return null
+	
