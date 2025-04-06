@@ -4,6 +4,7 @@ class_name ToolSys
 
 var tools: Array[tool]
 var equipped_tool: tool
+var next_tool: tool
 
 @onready var look_at_cast: RayCast3D = $"../LookAtCast"
 @onready var camera_3d: Camera3D = $".."
@@ -43,7 +44,22 @@ func _process(_delta: float) -> void:
 		else:
 			if interact_crosshair.visible:
 				interact_crosshair.visible = false
-		
+
+func upgrade_tool(tool_name: String):
+	equipped_tool.stow_finished.connect(equip_next_tool)
+	equipped_tool.stow()
+	var found_tool = false
+	for t in tools:
+		if t.tool_name == tool_name:
+			next_tool = t
+	if not found_tool: push_error("Couldn't find tool: "+tool_name)
+
+func equip_next_tool(old_tool):
+	#This is called from the stow finished signal from the old tool
+	equipped_tool.visible = false
+	equipped_tool = next_tool
+	equipped_tool.visible = true
+	equipped_tool.equip()
 
 func _unhandled_input(event):
 	if event.is_action_pressed("primary"):

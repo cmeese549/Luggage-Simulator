@@ -32,6 +32,8 @@ var tool_full: bool = false
 @export var capacity: int = 1
 @export var water_value: int = 1
 
+signal stow_finished(this_tool: tool)
+
 func _ready():
 	if !animation_player:
 		push_error("No animation player on tool: "+name)
@@ -75,6 +77,7 @@ func _on_animation_player_animation_finished(anim_name):
 			equiped = true
 		"stow":
 			equiped = false
+			stow_finished.emit(self)
 		"good_fill":
 			tool_full = true
 		"empty":
