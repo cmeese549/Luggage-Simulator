@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://hr021abwwm8b"]
 
-[ext_resource type="Script" uid="uid://cunpmy3a5ucf6" path="res://Objects/pump.gd" id="1_55ofu"]
+[ext_resource type="Script" uid="uid://cunpmy3a5ucf6" path="res://Objects/Pump/pump.gd" id="1_55ofu"]
 [ext_resource type="ArrayMesh" uid="uid://d06xqcr5yveh0" path="res://Art_Assets/Models/MachineBLOCKOUT.obj" id="2_d18j0"]
 [ext_resource type="Script" uid="uid://b25jflxjfg3ss" path="res://Objects/pump_buy.gd" id="3_d18j0"]
 
