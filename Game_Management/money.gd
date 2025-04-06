@@ -8,8 +8,8 @@ func _ready():
 	cur_money = starting_money
 	Events.make_money.connect(make_money)
 
-func make_money(amount, log=false):
-	if log:
+func make_money(amount, notify=false):
+	if notify:
 		#Could emit signal for money made here for UI
 		print("Made "+str(amount)+" money")
 	cur_money += amount

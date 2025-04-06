@@ -15,7 +15,7 @@ func all_ready():
 	water_obj = %Water
 	money = %Money
 
-func _process(delta):
+func _process(_delta):
 	if water_obj:
 		water_amount_num.text = str(water_obj.cur_amount)
 		water_level_num.text = "%.2f" % water_obj.cur_y
