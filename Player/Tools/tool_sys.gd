@@ -19,6 +19,7 @@ func start_game():
 	for child in get_children():
 		if child is tool: 
 			print("Found tool: "+child.name)
+			child.visible = false
 			tools.append(child)
 	tools[0].unlock()
 	tools[0].visible = true
