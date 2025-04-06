@@ -1,5 +1,7 @@
 extends Node
 
+class_name Money
+
 @export var starting_money: int = 0
 
 var cur_money: float

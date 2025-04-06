@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://exdhmbr43ger"]
+[gd_scene load_steps=19 format=3 uid="uid://exdhmbr43ger"]
 
 [ext_resource type="Script" uid="uid://dic75q4o378w6" path="res://UI/UI.gd" id="1_6dd3c"]
 [ext_resource type="Theme" uid="uid://b3kq74llqlv3x" path="res://UI/Theme/MinimalUI.tres" id="1_dhe1o"]
@@ -7,12 +7,13 @@
 [ext_resource type="Texture2D" uid="uid://c8ipav7ruim5w" path="res://UI/HUD/Crosshair/crosshair2.png" id="4_f1fl4"]
 [ext_resource type="Texture2D" uid="uid://btbey8ncomyx7" path="res://UI/HUD/Crosshair/hitmorker.png" id="5_jqf55"]
 [ext_resource type="Script" uid="uid://bkn6bkk5bo3k0" path="res://UI/Dialogue/DialogueBox.gd" id="5_qgmx8"]
-[ext_resource type="Script" path="res://UI/MainMenu.gd" id="6_byuxr"]
+[ext_resource type="Script" uid="uid://sb0v8kjwv2pv" path="res://UI/MainMenu/MainMenu.gd" id="6_byuxr"]
 [ext_resource type="Shader" uid="uid://bkcnroaexgcpu" path="res://UI/MainMenu/FadeFromBlack.tres" id="6_jqf55"]
 [ext_resource type="Script" uid="uid://bed3d7egj53pu" path="res://UI/PauseMenu/PauseMenu.gd" id="6_qhxh2"]
 [ext_resource type="Script" uid="uid://cde2nhieog6m4" path="res://UI/UpgradeMenu/UpgradeMenu.gd" id="6_t31p1"]
 [ext_resource type="Script" uid="uid://vcecdqq511h1" path="res://UI/Shop/Shop.gd" id="7_6q2ik"]
-[ext_resource type="Script" path="res://UI/HUD/hud.gd" id="7_017wa"]
+[ext_resource type="Script" uid="uid://cmqb4oi3mfhb4" path="res://UI/HUD/hud.gd" id="7_017wa"]
+[ext_resource type="PackedScene" uid="uid://yg0ip3ps48ca" path="res://UI/UpgradeMenu/UpgradeSlot.tscn" id="7_kncd2"]
 [ext_resource type="PackedScene" uid="uid://dth0cukoj3ajb" path="res://UI/PauseMenu/InventoryItem.tscn" id="10_npmjx"]
 [ext_resource type="Script" uid="uid://5ls1kx27ehtl" path="res://UI/Dialogue/DialoguePauser.gd" id="10_vx7wu"]
 [ext_resource type="AudioStream" uid="uid://bdm7p1ssjxe5w" path="res://UI/Dialogue/bloop.ogg" id="11_r2vy3"]
@@ -192,125 +193,20 @@ layout_mode = 2
 size_flags_vertical = 3
 alignment = 1
 
-[node name="UpgradeSlot1" type="VBoxContainer" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/UpgradeSlots"]
+[node name="UpgradeSlot" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/UpgradeSlots" instance=ExtResource("7_kncd2")]
 layout_mode = 2
-size_flags_horizontal = 3
-alignment = 1
 
-[node name="Name" type="Label" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/UpgradeSlots/UpgradeSlot1"]
+[node name="UpgradeSlot2" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/UpgradeSlots" instance=ExtResource("7_kncd2")]
 layout_mode = 2
-theme_override_font_sizes/font_size = 45
-text = "Speedy Pump"
-horizontal_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/UpgradeSlots/UpgradeSlot1"]
+[node name="UpgradeSlot3" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/UpgradeSlots" instance=ExtResource("7_kncd2")]
 layout_mode = 2
-texture = ExtResource("3_q0uhn")
-stretch_mode = 5
 
-[node name="Description" type="Label" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/UpgradeSlots/UpgradeSlot1"]
-custom_minimum_size = Vector2(5, 100)
+[node name="UpgradeSlot4" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/UpgradeSlots" instance=ExtResource("7_kncd2")]
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "Makes the pump way more speedier"
-horizontal_alignment = 1
-autowrap_mode = 2
 
-[node name="UpgradeSlot2" type="VBoxContainer" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/UpgradeSlots"]
+[node name="UpgradeSlot5" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/UpgradeSlots" instance=ExtResource("7_kncd2")]
 layout_mode = 2
-size_flags_horizontal = 3
-alignment = 1
-
-[node name="Name" type="Label" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/UpgradeSlots/UpgradeSlot2"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 45
-text = "Empty Slot"
-horizontal_alignment = 1
-
-[node name="TextureRect" type="TextureRect" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/UpgradeSlots/UpgradeSlot2"]
-layout_mode = 2
-texture = ExtResource("3_q0uhn")
-stretch_mode = 5
-
-[node name="Description" type="Label" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/UpgradeSlots/UpgradeSlot2"]
-custom_minimum_size = Vector2(5, 100)
-layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "Ready for the juice"
-horizontal_alignment = 1
-autowrap_mode = 2
-
-[node name="UpgradeSlot3" type="VBoxContainer" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/UpgradeSlots"]
-layout_mode = 2
-size_flags_horizontal = 3
-alignment = 1
-
-[node name="Name" type="Label" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/UpgradeSlots/UpgradeSlot3"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 45
-text = "Speedy Pump"
-horizontal_alignment = 1
-
-[node name="TextureRect" type="TextureRect" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/UpgradeSlots/UpgradeSlot3"]
-layout_mode = 2
-texture = ExtResource("3_q0uhn")
-stretch_mode = 5
-
-[node name="Description" type="Label" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/UpgradeSlots/UpgradeSlot3"]
-custom_minimum_size = Vector2(5, 100)
-layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "Makes the pump way more speedier"
-horizontal_alignment = 1
-autowrap_mode = 2
-
-[node name="UpgradeSlot4" type="VBoxContainer" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/UpgradeSlots"]
-layout_mode = 2
-size_flags_horizontal = 3
-alignment = 1
-
-[node name="Name" type="Label" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/UpgradeSlots/UpgradeSlot4"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 45
-text = "Speedy Pump"
-horizontal_alignment = 1
-
-[node name="TextureRect" type="TextureRect" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/UpgradeSlots/UpgradeSlot4"]
-layout_mode = 2
-texture = ExtResource("3_q0uhn")
-stretch_mode = 5
-
-[node name="Description" type="Label" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/UpgradeSlots/UpgradeSlot4"]
-custom_minimum_size = Vector2(5, 100)
-layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "Makes the pump way more speedier"
-horizontal_alignment = 1
-autowrap_mode = 2
-
-[node name="UpgradeSlot5" type="VBoxContainer" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/UpgradeSlots"]
-layout_mode = 2
-size_flags_horizontal = 3
-alignment = 1
-
-[node name="Name" type="Label" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/UpgradeSlots/UpgradeSlot5"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 45
-text = "Speedy Pump"
-horizontal_alignment = 1
-
-[node name="TextureRect" type="TextureRect" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/UpgradeSlots/UpgradeSlot5"]
-layout_mode = 2
-texture = ExtResource("3_q0uhn")
-stretch_mode = 5
-
-[node name="Description" type="Label" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/UpgradeSlots/UpgradeSlot5"]
-custom_minimum_size = Vector2(5, 100)
-layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "Makes the pump way more speedier"
-horizontal_alignment = 1
-autowrap_mode = 2
 
 [node name="HSeparator2" type="HSeparator" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows"]
 custom_minimum_size = Vector2(0, 12.395)

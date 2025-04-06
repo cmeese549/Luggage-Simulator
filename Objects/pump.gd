@@ -10,7 +10,16 @@ var cur_wps: float = 0
 var cur_quality: float 
 var built: bool = false
 
-var upgrade_slots
+var upgrade_slots : Array[pump_upgrade] = [
+	null,
+	null,
+	null,
+	null,
+	null
+]
+
+@export var speed_upgrades : Array[pump_upgrade]
+@export var qualtiy_upgrades : Array[pump_upgrade]
 
 var money
 
@@ -50,4 +59,7 @@ func attempt_buy():
 func attempt_upgrade():
 	#Open upgrade menu
 	print("doin an upgrade")
+	pass
+
+func apply_upgrade(new_upgrade: pump_upgrade) -> void:
 	pass
