@@ -1,4 +1,4 @@
-[gd_resource type="VisualShader" load_steps=58 format=3 uid="uid://c1ob3t0j4ownw"]
+[gd_resource type="VisualShader" load_steps=58 format=3 uid="uid://bvtd2d2vmcpix"]
 
 [ext_resource type="FastNoiseLite" uid="uid://bljy2y3ta76vf" path="res://Art_Assets/Shaders/WaterNoise1.tres" id="1_qea2m"]
 [ext_resource type="FastNoiseLite" uid="uid://cvdk5kmygg4w5" path="res://Art_Assets/Shaders/WaterNoise2.tres" id="2_fwm15"]

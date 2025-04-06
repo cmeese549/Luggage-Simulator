@@ -1,7 +1,9 @@
 extends Node3D
 
+class_name ToolSys
+
 var tools: Array[tool]
-var equiped_tool: tool
+var equipped_tool: tool
 
 @onready var look_at_cast: RayCast3D = $"../LookAtCast"
 @onready var camera_3d: Camera3D = $".."
@@ -16,12 +18,11 @@ func _ready():
 			print("Found tool: "+child.name)
 			tools.append(child)
 	tools[0].unlock()
-	equiped_tool = tools[0]
+	equipped_tool = tools[0]
 
 func _unhandled_input(event):
 	if event.is_action_pressed("primary"):
-		print("Clicked")
-		equiped_tool.use(check_for_water())
+		equipped_tool.use(check_for_water())
 
 func check_for_water():
 	if look_at_cast.is_colliding():

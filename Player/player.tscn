@@ -1,8 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://bk7vc4usjt3od"]
+[gd_scene load_steps=8 format=3 uid="uid://bk7vc4usjt3od"]
 
 [ext_resource type="Script" uid="uid://5yb4xnha3npe" path="res://player.gd" id="1_l8h54"]
 [ext_resource type="Script" uid="uid://b140mkd7ankio" path="res://Player/Tools/tool_sys.gd" id="2_btcbx"]
 [ext_resource type="PackedScene" uid="uid://xxekbn0nkf7g" path="res://Player/Tools/bucket.tscn" id="3_gwnis"]
+[ext_resource type="Script" uid="uid://ns08b0figwtw" path="res://Player/ToolCam.gd" id="4_gwnis"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_btcbx"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4ntmi"]
 
@@ -10,6 +13,7 @@
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_l8h54")
+sway_noise = SubResource("FastNoiseLite_btcbx")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_4ntmi")
@@ -21,6 +25,8 @@ mesh = SubResource("CapsuleMesh_btcbx")
 
 [node name="Camera3D" type="Camera3D" parent="Neck"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.509695, 0)
+cull_mask = 1048573
+fov = 90.0
 
 [node name="LookAtCast" type="RayCast3D" parent="Neck/Camera3D"]
 target_position = Vector3(0, 0, -2.2)
@@ -32,3 +38,25 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.509695, 0)
 script = ExtResource("2_btcbx")
 
 [node name="Bucket" parent="Neck/Camera3D/ToolSys" instance=ExtResource("3_gwnis")]
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(1152, 648)
+render_target_update_mode = 4
+
+[node name="ToolCam" type="Camera3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.51, 0)
+cull_mask = 1048574
+script = ExtResource("4_gwnis")
