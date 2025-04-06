@@ -59,8 +59,8 @@ func equip_next_tool(old_tool):
 	#This is called from the stow finished signal from the old tool
 	equipped_tool.visible = false
 	equipped_tool = next_tool
+	equipped_tool.unlock()
 	equipped_tool.visible = true
-	equipped_tool.equip()
 
 func _unhandled_input(event):
 	if event.is_action_pressed("primary"):
