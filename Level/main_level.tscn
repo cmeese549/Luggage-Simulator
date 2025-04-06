@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://d28sbjt0i0qst"]
+[gd_scene load_steps=7 format=3 uid="uid://d28sbjt0i0qst"]
 
 [ext_resource type="PackedScene" uid="uid://ddwtbnyshxxj3" path="res://Art_Assets/Levels/LevelGeometry.tscn" id="1_1wy1g"]
 [ext_resource type="PackedScene" uid="uid://bk7vc4usjt3od" path="res://Player/player.tscn" id="1_7ireg"]
+[ext_resource type="PackedScene" uid="uid://exdhmbr43ger" path="res://UI/UI.tscn" id="1_t065x"]
 [ext_resource type="Material" uid="uid://cc3jyugw620gk" path="res://Art_Assets/Materials/WaterVertex.tres" id="3_vad1a"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_t065x"]
@@ -11,12 +12,17 @@ size = Vector3(1000, 1, 1000)
 
 [node name="MainLevel" type="Node3D"]
 
+[node name="UI" parent="." instance=ExtResource("1_t065x")]
+
 [node name="Enviroment" type="Node" parent="."]
 
 [node name="LevelGeometry" parent="Enviroment" instance=ExtResource("1_1wy1g")]
 
 [node name="Player" parent="." instance=ExtResource("1_7ireg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -12.0672)
+
+[node name="Neck" parent="Player" index="2"]
+transform = Transform3D(1, 0, 0, 0, 0.965926, -0.258819, 0, 0.258819, 0.965926, 0, 0, 0)
 
 [node name="Water" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 68.218, -1, 171.569)
@@ -43,3 +49,5 @@ collision_layer = 4
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -52.3287, 0, 13.5603)
 shape = SubResource("BoxShape3D_vad1a")
 debug_color = Color(0, 0, 0, 1)
+
+[editable path="Player"]

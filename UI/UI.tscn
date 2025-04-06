@@ -1,0 +1,1416 @@
+[gd_scene load_steps=13 format=3 uid="uid://exdhmbr43ger"]
+
+[ext_resource type="Script" uid="uid://dic75q4o378w6" path="res://UI/UI.gd" id="1_6dd3c"]
+[ext_resource type="Theme" uid="uid://b3kq74llqlv3x" path="res://UI/Theme/MinimalUI.tres" id="1_dhe1o"]
+[ext_resource type="Texture2D" uid="uid://dsu4otkk2qt0g" path="res://icon.svg" id="3_q0uhn"]
+[ext_resource type="Texture2D" uid="uid://ben4olsm42ggw" path="res://Art_Assets/Textures/UncleUpgrade.png" id="4_d050y"]
+[ext_resource type="Texture2D" uid="uid://c8ipav7ruim5w" path="res://UI/HUD/Crosshair/crosshair2.png" id="4_f1fl4"]
+[ext_resource type="Texture2D" uid="uid://btbey8ncomyx7" path="res://UI/HUD/Crosshair/hitmorker.png" id="5_jqf55"]
+[ext_resource type="Script" uid="uid://bkn6bkk5bo3k0" path="res://UI/Dialogue/DialogueBox.gd" id="5_qgmx8"]
+[ext_resource type="Script" uid="uid://sb0v8kjwv2pv" path="res://UI/MainMenu.gd" id="6_byuxr"]
+[ext_resource type="Shader" uid="uid://b84ebkx0n6dek" path="res://UI/MainMenu/FadeFromBlack.tres" id="6_jqf55"]
+[ext_resource type="Script" uid="uid://5ls1kx27ehtl" path="res://UI/Dialogue/DialoguePauser.gd" id="10_vx7wu"]
+[ext_resource type="AudioStream" uid="uid://bdm7p1ssjxe5w" path="res://UI/Dialogue/bloop.ogg" id="11_r2vy3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_byuxr"]
+shader = ExtResource("6_jqf55")
+shader_parameter/Progress = 0.0
+
+[node name="Ui" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("1_dhe1o")
+script = ExtResource("1_6dd3c")
+
+[node name="UpgradeMenu" type="MarginContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="UpgradeMenu"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="UpgradeMenu/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="Rows" type="VBoxContainer" parent="UpgradeMenu/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 58
+text = "Upgrade Pump"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows"]
+custom_minimum_size = Vector2(0, 61.1)
+layout_mode = 2
+
+[node name="UpgradeSlots" type="HBoxContainer" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows"]
+layout_mode = 2
+alignment = 1
+
+[node name="UpgradeSlot1" type="VBoxContainer" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/UpgradeSlots"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Name" type="Label" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/UpgradeSlots/UpgradeSlot1"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 45
+text = "Speedy Pump"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/UpgradeSlots/UpgradeSlot1"]
+layout_mode = 2
+texture = ExtResource("3_q0uhn")
+stretch_mode = 5
+
+[node name="Description" type="Label" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/UpgradeSlots/UpgradeSlot1"]
+custom_minimum_size = Vector2(5, 100)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Makes the pump way more speedier"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="UpgradeSlot2" type="VBoxContainer" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/UpgradeSlots"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Name" type="Label" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/UpgradeSlots/UpgradeSlot2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 45
+text = "Empty Slot"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/UpgradeSlots/UpgradeSlot2"]
+layout_mode = 2
+texture = ExtResource("3_q0uhn")
+stretch_mode = 5
+
+[node name="Description" type="Label" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/UpgradeSlots/UpgradeSlot2"]
+custom_minimum_size = Vector2(5, 100)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Ready for the juice"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="UpgradeSlot3" type="VBoxContainer" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/UpgradeSlots"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Name" type="Label" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/UpgradeSlots/UpgradeSlot3"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 45
+text = "Speedy Pump"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/UpgradeSlots/UpgradeSlot3"]
+layout_mode = 2
+texture = ExtResource("3_q0uhn")
+stretch_mode = 5
+
+[node name="Description" type="Label" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/UpgradeSlots/UpgradeSlot3"]
+custom_minimum_size = Vector2(5, 100)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Makes the pump way more speedier"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="UpgradeSlot4" type="VBoxContainer" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/UpgradeSlots"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Name" type="Label" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/UpgradeSlots/UpgradeSlot4"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 45
+text = "Speedy Pump"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/UpgradeSlots/UpgradeSlot4"]
+layout_mode = 2
+texture = ExtResource("3_q0uhn")
+stretch_mode = 5
+
+[node name="Description" type="Label" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/UpgradeSlots/UpgradeSlot4"]
+custom_minimum_size = Vector2(5, 100)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Makes the pump way more speedier"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="UpgradeSlot5" type="VBoxContainer" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/UpgradeSlots"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Name" type="Label" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/UpgradeSlots/UpgradeSlot5"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 45
+text = "Speedy Pump"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/UpgradeSlots/UpgradeSlot5"]
+layout_mode = 2
+texture = ExtResource("3_q0uhn")
+stretch_mode = 5
+
+[node name="Description" type="Label" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/UpgradeSlots/UpgradeSlot5"]
+custom_minimum_size = Vector2(5, 100)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Makes the pump way more speedier"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="HSeparator2" type="HSeparator" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows"]
+custom_minimum_size = Vector2(0, 12.395)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows"]
+layout_mode = 2
+
+[node name="SpeedUpgrades" type="VBoxContainer" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/SpeedUpgrades"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 46
+text = "Speed Upgrades"
+horizontal_alignment = 1
+
+[node name="HSeparator2" type="HSeparator" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/SpeedUpgrades"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/SpeedUpgrades"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/SpeedUpgrades/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 20
+
+[node name="Button" type="Button" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/SpeedUpgrades/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 77.235)
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Extra Super Speedy Pump - $500"
+
+[node name="Button2" type="Button" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/SpeedUpgrades/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 77.235)
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Extra Super Speedy Pump - $500"
+
+[node name="Button3" type="Button" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/SpeedUpgrades/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 77.235)
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Extra Super Speedy Pump - $500"
+
+[node name="Button4" type="Button" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/SpeedUpgrades/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 77.235)
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Extra Super Speedy Pump - $500"
+
+[node name="Button5" type="Button" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/SpeedUpgrades/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 77.235)
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Extra Super Speedy Pump - $500"
+
+[node name="VSeparator" type="VSeparator" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/HBoxContainer"]
+custom_minimum_size = Vector2(0, 423.72)
+layout_mode = 2
+
+[node name="QualityUpgrades" type="VBoxContainer" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/QualityUpgrades"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 46
+text = "Quality Upgrades"
+horizontal_alignment = 1
+
+[node name="HSeparator2" type="HSeparator" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/QualityUpgrades"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/QualityUpgrades"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/QualityUpgrades/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Button" type="Button" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/QualityUpgrades/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 77.235)
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Extra Super Speedy Pump - $500"
+
+[node name="Button2" type="Button" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/QualityUpgrades/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 77.235)
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Extra Super Speedy Pump - $500"
+
+[node name="Button3" type="Button" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/QualityUpgrades/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 77.235)
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Extra Super Speedy Pump - $500"
+
+[node name="Button4" type="Button" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/QualityUpgrades/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 77.235)
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Extra Super Speedy Pump - $500"
+
+[node name="Button5" type="Button" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/QualityUpgrades/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 77.235)
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Extra Super Speedy Pump - $500"
+
+[node name="HSeparator3" type="HSeparator" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows"]
+custom_minimum_size = Vector2(0, 43.775)
+layout_mode = 2
+
+[node name="Close" type="HBoxContainer" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/Close"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Button" type="Button" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/Close"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.4
+theme_override_font_sizes/font_size = 31
+text = "Close"
+
+[node name="Control2" type="Control" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/Close"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Shop" type="MarginContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="Shop"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Shop/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="Rows" type="VBoxContainer" parent="Shop/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Shop/PanelContainer/MarginContainer/Rows"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 58
+text = "Uncle Upgrades Tool Trove"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="Shop/PanelContainer/MarginContainer/Rows"]
+custom_minimum_size = Vector2(0, 61.1)
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Shop/PanelContainer/MarginContainer/Rows"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.88
+
+[node name="GridContainer" type="GridContainer" parent="Shop/PanelContainer/MarginContainer/Rows/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/h_separation = 50
+theme_override_constants/v_separation = 50
+columns = 4
+
+[node name="Button" type="Button" parent="Shop/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer"]
+custom_minimum_size = Vector2(0, 440)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Shop/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer/Button"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ItemName" type="Label" parent="Shop/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer/Button/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 41
+text = "Epic Shop Item"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Shop/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer/Button/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("3_q0uhn")
+stretch_mode = 5
+
+[node name="Label2" type="Label" parent="Shop/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer/Button/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 46
+text = "$500"
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="Shop/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer/Button/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 21
+text = "This is a super awesome epic shop item"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Button2" type="Button" parent="Shop/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer"]
+custom_minimum_size = Vector2(0, 440)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Shop/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer/Button2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ItemName" type="Label" parent="Shop/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer/Button2/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 41
+text = "Epic Shop Item"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Shop/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer/Button2/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("3_q0uhn")
+stretch_mode = 5
+
+[node name="Label2" type="Label" parent="Shop/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer/Button2/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 46
+text = "$500"
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="Shop/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer/Button2/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 21
+text = "This is a super awesome epic shop item"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Button3" type="Button" parent="Shop/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer"]
+custom_minimum_size = Vector2(0, 440)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Shop/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer/Button3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ItemName" type="Label" parent="Shop/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer/Button3/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 41
+text = "Epic Shop Item"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Shop/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer/Button3/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("3_q0uhn")
+stretch_mode = 5
+
+[node name="Label2" type="Label" parent="Shop/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer/Button3/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 46
+text = "$500"
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="Shop/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer/Button3/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 21
+text = "This is a super awesome epic shop item"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Button4" type="Button" parent="Shop/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer"]
+custom_minimum_size = Vector2(0, 440)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Shop/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer/Button4"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ItemName" type="Label" parent="Shop/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer/Button4/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 41
+text = "Epic Shop Item"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Shop/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer/Button4/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("3_q0uhn")
+stretch_mode = 5
+
+[node name="Label2" type="Label" parent="Shop/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer/Button4/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 46
+text = "$500"
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="Shop/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer/Button4/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 21
+text = "This is a super awesome epic shop item"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Button5" type="Button" parent="Shop/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer"]
+custom_minimum_size = Vector2(0, 440)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Shop/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer/Button5"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ItemName" type="Label" parent="Shop/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer/Button5/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 41
+text = "Epic Shop Item"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Shop/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer/Button5/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("3_q0uhn")
+stretch_mode = 5
+
+[node name="Label2" type="Label" parent="Shop/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer/Button5/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 46
+text = "$500"
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="Shop/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer/Button5/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 21
+text = "This is a super awesome epic shop item"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Button6" type="Button" parent="Shop/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer"]
+custom_minimum_size = Vector2(0, 440)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Shop/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer/Button6"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ItemName" type="Label" parent="Shop/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer/Button6/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 41
+text = "Epic Shop Item"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Shop/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer/Button6/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("3_q0uhn")
+stretch_mode = 5
+
+[node name="Label2" type="Label" parent="Shop/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer/Button6/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 46
+text = "$500"
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="Shop/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer/Button6/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 21
+text = "This is a super awesome epic shop item"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Button7" type="Button" parent="Shop/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer"]
+custom_minimum_size = Vector2(0, 440)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Shop/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer/Button7"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ItemName" type="Label" parent="Shop/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer/Button7/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 41
+text = "Epic Shop Item"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Shop/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer/Button7/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("3_q0uhn")
+stretch_mode = 5
+
+[node name="Label2" type="Label" parent="Shop/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer/Button7/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 46
+text = "$500"
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="Shop/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer/Button7/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 21
+text = "This is a super awesome epic shop item"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Button8" type="Button" parent="Shop/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer"]
+custom_minimum_size = Vector2(0, 440)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Shop/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer/Button8"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ItemName" type="Label" parent="Shop/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer/Button8/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 41
+text = "Epic Shop Item"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Shop/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer/Button8/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("3_q0uhn")
+stretch_mode = 5
+
+[node name="Label2" type="Label" parent="Shop/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer/Button8/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 46
+text = "$500"
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="Shop/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer/Button8/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 21
+text = "This is a super awesome epic shop item"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="HSeparator3" type="HSeparator" parent="Shop/PanelContainer/MarginContainer/Rows"]
+custom_minimum_size = Vector2(0, 43.775)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Shop/PanelContainer/MarginContainer/Rows"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.6
+
+[node name="Portrait" type="Control" parent="Shop/PanelContainer/MarginContainer/Rows/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.6
+
+[node name="TextureRect" type="TextureRect" parent="Shop/PanelContainer/MarginContainer/Rows/HBoxContainer/Portrait"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.07, 1.07)
+texture = ExtResource("4_d050y")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Shop/PanelContainer/MarginContainer/Rows/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.76
+theme_override_font_sizes/bold_italics_font_size = 44
+theme_override_font_sizes/italics_font_size = 44
+theme_override_font_sizes/mono_font_size = 44
+theme_override_font_sizes/normal_font_size = 44
+theme_override_font_sizes/bold_font_size = 44
+bbcode_enabled = true
+script = ExtResource("5_qgmx8")
+
+[node name="HSeparator4" type="HSeparator" parent="Shop/PanelContainer/MarginContainer/Rows"]
+custom_minimum_size = Vector2(0, 43.775)
+layout_mode = 2
+
+[node name="Close" type="HBoxContainer" parent="Shop/PanelContainer/MarginContainer/Rows"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="Shop/PanelContainer/MarginContainer/Rows/Close"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Button" type="Button" parent="Shop/PanelContainer/MarginContainer/Rows/Close"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.4
+theme_override_font_sizes/font_size = 31
+text = "Close"
+
+[node name="Control2" type="Control" parent="Shop/PanelContainer/MarginContainer/Rows/Close"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Inventory" type="MarginContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="Inventory"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Inventory/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="Rows" type="VBoxContainer" parent="Inventory/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Inventory/PanelContainer/MarginContainer/Rows"]
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+theme_override_font_sizes/font_size = 58
+text = "Inventory"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="Inventory/PanelContainer/MarginContainer/Rows"]
+custom_minimum_size = Vector2(0, 37.39)
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Inventory/PanelContainer/MarginContainer/Rows"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="GridContainer" type="GridContainer" parent="Inventory/PanelContainer/MarginContainer/Rows/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/h_separation = 50
+theme_override_constants/v_separation = 50
+columns = 4
+
+[node name="Button" type="Button" parent="Inventory/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer"]
+custom_minimum_size = Vector2(0, 440)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Inventory/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer/Button"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ItemName" type="Label" parent="Inventory/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer/Button/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 41
+text = "Epic Inventory Item"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Inventory/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer/Button/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("3_q0uhn")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Inventory/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer/Button/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 21
+text = "This is a super awesome epic shop item"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Button2" type="Button" parent="Inventory/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer"]
+custom_minimum_size = Vector2(0, 440)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Inventory/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer/Button2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ItemName" type="Label" parent="Inventory/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer/Button2/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 41
+text = "Epic Inventory Item"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Inventory/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer/Button2/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("3_q0uhn")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Inventory/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer/Button2/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 21
+text = "This is a super awesome epic shop item"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Button3" type="Button" parent="Inventory/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer"]
+custom_minimum_size = Vector2(0, 440)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Inventory/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer/Button3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ItemName" type="Label" parent="Inventory/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer/Button3/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 41
+text = "Epic Inventory Item"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Inventory/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer/Button3/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("3_q0uhn")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Inventory/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer/Button3/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 21
+text = "This is a super awesome epic shop item"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Button4" type="Button" parent="Inventory/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer"]
+custom_minimum_size = Vector2(0, 440)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Inventory/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer/Button4"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ItemName" type="Label" parent="Inventory/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer/Button4/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 41
+text = "Epic Inventory Item"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Inventory/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer/Button4/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("3_q0uhn")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Inventory/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer/Button4/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 21
+text = "This is a super awesome epic shop item"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Button5" type="Button" parent="Inventory/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer"]
+custom_minimum_size = Vector2(0, 440)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Inventory/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer/Button5"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ItemName" type="Label" parent="Inventory/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer/Button5/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 41
+text = "Epic Inventory Item"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Inventory/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer/Button5/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("3_q0uhn")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Inventory/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer/Button5/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 21
+text = "This is a super awesome epic shop item"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Button6" type="Button" parent="Inventory/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer"]
+custom_minimum_size = Vector2(0, 440)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Inventory/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer/Button6"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ItemName" type="Label" parent="Inventory/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer/Button6/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 41
+text = "Epic Inventory Item"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Inventory/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer/Button6/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("3_q0uhn")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Inventory/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer/Button6/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 21
+text = "This is a super awesome epic shop item"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Button7" type="Button" parent="Inventory/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer"]
+custom_minimum_size = Vector2(0, 440)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Inventory/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer/Button7"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ItemName" type="Label" parent="Inventory/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer/Button7/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 41
+text = "Epic Inventory Item"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Inventory/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer/Button7/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("3_q0uhn")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Inventory/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer/Button7/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 21
+text = "This is a super awesome epic shop item"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Button8" type="Button" parent="Inventory/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer"]
+custom_minimum_size = Vector2(0, 440)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Inventory/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer/Button8"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ItemName" type="Label" parent="Inventory/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer/Button8/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 41
+text = "Epic Inventory Item"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Inventory/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer/Button8/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("3_q0uhn")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Inventory/PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer/Button8/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 21
+text = "This is a super awesome epic shop item"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="HSeparator4" type="HSeparator" parent="Inventory/PanelContainer/MarginContainer/Rows"]
+custom_minimum_size = Vector2(0, 43.775)
+layout_mode = 2
+
+[node name="Close" type="HBoxContainer" parent="Inventory/PanelContainer/MarginContainer/Rows"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="Inventory/PanelContainer/MarginContainer/Rows/Close"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Button" type="Button" parent="Inventory/PanelContainer/MarginContainer/Rows/Close"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.4
+theme_override_font_sizes/font_size = 31
+text = "Close"
+
+[node name="Control2" type="Control" parent="Inventory/PanelContainer/MarginContainer/Rows/Close"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PauseMenu" type="MarginContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="PauseMenu"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PauseMenu/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="Rows" type="VBoxContainer" parent="PauseMenu/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Game Paused" type="Label" parent="PauseMenu/PanelContainer/MarginContainer/Rows"]
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+theme_override_font_sizes/font_size = 58
+text = "Game Paused"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="PauseMenu/PanelContainer/MarginContainer/Rows"]
+custom_minimum_size = Vector2(0, 37.39)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PauseMenu/PanelContainer/MarginContainer/Rows"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="PauseMenu/PanelContainer/MarginContainer/Rows/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu/PanelContainer/MarginContainer/Rows/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 110
+
+[node name="Sensitivity" type="VBoxContainer" parent="PauseMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PauseMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/VBoxContainer/Sensitivity"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Look Sensitivity"
+horizontal_alignment = 1
+
+[node name="SensitivitySlider" type="HSlider" parent="PauseMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/VBoxContainer/Sensitivity"]
+layout_mode = 2
+max_value = 2.0
+step = 0.01
+value = 1.0
+
+[node name="FOV" type="VBoxContainer" parent="PauseMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PauseMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/VBoxContainer/FOV"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Field Of View"
+horizontal_alignment = 1
+
+[node name="FOVSlider" type="HSlider" parent="PauseMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/VBoxContainer/FOV"]
+layout_mode = 2
+max_value = 2.0
+step = 0.01
+value = 1.0
+
+[node name="Volume" type="VBoxContainer" parent="PauseMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PauseMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/VBoxContainer/Volume"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Volume"
+horizontal_alignment = 1
+
+[node name="VolumeSlider" type="HSlider" parent="PauseMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/VBoxContainer/Volume"]
+layout_mode = 2
+max_value = 2.0
+step = 0.01
+value = 1.0
+
+[node name="MusicVolume" type="VBoxContainer" parent="PauseMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PauseMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/VBoxContainer/MusicVolume"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Music Volume"
+horizontal_alignment = 1
+
+[node name="MusicVolumeSlider" type="HSlider" parent="PauseMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/VBoxContainer/MusicVolume"]
+layout_mode = 2
+max_value = 2.0
+step = 0.01
+value = 1.0
+
+[node name="SfxVolume" type="VBoxContainer" parent="PauseMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PauseMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/VBoxContainer/SfxVolume"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Sound Effect Volume"
+horizontal_alignment = 1
+
+[node name="SfxVolumeSlider" type="HSlider" parent="PauseMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/VBoxContainer/SfxVolume"]
+layout_mode = 2
+max_value = 2.0
+step = 0.01
+value = 1.0
+
+[node name="Control2" type="Control" parent="PauseMenu/PanelContainer/MarginContainer/Rows/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HSeparator4" type="HSeparator" parent="PauseMenu/PanelContainer/MarginContainer/Rows"]
+custom_minimum_size = Vector2(0, 43.775)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Close" type="HBoxContainer" parent="PauseMenu/PanelContainer/MarginContainer/Rows"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="PauseMenu/PanelContainer/MarginContainer/Rows/Close"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Close" type="Button" parent="PauseMenu/PanelContainer/MarginContainer/Rows/Close"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.4
+theme_override_font_sizes/font_size = 31
+text = "Close"
+
+[node name="Quit" type="Button" parent="PauseMenu/PanelContainer/MarginContainer/Rows/Close"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.4
+theme_override_font_sizes/font_size = 31
+text = "Quit To Desktop
+"
+
+[node name="Control2" type="Control" parent="PauseMenu/PanelContainer/MarginContainer/Rows/Close"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HUD" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Crosshairs" type="Control" parent="HUD"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Crosshair" type="TextureRect" parent="HUD/Crosshairs"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -136.0
+offset_top = -136.0
+offset_right = 284.0
+offset_bottom = 284.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.65, 0.65)
+texture = ExtResource("4_f1fl4")
+
+[node name="WhiteHitmarker" type="TextureRect" parent="HUD/Crosshairs/Crosshair"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -39.0
+offset_right = 501.459
+offset_bottom = 501.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.145, 0.145)
+texture = ExtResource("5_jqf55")
+expand_mode = 3
+
+[node name="BlueHitmarker" type="TextureRect" parent="HUD/Crosshairs/Crosshair" groups=["WaterCrosshair"]]
+visible = false
+modulate = Color(0.0651, 0.454305, 0.93, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -39.0
+offset_right = 501.459
+offset_bottom = 501.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.145, 0.145)
+texture = ExtResource("5_jqf55")
+expand_mode = 3
+
+[node name="YellowHitmarker" type="TextureRect" parent="HUD/Crosshairs/Crosshair" groups=["InteractCrosshair"]]
+visible = false
+modulate = Color(0.994023, 0.860147, 0.450501, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -39.0
+offset_right = 501.459
+offset_bottom = 501.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.145, 0.145)
+texture = ExtResource("5_jqf55")
+expand_mode = 3
+
+[node name="MainMenu" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("6_byuxr")
+
+[node name="Label" type="Label" parent="MainMenu"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 86.0
+offset_top = -211.0
+offset_right = 1641.0
+offset_bottom = -95.0
+grow_vertical = 0
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.0214346, 0.0214346, 0.0214346, 1)
+theme_override_font_sizes/font_size = 61
+text = "Mr. Money’s Phenomenally Soggy Water Removal"
+vertical_alignment = 2
+
+[node name="Begin" type="Label" parent="MainMenu"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -777.5
+offset_top = -58.0
+offset_right = 777.5
+offset_bottom = 58.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.0196078, 0.0196078, 0.0196078, 1)
+theme_override_font_sizes/font_size = 28
+text = "Press Any Button To Begin"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Fader" type="ColorRect" parent="MainMenu"]
+material = SubResource("ShaderMaterial_byuxr")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="DialoguePauser" type="Node" parent="."]
+script = ExtResource("10_vx7wu")
+
+[node name="PauseTimer" type="Timer" parent="DialoguePauser"]
+one_shot = true
+
+[node name="DialogueBloop" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_r2vy3")
+volume_db = -12.0
+bus = &"Sfx"
+
+[node name="TypeTimer" type="Timer" parent="."]
+wait_time = 0.04
+one_shot = true
