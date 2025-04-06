@@ -227,6 +227,7 @@ point_count = 3
 
 [node name="Bucket" type="Node3D" node_paths=PackedStringArray("jump_reset_curve")]
 script = ExtResource("1_bn1s3")
+tool_name = "Rusty Bucket"
 jump_overshoot_amount = 0.15
 jump_reset_curve = NodePath("Line2D")
 recentering_force = 10.0

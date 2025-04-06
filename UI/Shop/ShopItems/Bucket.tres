@@ -13,5 +13,5 @@ item_type = "Tool"
 required_items_quip = "It would be difficult to use a bucket without hands.{pause=0.5}  Lucky for you, I'll sell you your hands, then you can buy the bucket!  {pause=0.5} That is, so long as you have the Lit Test Item as well..."
 required_items_string = "Requires your own Hands and the \"Lit Test Item\", whatever that is..."
 required_inventory_items = Array[String](["Lit Test Item"])
-required_tools = Array[String](["Hands"])
+required_tools = Array[String](["Your Hands"])
 metadata/_custom_type_script = "uid://b1lecmjr7r5pu"

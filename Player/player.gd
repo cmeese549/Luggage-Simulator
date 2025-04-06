@@ -80,6 +80,15 @@ func check_has_tool(tool_name: String) -> bool:
 	
 func unlock_new_tool(tool: ShopItem) -> void:
 	tool_sys.upgrade_tool(tool.item_name)
+	
+func remove_inventory_items(items: Array[String]) -> void:
+	var items_to_remove : Array[InventoryItem] = []
+	for item_name: String in items:
+		for item: InventoryItem in inventory:
+			if item.item_name == item_name:
+				items_to_remove.append(item)
+	for item: InventoryItem in items_to_remove:
+		inventory.erase(item)
 
 func _unhandled_input(event):
 	if ready_to_start_game and !game_started and event != InputEventMouseMotion:
