@@ -1,10 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://ug1jekbthn0l"]
+[gd_scene load_steps=5 format=3 uid="uid://ug1jekbthn0l"]
 
 [ext_resource type="ArrayMesh" uid="uid://bninqyfdx127t" path="res://Art_Assets/Models/ToolShop/ToolShopGeo.obj" id="1_kf3or"]
 [ext_resource type="Material" uid="uid://du7nihx6ltaki" path="res://Art_Assets/Materials/ToolShop.tres" id="2_e4bha"]
+[ext_resource type="Material" uid="uid://bi53m0gy3fyxq" path="res://Art_Assets/Materials/Uncle.tres" id="3_jwd5n"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_vjs7i"]
 
 [node name="ToolShop" type="Node3D"]
 
 [node name="ToolShopGeo" type="MeshInstance3D" parent="."]
 mesh = ExtResource("1_kf3or")
 surface_material_override/0 = ExtResource("2_e4bha")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(2.36955, 0, 0, 0, 2.36955, 0, 0, 0, 1, 0, 1.13768, -1.13977)
+mesh = SubResource("QuadMesh_vjs7i")
+surface_material_override/0 = ExtResource("3_jwd5n")
