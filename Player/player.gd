@@ -42,9 +42,10 @@ func _ready():
 	else:
 		if main_menu != null:
 			main_menu.visible = true
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	item_pickup_range.area_entered.connect(pickup_item)
+	Events.tool_purchased.connect(unlock_new_tool)
 	
 func start_game() ->  void:
 	if hud != null:
@@ -76,6 +77,9 @@ func check_has_tool(tool_name: String) -> bool:
 		if tool.tool_name == tool_name and tool.unlocked:
 			return true
 	return false
+	
+func unlock_new_tool(tool: ShopItem) -> void:
+	print("Unlock the " + tool.item_name)
 
 func _unhandled_input(event):
 	if ready_to_start_game and !game_started and event != InputEventMouseMotion:

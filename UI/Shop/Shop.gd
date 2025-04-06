@@ -102,7 +102,8 @@ func attempt_purchase(item: ShopItem, button: Button) -> void:
 	if ui.money.try_buy(item.price):
 		display_random_quip(item_purchased_quips, used_item_purchased_quips)
 		button.call_deferred("queue_free")
-		Events.item_purchased.emit(item)
+		if item.item_type == "Tool":
+			Events.tool_purchased.emit(item)
 	else:
 		display_random_quip(cant_afford_quips, used_cant_afford_quips)
 

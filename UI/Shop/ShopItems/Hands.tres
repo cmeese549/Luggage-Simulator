@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ShopItem" load_steps=3 format=3 uid="uid://7enqhksiag3a"]
+
+[ext_resource type="Texture2D" uid="uid://bb8sq3fm3t50t" path="res://Art_Assets/Textures/HandTools/Hands_Full.png" id="1_2i1e1"]
+[ext_resource type="Script" uid="uid://b1lecmjr7r5pu" path="res://UI/Shop/ShopItems/ShopItem.gd" id="2_2owe1"]
+
+[resource]
+script = ExtResource("2_2owe1")
+item_name = "Your Hands"
+item_description = "These are the hands attached to your body"
+item_icon = ExtResource("1_2i1e1")
+price = 1
+required_items_quip = ""
+required_items_string = ""
+required_inventory_items = Array[String]([])
+required_tools = Array[String]([])
+metadata/_custom_type_script = "uid://b1lecmjr7r5pu"

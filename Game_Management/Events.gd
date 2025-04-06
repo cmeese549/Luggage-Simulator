@@ -7,4 +7,4 @@ signal remove_water(amount)
 signal make_money(amount, log)
 signal add_pump(new_pump: Pump)
 
-signal item_purchased(item: ShopItem)
+signal tool_purchased(item: ShopItem)
