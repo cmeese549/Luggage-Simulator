@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://exdhmbr43ger"]
+[gd_scene load_steps=18 format=3 uid="uid://exdhmbr43ger"]
 
 [ext_resource type="Script" uid="uid://dic75q4o378w6" path="res://UI/UI.gd" id="1_6dd3c"]
 [ext_resource type="Theme" uid="uid://b3kq74llqlv3x" path="res://UI/Theme/MinimalUI.tres" id="1_dhe1o"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://sb0v8kjwv2pv" path="res://UI/MainMenu/MainMenu.gd" id="6_byuxr"]
 [ext_resource type="Shader" uid="uid://bkcnroaexgcpu" path="res://UI/MainMenu/FadeFromBlack.tres" id="6_jqf55"]
 [ext_resource type="Script" uid="uid://bed3d7egj53pu" path="res://UI/PauseMenu/PauseMenu.gd" id="6_qhxh2"]
+[ext_resource type="Script" uid="uid://cde2nhieog6m4" path="res://UI/UpgradeMenu/UpgradeMenu.gd" id="6_t31p1"]
 [ext_resource type="Script" uid="uid://vcecdqq511h1" path="res://UI/Shop/Shop.gd" id="7_6q2ik"]
 [ext_resource type="Script" uid="uid://cmqb4oi3mfhb4" path="res://UI/HUD/hud.gd" id="7_017wa"]
 [ext_resource type="PackedScene" uid="uid://dth0cukoj3ajb" path="res://UI/PauseMenu/InventoryItem.tscn" id="10_npmjx"]
@@ -154,7 +155,6 @@ theme_override_font_sizes/font_size = 32
 text = "$100"
 
 [node name="UpgradeMenu" type="MarginContainer" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -162,6 +162,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+script = ExtResource("6_t31p1")
 
 [node name="PanelContainer" type="PanelContainer" parent="UpgradeMenu"]
 layout_mode = 2
@@ -188,6 +189,7 @@ layout_mode = 2
 
 [node name="UpgradeSlots" type="HBoxContainer" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows"]
 layout_mode = 2
+size_flags_vertical = 3
 alignment = 1
 
 [node name="UpgradeSlot1" type="VBoxContainer" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/UpgradeSlots"]
@@ -321,51 +323,25 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/SpeedUpgrades"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 46
-text = "Speed Upgrades"
-horizontal_alignment = 1
-
-[node name="HSeparator2" type="HSeparator" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/SpeedUpgrades"]
-custom_minimum_size = Vector2(0, 20)
-layout_mode = 2
-
-[node name="ScrollContainer" type="ScrollContainer" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/SpeedUpgrades"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="VBoxContainer" type="VBoxContainer" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/SpeedUpgrades/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/SpeedUpgrades"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/separation = 20
+theme_override_constants/separation = 85
 
-[node name="Button" type="Button" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/SpeedUpgrades/ScrollContainer/VBoxContainer"]
+[node name="Button" type="Button" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/SpeedUpgrades/VBoxContainer"]
 custom_minimum_size = Vector2(0, 77.235)
 layout_mode = 2
 theme_override_font_sizes/font_size = 48
 text = "Extra Super Speedy Pump - $500"
 
-[node name="Button2" type="Button" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/SpeedUpgrades/ScrollContainer/VBoxContainer"]
+[node name="Button2" type="Button" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/SpeedUpgrades/VBoxContainer"]
 custom_minimum_size = Vector2(0, 77.235)
 layout_mode = 2
 theme_override_font_sizes/font_size = 48
 text = "Extra Super Speedy Pump - $500"
 
-[node name="Button3" type="Button" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/SpeedUpgrades/ScrollContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 77.235)
-layout_mode = 2
-theme_override_font_sizes/font_size = 48
-text = "Extra Super Speedy Pump - $500"
-
-[node name="Button4" type="Button" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/SpeedUpgrades/ScrollContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 77.235)
-layout_mode = 2
-theme_override_font_sizes/font_size = 48
-text = "Extra Super Speedy Pump - $500"
-
-[node name="Button5" type="Button" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/SpeedUpgrades/ScrollContainer/VBoxContainer"]
+[node name="Button3" type="Button" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/SpeedUpgrades/VBoxContainer"]
 custom_minimum_size = Vector2(0, 77.235)
 layout_mode = 2
 theme_override_font_sizes/font_size = 48
@@ -379,50 +355,25 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/QualityUpgrades"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 46
-text = "Quality Upgrades"
-horizontal_alignment = 1
-
-[node name="HSeparator2" type="HSeparator" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/QualityUpgrades"]
-custom_minimum_size = Vector2(0, 20)
-layout_mode = 2
-
-[node name="ScrollContainer" type="ScrollContainer" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/QualityUpgrades"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="VBoxContainer" type="VBoxContainer" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/QualityUpgrades/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/QualityUpgrades"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_constants/separation = 85
 
-[node name="Button" type="Button" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/QualityUpgrades/ScrollContainer/VBoxContainer"]
+[node name="Button" type="Button" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/QualityUpgrades/VBoxContainer"]
 custom_minimum_size = Vector2(0, 77.235)
 layout_mode = 2
 theme_override_font_sizes/font_size = 48
 text = "Extra Super Speedy Pump - $500"
 
-[node name="Button2" type="Button" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/QualityUpgrades/ScrollContainer/VBoxContainer"]
+[node name="Button2" type="Button" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/QualityUpgrades/VBoxContainer"]
 custom_minimum_size = Vector2(0, 77.235)
 layout_mode = 2
 theme_override_font_sizes/font_size = 48
 text = "Extra Super Speedy Pump - $500"
 
-[node name="Button3" type="Button" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/QualityUpgrades/ScrollContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 77.235)
-layout_mode = 2
-theme_override_font_sizes/font_size = 48
-text = "Extra Super Speedy Pump - $500"
-
-[node name="Button4" type="Button" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/QualityUpgrades/ScrollContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 77.235)
-layout_mode = 2
-theme_override_font_sizes/font_size = 48
-text = "Extra Super Speedy Pump - $500"
-
-[node name="Button5" type="Button" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/QualityUpgrades/ScrollContainer/VBoxContainer"]
+[node name="Button3" type="Button" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/QualityUpgrades/VBoxContainer"]
 custom_minimum_size = Vector2(0, 77.235)
 layout_mode = 2
 theme_override_font_sizes/font_size = 48

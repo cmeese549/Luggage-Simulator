@@ -1,6 +1,6 @@
 extends Node
 
-class_name pump
+class_name Pump
 
 @export var base_wps: float = 1
 @export var base_quality: float = 1
