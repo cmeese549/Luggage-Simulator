@@ -10,6 +10,9 @@ var cur_wps: float = 0
 var cur_quality: float 
 var built: bool = false
 
+@export var speed_upgrades: Array[pump_upgrade]
+@export var quality_upgrades: Array[pump_upgrade]
+
 var upgrade_slots: Array[pump_upgrade] = [null, null, null, null, null]
 @export var upgrade_markers: Array[Marker3D]
 
