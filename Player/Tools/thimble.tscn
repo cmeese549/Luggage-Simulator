@@ -1,8 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://xxekbn0nkf7g"]
+[gd_scene load_steps=13 format=3 uid="uid://qykfij56gm1u"]
 
-[ext_resource type="Script" uid="uid://gaeegpj2o3tq" path="res://Player/Tools/tool.gd" id="1_bn1s3"]
-[ext_resource type="Material" uid="uid://lbvadevy8vlo" path="res://Art_Assets/Materials/HandTools/Bucket_Empty.tres" id="2_rf4ol"]
-[ext_resource type="Material" uid="uid://bk7xy761bydka" path="res://Art_Assets/Materials/HandTools/Bucket_Full.tres" id="4_qpq6h"]
+[ext_resource type="Script" uid="uid://gaeegpj2o3tq" path="res://Player/Tools/tool.gd" id="1_bnf1v"]
+[ext_resource type="Material" uid="uid://bx1fytfnw6rjd" path="res://Art_Assets/Materials/HandTools/Thimble_Empty.tres" id="2_asxqj"]
+[ext_resource type="Material" uid="uid://blf5ar3ss56dt" path="res://Art_Assets/Materials/HandTools/Thimble_Full.tres" id="3_bnf1v"]
 
 [sub_resource type="Animation" id="Animation_7nrwf"]
 length = 0.001
@@ -40,7 +40,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("2_rf4ol")]
+"values": [ExtResource("2_asxqj")]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -93,7 +93,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.75),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [ExtResource("2_rf4ol"), ExtResource("2_rf4ol")]
+"values": [ExtResource("2_asxqj"), ExtResource("2_asxqj")]
 }
 
 [sub_resource type="Animation" id="Animation_qpq6h"]
@@ -122,7 +122,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.6),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [ExtResource("4_qpq6h"), ExtResource("2_rf4ol")]
+"values": [ExtResource("3_bnf1v"), ExtResource("2_asxqj")]
 }
 
 [sub_resource type="Animation" id="Animation_ube02"]
@@ -147,7 +147,7 @@ tracks/1/path = NodePath(".:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.01),
+"times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
@@ -191,7 +191,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.75),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [ExtResource("2_rf4ol"), ExtResource("4_qpq6h")]
+"values": [ExtResource("2_asxqj"), ExtResource("3_bnf1v")]
 }
 
 [sub_resource type="Animation" id="Animation_ji2kk"]
@@ -225,13 +225,12 @@ _data = {
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.505464, 0.493025), -0.220431, -0.220431, 0, 0, Vector2(1, 1), -0.0989213, 0.0, 0, 0]
 point_count = 3
 
-[node name="Bucket" type="Node3D" node_paths=PackedStringArray("jump_reset_curve")]
-script = ExtResource("1_bn1s3")
-tool_name = "Rusty Bucket"
+[node name="Thimble" type="Node3D" node_paths=PackedStringArray("jump_reset_curve")]
+script = ExtResource("1_bnf1v")
+tool_name = "Thimble"
 jump_overshoot_amount = 0.15
 jump_reset_curve = NodePath("Line2D")
 recentering_force = 10.0
-capacity = 5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -246,7 +245,7 @@ transform = Transform3D(0.615741, 0, 0, 0, 0.674067, 0, 0, 0, 0.796476, 0, 0, 0)
 layers = 2
 mesh = SubResource("QuadMesh_7nrwf")
 skeleton = NodePath("../../..")
-surface_material_override/0 = ExtResource("2_rf4ol")
+surface_material_override/0 = ExtResource("2_asxqj")
 
 [node name="Line2D" type="Line2D" parent="."]
 width_curve = SubResource("Curve_bn1s3")

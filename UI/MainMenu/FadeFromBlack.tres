@@ -1,0 +1,59 @@
+[gd_resource type="VisualShader" load_steps=4 format=3 uid="uid://bkcnroaexgcpu"]
+
+[sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_occyu"]
+parameter_name = "Progress"
+hint = 1
+
+[sub_resource type="VisualShaderNodeColorConstant" id="VisualShaderNodeColorConstant_8c12w"]
+expanded_output_ports = [0]
+constant = Color(0, 0, 0, 1)
+
+[sub_resource type="VisualShaderNodeRemap" id="VisualShaderNodeRemap_w024w"]
+default_input_values = [1, 0.0, 2, 1.0, 3, 1.0, 4, 0.0]
+
+[resource]
+code = "shader_type canvas_item;
+render_mode blend_mix;
+
+uniform float Progress : hint_range(0.0, 1.0);
+
+
+
+void fragment() {
+// ColorConstant:3
+	vec4 n_out3p0 = vec4(0.000000, 0.000000, 0.000000, 1.000000);
+
+
+// FloatParameter:2
+	float n_out2p0 = Progress;
+
+
+	float n_out4p0;
+// Remap:4
+	float n_in4p1 = 0.00000;
+	float n_in4p2 = 1.00000;
+	float n_in4p3 = 1.00000;
+	float n_in4p4 = 0.00000;
+	{
+		float __input_range = n_in4p2 - n_in4p1;
+		float __output_range = n_in4p4 - n_in4p3;
+		n_out4p0 = n_in4p3 + __output_range * ((n_out2p0 - n_in4p1) / __input_range);
+	}
+
+
+// Output:0
+	COLOR.rgb = vec3(n_out3p0.xyz);
+	COLOR.a = n_out4p0;
+
+
+}
+"
+mode = 1
+flags/light_only = false
+nodes/fragment/2/node = SubResource("VisualShaderNodeFloatParameter_occyu")
+nodes/fragment/2/position = Vector2(-1080, 440)
+nodes/fragment/3/node = SubResource("VisualShaderNodeColorConstant_8c12w")
+nodes/fragment/3/position = Vector2(-920, 20)
+nodes/fragment/4/node = SubResource("VisualShaderNodeRemap_w024w")
+nodes/fragment/4/position = Vector2(-320, 520)
+nodes/fragment/connections = PackedInt32Array(3, 0, 0, 0, 2, 0, 4, 0, 4, 0, 0, 1)

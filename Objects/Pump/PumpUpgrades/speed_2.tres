@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="pump_upgrade" load_steps=2 format=3 uid="uid://c1qn1hidnnvig"]
+
+[ext_resource type="Script" uid="uid://cc2dlnfftk7rx" path="res://Objects/Pump/PumpUpgrades/pump_upgrade.gd" id="1_21ljf"]
+
+[resource]
+script = ExtResource("1_21ljf")
+upgrade_name = "Speed 2"
+description = "Go even faster!"
+price = 100
+effect = 5.0
+type = 0
+metadata/_custom_type_script = "uid://cc2dlnfftk7rx"

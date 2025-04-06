@@ -1,8 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://xxekbn0nkf7g"]
+[gd_scene load_steps=13 format=3 uid="uid://dvgxywx0ckbxa"]
 
-[ext_resource type="Script" uid="uid://gaeegpj2o3tq" path="res://Player/Tools/tool.gd" id="1_bn1s3"]
-[ext_resource type="Material" uid="uid://lbvadevy8vlo" path="res://Art_Assets/Materials/HandTools/Bucket_Empty.tres" id="2_rf4ol"]
-[ext_resource type="Material" uid="uid://bk7xy761bydka" path="res://Art_Assets/Materials/HandTools/Bucket_Full.tres" id="4_qpq6h"]
+[ext_resource type="Script" uid="uid://gaeegpj2o3tq" path="res://Player/Tools/tool.gd" id="1_x304u"]
+[ext_resource type="Material" uid="uid://bbtqa3fseyydi" path="res://Art_Assets/Materials/HandTools/CoolerJug_Empty.tres" id="2_x304u"]
+[ext_resource type="Material" uid="uid://hd5ngkuyuu52" path="res://Art_Assets/Materials/HandTools/CoolerJug_Full.tres" id="3_7r7x5"]
 
 [sub_resource type="Animation" id="Animation_7nrwf"]
 length = 0.001
@@ -16,13 +16,13 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0.450099, 0.219473, -0.681934)]
+"values": [Vector3(0, 0.219, -0.682)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/path = NodePath("AnimatedPos:rotation")
-tracks/1/interp = 1
+tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
@@ -40,7 +40,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("2_rf4ol")]
+"values": [ExtResource("2_x304u")]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -57,7 +57,7 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id="Animation_0uoli"]
 resource_name = "fill"
-length = 1.5
+length = 2.5
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -66,10 +66,10 @@ tracks/0/path = NodePath("AnimatedPos:position")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5, 1, 1.02, 1.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.3, 0.6, 1.8, 2.1, 2.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector3(0.450099, 0.219473, -0.681934), Vector3(0.0726919, -0.167317, -0.681934), Vector3(-0.081829, 0.0702525, -0.681934), Vector3(-0.0581878, 0.126953, -0.681934), Vector3(0.450099, 0.219473, -0.681934)]
+"values": [Vector3(0, 0.219, -0.682), Vector3(0, 0.115226, -0.682), Vector3(0, -0.137744, -0.682), Vector3(0, -0.137744, -0.682), Vector3(0, 0.115226, -0.682), Vector3(0, 0.219, -0.682)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -78,10 +78,10 @@ tracks/1/path = NodePath("AnimatedPos:rotation")
 tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.5, 1, 1.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.3, 0.6, 1.8, 2.1, 2.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector3(-0.234991, 0, 0), Vector3(0.2011, -0.122402, 2.58959), Vector3(-0.2162, -0.092806, 0.409358), Vector3(-0.234991, 0, 0)]
+"values": [Vector3(-0.234991, 0, 0), Vector3(-1.04346, 0, 0), Vector3(-1.48353, 0, 0), Vector3(-1.48353, 0, 0), Vector3(-1.04346, 0, 0), Vector3(-0.234991, 0, 0)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -90,15 +90,15 @@ tracks/2/path = NodePath("AnimatedPos/MeshInstance3D:surface_material_override/0
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.75),
+"times": PackedFloat32Array(0, 1.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [ExtResource("2_rf4ol"), ExtResource("2_rf4ol")]
+"values": [ExtResource("2_x304u"), ExtResource("2_x304u")]
 }
 
 [sub_resource type="Animation" id="Animation_qpq6h"]
 resource_name = "empty"
-length = 1.6
+length = 1.2
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -107,7 +107,7 @@ tracks/0/path = NodePath("AnimatedPos:rotation")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.6, 1, 1.3, 1.6),
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.8, 1, 1.2),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 0,
 "values": [Vector3(-0.216421, -0.0907571, 0), Vector3(-0.216421, -0.0907571, 1.39626), Vector3(-0.216421, -0.0907571, 3.14159), Vector3(-0.216421, -0.0907571, 3.14159), Vector3(-0.216421, -0.0907571, 1.74533), Vector3(-0.216421, -0.0907571, 0)]
@@ -122,7 +122,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.6),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [ExtResource("4_qpq6h"), ExtResource("2_rf4ol")]
+"values": [ExtResource("3_7r7x5"), ExtResource("2_x304u")]
 }
 
 [sub_resource type="Animation" id="Animation_ube02"]
@@ -138,7 +138,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector3(0.450099, -1.15067, -0.681934), Vector3(0.450099, 0.219473, -0.681934)]
+"values": [Vector3(0, -1.151, -0.682), Vector3(0, 0.219, -0.682)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -155,7 +155,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_rf4ol"]
 resource_name = "fill"
-length = 1.5
+length = 2.5
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -164,10 +164,10 @@ tracks/0/path = NodePath("AnimatedPos:position")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5, 1, 1.02, 1.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.3, 0.6, 1.8, 2.1, 2.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector3(0.450099, 0.219473, -0.681934), Vector3(0.0726919, -0.167317, -0.681934), Vector3(-0.081829, 0.0702525, -0.681934), Vector3(-0.0581878, 0.126953, -0.681934), Vector3(0.450099, 0.219473, -0.681934)]
+"values": [Vector3(0, 0.219, -0.682), Vector3(0, 0.115226, -0.682), Vector3(0, -0.137744, -0.682), Vector3(0, -0.137744, -0.682), Vector3(0, 0.115226, -0.682), Vector3(0, 0.219, -0.682)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -176,10 +176,10 @@ tracks/1/path = NodePath("AnimatedPos:rotation")
 tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.5, 1, 1.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.3, 0.6, 1.8, 2.1, 2.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector3(-0.234991, 0, 0), Vector3(0.2011, -0.122402, 2.58959), Vector3(-0.2162, -0.092806, 0.409358), Vector3(-0.234991, 0, 0)]
+"values": [Vector3(-0.234991, 0, 0), Vector3(-1.04346, 0, 0), Vector3(-1.48353, 0, 0), Vector3(-1.48353, 0, 0), Vector3(-1.04346, 0, 0), Vector3(-0.234991, 0, 0)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -188,10 +188,10 @@ tracks/2/path = NodePath("AnimatedPos/MeshInstance3D:surface_material_override/0
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.75),
+"times": PackedFloat32Array(0, 1.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [ExtResource("2_rf4ol"), ExtResource("4_qpq6h")]
+"values": [ExtResource("2_x304u"), ExtResource("3_7r7x5")]
 }
 
 [sub_resource type="Animation" id="Animation_ji2kk"]
@@ -206,7 +206,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector3(0.450099, 0.219473, -0.681934), Vector3(0.450099, -1.15067, -0.681934)]
+"values": [Vector3(0, 0.219, -0.682), Vector3(0, -1.151, -0.682)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ube02"]
@@ -225,13 +225,24 @@ _data = {
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.505464, 0.493025), -0.220431, -0.220431, 0, 0, Vector2(1, 1), -0.0989213, 0.0, 0, 0]
 point_count = 3
 
-[node name="Bucket" type="Node3D" node_paths=PackedStringArray("jump_reset_curve")]
-script = ExtResource("1_bn1s3")
-tool_name = "Rusty Bucket"
-jump_overshoot_amount = 0.15
+[node name="Jug" type="Node3D" node_paths=PackedStringArray("jump_reset_curve")]
+script = ExtResource("1_x304u")
+tool_name = "Big Jug"
+sway_min = Vector2(-20, -20)
+sway_max = Vector2(20, 20)
+sway_speed_rotation = 0.05
+sway_amount_rotation = 60.0
+idle_sway_rotation_strength = 30.0
+idle_sway_speed = 0.005
+jump_sway_amount = 25.0
+landing_sway_adjust_time = 0.3
+jump_overshoot_amount = 0.25
+bob_amount = 10.0
 jump_reset_curve = NodePath("Line2D")
+horizontal_speed = 50.0
+horizontal_range = Vector2(-0.1, 0.1)
 recentering_force = 10.0
-capacity = 5
+capacity = 10
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -239,14 +250,14 @@ libraries = {
 }
 
 [node name="AnimatedPos" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.972516, 0.232834, 0, -0.232834, 0.972516, 0.450099, 0.219473, -0.681934)
+transform = Transform3D(1, 0, 0, 0, 0.972516, 0.232834, 0, -0.232834, 0.972516, 0, 0.219, -0.682)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="AnimatedPos"]
 transform = Transform3D(0.615741, 0, 0, 0, 0.674067, 0, 0, 0, 0.796476, 0, 0, 0)
 layers = 2
 mesh = SubResource("QuadMesh_7nrwf")
 skeleton = NodePath("../../..")
-surface_material_override/0 = ExtResource("2_rf4ol")
+surface_material_override/0 = ExtResource("2_x304u")
 
 [node name="Line2D" type="Line2D" parent="."]
 width_curve = SubResource("Curve_bn1s3")
