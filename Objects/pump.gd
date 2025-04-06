@@ -20,8 +20,7 @@ func _ready():
 	$Sign.visible = true
 	$Sign/BuyLabel.text = "$"+str(price)
 	Events.all_ready.connect(all_ready)
-	$Upgrades/PumpUpgrade.monitorable = false
-	$Upgrades/PumpUpgrade.monitoring = false
+	$Upgrades/PumpUpgrade/CollisionShape3D.disabled = true
 
 func all_ready():
 	money = %Money
@@ -36,10 +35,8 @@ func build():
 	built = true
 	$Geo.visible = true
 	$Sign.visible = false
-	$Sign/PumpBuy.monitorable = false
-	$Sign/PumpBuy.monitoring = false
-	$Upgrades/PumpUpgrade.monitorable = true
-	$Upgrades/PumpUpgrade.monitoring = true
+	$Sign/PumpBuy/CollisionShape3D.disabled = true
+	$Upgrades/PumpUpgrade/CollisionShape3D.disabled = false
 	cur_wps = base_wps
 	Events.add_pump.emit(self)
 
