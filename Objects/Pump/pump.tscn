@@ -1,8 +1,15 @@
-[gd_scene load_steps=7 format=3 uid="uid://hr021abwwm8b"]
+[gd_scene load_steps=14 format=3 uid="uid://hr021abwwm8b"]
 
 [ext_resource type="Script" uid="uid://cunpmy3a5ucf6" path="res://Objects/Pump/pump.gd" id="1_55ofu"]
 [ext_resource type="ArrayMesh" uid="uid://d06xqcr5yveh0" path="res://Art_Assets/Models/MachineBLOCKOUT.obj" id="2_d18j0"]
-[ext_resource type="Script" uid="uid://b25jflxjfg3ss" path="res://Objects/pump_buy.gd" id="3_d18j0"]
+[ext_resource type="Script" uid="uid://cc2dlnfftk7rx" path="res://Objects/Pump/PumpUpgrades/pump_upgrade.gd" id="2_uvhau"]
+[ext_resource type="Resource" uid="uid://da41n65vhmlim" path="res://Objects/Pump/PumpUpgrades/speed_1.tres" id="3_2lgk4"]
+[ext_resource type="Script" uid="uid://b25jflxjfg3ss" path="res://Objects/Pump/pump_buy.gd" id="3_d18j0"]
+[ext_resource type="Resource" uid="uid://c1qn1hidnnvig" path="res://Objects/Pump/PumpUpgrades/speed_2.tres" id="4_6ybtv"]
+[ext_resource type="Resource" uid="uid://dq4fvyul325yv" path="res://Objects/Pump/PumpUpgrades/speed_3.tres" id="5_xilsv"]
+[ext_resource type="Resource" uid="uid://cjn3ajir16kx" path="res://Objects/Pump/PumpUpgrades/quality_1.tres" id="6_7nxrv"]
+[ext_resource type="Resource" uid="uid://cghi5igy78rs" path="res://Objects/Pump/PumpUpgrades/quality_2.tres" id="7_2435t"]
+[ext_resource type="Resource" uid="uid://bi1iaajindrpr" path="res://Objects/Pump/PumpUpgrades/quality_3.tres" id="8_1pin8"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_55ofu"]
 top_radius = 0.1
@@ -18,6 +25,8 @@ size = Vector3(8.23978, 1.42142, 1)
 
 [node name="Pump" type="Node3D" node_paths=PackedStringArray("upgrade_markers")]
 script = ExtResource("1_55ofu")
+speed_upgrades = Array[ExtResource("2_uvhau")]([ExtResource("3_2lgk4"), ExtResource("4_6ybtv"), ExtResource("5_xilsv")])
+quality_upgrades = Array[ExtResource("2_uvhau")]([ExtResource("6_7nxrv"), ExtResource("7_2435t"), ExtResource("8_1pin8")])
 upgrade_markers = [NodePath("Upgrades/Markers/Upgrade1"), NodePath("Upgrades/Markers/Upgrade2"), NodePath("Upgrades/Markers/Upgrade3"), NodePath("Upgrades/Markers/Upgrade4"), NodePath("Upgrades/Markers/Upgrade5")]
 
 [node name="Geo" type="Node3D" parent="."]
