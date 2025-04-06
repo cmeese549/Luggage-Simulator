@@ -22,17 +22,19 @@ script = ExtResource("1_romof")
 [node name="Water_Level_Debug" parent="." instance=ExtResource("2_hyf1s")]
 mouse_filter = 2
 
+[node name="Player" parent="." instance=ExtResource("1_7ireg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -12.0672)
+
 [node name="Money" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("3_8vdnm")
 starting_money = 100
 
+[node name="UI" parent="." instance=ExtResource("1_t065x")]
+
 [node name="Enviroment" type="Node" parent="."]
 
 [node name="LevelGeometry" parent="Enviroment" instance=ExtResource("1_1wy1g")]
-
-[node name="Player" parent="." instance=ExtResource("1_7ireg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -12.0672)
 
 [node name="Water" type="Node3D" parent="."]
 unique_name_in_owner = true
@@ -67,7 +69,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.71387, 0, -17.2599)
 
 [node name="Pump" parent="." instance=ExtResource("9_7gvd8")]
 transform = Transform3D(-0.14104, 0, -0.990004, 0, 1, 0, 0.990004, 0, -0.14104, 13.8841, -0.581938, -2.15099)
-
-[node name="UI" parent="." instance=ExtResource("1_t065x")]
 
 [editable path="UI"]

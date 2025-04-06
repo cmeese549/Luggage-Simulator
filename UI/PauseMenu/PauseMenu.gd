@@ -16,6 +16,8 @@ class_name PauseMenu
 @onready var music_slider : HSlider = $PanelContainer/MarginContainer/Rows/HBoxContainer/VBoxContainer/MusicVolume/MusicVolumeSlider
 @onready var sfx_slider : HSlider = $PanelContainer/MarginContainer/Rows/HBoxContainer/VBoxContainer/SfxVolume/SfxVolumeSlider
 
+var inventory_item : PackedScene = preload("res://UI/PauseMenu/InventoryItem.tscn")
+@onready var inventory_dad : GridContainer = $PanelContainer/MarginContainer/Rows/HBoxContainer/Rows/ScrollContainer/GridContainer
 
 func _ready() -> void:
 	quit_button.pressed.connect(get_tree().quit)
@@ -50,7 +52,18 @@ func music_slider_changed(value: float) -> void:
 func sfx_slider_changed(value: float) -> void:
 	set_bus_db("Sfx", value)
 	store_config("sfx_volume", value)
-
+	
+func update_inventory_items() -> void:
+	var old_items : Array[Node] = inventory_dad.get_children()
+	for item: Node in old_items:
+		item.call_deferred("queue_free")
+	
+	for item: InventoryItem in player.inventory:
+		var new_item : Button = inventory_item.instantiate()
+		new_item.find_child("ItemName").text = item.item_name
+		new_item.find_child("ItemDescription").text = item.item_description
+		new_item.find_child("ItemIcon").texture = item.item_icon
+		inventory_dad.add_child(new_item)
 	
 func _unhandled_input(event):
 	if Input.is_action_just_pressed("Pause"):
@@ -67,11 +80,13 @@ func toggle_pause() -> void:
 		pause()
 
 func pause() -> void:
+	update_inventory_items()
 	self.visible = true
 	hud.visible = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	get_tree().paused = true
 	sensitivity_slider.grab_focus()
+
 		
 func unpause() -> void:
 	self.visible = false
