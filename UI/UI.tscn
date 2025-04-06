@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://exdhmbr43ger"]
+[gd_scene load_steps=24 format=3 uid="uid://exdhmbr43ger"]
 
 [ext_resource type="Script" uid="uid://dic75q4o378w6" path="res://UI/UI.gd" id="1_6dd3c"]
 [ext_resource type="Theme" uid="uid://b3kq74llqlv3x" path="res://UI/Theme/MinimalUI.tres" id="1_dhe1o"]
@@ -19,7 +19,9 @@
 [ext_resource type="Script" uid="uid://5ls1kx27ehtl" path="res://UI/Dialogue/DialoguePauser.gd" id="10_vx7wu"]
 [ext_resource type="AudioStream" uid="uid://bdm7p1ssjxe5w" path="res://UI/Dialogue/bloop.ogg" id="11_r2vy3"]
 [ext_resource type="Resource" uid="uid://7enqhksiag3a" path="res://UI/Shop/ShopItems/Hands.tres" id="11_rjxvo"]
+[ext_resource type="Resource" uid="uid://jgmppv717ws8" path="res://UI/Shop/ShopItems/Sponge.tres" id="11_uk6e0"]
 [ext_resource type="Resource" uid="uid://cmeql7rts03ml" path="res://UI/Shop/ShopItems/Bucket.tres" id="12_uk6e0"]
+[ext_resource type="Resource" uid="uid://dufcgjuo6cucx" path="res://UI/Shop/ShopItems/WateringCan.tres" id="13_uk6e0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_byuxr"]
 shader = ExtResource("6_jqf55")
@@ -311,7 +313,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("7_6q2ik")
-shop_items = Array[ExtResource("9_xtxff")]([ExtResource("11_rjxvo"), ExtResource("12_uk6e0")])
+shop_items = Array[ExtResource("9_xtxff")]([ExtResource("11_rjxvo"), ExtResource("11_uk6e0"), ExtResource("12_uk6e0"), ExtResource("13_uk6e0")])
 
 [node name="PanelContainer" type="PanelContainer" parent="Shop"]
 layout_mode = 2
