@@ -4,6 +4,9 @@ class_name PauseMenu
 
 @onready var player : Player = get_tree().get_first_node_in_group("Player")
 
+@onready var shop : Shop = $"../Shop"
+@onready var upgrade_menu : MarginContainer = $"../UpgradeMenu"
+
 @onready var config = ConfigFile.new()
 @onready var audioServer = AudioServer
 
@@ -66,6 +69,9 @@ func update_inventory_items() -> void:
 		inventory_dad.add_child(new_item)
 	
 func _unhandled_input(event):
+	if shop.visible or upgrade_menu.visible:
+		return
+		
 	if Input.is_action_just_pressed("Pause"):
 		toggle_pause()
 		

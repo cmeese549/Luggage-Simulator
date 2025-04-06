@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://exdhmbr43ger"]
+[gd_scene load_steps=17 format=3 uid="uid://exdhmbr43ger"]
 
 [ext_resource type="Script" uid="uid://dic75q4o378w6" path="res://UI/UI.gd" id="1_6dd3c"]
 [ext_resource type="Theme" uid="uid://b3kq74llqlv3x" path="res://UI/Theme/MinimalUI.tres" id="1_dhe1o"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://sb0v8kjwv2pv" path="res://UI/MainMenu/MainMenu.gd" id="6_byuxr"]
 [ext_resource type="Shader" uid="uid://bkcnroaexgcpu" path="res://UI/MainMenu/FadeFromBlack.tres" id="6_jqf55"]
 [ext_resource type="Script" uid="uid://bed3d7egj53pu" path="res://UI/PauseMenu/PauseMenu.gd" id="6_qhxh2"]
+[ext_resource type="Script" uid="uid://vcecdqq511h1" path="res://UI/Shop/Shop.gd" id="7_6q2ik"]
 [ext_resource type="Script" uid="uid://cmqb4oi3mfhb4" path="res://UI/HUD/hud.gd" id="7_017wa"]
 [ext_resource type="PackedScene" uid="uid://dth0cukoj3ajb" path="res://UI/PauseMenu/InventoryItem.tscn" id="10_npmjx"]
 [ext_resource type="Script" uid="uid://5ls1kx27ehtl" path="res://UI/Dialogue/DialoguePauser.gd" id="10_vx7wu"]
@@ -458,6 +459,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+script = ExtResource("7_6q2ik")
 
 [node name="PanelContainer" type="PanelContainer" parent="Shop"]
 layout_mode = 2
