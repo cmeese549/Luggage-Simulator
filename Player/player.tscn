@@ -82,15 +82,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.509695, 0)
 script = ExtResource("2_btcbx")
 
 [node name="Thimble" parent="Neck/Camera3D/ToolSys" instance=ExtResource("3_k53q1")]
+tool_name = "Thimble"
 
 [node name="Hands" parent="Neck/Camera3D/ToolSys" instance=ExtResource("3_fhl08")]
 visible = false
-
-[node name="Hands2" parent="Neck/Camera3D/ToolSys" instance=ExtResource("3_fhl08")]
-visible = false
+tool_name = "Your Hands"
 
 [node name="Bucket" parent="Neck/Camera3D/ToolSys" instance=ExtResource("3_gwnis")]
 visible = false
+tool_name = "Bucket"
 jump_overshoot_amount = 0.055
 recentering_force = 55.0
 
