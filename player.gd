@@ -3,14 +3,14 @@ extends CharacterBody3D
 class_name Player
 
 @onready var neck = $Neck
-@onready var camera = $Neck/Camera3D
+@onready var camera : Camera3D = $Neck/Camera3D
 @onready var tool_sys : ToolSys = $Neck/Camera3D/ToolSys
 
 @onready var hud : Control = $"../UI/HUD"
 @onready var main_menu : Control = $"../UI/MainMenu"
 
 const SPEED = 5.0
-const JUMP_VELOCITY = 4.5
+const JUMP_VELOCITY = 5.2
 
 var mouse_sens = 1
 
@@ -51,8 +51,6 @@ func _unhandled_input(event):
 		start_game()
 	if event is InputEventMouseButton:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	if event.is_action_pressed("ui_cancel"):
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 			
 func _input(event: InputEvent) -> void:
 	if ready_to_start_game and !game_started and event != InputEventMouseMotion:
@@ -72,6 +70,7 @@ func gamepad_aim(delta: float) -> void:
 func _physics_process(delta):
 	if !ready_to_start_game:
 		return
+		
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -221,3 +220,6 @@ func camera_sway_weapon(delta: float, bob_this_frame: Vector2) -> void:
 		clamp(movement.x / _tool.horizontal_speed, _tool.horizontal_range.x, _tool.horizontal_range.y),
 		_tool.idle_sway_speed
 	)
+
+func update_fov(value: float) -> void:
+	camera.fov = value
