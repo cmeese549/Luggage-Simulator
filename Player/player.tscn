@@ -81,9 +81,9 @@ debug_shape_thickness = 1
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.509695, 0)
 script = ExtResource("2_btcbx")
 
-[node name="Hands" parent="Neck/Camera3D/ToolSys" instance=ExtResource("3_fhl08")]
-
 [node name="Thimble" parent="Neck/Camera3D/ToolSys" instance=ExtResource("3_k53q1")]
+
+[node name="Hands" parent="Neck/Camera3D/ToolSys" instance=ExtResource("3_fhl08")]
 visible = false
 
 [node name="Bucket" parent="Neck/Camera3D/ToolSys" instance=ExtResource("3_gwnis")]

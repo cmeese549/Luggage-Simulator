@@ -9,6 +9,8 @@ var equiped: bool = false
 var tool_ready: bool = false
 var tool_full: bool = false
 
+@export var tool_name : String
+
 @export var sway_min : Vector2 = Vector2(-30, -30)
 @export var sway_max : Vector2 = Vector2(30, 30)
 @export var sway_speed_rotation : float = 0.075
@@ -29,6 +31,8 @@ var tool_full: bool = false
 
 @export var capacity: int = 1
 @export var water_value: int = 1
+
+signal stow_finished(this_tool: tool)
 
 func _ready():
 	if !animation_player:
@@ -73,6 +77,7 @@ func _on_animation_player_animation_finished(anim_name):
 			equiped = true
 		"stow":
 			equiped = false
+			stow_finished.emit(self)
 		"good_fill":
 			tool_full = true
 		"empty":
