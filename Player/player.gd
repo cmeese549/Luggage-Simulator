@@ -79,7 +79,7 @@ func check_has_tool(tool_name: String) -> bool:
 	return false
 	
 func unlock_new_tool(tool: ShopItem) -> void:
-	print("Unlock the " + tool.item_name)
+	tool_sys.upgrade_tool(tool.item_name)
 
 func _unhandled_input(event):
 	if ready_to_start_game and !game_started and event != InputEventMouseMotion:
