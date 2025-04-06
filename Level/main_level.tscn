@@ -1,7 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://d28sbjt0i0qst"]
+[gd_scene load_steps=9 format=3 uid="uid://d28sbjt0i0qst"]
 
 [ext_resource type="PackedScene" uid="uid://ddwtbnyshxxj3" path="res://Art_Assets/Levels/LevelGeometry.tscn" id="1_1wy1g"]
 [ext_resource type="PackedScene" uid="uid://bk7vc4usjt3od" path="res://Player/player.tscn" id="1_7ireg"]
+[ext_resource type="Script" uid="uid://bu07i0b06sujv" path="res://Game_Management/main_level.gd" id="1_romof"]
+[ext_resource type="PackedScene" uid="uid://cwuhc7fibr0jj" path="res://UI/water_level_debug.tscn" id="2_hyf1s"]
+[ext_resource type="Script" uid="uid://d0rpsw8qm8mxc" path="res://Level/water.gd" id="3_t065x"]
 [ext_resource type="Material" uid="uid://cc3jyugw620gk" path="res://Art_Assets/Materials/WaterVertex.tres" id="3_vad1a"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_t065x"]
@@ -10,6 +13,10 @@
 size = Vector3(1000, 1, 1000)
 
 [node name="MainLevel" type="Node3D"]
+script = ExtResource("1_romof")
+
+[node name="Water_Level_Debug" parent="." instance=ExtResource("2_hyf1s")]
+mouse_filter = 2
 
 [node name="Enviroment" type="Node" parent="."]
 
@@ -19,7 +26,9 @@ size = Vector3(1000, 1, 1000)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -12.0672)
 
 [node name="Water" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 68.218, -1, 171.569)
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 68.218, -90, 171.569)
+script = ExtResource("3_t065x")
 
 [node name="WaterPlane" type="MeshInstance3D" parent="Water"]
 transform = Transform3D(700, 0, 0, 0, -3.0598e-05, 1, 0, -700, -4.37114e-08, 0, 0, 0)

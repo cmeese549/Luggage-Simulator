@@ -20,6 +20,7 @@ func _ready():
 
 func _unhandled_input(event):
 	if event.is_action_pressed("primary"):
+		print("Clicked")
 		equiped_tool.use(check_for_water())
 
 func check_for_water():

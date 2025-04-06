@@ -25,6 +25,7 @@ func use(is_there_water: bool):
 		if !tool_full:
 			if is_there_water:
 				animation_player.play("good_fill")
+				Events.remove_water.emit(capacity)
 			else:
 				animation_player.play("bad_fill")
 		else:
