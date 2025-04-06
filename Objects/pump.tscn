@@ -16,7 +16,7 @@ radius = 0.372559
 [sub_resource type="BoxShape3D" id="BoxShape3D_d18j0"]
 size = Vector3(8.23978, 1.42142, 1)
 
-[node name="Pump" type="Node3D" groups=["Pump"]]
+[node name="Pump" type="Node3D"]
 script = ExtResource("1_55ofu")
 
 [node name="Geo" type="Node3D" parent="."]
