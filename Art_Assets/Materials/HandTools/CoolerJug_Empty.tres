@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://bbtqa3fseyydi"]
+
+[ext_resource type="Texture2D" uid="uid://s5anjytyy8k" path="res://Art_Assets/Textures/HandTools/CoolerJug_Empty.png" id="1_5nuvf"]
+
+[resource]
+transparency = 1
+albedo_texture = ExtResource("1_5nuvf")
+texture_filter = 0

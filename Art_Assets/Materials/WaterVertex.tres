@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://cc3jyugw620gk"]
 
-[ext_resource type="Shader" uid="uid://bvtd2d2vmcpix" path="res://Art_Assets/Shaders/WaterShaderVertex.tres" id="1_ft1sj"]
+[ext_resource type="Shader" uid="uid://c1ob3t0j4ownw" path="res://Art_Assets/Shaders/WaterShaderVertex.tres" id="1_ft1sj"]
 
 [resource]
 render_priority = 0

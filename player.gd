@@ -52,6 +52,8 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 		do_jump_sway(delta)
+		was_just_flying = true
+
 
 	# Get the input direction and handle the movement/deceleration.
 	var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_back")
@@ -73,19 +75,19 @@ func _process(delta : float) -> void:
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-90), deg_to_rad(90))
 		
 	var bob_this_frame : Vector2 = Vector2.ZERO
-	var input_dir = Input.get_vector("Move Left", "Move Right", "Move Forwards", "Move Backwards")
+	var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_back")
 	if input_dir != Vector2.ZERO and is_on_floor():
 		bob_this_frame = weapon_bob(delta)
 		
 	if !is_on_floor():
 		do_jump_sway(delta)
 	else:
-		if doing_landing_adjust:
+		if was_just_flying:
 			landing_sway_adjust_cooldown += delta
 			reset_jump_sway(delta)
 			if landing_sway_adjust_cooldown >= tool_sys.equipped_tool.landing_sway_adjust_time:
 				landing_sway_adjust_cooldown = 0
-				doing_landing_adjust = false
+				was_just_flying = false
 	
 	if camera_movement_this_frame == Vector2.ZERO:
 		idle_sway_weapon(delta, bob_this_frame)
@@ -157,16 +159,6 @@ func idle_sway_weapon(delta: float, bob_this_frame: Vector2) -> void:
 		(tool.position.z + idle_sway.z) * delta, 
 		tool.idle_sway_speed
 	)
-	tool.mesh.rotation_degrees.x = lerpf(
-		tool.mesh.rotation_degrees.x, 
-		(tool.mesh.rotation_degrees.x - (tool.idle_sway_rotation_strength * idle_sway.y)) * delta, 
-		tool.idle_sway_speed
-	)
-	tool.mesh.rotation_degrees.y = lerpf(
-		tool.mesh.rotation_degrees.y, 
-		(tool.mesh.rotation_degrees.y + (tool.idle_sway_rotation_strength * idle_sway.x)) * delta, 
-		tool.idle_sway_speed
-	)
 	
 func camera_sway_weapon(delta: float, bob_this_frame: Vector2) -> void:
 	var tool = tool_sys.equipped_tool
@@ -194,14 +186,4 @@ func camera_sway_weapon(delta: float, bob_this_frame: Vector2) -> void:
 		tool.position.z, 
 		clamp(movement.x / tool.horizontal_speed, tool.horizontal_range.x, tool.horizontal_range.y),
 		tool.idle_sway_speed
-	)
-	tool.mesh.rotation_degrees.x = lerp(
-		tool.mesh.rotation_degrees.x, 
-		clamp(tool.mesh.rotation_degrees.x - (movement.y * (direction_modifier * -1) * tool.sway_amount_rotation) * delta, rotation_clamp.x / 3, rotation_clamp.y / 3),
-		tool.sway_speed_rotation
-	)
-	tool.mesh.rotation_degrees.y = lerp(
-		tool.mesh.rotation_degrees.y, 
-		clamp(tool.mesh.rotation_degrees.y + (movement.x * tool.sway_amount_rotation) * delta, rotation_clamp.x, rotation_clamp.y), 
-		tool.sway_speed_rotation
 	)

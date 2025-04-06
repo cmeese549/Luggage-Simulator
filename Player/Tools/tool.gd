@@ -23,6 +23,9 @@ var tool_full: bool = false
 @export var jump_overshoot_amount : float = 0.055
 @export var bob_amount : float = 20
 @export var jump_reset_curve : Line2D
+@export var horizontal_speed : float = 60
+@export var horizontal_range : Vector2 = Vector2(-0.15, 0.15)
+@export var recentering_force : float = 55
 
 @export var capacity: int = 1
 
@@ -30,7 +33,7 @@ func _ready():
 	if !animation_player:
 		push_error("No animation player on tool: "+name)
 
-func use():
+func use(is_there_water: bool):
 	if !tool_ready:
 		#TODO put some rejection noise here
 		print("Tool not ready")
@@ -38,7 +41,10 @@ func use():
 	if unlocked and equiped and tool_ready:
 		tool_ready = false
 		if !tool_full:
-			animation_player.play("fill")
+			if is_there_water:
+				animation_player.play("good_fill")
+			else:
+				animation_player.play("bad_fill")
 		else:
 			animation_player.play("empty")
 

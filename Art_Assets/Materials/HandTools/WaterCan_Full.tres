@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://8g2g4va24dhf"]
+
+[ext_resource type="Texture2D" uid="uid://k16fcqlptxgg" path="res://Art_Assets/Textures/HandTools/WaterCan_Full.png" id="1_orrox"]
+
+[resource]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+albedo_texture = ExtResource("1_orrox")
+texture_filter = 0
