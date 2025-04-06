@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://bk7vc4usjt3od"]
+[gd_scene load_steps=7 format=3 uid="uid://bk7vc4usjt3od"]
 
 [ext_resource type="Script" uid="uid://5yb4xnha3npe" path="res://player.gd" id="1_l8h54"]
 [ext_resource type="Script" uid="uid://b140mkd7ankio" path="res://Player/Tools/tool_sys.gd" id="2_btcbx"]
 [ext_resource type="PackedScene" uid="uid://xxekbn0nkf7g" path="res://Player/Tools/bucket.tscn" id="3_gwnis"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_btcbx"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4ntmi"]
 
@@ -10,6 +12,7 @@
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_l8h54")
+sway_noise = SubResource("FastNoiseLite_btcbx")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_4ntmi")

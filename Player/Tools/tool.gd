@@ -9,6 +9,21 @@ var equiped: bool = false
 var tool_ready: bool = false
 var tool_full: bool = false
 
+@export var sway_min : Vector2 = Vector2(-30, -30)
+@export var sway_max : Vector2 = Vector2(30, 30)
+@export var sway_speed_rotation : float = 0.075
+@export var sway_amount_rotation : float = 75.0
+
+@export var random_sway_amount : float = 7
+@export var idle_sway_rotation_strength : float = 35
+@export var idle_sway_speed : float = 0.007
+
+@export var jump_sway_amount : float = 35
+@export var landing_sway_adjust_time : float = 0.2
+@export var jump_overshoot_amount : float = 0.055
+@export var bob_amount : float = 20
+@export var jump_reset_curve : Line2D
+
 @export var capacity: int = 1
 
 func _ready():
