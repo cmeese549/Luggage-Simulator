@@ -60,7 +60,7 @@ func open(pump: Pump) -> void:
 		disable_upgrade_buttons()
 	else:
 		if pump.speed_upgrades.size() == 3 and pump.quality_upgrades.size() == 3:
-			enable_upgrade_buttons()
+			connect_upgrade_buttons()
 	connect_buttons(pump)
 	
 func connect_buttons(pump: Pump) -> void:
@@ -109,26 +109,12 @@ func display_populated_upgrade_slot(upgrade: pump_upgrade) -> void:
 	entry.find_child("Icon").texture = upgrade.icon
 	entry.find_child("Description").text = upgrade.description
 	upgrade_slots.add_child(entry)
-		
-func disable_upgrade_buttons() -> void:
-	all_buttons_disabled = true
-	speed_upgrade_1.disabled = true
-	speed_upgrade_2.disabled = true
-	speed_upgrade_3.disabled = true
-	quality_upgrade_1.disabled = true
-	quality_upgrade_2.disabled = true
-	quality_upgrade_3.disabled = true
-	
-func enable_upgrade_buttons() -> void:
-	all_buttons_disabled = false
-	speed_upgrade_1.disabled = false
-	speed_upgrade_2.disabled = false
-	speed_upgrade_3.disabled = false
-	quality_upgrade_1.disabled = false
-	quality_upgrade_2.disabled = false
-	quality_upgrade_3.disabled = false
 	
 func update_affordability() -> void:
+	var applied_upgrades : int = 0
+	for upgrade: pump_upgrade in current_pump.upgrade_slots:
+		if upgrade != null:
+			applied_upgrades += 1
 	var i : int = 0
 	var speed_upgrade_buttons : Array[Button] = [
 		speed_upgrade_1,
@@ -137,7 +123,7 @@ func update_affordability() -> void:
 	]
 	for button: Button in speed_upgrade_buttons:
 		var upgrade_data : pump_upgrade = current_pump.speed_upgrades[i]
-		if ui.money.cur_money >= upgrade_data.price:
+		if ui.money.cur_money >= upgrade_data.price and applied_upgrades < 5:
 			button.disabled = false
 		else:
 			button.disabled = true
@@ -150,7 +136,7 @@ func update_affordability() -> void:
 	]
 	for button: Button in quality_upgrade_buttons:
 		var upgrade_data : pump_upgrade = current_pump.quality_upgrades[i]
-		if ui.money.cur_money >= upgrade_data.price:
+		if ui.money.cur_money >= upgrade_data.price and applied_upgrades < 5:
 			button.disabled = false
 		else:
 			button.disabled = true

@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://5yb4xnha3npe" path="res://Player/player.gd" id="1_l8h54"]
 [ext_resource type="Script" uid="uid://b140mkd7ankio" path="res://Player/Tools/tool_sys.gd" id="2_btcbx"]
 [ext_resource type="PackedScene" uid="uid://xxekbn0nkf7g" path="res://Player/Tools/bucket.tscn" id="3_gwnis"]
-[ext_resource type="Script" path="res://Player/ToolCam.gd" id="4_gwnis"]
+[ext_resource type="Script" uid="uid://ns08b0figwtw" path="res://Player/ToolCam.gd" id="4_gwnis"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_btcbx"]
 
@@ -32,6 +32,7 @@ fov = 90.0
 target_position = Vector3(0, 0, -2.2)
 collision_mask = 11
 collide_with_areas = true
+debug_shape_thickness = 1
 
 [node name="ToolSys" type="Node3D" parent="Neck/Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.509695, 0)
