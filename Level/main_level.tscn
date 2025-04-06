@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://d28sbjt0i0qst"]
+[gd_scene load_steps=12 format=3 uid="uid://d28sbjt0i0qst"]
 
 [ext_resource type="PackedScene" uid="uid://ddwtbnyshxxj3" path="res://Art_Assets/Levels/LevelGeometry.tscn" id="1_1wy1g"]
 [ext_resource type="PackedScene" uid="uid://bk7vc4usjt3od" path="res://Player/player.tscn" id="1_7ireg"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://d0rpsw8qm8mxc" path="res://Level/water.gd" id="3_t065x"]
 [ext_resource type="Material" uid="uid://cc3jyugw620gk" path="res://Art_Assets/Materials/WaterVertex.tres" id="3_vad1a"]
 [ext_resource type="PackedScene" uid="uid://d04mojfecls7r" path="res://Objects/water_seller.tscn" id="8_cv6sc"]
+[ext_resource type="PackedScene" uid="uid://hr021abwwm8b" path="res://Objects/pump.tscn" id="9_7gvd8"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_t065x"]
 
@@ -21,7 +22,9 @@ script = ExtResource("1_romof")
 mouse_filter = 2
 
 [node name="Money" type="Node" parent="."]
+unique_name_in_owner = true
 script = ExtResource("3_8vdnm")
+starting_money = 100
 
 [node name="Enviroment" type="Node" parent="."]
 
@@ -41,7 +44,7 @@ mesh = SubResource("QuadMesh_t065x")
 skeleton = NodePath("../..")
 surface_material_override/0 = ExtResource("3_vad1a")
 
-[node name="WaterTop" type="Area3D" parent="Water" groups=["WaterTop"]]
+[node name="WaterTop" type="Area3D" parent="Water" groups=["Interactable"]]
 collision_layer = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Water/WaterTop"]
@@ -60,3 +63,6 @@ debug_color = Color(0, 0, 0, 1)
 
 [node name="WaterSeller" parent="." instance=ExtResource("8_cv6sc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.71387, 0, -17.2599)
+
+[node name="Pump" parent="." instance=ExtResource("9_7gvd8")]
+transform = Transform3D(-0.14104, 0, -0.990004, 0, 1, 0, 0.990004, 0, -0.14104, 13.8841, -0.581938, -2.15099)

@@ -48,7 +48,7 @@ func use(water_thing):
 			else:
 				animation_player.play("bad_fill")
 		else:
-			if water_thing == "DepositArea": Events.make_money.emit(capacity * water_value)
+			if water_thing == "DepositArea": Events.make_money.emit(capacity * water_value, true)
 			animation_player.play("empty")
 
 func unlock():

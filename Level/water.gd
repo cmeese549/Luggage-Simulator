@@ -16,12 +16,13 @@ func _ready():
 	position.y = starting_y
 	
 	Events.remove_water.connect(remove_water)
+	Events.add_pump.connect(add_pump)
 
 func _process(delta):
 	cur_wps_out = 0
 	for w_pump in pumps:
-		cur_amount -= w_pump.cur_wps * delta
-		cur_wps_out +=w_pump.cur_wps
+		remove_water(w_pump.do_pump(delta))
+		cur_wps_out += w_pump.cur_wps
 	
 	if cur_amount <= 0: now_empty()
 	
@@ -29,7 +30,6 @@ func _process(delta):
 	position.y = cur_y
 
 func remove_water(amount):
-	print("Removing "+str(amount)+" water")
 	cur_amount -= amount
 
 func add_pump(new_pump: pump):

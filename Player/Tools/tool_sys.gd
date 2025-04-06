@@ -22,14 +22,17 @@ func _ready():
 
 func _unhandled_input(event):
 	if event.is_action_pressed("primary"):
-		equipped_tool.use(check_for_water_thing())
+		var interact_thing = check_for_interactable()
+		if interact_thing:
+			if interact_thing.name == "WaterTop" || interact_thing.name == "DepositArea":
+				equipped_tool.use(interact_thing.name)
+			elif interact_thing.name == "PumpBuy":
+				interact_thing.attempt_buy()
 
-func check_for_water_thing():
+func check_for_interactable():
 	if look_at_cast.is_colliding():
 		var col = look_at_cast.get_collider()
 		print("Looking at "+col.name)
-		if "WaterTop" in col.get_groups():
-			return "WaterTop"
-		elif "DepositArea" in col.get_groups():
-			return "DepositArea"
+		if "Interactable" in col.get_groups():
+			return col
 	return null

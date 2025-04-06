@@ -63,3 +63,15 @@ text = "WPS Out:"
 layout_mode = 2
 size_flags_horizontal = 10
 text = "-1"
+
+[node name="Money" type="HBoxContainer" parent="MarginContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="MoneyLabel" type="Label" parent="MarginContainer/PanelContainer/VBoxContainer/Money"]
+layout_mode = 2
+text = "Money:"
+
+[node name="MoneyNum" type="Label" parent="MarginContainer/PanelContainer/VBoxContainer/Money"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "xxx"

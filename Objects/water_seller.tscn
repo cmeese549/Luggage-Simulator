@@ -38,7 +38,7 @@ mesh = SubResource("CylinderMesh_pm31n")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 shape = SubResource("CylinderShape3D_s8o1i")
 
-[node name="DepositArea" type="Area3D" parent="." groups=["DepositArea"]]
+[node name="DepositArea" type="Area3D" parent="." groups=["Interactable"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.498094, 5)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DepositArea"]
