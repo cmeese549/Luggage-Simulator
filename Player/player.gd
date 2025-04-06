@@ -5,6 +5,7 @@ class_name Player
 @onready var neck = $Neck
 @onready var camera : Camera3D = $Neck/Camera3D
 @onready var tool_sys : ToolSys = $Neck/Camera3D/ToolSys
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 @onready var hud : Control = $"../UI/HUD"
 @onready var main_menu : Control = $"../UI/MainMenu"
@@ -25,6 +26,8 @@ var current_footstep_cooldown = 0.0
 var was_just_flying : bool = false
 var doing_landing_adjust : bool = false
 var landing_sway_adjust_cooldown : float = 0
+
+var was_just_in_water: bool = false
 
 var ready_to_start_game = true
 var game_started = false
@@ -82,9 +85,18 @@ func _physics_process(delta):
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
+	
+	if is_in_water() and !was_just_in_water:
+		animation_player.play("water_bob")
+		animation_player.get_animation("water_bob").loop_mode = Animation.LOOP_LINEAR
+		was_just_in_water = true
+	
+	if !is_in_water() and was_just_in_water:
+		animation_player.get_animation("water_bob").loop_mode = Animation.LOOP_NONE
+		was_just_in_water = false
 
 	# Handle jump.
-	if Input.is_action_just_pressed("jump") and is_on_floor():
+	if Input.is_action_just_pressed("jump") and is_on_floor() and !is_in_water():
 		velocity.y = JUMP_VELOCITY
 		if tool_sys.equipped_tool != null:
 			do_jump_sway(delta)
@@ -231,3 +243,6 @@ func camera_sway_weapon(delta: float, bob_this_frame: Vector2) -> void:
 
 func update_fov(value: float) -> void:
 	camera.fov = value
+
+func is_in_water() -> bool:
+	return $WaterDetecter.is_colliding()
