@@ -76,6 +76,12 @@ primary={
 ]
 }
 
+[layer_names]
+
+3d_physics/layer_1="Main"
+3d_physics/layer_2="Water Surface"
+3d_physics/layer_3="Water Float"
+
 [physics]
 
 common/physics_interpolation=true
