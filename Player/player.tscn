@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://b2gqicgrkqu86" path="res://Player/Tools/hands.tscn" id="3_fhl08"]
 [ext_resource type="PackedScene" uid="uid://xxekbn0nkf7g" path="res://Player/Tools/bucket.tscn" id="3_gwnis"]
 [ext_resource type="PackedScene" uid="uid://qykfij56gm1u" path="res://Player/Tools/thimble.tscn" id="3_k53q1"]
-[ext_resource type="Script" path="res://Player/ToolCam.gd" id="4_gwnis"]
+[ext_resource type="Script" uid="uid://ns08b0figwtw" path="res://Player/ToolCam.gd" id="4_gwnis"]
 [ext_resource type="PackedScene" uid="uid://cpado1v1hq4kt" path="res://Player/Tools/sponge.tscn" id="5_vtle1"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_btcbx"]
@@ -80,20 +80,17 @@ debug_shape_thickness = 1
 
 [node name="ToolSys" type="Node3D" parent="Neck/Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.509695, 0)
+visible = false
 script = ExtResource("2_btcbx")
-
-[node name="Thimble" parent="Neck/Camera3D/ToolSys" instance=ExtResource("3_k53q1")]
-visible = false
-
-[node name="Hands" parent="Neck/Camera3D/ToolSys" instance=ExtResource("3_fhl08")]
-tool_name = "Your Hands"
-visible = false
 
 [node name="Sponge" parent="Neck/Camera3D/ToolSys" instance=ExtResource("5_vtle1")]
 
+[node name="Thimble" parent="Neck/Camera3D/ToolSys" instance=ExtResource("3_k53q1")]
+
+[node name="Hands" parent="Neck/Camera3D/ToolSys" instance=ExtResource("3_fhl08")]
+
 [node name="Bucket" parent="Neck/Camera3D/ToolSys" instance=ExtResource("3_gwnis")]
 tool_name = "Bucket"
-visible = false
 jump_overshoot_amount = 0.055
 recentering_force = 55.0
 
