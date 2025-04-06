@@ -29,6 +29,14 @@ var landing_sway_adjust_cooldown : float = 0
 var ready_to_start_game = true
 var game_started = false
 
+var inventory : Array[InventoryItem] = [
+	InventoryItem.new(),
+	InventoryItem.new(),
+	InventoryItem.new(),
+	InventoryItem.new(),
+	InventoryItem.new()
+]
+
 func _ready():
 	if ready_to_start_game:
 		start_game()
