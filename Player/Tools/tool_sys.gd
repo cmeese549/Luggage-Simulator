@@ -52,6 +52,7 @@ func upgrade_tool(tool_name: String):
 	for t in tools:
 		if t.tool_name == tool_name:
 			next_tool = t
+			found_tool = true
 	if not found_tool: push_error("Couldn't find tool: "+tool_name)
 
 func equip_next_tool(old_tool):
