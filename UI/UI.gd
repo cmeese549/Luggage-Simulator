@@ -6,6 +6,8 @@ class_name UI
 
 var money: Money
 
+var pauseable : bool = true
+
 func _ready():
 	Events.all_ready.connect(all_ready)
 

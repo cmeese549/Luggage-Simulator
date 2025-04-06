@@ -9,6 +9,8 @@ var equiped: bool = false
 var tool_ready: bool = false
 var tool_full: bool = false
 
+@export var tool_name : String
+
 @export var sway_min : Vector2 = Vector2(-30, -30)
 @export var sway_max : Vector2 = Vector2(30, 30)
 @export var sway_speed_rotation : float = 0.075

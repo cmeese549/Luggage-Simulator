@@ -18,6 +18,12 @@ func _ready() -> void:
 	pause_timer.timeout.connect(unpause)
 	pauser.pause_requested.connect(pause)
 	
+func stop_dialogue() -> void:
+	dialogue_finished.emit()
+	voice.stop()
+	type_timer.stop()
+	pause_timer.stop()
+	
 func is_message_fully_visible() -> bool:
 	return content.visible_characters >= content.text.length() - 1
 	

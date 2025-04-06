@@ -43,6 +43,15 @@ func _ready():
 	
 	item_pickup_range.area_entered.connect(pickup_item)
 	
+func start_game() ->  void:
+	if hud != null:
+		hud.visible = true
+		
+	if main_menu != null:
+		main_menu.visible = false
+	game_started = true
+	tool_sys.start_game()
+	
 func pickup_item(area: Area3D) -> void:
 	if area.is_in_group("Pickupable"):
 		print("Getting item")
@@ -53,14 +62,17 @@ func pickup_item(area: Area3D) -> void:
 		inventory.append(new_item)
 		area.get_parent().call_deferred("queue_free")
 	
-func start_game() ->  void:
-	if hud != null:
-		hud.visible = true
-		
-	if main_menu != null:
-		main_menu.visible = false
-	game_started = true
-	tool_sys.start_game()
+func check_has_inventory_item(item_name: String) -> bool:
+	for item: InventoryItem in inventory:
+		if item.item_name == item_name:
+			return true
+	return false
+	
+func check_has_tool(tool_name: String) -> bool:
+	for tool: tool in tool_sys.tools:
+		if tool.tool_name == tool_name and tool.unlocked:
+			return true
+	return false
 
 func _unhandled_input(event):
 	if ready_to_start_game and !game_started and event != InputEventMouseMotion:

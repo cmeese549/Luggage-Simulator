@@ -20,7 +20,6 @@ func extract_pauses_from_dialogue(dialogue: String) -> String:
 func find_pauses(dialogue: String) -> void:
 	var search : Array[RegExMatch] = pause_regex.search_all(dialogue)
 	for result : RegExMatch in search:
-		print("Found pause")
 		var tag_string : String = result.get_string()
 		var tag_position : int = adjust_position(result.get_start(), dialogue)
 		var new_pause : DialoguePause = DialoguePause.new(tag_position, tag_string)

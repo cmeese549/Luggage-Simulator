@@ -1,0 +1,53 @@
+[gd_scene load_steps=2 format=3 uid="uid://dh3svyhks2vpb"]
+
+[ext_resource type="Texture2D" uid="uid://dsu4otkk2qt0g" path="res://icon.svg" id="1_170hd"]
+
+[node name="ShopItem" type="Button"]
+custom_minimum_size = Vector2(0, 440)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 25
+
+[node name="ItemName" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 41
+text = "Epic Shop Item"
+horizontal_alignment = 1
+
+[node name="ItemIcon" type="TextureRect" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.72
+texture = ExtResource("1_170hd")
+expand_mode = 1
+stretch_mode = 3
+
+[node name="ItemPrice" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 46
+text = "$500"
+horizontal_alignment = 1
+
+[node name="ItemDescription" type="Label" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 21
+text = "This is a super awesome epic shop item"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="ItemRequirements" type="Label" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 21
+text = "Required Items:"
+horizontal_alignment = 1
+autowrap_mode = 2

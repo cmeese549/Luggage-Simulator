@@ -4,6 +4,7 @@ class_name PauseMenu
 
 @onready var player : Player = get_tree().get_first_node_in_group("Player")
 
+@onready var ui : UI = $".."
 @onready var shop : Shop = $"../Shop"
 @onready var upgrade_menu : MarginContainer = $"../UpgradeMenu"
 
@@ -72,10 +73,11 @@ func _unhandled_input(event):
 	if shop.visible or upgrade_menu.visible:
 		return
 		
-	if Input.is_action_just_pressed("Pause"):
+	if Input.is_action_just_pressed("Pause") and ui.pauseable:
+		print("Freakin paus time")
 		toggle_pause()
 		
-	if event is InputEventJoypadButton and event.is_action_pressed("ui_cancel"):
+	if event is InputEventJoypadButton and event.is_action_pressed("ui_cancel") and ui.pauseable:
 		if get_tree().paused:
 			unpause()
 		

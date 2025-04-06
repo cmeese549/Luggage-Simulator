@@ -23,7 +23,7 @@ var current_pump : Pump = null
 
 func _input(event) -> void:
 	if self.visible:
-		if Input.is_action_just_pressed("ui_cancel") or Input.is_action_just_pressed("Pause"):
+		if Input.is_action_just_released("ui_cancel") or Input.is_action_just_released("Pause"):
 			close()
 
 func _ready() -> void:
@@ -41,6 +41,7 @@ func close() -> void:
 	get_tree().paused = false
 	disconnect_buttons()
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	ui.pauseable = true
 
 func open(pump: Pump) -> void:
 	hud.visible = false
@@ -50,6 +51,7 @@ func open(pump: Pump) -> void:
 	render_upgrades(pump)
 	connect_buttons(pump)
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	ui.pauseable = false
 	
 func render_upgrades(pump: Pump) -> void:
 	var i : int = 0
