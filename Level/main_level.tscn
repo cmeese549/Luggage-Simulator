@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://d28sbjt0i0qst"]
+[gd_scene load_steps=20 format=3 uid="uid://d28sbjt0i0qst"]
 
 [ext_resource type="PackedScene" uid="uid://ddwtbnyshxxj3" path="res://Art_Assets/Levels/LevelGeometry.tscn" id="1_1wy1g"]
 [ext_resource type="PackedScene" uid="uid://bk7vc4usjt3od" path="res://Player/player.tscn" id="1_7ireg"]
@@ -15,6 +15,8 @@
 [ext_resource type="PackedScene" uid="uid://hr021abwwm8b" path="res://Objects/Pump/pump.tscn" id="9_7gvd8"]
 [ext_resource type="Resource" uid="uid://jgmppv717ws8" path="res://UI/Shop/ShopItems/Sponge.tres" id="9_swadt"]
 [ext_resource type="Resource" uid="uid://cmeql7rts03ml" path="res://UI/Shop/ShopItems/Bucket.tres" id="10_hhlvi"]
+[ext_resource type="Resource" uid="uid://dufcgjuo6cucx" path="res://UI/Shop/ShopItems/WateringCan.tres" id="11_swadt"]
+[ext_resource type="Resource" uid="uid://dwctgocpxrtsi" path="res://UI/Shop/ShopItems/Jug.tres" id="12_hhlvi"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_t065x"]
 
@@ -41,7 +43,7 @@ starting_money = 100
 [node name="UI" parent="." instance=ExtResource("1_t065x")]
 
 [node name="Shop" parent="UI" index="2"]
-shop_items = Array[ExtResource("7_o3roe")]([ExtResource("8_yhkds"), ExtResource("9_swadt"), ExtResource("10_hhlvi")])
+shop_items = Array[ExtResource("7_o3roe")]([ExtResource("8_yhkds"), ExtResource("9_swadt"), ExtResource("10_hhlvi"), ExtResource("11_swadt"), ExtResource("12_hhlvi")])
 
 [node name="MainMenu" parent="UI" index="5"]
 script = null
