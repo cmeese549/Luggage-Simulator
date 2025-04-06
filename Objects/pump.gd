@@ -10,7 +10,7 @@ var cur_wps: float = 0
 var cur_quality: float 
 var built: bool = false
 
-var upgrade_slots
+var upgrade_slots: Array[pump_upgrade] = [null, null, null, null, null]
 
 var money
 
