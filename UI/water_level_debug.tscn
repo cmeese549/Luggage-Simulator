@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cwuhc7fibr0jj"]
 
-[ext_resource type="Script" uid="uid://br2w6auiyrrdd" path="res://water_level_debug.gd" id="1_nrkev"]
+[ext_resource type="Script" uid="uid://br2w6auiyrrdd" path="res://UI/water_level_debug.gd" id="1_nrkev"]
 
 [node name="Water_Level_Debug" type="Control"]
 layout_mode = 3

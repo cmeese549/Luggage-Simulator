@@ -96,45 +96,45 @@ func _process(delta : float) -> void:
 		camera_movement_this_frame = Vector2.ZERO
 	
 func do_jump_sway(delta: float) -> void:
-	var tool = tool_sys.equipped_tool
-	tool.position.y = lerpf(
-		tool.position.y, 
-		(tool.position.y - (velocity.y * tool.jump_sway_amount)) * delta, 
-		tool.idle_sway_speed
+	var _tool = tool_sys.equipped_tool
+	_tool.position.y = lerpf(
+		_tool.position.y, 
+		(_tool.position.y - (velocity.y * _tool.jump_sway_amount)) * delta, 
+		_tool.idle_sway_speed
 	)
 	
 func reset_jump_sway(_delta: float) -> void:
-	var tool = tool_sys.equipped_tool
-	var jump_reset_progress: float = remap(landing_sway_adjust_cooldown, 0, tool.landing_sway_adjust_time, 0, 1)
-	tool.position.y = lerpf(
-		tool.position.y, 
-		tool.jump_overshoot_amount * -1, 
-		tool.idle_sway_speed * tool.jump_reset_curve.width_curve.sample(jump_reset_progress) * tool.recentering_force
+	var _tool = tool_sys.equipped_tool
+	var jump_reset_progress: float = remap(landing_sway_adjust_cooldown, 0, _tool.landing_sway_adjust_time, 0, 1)
+	_tool.position.y = lerpf(
+		_tool.position.y, 
+		_tool.jump_overshoot_amount * -1, 
+		_tool.idle_sway_speed * _tool.jump_reset_curve.width_curve.sample(jump_reset_progress) * _tool.recentering_force
 	)
 
 func weapon_bob(delta: float) -> Vector2:
-	var tool = tool_sys.equipped_tool
+	var _tool = tool_sys.equipped_tool
 	bob_time += delta
 	if bob_time > 1000000:
 		bob_time = 0
 	var bob_amount : Vector2 = Vector2.ZERO
 	bob_amount.x = sin(bob_time * footstep_cooldown * 22)
 	bob_amount.y = abs(cos(bob_time * footstep_cooldown * 22))
-	return bob_amount * tool.bob_amount
+	return bob_amount * _tool.bob_amount
 		
 func get_idle_sway(delta: float) -> Vector3:
-	var tool = tool_sys.equipped_tool
+	var _tool = tool_sys.equipped_tool
 	var idle_sway_noise : float = get_idle_sway_noise()
-	var idle_sway_random_amount : float = idle_sway_noise * tool.idle_sway_speed
+	var idle_sway_random_amount : float = idle_sway_noise * _tool.idle_sway_speed
 	
 	sway_time += delta
 	if sway_time > 1000000:
 		sway_time = 0
 		
 	var idle_sway : Vector3 = Vector3.ZERO
-	idle_sway.x = sin(sway_time * 1.5 + idle_sway_random_amount) * tool.random_sway_amount
-	idle_sway.y = sin(sway_time - idle_sway_random_amount) * tool.random_sway_amount
-	idle_sway.z = sin(sway_time * 0.75 + idle_sway_random_amount) * tool.random_sway_amount
+	idle_sway.x = sin(sway_time * 1.5 + idle_sway_random_amount) * _tool.random_sway_amount
+	idle_sway.y = sin(sway_time - idle_sway_random_amount) * _tool.random_sway_amount
+	idle_sway.z = sin(sway_time * 0.75 + idle_sway_random_amount) * _tool.random_sway_amount
 	return idle_sway
 	
 func get_idle_sway_noise() -> float:
@@ -143,47 +143,47 @@ func get_idle_sway_noise() -> float:
 	
 func idle_sway_weapon(delta: float, bob_this_frame: Vector2) -> void:
 	var idle_sway : Vector3 = get_idle_sway(delta)
-	var tool = tool_sys.equipped_tool
-	tool.position.x = lerpf(
-		tool.position.x, 
-		(tool.position.x - (idle_sway.x + bob_this_frame.x)) * delta,
-		tool.idle_sway_speed
+	var _tool = tool_sys.equipped_tool
+	_tool.position.x = lerpf(
+		_tool.position.x, 
+		(_tool.position.x - (idle_sway.x + bob_this_frame.x)) * delta,
+		_tool.idle_sway_speed
 	)
-	tool.position.y = lerpf(
-		tool.position.y, 
-		(tool.position.y + (idle_sway.y + bob_this_frame.y)) * delta,
-		tool.idle_sway_speed
+	_tool.position.y = lerpf(
+		_tool.position.y, 
+		(_tool.position.y + (idle_sway.y + bob_this_frame.y)) * delta,
+		_tool.idle_sway_speed
 	)
-	tool.position.z = lerpf(
-		tool.position.z, 
-		(tool.position.z + idle_sway.z) * delta, 
-		tool.idle_sway_speed
+	_tool.position.z = lerpf(
+		_tool.position.z, 
+		(_tool.position.z + idle_sway.z) * delta, 
+		_tool.idle_sway_speed
 	)
 	
 func camera_sway_weapon(delta: float, bob_this_frame: Vector2) -> void:
-	var tool = tool_sys.equipped_tool
-	var movement : Vector2 = (camera_movement_this_frame * 125).clamp(tool.sway_min, tool.sway_max)
+	var _tool = tool_sys.equipped_tool
+	var movement : Vector2 = (camera_movement_this_frame * 125).clamp(_tool.sway_min, _tool.sway_max)
 	var direction_modifier : float = 1
 	var movement_clamp : Vector2 = Vector2(0.0, 0.1)
 	var rotation_clamp: Vector2 = Vector2(-25.0, 25.0)
 	bob_this_frame = bob_this_frame
-	if tool.name == "Scythe":
-		if tool.scythe_swinging_from_right:
+	if _tool.name == "Scythe":
+		if _tool.scythe_swinging_from_right:
 			direction_modifier = -1
 			movement_clamp.x = movement_clamp.y * -1
 			movement_clamp.y = 0.0
-	tool.position.x = lerpf(
-		tool.position.x, 
-		(tool.position.x - (bob_this_frame.x)) * delta, 
-		tool.idle_sway_speed
+	_tool.position.x = lerpf(
+		_tool.position.x, 
+		(_tool.position.x - (bob_this_frame.x)) * delta, 
+		_tool.idle_sway_speed
 	)
-	tool.position.y = lerpf(
-		tool.position.y, 
-		(tool.position.y + (bob_this_frame.y)) * delta, 
-		tool.idle_sway_speed
+	_tool.position.y = lerpf(
+		_tool.position.y, 
+		(_tool.position.y + (bob_this_frame.y)) * delta, 
+		_tool.idle_sway_speed
 	)
-	tool.position.z = lerpf(
-		tool.position.z, 
-		clamp(movement.x / tool.horizontal_speed, tool.horizontal_range.x, tool.horizontal_range.y),
-		tool.idle_sway_speed
+	_tool.position.z = lerpf(
+		_tool.position.z, 
+		clamp(movement.x / _tool.horizontal_speed, _tool.horizontal_range.x, _tool.horizontal_range.y),
+		_tool.idle_sway_speed
 	)

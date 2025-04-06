@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://5yb4xnha3npe" path="res://player.gd" id="1_l8h54"]
 [ext_resource type="Script" uid="uid://b140mkd7ankio" path="res://Player/Tools/tool_sys.gd" id="2_btcbx"]
 [ext_resource type="PackedScene" uid="uid://xxekbn0nkf7g" path="res://Player/Tools/bucket.tscn" id="3_gwnis"]
-[ext_resource type="Script" uid="uid://ns08b0figwtw" path="res://Player/ToolCam.gd" id="4_gwnis"]
+[ext_resource type="Script" path="res://Player/ToolCam.gd" id="4_gwnis"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_btcbx"]
 
@@ -38,6 +38,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.509695, 0)
 script = ExtResource("2_btcbx")
 
 [node name="Bucket" parent="Neck/Camera3D/ToolSys" instance=ExtResource("3_gwnis")]
+jump_overshoot_amount = 0.055
+recentering_force = 55.0
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 anchors_preset = 15

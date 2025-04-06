@@ -28,12 +28,13 @@ var tool_full: bool = false
 @export var recentering_force : float = 55
 
 @export var capacity: int = 1
+@export var water_value: int = 1
 
 func _ready():
 	if !animation_player:
 		push_error("No animation player on tool: "+name)
 
-func use(is_there_water: bool):
+func use(water_thing):
 	if !tool_ready:
 		#TODO put some rejection noise here
 		print("Tool not ready")
@@ -41,12 +42,13 @@ func use(is_there_water: bool):
 	if unlocked and equiped and tool_ready:
 		tool_ready = false
 		if !tool_full:
-			if is_there_water:
+			if water_thing == "WaterTop":
 				animation_player.play("good_fill")
 				Events.remove_water.emit(capacity)
 			else:
 				animation_player.play("bad_fill")
 		else:
+			if water_thing == "DepositArea": Events.make_money.emit(capacity * water_value)
 			animation_player.play("empty")
 
 func unlock():
@@ -71,10 +73,8 @@ func _on_animation_player_animation_finished(anim_name):
 			equiped = true
 		"stow":
 			equiped = false
-		"fill":
-			#TODO determine if near and facing water
+		"good_fill":
 			tool_full = true
 		"empty":
-			#TODO determine if near and facing reciptical
 			tool_full = false
 	
