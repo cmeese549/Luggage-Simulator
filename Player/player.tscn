@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bk7vc4usjt3od"]
+[gd_scene load_steps=12 format=3 uid="uid://bk7vc4usjt3od"]
 
 [ext_resource type="Script" uid="uid://5yb4xnha3npe" path="res://Player/player.gd" id="1_l8h54"]
 [ext_resource type="Script" uid="uid://b140mkd7ankio" path="res://Player/Tools/tool_sys.gd" id="2_btcbx"]
@@ -10,6 +10,20 @@
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4ntmi"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_btcbx"]
+
+[sub_resource type="Animation" id="Animation_k53q1"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Neck:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
 
 [sub_resource type="Animation" id="Animation_gwnis"]
 resource_name = "water_bob"
@@ -28,25 +42,15 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 1, 2, 3, 4)
 }
 
-[sub_resource type="Animation" id="Animation_k53q1"]
-length = 0.001
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Neck:position:y")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fhl08"]
 _data = {
 &"RESET": SubResource("Animation_k53q1"),
 &"water_bob": SubResource("Animation_gwnis")
 }
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gwnis"]
+radius = 0.706
+height = 2.852
 
 [node name="Player" type="CharacterBody3D" groups=["Player"]]
 script = ExtResource("1_l8h54")
@@ -110,3 +114,10 @@ collision_mask = 4
 libraries = {
 &"": SubResource("AnimationLibrary_fhl08")
 }
+
+[node name="ItemPickupRange" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 256
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ItemPickupRange"]
+shape = SubResource("CapsuleShape3D_gwnis")

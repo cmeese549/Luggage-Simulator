@@ -1,6 +1,6 @@
-extends Node
+extends Node3D
 
-class_name pump
+class_name Pump
 
 @export var base_wps: float = 1
 @export var base_quality: float = 1
@@ -15,6 +15,8 @@ var built: bool = false
 
 var upgrade_slots: Array[pump_upgrade] = [null, null, null, null, null]
 @export var upgrade_markers: Array[Marker3D]
+
+@onready var upgrade_menu : UpgradeMenu = get_tree().get_first_node_in_group("UpgradeMenu")
 
 var money
 
@@ -49,11 +51,9 @@ func attempt_buy():
 		build()
 
 func attempt_upgrade():
-	#Open upgrade menu
-	print("doin an upgrade")
-	pass
+	upgrade_menu.open(self)
 
-func apply_upgrde(new_upgrade: pump_upgrade):
+func apply_upgrade(new_upgrade: pump_upgrade):
 	var did_upgrade = false
 	var i = 0
 	for slot in upgrade_slots:
@@ -75,3 +75,5 @@ func apply_upgrde(new_upgrade: pump_upgrade):
 		i += 1
 	if not did_upgrade:
 		push_error("Tried to add an upgrade to a full pump")
+	if upgrade_menu.visible:
+		upgrade_menu.render_upgrades(self)

@@ -9,7 +9,7 @@ var cur_amount: float
 var cur_y: float
 var cur_wps_out: float
 
-var pumps: Array[pump] = []
+var pumps: Array[Pump] = []
 
 func _ready():
 	cur_amount = starting_amount
@@ -32,7 +32,7 @@ func _process(delta):
 func remove_water(amount):
 	cur_amount -= amount
 
-func add_pump(new_pump: pump):
+func add_pump(new_pump: Pump):
 	pumps.append(new_pump)
 
 func now_empty():

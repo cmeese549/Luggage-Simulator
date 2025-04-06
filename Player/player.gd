@@ -10,6 +10,8 @@ class_name Player
 @onready var hud : Control = $"../UI/HUD"
 @onready var main_menu : Control = $"../UI/MainMenu"
 
+@onready var item_pickup_range : Area3D = find_child("ItemPickupRange")
+
 const SPEED = 5.0
 const JUMP_VELOCITY = 5.2
 
@@ -32,13 +34,7 @@ var was_just_in_water: bool = false
 var ready_to_start_game = true
 var game_started = false
 
-var inventory : Array[InventoryItem] = [
-	InventoryItem.new(),
-	InventoryItem.new(),
-	InventoryItem.new(),
-	InventoryItem.new(),
-	InventoryItem.new()
-]
+var inventory : Array[InventoryItem] = []
 
 func _ready():
 	if ready_to_start_game:
@@ -47,6 +43,18 @@ func _ready():
 		if main_menu != null:
 			main_menu.visible = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	
+	item_pickup_range.area_entered.connect(pickup_item)
+	
+func pickup_item(area: Area3D) -> void:
+	if area.is_in_group("Pickupable"):
+		print("Getting item")
+		var new_item : InventoryItem = InventoryItem.new()
+		new_item.item_name = area.get_parent().item_name
+		new_item.item_icon = area.get_parent().item_icon
+		new_item.item_description = area.get_parent().item_description
+		inventory.append(new_item)
+		area.get_parent().call_deferred("queue_free")
 	
 func start_game() ->  void:
 	if hud != null:
