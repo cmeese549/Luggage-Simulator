@@ -9,6 +9,7 @@ var equipped_tool: tool
 @onready var camera_3d: Camera3D = $".."
 
 @onready var water_crosshair : TextureRect = get_tree().get_first_node_in_group("WaterCrosshair")
+@onready var interact_crosshair : TextureRect = get_tree().get_first_node_in_group("InteractCrosshair")
 
 #@onready var screen_rect = camera_3d.get_viewport_rect()
 #@onready var screen_center = Vector2(screen_rect.size.x / 2, screen_rect.size.y / 2)
@@ -25,25 +26,37 @@ func start_game():
 	
 func _process(_delta: float) -> void:
 	if water_crosshair != null:
-		do_water_crosshair()
+		var looked_at_object = check_for_interactable()
+		if looked_at_object != null and looked_at_object.name == "WaterTop":
+			if !water_crosshair.visible:
+				water_crosshair.visible = true
+		else:
+			if water_crosshair.visible:
+				water_crosshair.visible = false
+	
+	if interact_crosshair != null:
+		var looked_at_object = check_for_interactable()
+		if looked_at_object != null and looked_at_object.name != "WaterTop":
+			if !interact_crosshair.visible:
+				interact_crosshair.visible = true
+		else:
+			if interact_crosshair.visible:
+				interact_crosshair.visible = false
 		
-func do_water_crosshair() -> void:
-	var looking_at_water : bool = check_for_water()
-	if looking_at_water:
-		if !water_crosshair.visible:
-			water_crosshair.visible = true
-	elif water_crosshair.visible:
-			water_crosshair.visible = false
 
 func _unhandled_input(event):
-	if event.is_action_pressed("primary") and equipped_tool != null:
-		equipped_tool.use(check_for_water())
+	if event.is_action_pressed("primary"):
+		var interact_thing = check_for_interactable()
+		if interact_thing:
+			if interact_thing.name == "WaterTop" || interact_thing.name == "DepositArea":
+				equipped_tool.use(interact_thing.name)
+			elif interact_thing.name == "PumpBuy":
+				interact_thing.attempt_buy()
 
-func check_for_water() -> bool:
+func check_for_interactable():
 	if look_at_cast.is_colliding():
 		var col = look_at_cast.get_collider()
 		print("Looking at "+col.name)
-		if "WaterTop" in col.get_groups():
-			print("looking at some water bb")
-			return true
-	return false
+		if "Interactable" in col.get_groups():
+			return col
+	return null

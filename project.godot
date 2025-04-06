@@ -15,6 +15,10 @@ run/main_scene="uid://d28sbjt0i0qst"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Events="*res://Game_Management/Events.gd"
+
 [display]
 
 window/size/viewport_width=1920
@@ -25,6 +29,20 @@ window/stretch/aspect="expand"
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/terrain_3d/plugin.cfg")
+
+[file_customization]
+
+folder_colors={
+"res://Art_Assets/": "teal",
+"res://Level/": "yellow",
+"res://Player/": "red",
+"res://UI/": "green",
+"res://addons/": "gray"
+}
+
+[global_group]
+
+Interactable=""
 
 [input]
 

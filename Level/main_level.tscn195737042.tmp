@@ -19,7 +19,7 @@ size = Vector3(1000, 1, 1000)
 [node name="MainLevel" type="Node3D"]
 script = ExtResource("1_romof")
 
-[node name="UI" parent="." instance=ExtResource("1_t065x")]
+[node name="Ui" parent="." instance=ExtResource("1_t065x")]
 
 [node name="Water_Level_Debug" parent="." instance=ExtResource("2_hyf1s")]
 mouse_filter = 2
@@ -69,5 +69,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.71387, 0, -17.2599)
 
 [node name="Pump" parent="." instance=ExtResource("9_7gvd8")]
 transform = Transform3D(-0.14104, 0, -0.990004, 0, 1, 0, 0.990004, 0, -0.14104, 13.8841, -0.581938, -2.15099)
-
-[editable path="UI"]

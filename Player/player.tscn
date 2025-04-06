@@ -39,6 +39,8 @@ script = ExtResource("2_btcbx")
 
 [node name="Bucket" parent="Neck/Camera3D/ToolSys" instance=ExtResource("3_gwnis")]
 visible = false
+jump_overshoot_amount = 0.055
+recentering_force = 55.0
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 anchors_preset = 15
