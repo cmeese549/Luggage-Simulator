@@ -32,6 +32,9 @@ starting_money = 100
 
 [node name="UI" parent="." instance=ExtResource("1_t065x")]
 
+[node name="MainMenu" parent="UI" index="5"]
+script = null
+
 [node name="Enviroment" type="Node" parent="."]
 
 [node name="LevelGeometry" parent="Enviroment" instance=ExtResource("1_1wy1g")]
@@ -69,5 +72,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.71387, 0, -17.2599)
 
 [node name="Pump" parent="." instance=ExtResource("9_7gvd8")]
 transform = Transform3D(-0.14104, 0, -0.990004, 0, 1, 0, 0.990004, 0, -0.14104, 13.8841, -0.581938, -2.15099)
+base_wps = 1.0
+base_quality = 1.0
+price = 100
 
 [editable path="UI"]

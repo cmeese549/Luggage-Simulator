@@ -11,6 +11,7 @@ var cur_quality: float
 var built: bool = false
 
 var upgrade_slots: Array[pump_upgrade] = [null, null, null, null, null]
+@export var upgrade_markers: Array[Marker3D]
 
 var money
 
@@ -48,3 +49,26 @@ func attempt_upgrade():
 	#Open upgrade menu
 	print("doin an upgrade")
 	pass
+
+func apply_upgrde(new_upgrade: pump_upgrade):
+	var did_upgrade = false
+	var i = 0
+	for slot in upgrade_slots:
+		if slot == null:
+			upgrade_slots[i] = new_upgrade
+			match new_upgrade.type:
+				pump_upgrade.upgrade_type.QUALITY: 
+					print("quality")
+					cur_quality += new_upgrade.effect
+				pump_upgrade.upgrade_type.SPEED:
+					print("speed")
+					cur_wps += new_upgrade.effect
+			if new_upgrade.model:
+				var new_model: Node3D = new_upgrade.model.instantiate()
+				$Upgrades.add_child(new_model)
+				new_model.global_position = upgrade_markers[i].global_position
+			did_upgrade = true
+			break
+		i += 1
+	if not did_upgrade:
+		push_error("Tried to add an upgrade to a full pump")

@@ -7,6 +7,7 @@ var description: String
 var price: int
 var effect: float
 var icon: Texture2D
+var model: PackedScene
 
 enum upgrade_type {
 	SPEED,
