@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://ps6t0jjibn7a"]
+
+[ext_resource type="Texture2D" uid="uid://fp8stqwfgm35" path="res://Art_Assets/Textures/Dirt_basecolor.png" id="1_ngs4p"]
+
+[resource]
+albedo_texture = ExtResource("1_ngs4p")
+uv1_scale = Vector3(0.25, 0.25, 0.25)
+texture_filter = 0

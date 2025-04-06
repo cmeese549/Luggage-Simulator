@@ -3,20 +3,19 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dcpx126sxxiux"
-path.s3tc="res://.godot/imported/Sand_basecolor.png-31ae3aaa08a215a27fdccbcdf3fbf1a2.s3tc.ctex"
+path="res://.godot/imported/Sand_basecolor.png-31ae3aaa08a215a27fdccbcdf3fbf1a2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://Art_Assets/Textures/Sand_basecolor.png"
-dest_files=["res://.godot/imported/Sand_basecolor.png-31ae3aaa08a215a27fdccbcdf3fbf1a2.s3tc.ctex"]
+dest_files=["res://.godot/imported/Sand_basecolor.png-31ae3aaa08a215a27fdccbcdf3fbf1a2.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

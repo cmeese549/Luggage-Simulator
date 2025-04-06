@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bi0l0bjm1yfww"
+path="res://.godot/imported/WaterPumpWheel.obj-2a3e27234707c52d7323b4b32515a96b.mesh"
+
+[deps]
+
+files=["res://.godot/imported/WaterPumpWheel.obj-2a3e27234707c52d7323b4b32515a96b.mesh"]
+
+source_file="res://Art_Assets/Models/WaterPump/WaterPumpWheel.obj"
+dest_files=["res://.godot/imported/WaterPumpWheel.obj-2a3e27234707c52d7323b4b32515a96b.mesh", "res://.godot/imported/WaterPumpWheel.obj-2a3e27234707c52d7323b4b32515a96b.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

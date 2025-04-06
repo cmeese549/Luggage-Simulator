@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://exdhmbr43ger"]
+[gd_scene load_steps=24 format=3 uid="uid://exdhmbr43ger"]
 
 [ext_resource type="Script" uid="uid://dic75q4o378w6" path="res://UI/UI.gd" id="1_6dd3c"]
 [ext_resource type="Theme" uid="uid://b3kq74llqlv3x" path="res://UI/Theme/MinimalUI.tres" id="1_dhe1o"]
@@ -7,19 +7,21 @@
 [ext_resource type="Texture2D" uid="uid://c8ipav7ruim5w" path="res://UI/HUD/Crosshair/crosshair2.png" id="4_f1fl4"]
 [ext_resource type="Texture2D" uid="uid://btbey8ncomyx7" path="res://UI/HUD/Crosshair/hitmorker.png" id="5_jqf55"]
 [ext_resource type="Script" uid="uid://bkn6bkk5bo3k0" path="res://UI/Dialogue/DialogueBox.gd" id="5_qgmx8"]
-[ext_resource type="Script" uid="uid://sb0v8kjwv2pv" path="res://UI/MainMenu/MainMenu.gd" id="6_byuxr"]
+[ext_resource type="Script" path="res://UI/MainMenu/MainMenu.gd" id="6_byuxr"]
 [ext_resource type="Shader" uid="uid://bkcnroaexgcpu" path="res://UI/MainMenu/FadeFromBlack.tres" id="6_jqf55"]
 [ext_resource type="Script" uid="uid://bed3d7egj53pu" path="res://UI/PauseMenu/PauseMenu.gd" id="6_qhxh2"]
 [ext_resource type="Script" uid="uid://cde2nhieog6m4" path="res://UI/UpgradeMenu/UpgradeMenu.gd" id="6_t31p1"]
 [ext_resource type="Script" uid="uid://vcecdqq511h1" path="res://UI/Shop/Shop.gd" id="7_6q2ik"]
-[ext_resource type="Script" uid="uid://cmqb4oi3mfhb4" path="res://UI/HUD/hud.gd" id="7_017wa"]
+[ext_resource type="Script" path="res://UI/HUD/hud.gd" id="7_017wa"]
 [ext_resource type="PackedScene" uid="uid://yg0ip3ps48ca" path="res://UI/UpgradeMenu/UpgradeSlot.tscn" id="7_kncd2"]
 [ext_resource type="Script" uid="uid://b1lecmjr7r5pu" path="res://UI/Shop/ShopItems/ShopItem.gd" id="9_xtxff"]
 [ext_resource type="PackedScene" uid="uid://dth0cukoj3ajb" path="res://UI/PauseMenu/InventoryItem.tscn" id="10_npmjx"]
 [ext_resource type="Script" uid="uid://5ls1kx27ehtl" path="res://UI/Dialogue/DialoguePauser.gd" id="10_vx7wu"]
 [ext_resource type="AudioStream" uid="uid://bdm7p1ssjxe5w" path="res://UI/Dialogue/bloop.ogg" id="11_r2vy3"]
 [ext_resource type="Resource" uid="uid://7enqhksiag3a" path="res://UI/Shop/ShopItems/Hands.tres" id="11_rjxvo"]
+[ext_resource type="Resource" uid="uid://jgmppv717ws8" path="res://UI/Shop/ShopItems/Sponge.tres" id="11_uk6e0"]
 [ext_resource type="Resource" uid="uid://cmeql7rts03ml" path="res://UI/Shop/ShopItems/Bucket.tres" id="12_uk6e0"]
+[ext_resource type="Resource" uid="uid://dufcgjuo6cucx" path="res://UI/Shop/ShopItems/WateringCan.tres" id="13_uk6e0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_byuxr"]
 shader = ExtResource("6_jqf55")
@@ -311,7 +313,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("7_6q2ik")
-shop_items = Array[ExtResource("9_xtxff")]([ExtResource("11_rjxvo"), ExtResource("12_uk6e0")])
+shop_items = Array[ExtResource("9_xtxff")]([ExtResource("11_rjxvo"), ExtResource("11_uk6e0"), ExtResource("12_uk6e0"), ExtResource("13_uk6e0")])
 
 [node name="PanelContainer" type="PanelContainer" parent="Shop"]
 layout_mode = 2

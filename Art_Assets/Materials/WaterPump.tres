@@ -1,0 +1,7 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://bqoovbhetevht"]
+
+[ext_resource type="Texture2D" uid="uid://doi2wjltb4v0h" path="res://Art_Assets/Textures/WaterPump_C.png" id="1_yxd1g"]
+
+[resource]
+albedo_texture = ExtResource("1_yxd1g")
+texture_filter = 0

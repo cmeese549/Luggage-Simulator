@@ -1,7 +1,6 @@
-[gd_scene load_steps=14 format=3 uid="uid://cpado1v1hq4kt"]
+[gd_scene load_steps=13 format=3 uid="uid://cpado1v1hq4kt"]
 
 [ext_resource type="Script" uid="uid://gaeegpj2o3tq" path="res://Player/Tools/tool.gd" id="1_kl62g"]
-[ext_resource type="Material" uid="uid://h58o0lr3ej4u" path="res://Art_Assets/Materials/HandTools/Hands_Empty.tres" id="2_pycml"]
 [ext_resource type="Material" uid="uid://0clnru4gvim2" path="res://Art_Assets/Materials/HandTools/Sponge_Empty.tres" id="3_pycml"]
 [ext_resource type="Material" uid="uid://b8cbeoai16xwv" path="res://Art_Assets/Materials/HandTools/Sponge_Full.tres" id="4_itajf"]
 
@@ -29,7 +28,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("2_pycml")]
+"values": [ExtResource("3_pycml")]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -224,7 +223,7 @@ transform = Transform3D(0.615741, 0, 0, 0, 0.674067, 0, 0, 0, 0.796476, 0, 0, 0)
 layers = 2
 mesh = SubResource("QuadMesh_7nrwf")
 skeleton = NodePath("../../..")
-surface_material_override/0 = ExtResource("2_pycml")
+surface_material_override/0 = ExtResource("3_pycml")
 
 [node name="Line2D" type="Line2D" parent="."]
 width_curve = SubResource("Curve_bn1s3")

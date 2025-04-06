@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ShopItem" load_steps=3 format=3 uid="uid://dwctgocpxrtsi"]
+
+[ext_resource type="Texture2D" uid="uid://s5anjytyy8k" path="res://Art_Assets/Textures/HandTools/CoolerJug_Empty.png" id="1_q4rvq"]
+[ext_resource type="Script" uid="uid://b1lecmjr7r5pu" path="res://UI/Shop/ShopItems/ShopItem.gd" id="2_mcuk6"]
+
+[resource]
+script = ExtResource("2_mcuk6")
+item_name = "Big Jug"
+item_description = "A very large jug"
+item_icon = ExtResource("1_q4rvq")
+price = 1
+item_type = "Tool"
+required_items_quip = ""
+required_items_string = ""
+required_inventory_items = Array[String]([])
+required_tools = Array[String](["Watering Can"])
+metadata/_custom_type_script = "uid://b1lecmjr7r5pu"
