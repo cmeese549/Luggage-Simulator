@@ -215,6 +215,7 @@ point_count = 3
 
 [node name="Hands" type="Node3D" node_paths=PackedStringArray("jump_reset_curve")]
 script = ExtResource("1_8g8da")
+tool_name = "Your Hands"
 jump_overshoot_amount = 0.15
 jump_reset_curve = NodePath("Line2D")
 recentering_force = 10.0
