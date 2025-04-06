@@ -23,7 +23,6 @@ func start_game():
 			child.visible = false
 			tools.append(child)
 	tools[0].unlock()
-	tools[0].visible = true
 	equipped_tool = tools[0]
 	
 func _process(_delta: float) -> void:
@@ -60,7 +59,6 @@ func equip_next_tool(old_tool):
 	equipped_tool.visible = false
 	equipped_tool = next_tool
 	equipped_tool.unlock()
-	equipped_tool.visible = true
 
 func _unhandled_input(event):
 	if event.is_action_pressed("primary"):
