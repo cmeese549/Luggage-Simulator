@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bk7vc4usjt3od"]
+[gd_scene load_steps=9 format=3 uid="uid://bk7vc4usjt3od"]
 
 [ext_resource type="Script" uid="uid://5yb4xnha3npe" path="res://Player/player.gd" id="1_l8h54"]
 [ext_resource type="Script" uid="uid://b140mkd7ankio" path="res://Player/Tools/tool_sys.gd" id="2_btcbx"]
@@ -10,6 +10,10 @@
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4ntmi"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_btcbx"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gwnis"]
+radius = 0.706
+height = 2.852
 
 [node name="Player" type="CharacterBody3D" groups=["Player"]]
 script = ExtResource("1_l8h54")
@@ -64,3 +68,10 @@ render_target_update_mode = 4
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.51, 0)
 cull_mask = 1048574
 script = ExtResource("4_gwnis")
+
+[node name="ItemPickupRange" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 256
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ItemPickupRange"]
+shape = SubResource("CapsuleShape3D_gwnis")
