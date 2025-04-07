@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://exdhmbr43ger"]
+[gd_scene load_steps=25 format=3 uid="uid://exdhmbr43ger"]
 
 [ext_resource type="Script" uid="uid://dic75q4o378w6" path="res://UI/UI.gd" id="1_6dd3c"]
 [ext_resource type="Theme" uid="uid://b3kq74llqlv3x" path="res://UI/Theme/MinimalUI.tres" id="1_dhe1o"]
@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://btbey8ncomyx7" path="res://UI/HUD/Crosshair/hitmorker.png" id="5_jqf55"]
 [ext_resource type="Script" uid="uid://bkn6bkk5bo3k0" path="res://UI/Dialogue/DialogueBox.gd" id="5_qgmx8"]
 [ext_resource type="Script" uid="uid://sb0v8kjwv2pv" path="res://UI/MainMenu/MainMenu.gd" id="6_byuxr"]
-[ext_resource type="Shader" uid="uid://bkcnroaexgcpu" path="res://UI/MainMenu/FadeFromBlack.tres" id="6_jqf55"]
+[ext_resource type="Shader" uid="uid://b54wwcsihdtoe" path="res://UI/MainMenu/FadeFromBlack.tres" id="6_jqf55"]
 [ext_resource type="Script" uid="uid://bed3d7egj53pu" path="res://UI/PauseMenu/PauseMenu.gd" id="6_qhxh2"]
 [ext_resource type="Script" uid="uid://cde2nhieog6m4" path="res://UI/UpgradeMenu/UpgradeMenu.gd" id="6_t31p1"]
 [ext_resource type="Script" uid="uid://vcecdqq511h1" path="res://UI/Shop/Shop.gd" id="7_6q2ik"]
@@ -26,6 +26,10 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_byuxr"]
 shader = ExtResource("6_jqf55")
 shader_parameter/Progress = 0.0
+
+[sub_resource type="Curve" id="Curve_uk6e0"]
+_data = [Vector2(0, 0), 0.0, 0.137338, 0, 0, Vector2(0.870172, 0.316971), 1.31209, 1.31209, 0, 0, Vector2(0.998927, 1), 2.98866, 0.0, 0, 0]
+point_count = 3
 
 [node name="UI" type="Control"]
 process_mode = 3
@@ -840,7 +844,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="MainMenu" type="Control" parent="."]
-visible = false
+process_mode = 3
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -899,6 +903,9 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
+
+[node name="Line2D" type="Line2D" parent="MainMenu"]
+width_curve = SubResource("Curve_uk6e0")
 
 [node name="DialoguePauser" type="Node" parent="."]
 process_mode = 3

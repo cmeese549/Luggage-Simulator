@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://d28sbjt0i0qst"]
+[gd_scene load_steps=19 format=3 uid="uid://d28sbjt0i0qst"]
 
 [ext_resource type="PackedScene" uid="uid://ddwtbnyshxxj3" path="res://Art_Assets/Levels/LevelGeometry.tscn" id="1_1wy1g"]
 [ext_resource type="PackedScene" uid="uid://bk7vc4usjt3od" path="res://Player/player.tscn" id="1_7ireg"]
@@ -10,15 +10,7 @@
 [ext_resource type="Script" uid="uid://d0rpsw8qm8mxc" path="res://Level/water.gd" id="3_t065x"]
 [ext_resource type="Material" uid="uid://cc3jyugw620gk" path="res://Art_Assets/Materials/WaterVertex.tres" id="3_vad1a"]
 [ext_resource type="AudioStream" uid="uid://57dmf87xry8d" path="res://Audio/Sfx/spend_money.mp3" id="6_xpqtb"]
-[ext_resource type="Script" uid="uid://b1lecmjr7r5pu" path="res://UI/Shop/ShopItems/ShopItem.gd" id="7_o3roe"]
 [ext_resource type="PackedScene" uid="uid://d04mojfecls7r" path="res://Objects/water_seller.tscn" id="8_cv6sc"]
-[ext_resource type="Resource" uid="uid://7enqhksiag3a" path="res://UI/Shop/ShopItems/Hands.tres" id="8_yhkds"]
-[ext_resource type="Resource" uid="uid://jgmppv717ws8" path="res://UI/Shop/ShopItems/Sponge.tres" id="9_swadt"]
-[ext_resource type="Resource" uid="uid://cmeql7rts03ml" path="res://UI/Shop/ShopItems/Bucket.tres" id="10_hhlvi"]
-[ext_resource type="Resource" uid="uid://dufcgjuo6cucx" path="res://UI/Shop/ShopItems/WateringCan.tres" id="11_swadt"]
-[ext_resource type="Resource" uid="uid://dwctgocpxrtsi" path="res://UI/Shop/ShopItems/Jug.tres" id="12_hhlvi"]
-[ext_resource type="Resource" uid="uid://blxq2rrfwlm43" path="res://UI/Shop/ShopItems/RollerSkate.tres" id="13_hhlvi"]
-[ext_resource type="Resource" uid="uid://cpt63tjw3br52" path="res://UI/Shop/ShopItems/SkateBoard.tres" id="14_dbttc"]
 [ext_resource type="AudioStream" uid="uid://b6hawj4wlcvs2" path="res://Audio/Sfx/Ambience/water_ambience.ogg" id="15_dbttc"]
 [ext_resource type="AudioStream" uid="uid://babm51jmu7wc5" path="res://Audio/Sfx/Ambience/nature_ambience.ogg" id="18_hhlvi"]
 [ext_resource type="Script" uid="uid://c6ov71035nkfo" path="res://Audio/Music/Band.gd" id="19_qqyv7"]
@@ -50,12 +42,6 @@ starting_money = 100
 stream = ExtResource("6_xpqtb")
 
 [node name="UI" parent="." instance=ExtResource("1_t065x")]
-
-[node name="Shop" parent="UI" index="2"]
-shop_items = Array[ExtResource("7_o3roe")]([ExtResource("8_yhkds"), ExtResource("9_swadt"), ExtResource("10_hhlvi"), ExtResource("11_swadt"), ExtResource("12_hhlvi"), ExtResource("13_hhlvi"), ExtResource("14_dbttc")])
-
-[node name="MainMenu" parent="UI" index="5"]
-script = null
 
 [node name="Enviroment" type="Node" parent="."]
 
@@ -100,13 +86,14 @@ debug_color = Color(0, 0, 0, 1)
 [node name="WaterSeller" parent="." instance=ExtResource("8_cv6sc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.71387, 0, -17.2599)
 
-[node name="Audio" type="Node" parent="."]
+[node name="Audio" type="Node" parent="." groups=["Music", "Pickupable"]]
 process_mode = 3
 script = ExtResource("19_qqyv7")
 
 [node name="Nature Ambience" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource("18_hhlvi")
 autoplay = true
+bus = &"Ambience"
 
 [node name="Song1" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource("20_s4lgs")
@@ -174,5 +161,3 @@ item_description = "Trade this to Uncle Upgrade to get a watering can.  Great de
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28.9398, 0, 0)
 item_name = "Expense Report"
 item_description = "Trade this to Uncle Upgrade to get a big jug."
-
-[editable path="UI"]
