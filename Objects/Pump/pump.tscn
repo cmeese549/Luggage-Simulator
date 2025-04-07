@@ -10,17 +10,12 @@
 [ext_resource type="Resource" uid="uid://cghi5igy78rs" path="res://Objects/Pump/PumpUpgrades/quality_2.tres" id="7_2435t"]
 [ext_resource type="Resource" uid="uid://bi1iaajindrpr" path="res://Objects/Pump/PumpUpgrades/quality_3.tres" id="8_1pin8"]
 [ext_resource type="PackedScene" uid="uid://cpxoruyhd58wy" path="res://Art_Assets/Models/WaterPump/WaterPump.tscn" id="9_6ybtv"]
+[ext_resource type="PackedScene" uid="uid://bjwdpc83ln71e" path="res://Art_Assets/Models/WaterPump/Barrier.tscn" id="10_xilsv"]
 [ext_resource type="AudioStream" uid="uid://blany6o2ya8a2" path="res://Audio/Sfx/Pump/pump_built.wav" id="11_6ybtv"]
 [ext_resource type="AudioStream" uid="uid://csci87kwyg66b" path="res://Audio/Sfx/Pump/pump_ambience.ogg" id="12_xilsv"]
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_55ofu"]
-top_radius = 0.1
-bottom_radius = 0.1
-height = 1.5
-
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_55ofu"]
-height = 1.42505
-radius = 0.372559
+[sub_resource type="BoxShape3D" id="BoxShape3D_7nxrv"]
+size = Vector3(2.36292, 1.79218, 1.27551)
 
 [sub_resource type="Animation" id="Animation_xilsv"]
 length = 0.001
@@ -60,7 +55,7 @@ _data = {
 }
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_d18j0"]
-size = Vector3(8.36012, 2.27772, 1)
+size = Vector3(9.52997, 3.25139, 1.78931)
 
 [node name="Pump" type="Node3D" node_paths=PackedStringArray("upgrade_markers")]
 script = ExtResource("1_55ofu")
@@ -77,25 +72,25 @@ upgrade_markers = [NodePath("Upgrades/Markers/Upgrade1"), NodePath("Upgrades/Mar
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10, 0)
 
 [node name="Sign" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00651872, 0, 4.03191)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.032)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Sign"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.724816, 0)
-mesh = SubResource("CylinderMesh_55ofu")
+[node name="Barrier" parent="Sign" instance=ExtResource("10_xilsv")]
 
 [node name="BuyLabel" type="Label3D" parent="Sign"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.72078, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.07198, 0)
 billboard = 2
+render_priority = -2
+outline_render_priority = -3
 text = "$xxx"
-font_size = 50
+font_size = 60
 
 [node name="PumpBuy" type="Area3D" parent="Sign" groups=["Interactable"]]
 collision_layer = 8
 script = ExtResource("3_d18j0")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Sign/PumpBuy"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.723755, 0)
-shape = SubResource("CylinderShape3D_55ofu")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000305176, 0.849823, 0.0088501)
+shape = SubResource("BoxShape3D_7nxrv")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -109,25 +104,25 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 2.25)
 collision_layer = 8
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Upgrades/PumpUpgrade"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0712347, 0.277507, 0.691926)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0130873, 0.0861574, -0.21469)
 shape = SubResource("BoxShape3D_d18j0")
 
 [node name="Markers" type="Node3D" parent="Upgrades"]
 
 [node name="Upgrade1" type="Marker3D" parent="Upgrades/Markers"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.97791, 1.19312, 3.31166)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.932, 1.193, 3.26)
 
 [node name="Upgrade2" type="Marker3D" parent="Upgrades/Markers"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.39154, 2.89063, 2.97616)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.463, 2.888, 2.904)
 
 [node name="Upgrade3" type="Marker3D" parent="Upgrades/Markers"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00881934, 1.19312, 3.31166)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.193, 3.26)
 
 [node name="Upgrade4" type="Marker3D" parent="Upgrades/Markers"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.49132, 2.89063, 2.97616)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.463, 2.888, 2.904)
 
 [node name="Upgrade5" type="Marker3D" parent="Upgrades/Markers"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.94959, 1.19312, 3.31166)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.932, 1.193, 3.26)
 
 [node name="BuildAudio" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("11_6ybtv")
