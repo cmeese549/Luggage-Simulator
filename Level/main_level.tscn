@@ -37,7 +37,7 @@ collision_mask = 5
 unique_name_in_owner = true
 process_mode = 3
 script = ExtResource("3_8vdnm")
-starting_money = 500000000000
+starting_money = 5
 
 [node name="MoneySound" type="AudioStreamPlayer" parent="Money"]
 stream = ExtResource("5_swadt")
@@ -111,7 +111,7 @@ wait_time = 120.0
 one_shot = true
 
 [node name="InventoryItems" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 293.668, 0, 0)
+transform = Transform3D(-0.0897114, 0, 0.995968, 0, 1, 0, -0.995968, 0, -0.0897114, 223.087, 0, -59.2353)
 
 [node name="Keys" parent="InventoryItems" instance=ExtResource("2_f68k2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.86112, 0, -22.051)

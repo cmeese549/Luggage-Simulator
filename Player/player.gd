@@ -59,7 +59,7 @@ var handled_skateboard_stop : bool = false
 
 var was_just_in_water: bool = false
 
-var ready_to_start_game = true
+var ready_to_start_game = false
 var game_started = false
 
 var inventory : Array[InventoryItem] = []
