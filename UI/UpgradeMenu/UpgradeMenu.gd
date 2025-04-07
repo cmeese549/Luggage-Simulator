@@ -76,7 +76,7 @@ func connect_buttons(pump: Pump) -> void:
 	]
 	for button: Button in speed_upgrade_buttons:
 		var upgrade_data : pump_upgrade = pump.speed_upgrades[i]
-		button.text = upgrade_data.upgrade_name + " - " + upgrade_data.description + " - $" + str(upgrade_data.price)
+		button.text = upgrade_data.upgrade_name + " - " + upgrade_data.description + " - $" + add_comma_to_int(upgrade_data.price)
 		button.pressed.connect(apply_upgrade.bind(upgrade_data, pump))
 		i += 1
 	i = 0
@@ -87,7 +87,7 @@ func connect_buttons(pump: Pump) -> void:
 	]
 	for button: Button in quality_upgrade_buttons:
 		var upgrade_data : pump_upgrade = pump.quality_upgrades[i]
-		button.text = upgrade_data.upgrade_name + " - " + upgrade_data.description + " - $" + str(upgrade_data.price)
+		button.text = upgrade_data.upgrade_name + " - " + upgrade_data.description + " - $" + add_comma_to_int(upgrade_data.price)
 		button.pressed.connect(apply_upgrade.bind(upgrade_data, pump))
 		i += 1
 		
@@ -131,7 +131,7 @@ func update_affordability() -> void:
 	]
 	for button: Button in speed_upgrade_buttons:
 		var upgrade_data : pump_upgrade = current_pump.speed_upgrades[i]
-		if ui.money.cur_money >= upgrade_data.price and applied_upgrades < 5:
+		if roundi(ui.money.cur_money) >= upgrade_data.price and applied_upgrades < 5:
 			button.disabled = false
 		else:
 			button.disabled = true
@@ -144,9 +144,15 @@ func update_affordability() -> void:
 	]
 	for button: Button in quality_upgrade_buttons:
 		var upgrade_data : pump_upgrade = current_pump.quality_upgrades[i]
-		if ui.money.cur_money >= upgrade_data.price and applied_upgrades < 5:
+		if roundi(ui.money.cur_money) >= upgrade_data.price and applied_upgrades < 5:
 			button.disabled = false
 		else:
 			button.disabled = true
 		i += 1
 	
+func add_comma_to_int(value: int) -> String:
+	var str_value: String = str(value)
+	var loop_end: int = 0 if value > -1 else 1
+	for i in range(str_value.length()-3, loop_end, -3):
+		str_value = str_value.insert(i, ",")
+	return str_value

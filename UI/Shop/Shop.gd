@@ -119,7 +119,7 @@ func render_shop_items() -> void:
 		var new_shop_item : Button = shop_item.instantiate()
 		new_shop_item.find_child("VBoxContainer").find_child("ItemName").text = item.item_name
 		new_shop_item.find_child("VBoxContainer").find_child("ItemIcon").texture = item.item_icon
-		new_shop_item.find_child("VBoxContainer").find_child("ItemPrice").text = "$" + str(item.price)
+		new_shop_item.find_child("VBoxContainer").find_child("ItemPrice").text = "$" + add_comma_to_int(item.price)
 		new_shop_item.find_child("VBoxContainer").find_child("ItemDescription").text = item.item_description
 		new_shop_item.find_child("VBoxContainer").find_child("ItemRequirements").text = item.required_items_string
 		new_shop_item.pressed.connect(attempt_purchase.bind(item, new_shop_item))
@@ -163,3 +163,10 @@ func check_has_tool(item: ShopItem) -> bool:
 		if !player_has_tool:
 			return false
 	return true
+	
+func add_comma_to_int(value: int) -> String:
+	var str_value: String = str(value)
+	var loop_end: int = 0 if value > -1 else 1
+	for i in range(str_value.length()-3, loop_end, -3):
+		str_value = str_value.insert(i, ",")
+	return str_value

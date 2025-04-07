@@ -20,7 +20,7 @@ func make_money(amount, notify=false):
 	
 
 func try_buy(amount):
-	if cur_money >= amount:
+	if roundi(cur_money) >= amount:
 		cur_money -= amount
 		print("Paid "+str(amount))
 		money_sound.play()
