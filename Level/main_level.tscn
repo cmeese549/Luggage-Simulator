@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://d28sbjt0i0qst"]
+[gd_scene load_steps=20 format=3 uid="uid://d28sbjt0i0qst"]
 
 [ext_resource type="PackedScene" uid="uid://ddwtbnyshxxj3" path="res://Art_Assets/Levels/LevelGeometry.tscn" id="1_1wy1g"]
 [ext_resource type="PackedScene" uid="uid://bk7vc4usjt3od" path="res://Player/player.tscn" id="1_7ireg"]
@@ -12,6 +12,7 @@
 [ext_resource type="AudioStream" uid="uid://57dmf87xry8d" path="res://Audio/Sfx/spend_money.mp3" id="6_xpqtb"]
 [ext_resource type="PackedScene" uid="uid://d04mojfecls7r" path="res://Objects/water_seller.tscn" id="8_cv6sc"]
 [ext_resource type="AudioStream" uid="uid://b6hawj4wlcvs2" path="res://Audio/Sfx/Ambience/water_ambience.ogg" id="15_dbttc"]
+[ext_resource type="PackedScene" uid="uid://hr021abwwm8b" path="res://Objects/Pump/pump.tscn" id="17_swadt"]
 [ext_resource type="AudioStream" uid="uid://babm51jmu7wc5" path="res://Audio/Sfx/Ambience/nature_ambience.ogg" id="18_hhlvi"]
 [ext_resource type="Script" uid="uid://c6ov71035nkfo" path="res://Audio/Music/Band.gd" id="19_qqyv7"]
 [ext_resource type="AudioStream" uid="uid://c0waf3078ni8q" path="res://Audio/Music/Song1.mp3" id="20_s4lgs"]
@@ -36,7 +37,7 @@ collision_mask = 5
 unique_name_in_owner = true
 process_mode = 3
 script = ExtResource("3_8vdnm")
-starting_money = 100
+starting_money = 1000000
 
 [node name="MoneySound" type="AudioStreamPlayer" parent="Money"]
 stream = ExtResource("6_xpqtb")
@@ -49,8 +50,9 @@ stream = ExtResource("6_xpqtb")
 
 [node name="Water" type="Node3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 68.218, -1, 171.569)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 68.218, -83.1072, 171.569)
 script = ExtResource("3_t065x")
+starting_y = -89.0
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Water"]
 process_mode = 3
@@ -161,3 +163,133 @@ item_description = "Trade this to Uncle Upgrade to get a watering can.  Great de
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28.9398, 0, 0)
 item_name = "Expense Report"
 item_description = "Trade this to Uncle Upgrade to get a big jug."
+
+[node name="AllPumps" type="Node" parent="."]
+
+[node name="FirstLayer" type="Node" parent="AllPumps"]
+
+[node name="Pump" parent="AllPumps/FirstLayer" node_paths=PackedStringArray("upgrade_markers") instance=ExtResource("17_swadt")]
+transform = Transform3D(-0.109544, 0, -0.993982, 0, 1, 0, 0.993982, 0, -0.109544, 24.7001, -0.581938, -9.65339)
+upgrade_markers = []
+
+[node name="Pump2" parent="AllPumps/FirstLayer" node_paths=PackedStringArray("upgrade_markers") instance=ExtResource("17_swadt")]
+transform = Transform3D(-0.346625, 0, -0.938004, 0, 1, 0, 0.938004, 0, -0.346625, 50.677, -0.581938, -7.3043)
+upgrade_markers = []
+
+[node name="Pump3" parent="AllPumps/FirstLayer" node_paths=PackedStringArray("upgrade_markers") instance=ExtResource("17_swadt")]
+transform = Transform3D(-0.385923, 0, -0.922531, 0, 1, 0, 0.922531, 0, -0.385923, 75.7109, -0.581938, 4.864)
+upgrade_markers = []
+
+[node name="Pump4" parent="AllPumps/FirstLayer" node_paths=PackedStringArray("upgrade_markers") instance=ExtResource("17_swadt")]
+transform = Transform3D(-0.425495, 0, -0.904961, 0, 1, 0, 0.904961, 0, -0.425495, 104.262, -0.581938, 15.1454)
+upgrade_markers = []
+
+[node name="Pump5" parent="AllPumps/FirstLayer" node_paths=PackedStringArray("upgrade_markers") instance=ExtResource("17_swadt")]
+transform = Transform3D(-0.169556, 0, -0.985521, 0, 1, 0, 0.985521, 0, -0.169556, 131.482, -0.581938, 30.7838)
+upgrade_markers = []
+
+[node name="Pump6" parent="AllPumps/FirstLayer" node_paths=PackedStringArray("upgrade_markers") instance=ExtResource("17_swadt")]
+transform = Transform3D(0.631014, 0, -0.775772, 0, 1, 0, 0.775772, 0, 0.631014, 156.928, -0.581938, 21.1549)
+upgrade_markers = []
+
+[node name="Pump7" parent="AllPumps/FirstLayer" node_paths=PackedStringArray("upgrade_markers") instance=ExtResource("17_swadt")]
+transform = Transform3D(0.996287, 0, -0.0860956, 0, 1, 0, 0.0860956, 0, 0.996287, 170.648, -0.581938, -0.321974)
+upgrade_markers = []
+
+[node name="Pump8" parent="AllPumps/FirstLayer" node_paths=PackedStringArray("upgrade_markers") instance=ExtResource("17_swadt")]
+transform = Transform3D(0.796255, 0, -0.604961, 0, 1, 0, 0.604961, 0, 0.796255, 182.418, -0.581938, -24.5184)
+upgrade_markers = []
+
+[node name="Pump9" parent="AllPumps/FirstLayer" node_paths=PackedStringArray("upgrade_markers") instance=ExtResource("17_swadt")]
+transform = Transform3D(0.489641, 0, -0.871924, 0, 1, 0, 0.871924, 0, 0.489641, 205.519, -0.581938, -33.6539)
+upgrade_markers = []
+
+[node name="Pump10" parent="AllPumps/FirstLayer" node_paths=PackedStringArray("upgrade_markers") instance=ExtResource("17_swadt")]
+transform = Transform3D(-0.264177, 0, -0.964475, 0, 1, 0, 0.964475, 0, -0.264177, 236.059, -0.581938, -26.1482)
+upgrade_markers = []
+
+[node name="Pump11" parent="AllPumps/FirstLayer" node_paths=PackedStringArray("upgrade_markers") instance=ExtResource("17_swadt")]
+transform = Transform3D(-0.423473, 0, -0.905909, 0, 1, 0, 0.905909, 0, -0.423473, 259.542, -0.581938, -8.75987)
+upgrade_markers = []
+
+[node name="Pump12" parent="AllPumps/FirstLayer" node_paths=PackedStringArray("upgrade_markers") instance=ExtResource("17_swadt")]
+transform = Transform3D(-0.955886, 0, -0.29374, 0, 1, 0, 0.29374, 0, -0.955886, 269.996, -0.581938, 26.9176)
+upgrade_markers = []
+
+[node name="Pump13" parent="AllPumps/FirstLayer" node_paths=PackedStringArray("upgrade_markers") instance=ExtResource("17_swadt")]
+transform = Transform3D(-0.983016, 0, 0.183523, 0, 1, 0, -0.183523, 0, -0.983016, 265.958, -0.581938, 62.2766)
+upgrade_markers = []
+
+[node name="Pump14" parent="AllPumps/FirstLayer" node_paths=PackedStringArray("upgrade_markers") instance=ExtResource("17_swadt")]
+transform = Transform3D(-0.804987, 0, 0.593293, 0, 1, 0, -0.593293, 0, -0.804987, 251.402, -0.581938, 91.8626)
+upgrade_markers = []
+
+[node name="Pump15" parent="AllPumps/FirstLayer" node_paths=PackedStringArray("upgrade_markers") instance=ExtResource("17_swadt")]
+transform = Transform3D(-0.804987, 0, 0.593293, 0, 1, 0, -0.593293, 0, -0.804987, 232.941, -0.581938, 122.134)
+upgrade_markers = []
+
+[node name="Pump16" parent="AllPumps/FirstLayer" node_paths=PackedStringArray("upgrade_markers") instance=ExtResource("17_swadt")]
+transform = Transform3D(-0.285437, 0, 0.958398, 0, 1, 0, -0.958398, 0, -0.285437, 152.2, -0.581938, 169.887)
+upgrade_markers = []
+
+[node name="Pump17" parent="AllPumps/FirstLayer" node_paths=PackedStringArray("upgrade_markers") instance=ExtResource("17_swadt")]
+transform = Transform3D(-0.332325, 0, 0.943165, 0, 1, 0, -0.943165, 0, -0.332325, 115.19, -0.581938, 180.923)
+upgrade_markers = []
+
+[node name="Pump18" parent="AllPumps/FirstLayer" node_paths=PackedStringArray("upgrade_markers") instance=ExtResource("17_swadt")]
+transform = Transform3D(-0.194919, 0, 0.98082, 0, 1, 0, -0.98082, 0, -0.194919, 83.344, -0.581938, 191.847)
+upgrade_markers = []
+
+[node name="Pump19" parent="AllPumps/FirstLayer" node_paths=PackedStringArray("upgrade_markers") instance=ExtResource("17_swadt")]
+transform = Transform3D(-0.0530674, 0, 0.998591, 0, 1, 0, -0.998591, 0, -0.0530674, 53.8379, -0.581938, 199.452)
+upgrade_markers = []
+
+[node name="Pump20" parent="AllPumps/FirstLayer" node_paths=PackedStringArray("upgrade_markers") instance=ExtResource("17_swadt")]
+transform = Transform3D(0.0912937, 0, 0.995824, 0, 1, 0, -0.995824, 0, 0.0912937, 23.2328, -0.581938, 203.223)
+upgrade_markers = []
+
+[node name="Pump21" parent="AllPumps/FirstLayer" node_paths=PackedStringArray("upgrade_markers") instance=ExtResource("17_swadt")]
+transform = Transform3D(0.257268, 0, 0.96634, 0, 1, 0, -0.96634, 0, 0.257268, -38.3805, -0.581938, 201.176)
+upgrade_markers = []
+
+[node name="Pump22" parent="AllPumps/FirstLayer" node_paths=PackedStringArray("upgrade_markers") instance=ExtResource("17_swadt")]
+transform = Transform3D(0.419152, 0, 0.907916, 0, 1, 0, -0.907916, 0, 0.419152, -64.0525, -0.581938, 192.332)
+upgrade_markers = []
+
+[node name="Pump23" parent="AllPumps/FirstLayer" node_paths=PackedStringArray("upgrade_markers") instance=ExtResource("17_swadt")]
+transform = Transform3D(0.547958, 0, 0.836506, 0, 1, 0, -0.836506, 0, 0.547958, -88.5719, -0.581938, 184.39)
+upgrade_markers = []
+
+[node name="Pump24" parent="AllPumps/FirstLayer" node_paths=PackedStringArray("upgrade_markers") instance=ExtResource("17_swadt")]
+transform = Transform3D(0.807363, 0, 0.590056, 0, 1, 0, -0.590056, 0, 0.807363, -114.271, -0.581938, 171.274)
+upgrade_markers = []
+
+[node name="Pump25" parent="AllPumps/FirstLayer" node_paths=PackedStringArray("upgrade_markers") instance=ExtResource("17_swadt")]
+transform = Transform3D(0.883423, 0, 0.468577, 0, 1, 0, -0.468577, 0, 0.883423, -135.342, -0.581938, 142.014)
+upgrade_markers = []
+
+[node name="Pump26" parent="AllPumps/FirstLayer" node_paths=PackedStringArray("upgrade_markers") instance=ExtResource("17_swadt")]
+transform = Transform3D(0.995754, 0, -0.0920584, 0, 1, 0, 0.0920584, 0, 0.995754, -142.568, -0.581938, 110.285)
+upgrade_markers = []
+
+[node name="Pump27" parent="AllPumps/FirstLayer" node_paths=PackedStringArray("upgrade_markers") instance=ExtResource("17_swadt")]
+transform = Transform3D(0.942139, 0, -0.335222, 0, 1, 0, 0.335222, 0, 0.942139, -133.243, -0.581938, 79.3087)
+upgrade_markers = []
+
+[node name="Pump28" parent="AllPumps/FirstLayer" node_paths=PackedStringArray("upgrade_markers") instance=ExtResource("17_swadt")]
+transform = Transform3D(0.812348, 0, -0.583173, 0, 1, 0, 0.583173, 0, 0.812348, -114.678, -0.581938, 51.829)
+upgrade_markers = []
+
+[node name="Pump29" parent="AllPumps/FirstLayer" node_paths=PackedStringArray("upgrade_markers") instance=ExtResource("17_swadt")]
+transform = Transform3D(0.580802, 0, -0.814045, 0, 1, 0, 0.814045, 0, 0.580802, -68.731, -0.581938, 10.787)
+upgrade_markers = []
+
+[node name="Pump30" parent="AllPumps/FirstLayer" node_paths=PackedStringArray("upgrade_markers") instance=ExtResource("17_swadt")]
+transform = Transform3D(0.240007, 0, -0.970771, 0, 1, 0, 0.970771, 0, 0.240007, -39.5392, -0.581938, -5.31339)
+upgrade_markers = []
+
+[node name="SecondLayer" type="Node" parent="AllPumps"]
+
+[node name="Pump31" parent="AllPumps/SecondLayer" node_paths=PackedStringArray("upgrade_markers") instance=ExtResource("17_swadt")]
+transform = Transform3D(0.999431, 0, -0.0337313, 0, 1, 0, 0.0337313, 0, 0.999431, 10.884, -15.0019, 18.5429)
+upgrade_markers = []
