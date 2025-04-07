@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dd8lm3o0wse32"
+path="res://.godot/imported/cooler_empty.wav-ead3d594928d0cddbe8db7e24b846db1.sample"
+
+[deps]
+
+source_file="res://Audio/Sfx/Tools/Water Cooler/cooler_empty.wav"
+dest_files=["res://.godot/imported/cooler_empty.wav-ead3d594928d0cddbe8db7e24b846db1.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

@@ -1,22 +1,29 @@
-[gd_scene load_steps=20 format=3 uid="uid://d28sbjt0i0qst"]
+[gd_scene load_steps=27 format=3 uid="uid://d28sbjt0i0qst"]
 
 [ext_resource type="PackedScene" uid="uid://ddwtbnyshxxj3" path="res://Art_Assets/Levels/LevelGeometry.tscn" id="1_1wy1g"]
 [ext_resource type="PackedScene" uid="uid://bk7vc4usjt3od" path="res://Player/player.tscn" id="1_7ireg"]
 [ext_resource type="Script" uid="uid://bu07i0b06sujv" path="res://Game_Management/main_level.gd" id="1_romof"]
 [ext_resource type="PackedScene" uid="uid://exdhmbr43ger" path="res://UI/UI.tscn" id="1_t065x"]
-[ext_resource type="PackedScene" uid="uid://di1beqvco0ht6" path="res://Objects/InventoryItems/TestItem.tscn" id="2_f68k2"]
+[ext_resource type="PackedScene" uid="uid://di1beqvco0ht6" path="res://Objects/InventoryItems/InventoryItem.tscn" id="2_f68k2"]
 [ext_resource type="PackedScene" uid="uid://cwuhc7fibr0jj" path="res://UI/water_level_debug.tscn" id="2_hyf1s"]
 [ext_resource type="Script" uid="uid://brrlrkleuxt1p" path="res://Game_Management/money.gd" id="3_8vdnm"]
 [ext_resource type="Script" uid="uid://d0rpsw8qm8mxc" path="res://Level/water.gd" id="3_t065x"]
 [ext_resource type="Material" uid="uid://cc3jyugw620gk" path="res://Art_Assets/Materials/WaterVertex.tres" id="3_vad1a"]
+[ext_resource type="AudioStream" uid="uid://57dmf87xry8d" path="res://Audio/Sfx/spend_money.mp3" id="6_xpqtb"]
 [ext_resource type="Script" uid="uid://b1lecmjr7r5pu" path="res://UI/Shop/ShopItems/ShopItem.gd" id="7_o3roe"]
 [ext_resource type="PackedScene" uid="uid://d04mojfecls7r" path="res://Objects/water_seller.tscn" id="8_cv6sc"]
 [ext_resource type="Resource" uid="uid://7enqhksiag3a" path="res://UI/Shop/ShopItems/Hands.tres" id="8_yhkds"]
-[ext_resource type="PackedScene" uid="uid://hr021abwwm8b" path="res://Objects/Pump/pump.tscn" id="9_7gvd8"]
 [ext_resource type="Resource" uid="uid://jgmppv717ws8" path="res://UI/Shop/ShopItems/Sponge.tres" id="9_swadt"]
 [ext_resource type="Resource" uid="uid://cmeql7rts03ml" path="res://UI/Shop/ShopItems/Bucket.tres" id="10_hhlvi"]
 [ext_resource type="Resource" uid="uid://dufcgjuo6cucx" path="res://UI/Shop/ShopItems/WateringCan.tres" id="11_swadt"]
 [ext_resource type="Resource" uid="uid://dwctgocpxrtsi" path="res://UI/Shop/ShopItems/Jug.tres" id="12_hhlvi"]
+[ext_resource type="Resource" uid="uid://blxq2rrfwlm43" path="res://UI/Shop/ShopItems/RollerSkate.tres" id="13_hhlvi"]
+[ext_resource type="Resource" uid="uid://cpt63tjw3br52" path="res://UI/Shop/ShopItems/SkateBoard.tres" id="14_dbttc"]
+[ext_resource type="AudioStream" uid="uid://b6hawj4wlcvs2" path="res://Audio/Sfx/Ambience/water_ambience.ogg" id="15_dbttc"]
+[ext_resource type="AudioStream" uid="uid://babm51jmu7wc5" path="res://Audio/Sfx/Ambience/nature_ambience.ogg" id="18_hhlvi"]
+[ext_resource type="Script" uid="uid://c6ov71035nkfo" path="res://Audio/Music/Band.gd" id="19_qqyv7"]
+[ext_resource type="AudioStream" uid="uid://c0waf3078ni8q" path="res://Audio/Music/Song1.mp3" id="20_s4lgs"]
+[ext_resource type="AudioStream" uid="uid://bx6v6xklxfma" path="res://Audio/Music/Song2.mp3" id="21_qqyv7"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_t065x"]
 
@@ -25,8 +32,6 @@ size = Vector3(1000, 1, 1000)
 
 [node name="MainLevel" type="Node3D"]
 script = ExtResource("1_romof")
-
-[node name="TestItem" parent="." instance=ExtResource("2_f68k2")]
 
 [node name="Water_Level_Debug" parent="." instance=ExtResource("2_hyf1s")]
 mouse_filter = 2
@@ -37,13 +42,17 @@ collision_mask = 5
 
 [node name="Money" type="Node" parent="."]
 unique_name_in_owner = true
+process_mode = 3
 script = ExtResource("3_8vdnm")
 starting_money = 100
+
+[node name="MoneySound" type="AudioStreamPlayer" parent="Money"]
+stream = ExtResource("6_xpqtb")
 
 [node name="UI" parent="." instance=ExtResource("1_t065x")]
 
 [node name="Shop" parent="UI" index="2"]
-shop_items = Array[ExtResource("7_o3roe")]([ExtResource("8_yhkds"), ExtResource("9_swadt"), ExtResource("10_hhlvi"), ExtResource("11_swadt"), ExtResource("12_hhlvi")])
+shop_items = Array[ExtResource("7_o3roe")]([ExtResource("8_yhkds"), ExtResource("9_swadt"), ExtResource("10_hhlvi"), ExtResource("11_swadt"), ExtResource("12_hhlvi"), ExtResource("13_hhlvi"), ExtResource("14_dbttc")])
 
 [node name="MainMenu" parent="UI" index="5"]
 script = null
@@ -56,6 +65,14 @@ script = null
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 68.218, -1, 171.569)
 script = ExtResource("3_t065x")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Water"]
+process_mode = 3
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -51.2785, -7.50375, -83.7181)
+stream = ExtResource("15_dbttc")
+volume_db = -6.0
+unit_size = 90.0
+autoplay = true
 
 [node name="WaterPlane" type="MeshInstance3D" parent="Water"]
 transform = Transform3D(700, 0, 0, 0, -3.0598e-05, 1, 0, -700, -4.37114e-08, 0, 0, 0)
@@ -83,8 +100,79 @@ debug_color = Color(0, 0, 0, 1)
 [node name="WaterSeller" parent="." instance=ExtResource("8_cv6sc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.71387, 0, -17.2599)
 
-[node name="Pump" parent="." node_paths=PackedStringArray("upgrade_markers") instance=ExtResource("9_7gvd8")]
-transform = Transform3D(-0.14104, 0, -0.990004, 0, 1, 0, 0.990004, 0, -0.14104, 13.8841, -0.581938, -2.15099)
-upgrade_markers = []
+[node name="Audio" type="Node" parent="."]
+process_mode = 3
+script = ExtResource("19_qqyv7")
+
+[node name="Nature Ambience" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("18_hhlvi")
+autoplay = true
+
+[node name="Song1" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("20_s4lgs")
+bus = &"Music"
+
+[node name="Song2" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("21_qqyv7")
+bus = &"Music"
+
+[node name="SongTimer" type="Timer" parent="Audio"]
+wait_time = 120.0
+one_shot = true
+
+[node name="InventoryItems" type="Node3D" parent="."]
+
+[node name="Skateboard Wheel 1" parent="InventoryItems" instance=ExtResource("2_f68k2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.55004, 0, 0)
+item_name = "Skateboard Wheel 1"
+item_description = "Trade all 4 to Uncle Upgrade for a Skateboard!"
+
+[node name="Skateboard Wheel 2" parent="InventoryItems" instance=ExtResource("2_f68k2")]
+item_name = "Skateboard Wheel 2"
+item_description = "Trade all 4 to Uncle Upgrade for a Skateboard!"
+
+[node name="Skateboard Wheel 3" parent="InventoryItems" instance=ExtResource("2_f68k2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.52416, 0, 0)
+item_name = "Skateboard Wheel 3"
+item_description = "Trade all 4 to Uncle Upgrade for a Skateboard!"
+
+[node name="Skateboard Wheel 4" parent="InventoryItems" instance=ExtResource("2_f68k2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.56602, 0, 0)
+item_name = "Skateboard Wheel 4"
+item_description = "Trade all 4 to Uncle Upgrade for a Skateboard!"
+
+[node name="Lit Test Item" parent="InventoryItems" instance=ExtResource("2_f68k2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.58275, 0, 0)
+item_description = "Trade to Uncle Upgrade for a Bucket.  REMOVE BEFORE LAUNCH!!!!"
+
+[node name="Rollerskate Shoelace 1" parent="InventoryItems" instance=ExtResource("2_f68k2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.0593, 0, 0)
+item_name = "Rollerskate Shoelace 1"
+item_description = "Trade 2 of these to Uncle Upgrade for some skates!"
+
+[node name="Rollerskate Shoelace 2" parent="InventoryItems" instance=ExtResource("2_f68k2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.7712, 0, 0)
+item_name = "Rollerskate Shoelace 2"
+item_description = "Trade 2 of these to Uncle Upgrade for some skates!"
+
+[node name="Hands For Dummies" parent="InventoryItems" instance=ExtResource("2_f68k2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.9843, 0, 0)
+item_name = "Hands For Dummies"
+item_description = "You can trade this to Uncle Upgrade to get your hands!"
+
+[node name="Square Pants" parent="InventoryItems" instance=ExtResource("2_f68k2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.48, 0, 0)
+item_name = "Square Pants"
+item_description = "You can trade these to Uncle Upgrade to get a sponge!"
+
+[node name="Diamond" parent="InventoryItems" instance=ExtResource("2_f68k2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.9531, 0, 0)
+item_name = "Diamond"
+item_description = "Trade this to Uncle Upgrade to get a watering can.  Great deal!"
+
+[node name="Expense Report" parent="InventoryItems" instance=ExtResource("2_f68k2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28.9398, 0, 0)
+item_name = "Expense Report"
+item_description = "Trade this to Uncle Upgrade to get a big jug."
 
 [editable path="UI"]

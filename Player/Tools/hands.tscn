@@ -1,8 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://b2gqicgrkqu86"]
+[gd_scene load_steps=15 format=3 uid="uid://b2gqicgrkqu86"]
 
 [ext_resource type="Script" uid="uid://gaeegpj2o3tq" path="res://Player/Tools/tool.gd" id="1_8g8da"]
 [ext_resource type="Material" uid="uid://h58o0lr3ej4u" path="res://Art_Assets/Materials/HandTools/Hands_Empty.tres" id="2_8g8da"]
+[ext_resource type="AudioStream" uid="uid://pfbfs2rb4gdk" path="res://Audio/Sfx/Tools/Hands/hands_fill.wav" id="2_ukqik"]
 [ext_resource type="Material" uid="uid://be6n7dvpg3lcv" path="res://Art_Assets/Materials/HandTools/Hands_Full.tres" id="3_6s51c"]
+[ext_resource type="AudioStream" uid="uid://ckkiucsvlewde" path="res://Audio/Sfx/Tools/Hands/hands_empty.wav" id="3_r6rco"]
 
 [sub_resource type="Animation" id="Animation_7nrwf"]
 length = 0.001
@@ -239,11 +241,28 @@ point_count = 3
 
 [node name="Hands" type="Node3D" node_paths=PackedStringArray("jump_reset_curve")]
 script = ExtResource("1_8g8da")
+fill_audio = ExtResource("2_ukqik")
+fill_volume = null
+empty_audio = ExtResource("3_r6rco")
+empty_volume = null
 tool_name = "Your Hands"
+sway_min = null
+sway_max = null
+sway_speed_rotation = null
+sway_amount_rotation = null
+random_sway_amount = null
+idle_sway_rotation_strength = null
+idle_sway_speed = null
+jump_sway_amount = null
+landing_sway_adjust_time = null
 jump_overshoot_amount = 0.15
+bob_amount = null
 jump_reset_curve = NodePath("Line2D")
+horizontal_speed = null
+horizontal_range = null
 recentering_force = 10.0
 capacity = 2
+water_value = null
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

@@ -9,8 +9,9 @@ item_name = "Your Hands"
 item_description = "These are the hands attached to your body"
 item_icon = ExtResource("1_2i1e1")
 price = 1
-required_items_quip = ""
-required_items_string = ""
-required_inventory_items = Array[String]([])
+item_type = "Tool"
+required_items_quip = "Woah woah woah there, these [color=green]Hands[/color] are advanced pieces of machinery.  I won't sell them to you until you know how to use them... {pause-1.0} maybe you can find some kind of [color=green]book about hands?[/color]"
+required_items_string = "Requires the book \"Hands For Dummies\" to purchase."
+required_inventory_items = Array[String](["Hands For Dummies"])
 required_tools = Array[String]([])
 metadata/_custom_type_script = "uid://b1lecmjr7r5pu"

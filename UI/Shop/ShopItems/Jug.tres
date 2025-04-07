@@ -10,8 +10,8 @@ item_description = "A very large jug"
 item_icon = ExtResource("1_q4rvq")
 price = 1
 item_type = "Tool"
-required_items_quip = ""
-required_items_string = ""
-required_inventory_items = Array[String]([])
+required_items_quip = "I hate this thing so much.  I'll trade you it for a [color=green]Watering Can and an Expense Report.[/color]  {pause=0.5} Please get a [color=green]Watering Can[/color] so I can get rid of this stupid [color=green]jug.[/color]"
+required_items_string = "Requires the Watering Can and an Expense Report to purchase.  Try looking over by the big trampoline!"
+required_inventory_items = Array[String](["Expense Report"])
 required_tools = Array[String](["Watering Can"])
 metadata/_custom_type_script = "uid://b1lecmjr7r5pu"

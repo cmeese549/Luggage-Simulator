@@ -18,9 +18,13 @@ var upgrade_slots: Array[pump_upgrade] = [null, null, null, null, null]
 
 @onready var upgrade_menu : UpgradeMenu = get_tree().get_first_node_in_group("UpgradeMenu")
 
+@onready var build_audio : AudioStreamPlayer3D = $BuildAudio
+@onready var ambience : AudioStreamPlayer3D = $Ambience
+
 var money
 
 func _ready():
+	build_audio.finished.connect(start_ambience)
 	cur_quality = base_quality
 	$Geo.visible = built
 	$Sign.visible = true
@@ -36,8 +40,12 @@ func do_pump(delta):
 	var money_amount = water_amount * cur_quality
 	Events.make_money.emit(money_amount)
 	return water_amount
+	
+func start_ambience() -> void:
+	ambience.play()
 
 func build():
+	build_audio.play()
 	built = true
 	$Geo.visible = true
 	$Sign.visible = false
@@ -45,6 +53,7 @@ func build():
 	$Upgrades/PumpUpgrade/CollisionShape3D.disabled = false
 	cur_wps = base_wps
 	Events.add_pump.emit(self)
+	$AnimationPlayer.play("build")
 
 func attempt_buy():
 	if money.try_buy(price):

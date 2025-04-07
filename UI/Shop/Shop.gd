@@ -37,6 +37,7 @@ var used_item_purchased_quips : Array[String] = []
 func _ready() -> void:
 	close_button.pressed.connect(close_shop)
 	render_shop_items()
+	Events.open_shop.connect(open_shop)
 
 func _input(event) -> void:
 	if Input.is_action_just_pressed("OpenShopDebug"):
@@ -94,6 +95,7 @@ func render_shop_items() -> void:
 func attempt_purchase(item: ShopItem, button: Button) -> void:
 	var has_required_items = check_has_inventory_items(item)
 	if has_required_items:
+		print(item.item_name + " has items")
 		has_required_items = check_has_tool(item)
 	if !has_required_items:
 		dialogue_box.render_dialogue(item.required_items_quip)
@@ -105,6 +107,8 @@ func attempt_purchase(item: ShopItem, button: Button) -> void:
 		player.remove_inventory_items(item.required_inventory_items)
 		if item.item_type == "Tool":
 			Events.tool_purchased.emit(item)
+		elif item.item_type == "Speed":
+			Events.speed_purchased.emit(item)
 	else:
 		display_random_quip(cant_afford_quips, used_cant_afford_quips)
 
@@ -116,7 +120,9 @@ func check_has_inventory_items(item: ShopItem) -> bool:
 	return true
 
 func check_has_tool(item: ShopItem) -> bool:
+	print(item.item_name)
 	for required_tool : String in item.required_tools:
+		print(required_tool)
 		var player_has_tool = player.check_has_tool(required_tool)
 		if !player_has_tool:
 			return false

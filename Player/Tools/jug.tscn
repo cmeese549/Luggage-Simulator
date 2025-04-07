@@ -1,8 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://dvgxywx0ckbxa"]
+[gd_scene load_steps=15 format=3 uid="uid://dvgxywx0ckbxa"]
 
 [ext_resource type="Script" uid="uid://gaeegpj2o3tq" path="res://Player/Tools/tool.gd" id="1_x304u"]
+[ext_resource type="AudioStream" uid="uid://lxqfu1anhlc6" path="res://Audio/Sfx/Tools/Water Cooler/cooler_fill.wav" id="2_thr5b"]
 [ext_resource type="Material" uid="uid://bbtqa3fseyydi" path="res://Art_Assets/Materials/HandTools/CoolerJug_Empty.tres" id="2_x304u"]
 [ext_resource type="Material" uid="uid://hd5ngkuyuu52" path="res://Art_Assets/Materials/HandTools/CoolerJug_Full.tres" id="3_7r7x5"]
+[ext_resource type="AudioStream" uid="uid://dd8lm3o0wse32" path="res://Audio/Sfx/Tools/Water Cooler/cooler_empty.wav" id="3_n8hrx"]
 
 [sub_resource type="Animation" id="Animation_7nrwf"]
 length = 0.001
@@ -227,11 +229,16 @@ point_count = 3
 
 [node name="Jug" type="Node3D" node_paths=PackedStringArray("jump_reset_curve")]
 script = ExtResource("1_x304u")
+fill_audio = ExtResource("2_thr5b")
+fill_volume = null
+empty_audio = ExtResource("3_n8hrx")
+empty_volume = 3.0
 tool_name = "Big Jug"
 sway_min = Vector2(-20, -20)
 sway_max = Vector2(20, 20)
 sway_speed_rotation = 0.05
 sway_amount_rotation = 60.0
+random_sway_amount = null
 idle_sway_rotation_strength = 30.0
 idle_sway_speed = 0.005
 jump_sway_amount = 25.0
@@ -243,6 +250,7 @@ horizontal_speed = 50.0
 horizontal_range = Vector2(-0.1, 0.1)
 recentering_force = 10.0
 capacity = 10
+water_value = null
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ShopItem" load_steps=3 format=3 uid="uid://blxq2rrfwlm43"]
+
+[ext_resource type="Texture2D" uid="uid://dsu4otkk2qt0g" path="res://icon.svg" id="1_bwkcn"]
+[ext_resource type="Script" uid="uid://b1lecmjr7r5pu" path="res://UI/Shop/ShopItems/ShopItem.gd" id="2_w6iy3"]
+
+[resource]
+script = ExtResource("2_w6iy3")
+item_name = "Rollerskates"
+item_description = "Some sick nasty roller skates!"
+item_icon = ExtResource("1_bwkcn")
+price = 1
+item_type = "Speed"
+required_items_quip = "I broke my wrist 13 times in a row using these, so I angirly ripped off the [color=green]Shoelaces[/color] and forgot about them... {pause=1.0} Find those [color=green]Shoelaces,[/color] and the [color=green]Skates[/color] are yours."
+required_items_string = "Requires 2 Rollerskate Shoelaces.  I think they are around here somewhere..."
+required_inventory_items = Array[String](["Rollerskate Shoelace 1", "Rollerskate Shoelace 2"])
+required_tools = Array[String]([])
+metadata/_custom_type_script = "uid://b1lecmjr7r5pu"
