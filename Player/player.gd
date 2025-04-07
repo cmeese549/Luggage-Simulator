@@ -97,6 +97,7 @@ func pickup_item(area: Area3D) -> void:
 		new_item.item_icon = area.get_parent().get_parent().item_icon
 		new_item.item_description = area.get_parent().get_parent().item_description
 		inventory.append(new_item)
+		Events.item_pickedup.emit(new_item)
 		area.get_parent().get_parent().call_deferred("queue_free")
 		
 func play_interact_sound() -> void:

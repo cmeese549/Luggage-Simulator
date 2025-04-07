@@ -18,6 +18,13 @@ func find_all_pumps():
 
 func new_pump(n_pump: Pump):
 	built_pumps.append(n_pump)
+	var scale_num = 1
+	if built_pumps.size() < 15:
+		scale_num = 1.5
+	elif built_pumps.size() < 22:
+		scale_num = 1.2
+	else:
+		scale_num = 1.08
 	current_pump_price = current_pump_price * (1.16)
 	for p in all_pumps:
 		p.update_price(int(current_pump_price))

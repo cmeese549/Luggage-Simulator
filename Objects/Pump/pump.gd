@@ -38,7 +38,7 @@ func all_ready():
 
 func do_pump(delta):
 	if water.empty:
-		return
+		return 0
 	var water_amount = cur_wps * delta
 	var money_amount = water_amount * cur_quality
 	Events.make_money.emit(money_amount)
@@ -66,6 +66,7 @@ func attempt_buy() -> bool:
 	return false
 
 func attempt_upgrade():
+	Events.pump_upgrade_menu.emit(self)
 	upgrade_menu.open(self)
 
 func apply_upgrade(new_upgrade: pump_upgrade):

@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bylrv0gg5e3pi" path="res://Art_Assets/Textures/WaterBase.png" id="2_ahc2x"]
 
 [resource]
-render_priority = 0
+render_priority = -5
 shader = ExtResource("1_iugqt")
 shader_parameter/ColorMult = Color(0, 0.7, 1, 1)
 shader_parameter/Speed = 0.36

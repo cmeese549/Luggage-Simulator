@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://cpuf0byync0a2"]
+[gd_scene load_steps=21 format=3 uid="uid://cpuf0byync0a2"]
 
 [ext_resource type="PackedScene" uid="uid://ddwtbnyshxxj3" path="res://Art_Assets/Levels/LevelGeometry.tscn" id="1_1wy1g"]
 [ext_resource type="PackedScene" uid="uid://bk7vc4usjt3od" path="res://Player/player.tscn" id="1_7ireg"]
@@ -13,6 +13,7 @@
 [ext_resource type="AudioStream" uid="uid://b6hawj4wlcvs2" path="res://Audio/Sfx/Ambience/water_ambience.ogg" id="15_dbttc"]
 [ext_resource type="Script" uid="uid://dupj3d5ny1j3s" path="res://Level/all_pumps.gd" id="17_hhlvi"]
 [ext_resource type="PackedScene" uid="uid://hr021abwwm8b" path="res://Objects/Pump/pump.tscn" id="17_swadt"]
+[ext_resource type="PackedScene" path="res://Game_Management/tutorial.tscn" id="18_dbttc"]
 [ext_resource type="AudioStream" uid="uid://babm51jmu7wc5" path="res://Audio/Sfx/Ambience/nature_ambience.ogg" id="18_hhlvi"]
 [ext_resource type="Script" uid="uid://c6ov71035nkfo" path="res://Audio/Music/Band.gd" id="19_qqyv7"]
 [ext_resource type="AudioStream" uid="uid://c0waf3078ni8q" path="res://Audio/Music/Song1.mp3" id="20_s4lgs"]
@@ -37,7 +38,7 @@ collision_mask = 5
 unique_name_in_owner = true
 process_mode = 3
 script = ExtResource("3_8vdnm")
-starting_money = 5000
+starting_money = 5
 
 [node name="MoneySound" type="AudioStreamPlayer" parent="Money"]
 stream = ExtResource("5_swadt")
@@ -52,6 +53,7 @@ stream = ExtResource("5_swadt")
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 68.218, -1, 171.569)
 script = ExtResource("3_t065x")
+starting_y = -70.0
 ending_y = -80.0
 starting_amount = 1e+06
 
@@ -365,3 +367,33 @@ transform = Transform3D(0.229659, 0, -0.973271, 0, 1, 0, 0.973271, 0, 0.229659, 
 
 [node name="Pump62" parent="AllPumps/ThirdLayer" instance=ExtResource("17_swadt")]
 transform = Transform3D(0.735151, 0, -0.677903, 0, 1, 0, 0.677903, 0, 0.735151, 62.7293, -45, 78.6257)
+
+[node name="Tutorial" parent="." node_paths=PackedStringArray("tutorial_locations") instance=ExtResource("18_dbttc")]
+tutorial_locations = {
+0: NodePath("../TutorialMarkers/WaterPickup"),
+1: NodePath("../TutorialMarkers/WaterDump"),
+2: NodePath("../TutorialMarkers/Pump"),
+3: NodePath("../TutorialMarkers/Shop"),
+4: NodePath("../TutorialMarkers/FindItem"),
+5: NodePath("../TutorialMarkers/Done")
+}
+
+[node name="TutorialMarkers" type="Node" parent="."]
+
+[node name="WaterPickup" type="Marker3D" parent="TutorialMarkers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 243.11, -0.492689, 6.9516)
+
+[node name="WaterDump" type="Marker3D" parent="TutorialMarkers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 246.076, 0, 2.20182)
+
+[node name="Pump" type="Marker3D" parent="TutorialMarkers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 232.276, 0, -15.2875)
+
+[node name="Shop" type="Marker3D" parent="TutorialMarkers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 227.881, 0, -17.4782)
+
+[node name="FindItem" type="Marker3D" parent="TutorialMarkers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 211.281, 0, -14.6264)
+
+[node name="Done" type="Marker3D" parent="TutorialMarkers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 235.937, 0, -6.84646)

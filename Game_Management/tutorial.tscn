@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://cb77ps0e8v5xs"]
+
+[ext_resource type="Script" uid="uid://deii0kw8qnwt6" path="res://Game_Management/tutorial.gd" id="1_cuxgw"]
+[ext_resource type="PackedScene" uid="uid://p37k13tnkylq" path="res://Art_Assets/Models/Todd/TutorialTodd.tscn" id="1_pl4mw"]
+
+[node name="Tutorial" type="Node3D"]
+script = ExtResource("1_cuxgw")
+
+[node name="TutorialTodd" parent="." instance=ExtResource("1_pl4mw")]
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.65894, 0)
+billboard = 2
+text = "Your task is to drain the depths of this here lake. Please use your thimble on the water here with the mouse primary button."
+autowrap_mode = 3
+width = 750.0

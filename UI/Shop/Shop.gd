@@ -94,6 +94,7 @@ func deliver_final_quip() -> void:
 	your_money.text = " "
 	
 func close_shop() -> void:
+	Events.close_shop.emit()
 	dialogue_box.stop_dialogue()
 	self.visible = false
 	hud.visible = true
