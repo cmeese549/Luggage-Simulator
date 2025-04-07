@@ -16,7 +16,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 25
+theme_override_constants/separation = 15
 
 [node name="ItemName" type="Label" parent="VBoxContainer"]
 layout_mode = 2
@@ -39,20 +39,22 @@ text = "$500"
 horizontal_alignment = 1
 
 [node name="ItemDescription" type="Label" parent="VBoxContainer"]
-custom_minimum_size = Vector2(0, 60)
+custom_minimum_size = Vector2(0, 55.55)
 layout_mode = 2
 theme = ExtResource("1_qtpk1")
 theme_override_font_sizes/font_size = 26
-text = "This is a super awesome epic shop item"
+text = "This is a super awesome epic shop "
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="ItemRequirements" type="Label" parent="VBoxContainer"]
+[node name="ItemRequirements" type="RichTextLabel" parent="VBoxContainer"]
 custom_minimum_size = Vector2(0, 111)
 layout_mode = 2
-theme_override_font_sizes/font_size = 34
+theme_override_font_sizes/normal_font_size = 34
+bbcode_enabled = true
 text = "Required Items:
 f
 f"
-horizontal_alignment = 1
+scroll_active = false
 autowrap_mode = 2
+horizontal_alignment = 1

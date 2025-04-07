@@ -10,8 +10,8 @@ item_description = "This sponge rocks! (it's rock hard)"
 item_icon = ExtResource("1_nhvx4")
 price = 200
 item_type = "Tool"
-required_items_quip = "It would be difficult to use a [color=green]Sponge[/color] without [color=green]Hands[/color] and some [color=indigo]Square Pants.[/color]{pause=0.5}  Lucky for you, I'll sell you [color=green]Your Hands,[/color] then you can buy the [color=green]Sponge![/color] {pause=0.5} That is, so long as you have some [color=indigo]Square Pants[/color] to trade with..."
-required_items_string = "Requires Your Hands and some Square Pants to purchase."
+required_items_quip = "It would be difficult to use a [color=green]Sponge[/color] without [color=green]Hands[/color] and some [color=indigo]Square Pants.[/color]{pause=0.5}  Sadly I lost my [color=indigo]Square Pants[/color] in [color=indigo]some puddles,[/color] but if you use [color=green]Your Hands[/color] to bring them to me, I'll sell you this [color=green]Sponge.[/color]"
+required_items_string = "Requires [color=green]Your Hands[/color] and some [color=indigo]Square Pants[/color] to purchase.  Uncle Upgrade dropped those pants [color=indigo]in some puddles.[/color]"
 required_inventory_items = Array[String](["Square Pants"])
 required_tools = Array[String](["Your Hands"])
 metadata/_custom_type_script = "uid://b1lecmjr7r5pu"

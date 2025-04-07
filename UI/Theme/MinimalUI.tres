@@ -94,7 +94,7 @@ cache/0/44/0/underline_thickness = 0.0
 cache/0/44/0/scale = 1.0
 
 [sub_resource type="StyleBoxFlat" id="1"]
-bg_color = Color(0, 0, 0, 1)
+bg_color = Color(0.04, 0.04, 0.04, 1)
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1

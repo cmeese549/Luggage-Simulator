@@ -230,9 +230,9 @@ point_count = 3
 [node name="Jug" type="Node3D" node_paths=PackedStringArray("jump_reset_curve")]
 script = ExtResource("1_x304u")
 fill_audio = ExtResource("2_thr5b")
-fill_volume = null
+fill_volume = -2.5
 empty_audio = ExtResource("3_n8hrx")
-empty_volume = 3.0
+empty_volume = 0.5
 tool_name = "Big Jug"
 sway_min = Vector2(-20, -20)
 sway_max = Vector2(20, 20)

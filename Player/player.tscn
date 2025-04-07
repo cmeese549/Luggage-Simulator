@@ -296,10 +296,12 @@ bus = &"Jump"
 
 [node name="Skateboard" type="AudioStreamPlayer" parent="Audio/Footsteps"]
 stream = ExtResource("28_bbimk")
+volume_db = 2.5
 bus = &"Skateboard"
 
 [node name="SkateboardFade" type="AudioStreamPlayer" parent="Audio/Footsteps"]
 stream = ExtResource("29_m0h3t")
+volume_db = 2.5
 bus = &"Skateboard"
 
 [node name="JumpSplash" type="AudioStreamPlayer" parent="Audio/Footsteps"]
@@ -317,7 +319,7 @@ bus = &"Tools"
 
 [node name="MoneySound" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource("10_x3vf3")
-volume_db = -9.0
+volume_db = -11.0
 bus = &"Alerts"
 
 [node name="PickupSound" type="AudioStreamPlayer" parent="Audio"]
