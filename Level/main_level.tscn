@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://d28sbjt0i0qst"]
+[gd_scene load_steps=26 format=3 uid="uid://d28sbjt0i0qst"]
 
 [ext_resource type="PackedScene" uid="uid://ddwtbnyshxxj3" path="res://Art_Assets/Levels/LevelGeometry.tscn" id="1_1wy1g"]
 [ext_resource type="PackedScene" uid="uid://bk7vc4usjt3od" path="res://Player/player.tscn" id="1_7ireg"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://brrlrkleuxt1p" path="res://Game_Management/money.gd" id="3_8vdnm"]
 [ext_resource type="Script" uid="uid://d0rpsw8qm8mxc" path="res://Level/water.gd" id="3_t065x"]
 [ext_resource type="Material" uid="uid://cc3jyugw620gk" path="res://Art_Assets/Materials/WaterVertex.tres" id="3_vad1a"]
+[ext_resource type="AudioStream" uid="uid://57dmf87xry8d" path="res://Audio/Sfx/spend_money.mp3" id="6_xpqtb"]
 [ext_resource type="Script" uid="uid://b1lecmjr7r5pu" path="res://UI/Shop/ShopItems/ShopItem.gd" id="7_o3roe"]
 [ext_resource type="PackedScene" uid="uid://d04mojfecls7r" path="res://Objects/water_seller.tscn" id="8_cv6sc"]
 [ext_resource type="Resource" uid="uid://7enqhksiag3a" path="res://UI/Shop/ShopItems/Hands.tres" id="8_yhkds"]
@@ -17,6 +18,11 @@
 [ext_resource type="Resource" uid="uid://cmeql7rts03ml" path="res://UI/Shop/ShopItems/Bucket.tres" id="10_hhlvi"]
 [ext_resource type="Resource" uid="uid://dufcgjuo6cucx" path="res://UI/Shop/ShopItems/WateringCan.tres" id="11_swadt"]
 [ext_resource type="Resource" uid="uid://dwctgocpxrtsi" path="res://UI/Shop/ShopItems/Jug.tres" id="12_hhlvi"]
+[ext_resource type="AudioStream" uid="uid://b6hawj4wlcvs2" path="res://Audio/Sfx/Ambience/water_ambience.ogg" id="15_dbttc"]
+[ext_resource type="AudioStream" uid="uid://babm51jmu7wc5" path="res://Audio/Sfx/Ambience/nature_ambience.ogg" id="18_hhlvi"]
+[ext_resource type="Script" uid="uid://c6ov71035nkfo" path="res://Audio/Music/Band.gd" id="19_qqyv7"]
+[ext_resource type="AudioStream" uid="uid://c0waf3078ni8q" path="res://Audio/Music/Song1.mp3" id="20_s4lgs"]
+[ext_resource type="AudioStream" uid="uid://bx6v6xklxfma" path="res://Audio/Music/Song2.mp3" id="21_qqyv7"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_t065x"]
 
@@ -37,8 +43,13 @@ collision_mask = 5
 
 [node name="Money" type="Node" parent="."]
 unique_name_in_owner = true
+process_mode = 3
 script = ExtResource("3_8vdnm")
 starting_money = 100
+
+[node name="MoneySound" type="AudioStreamPlayer" parent="Money"]
+stream = ExtResource("6_xpqtb")
+bus = &"Alerts"
 
 [node name="UI" parent="." instance=ExtResource("1_t065x")]
 
@@ -56,6 +67,15 @@ script = null
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 68.218, -1, 171.569)
 script = ExtResource("3_t065x")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Water"]
+process_mode = 3
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -51.2785, -7.50375, -83.7181)
+stream = ExtResource("15_dbttc")
+volume_db = -6.0
+unit_size = 90.0
+autoplay = true
+bus = &"Ambience"
 
 [node name="WaterPlane" type="MeshInstance3D" parent="Water"]
 transform = Transform3D(700, 0, 0, 0, -3.0598e-05, 1, 0, -700, -4.37114e-08, 0, 0, 0)
@@ -86,5 +106,26 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.71387, 0, -17.2599)
 [node name="Pump" parent="." node_paths=PackedStringArray("upgrade_markers") instance=ExtResource("9_7gvd8")]
 transform = Transform3D(-0.14104, 0, -0.990004, 0, 1, 0, 0.990004, 0, -0.14104, 13.8841, -0.581938, -2.15099)
 upgrade_markers = []
+
+[node name="Audio" type="Node" parent="."]
+process_mode = 3
+script = ExtResource("19_qqyv7")
+
+[node name="Nature Ambience" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("18_hhlvi")
+autoplay = true
+bus = &"Ambience"
+
+[node name="Song1" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("20_s4lgs")
+bus = &"Music"
+
+[node name="Song2" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("21_qqyv7")
+bus = &"Music"
+
+[node name="SongTimer" type="Timer" parent="Audio"]
+wait_time = 120.0
+one_shot = true
 
 [editable path="UI"]

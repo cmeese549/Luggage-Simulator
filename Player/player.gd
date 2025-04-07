@@ -12,6 +12,16 @@ class_name Player
 
 @onready var item_pickup_range : Area3D = find_child("ItemPickupRange")
 
+var rng = RandomNumberGenerator.new()
+@onready var pickup_sound : AudioStreamPlayer = $Audio/PickupSound
+@onready var interact_sound : AudioStreamPlayer = $Audio/InteractSound
+@onready var tool_sound : AudioStreamPlayer = $Audio/ToolSounder
+@onready var sand_footstep_sounds : Array[Node] = $Audio/Footsteps/Sand.get_children()
+@onready var water_footstep_sounds : Array[Node] = $Audio/Footsteps/Water.get_children()
+@onready var jump_land_sounds : Array[Node] = $Audio/Footsteps/JumpLand.get_children()
+@onready var jump_sounds : Array[Node] = $Audio/Footsteps/Jump.get_children()
+var ready_to_land : bool = true
+
 const SPEED = 5.0
 const JUMP_VELOCITY = 5.2
 
@@ -23,7 +33,7 @@ var bob_time : float = 0
 @export var sway_noise : FastNoiseLite
 
 var footstep_cooldown = 0.4
-var current_footstep_cooldown = 0.0
+var current_footstep_cooldown = 0
 
 var was_just_flying : bool = false
 var doing_landing_adjust : bool = false
@@ -47,6 +57,9 @@ func _ready():
 	item_pickup_range.area_entered.connect(pickup_item)
 	Events.tool_purchased.connect(unlock_new_tool)
 	
+	for stream: Node in jump_land_sounds:
+		stream.finished.connect(ready_to_land_again)
+	
 func start_game() ->  void:
 	if hud != null:
 		hud.visible = true
@@ -58,13 +71,21 @@ func start_game() ->  void:
 	
 func pickup_item(area: Area3D) -> void:
 	if area.is_in_group("Pickupable"):
-		print("Getting item")
+		pickup_sound.play()
 		var new_item : InventoryItem = InventoryItem.new()
 		new_item.item_name = area.get_parent().item_name
 		new_item.item_icon = area.get_parent().item_icon
 		new_item.item_description = area.get_parent().item_description
 		inventory.append(new_item)
 		area.get_parent().call_deferred("queue_free")
+		
+func play_interact_sound() -> void:
+	interact_sound.play()
+	
+func play_tool_sound(stream: AudioStream, volume: float) -> void:
+	tool_sound.stream = stream
+	tool_sound.volume_db = volume
+	tool_sound.play()
 	
 func check_has_inventory_item(item_name: String) -> bool:
 	for item: InventoryItem in inventory:
@@ -114,7 +135,7 @@ func gamepad_aim(delta: float) -> void:
 func _physics_process(delta):
 	if !ready_to_start_game:
 		return
-		
+	current_footstep_cooldown -= delta
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -131,15 +152,18 @@ func _physics_process(delta):
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor() and !is_in_water():
 		velocity.y = JUMP_VELOCITY
+		do_jump_sound()
 		if tool_sys.equipped_tool != null:
 			do_jump_sway(delta)
 		was_just_flying = true
-
-
+		
 	# Get the input direction and handle the movement/deceleration.
 	var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_back")
 	var direction = (neck.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction:
+		if current_footstep_cooldown <= 0 && is_on_floor():
+			current_footstep_cooldown = footstep_cooldown
+			do_footstep_sound()
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED
 	else:
@@ -147,6 +171,28 @@ func _physics_process(delta):
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 
 	move_and_slide()
+	
+func do_footstep_sound() -> void:
+	var current_sounds : Array[Node] = sand_footstep_sounds
+	if is_in_water():
+		current_sounds = water_footstep_sounds
+	rng.randomize()
+	var step_index = rng.randi_range(0, current_sounds.size() - 1)
+	current_sounds[step_index].play()
+
+func do_landing_sound() -> void:
+	if !is_in_water():
+		rng.randomize()
+		var step_index = rng.randi_range(0, jump_land_sounds.size() - 1)
+		jump_land_sounds[step_index].play()
+		
+func do_jump_sound() -> void:
+	rng.randomize()
+	var step_index = rng.randi_range(0, jump_sounds.size() - 1)
+	jump_sounds[step_index].play()
+		
+func ready_to_land_again() -> void:
+	ready_to_land = true
 	
 func _process(delta : float) -> void:
 	if !ready_to_start_game:
@@ -169,11 +215,15 @@ func _process(delta : float) -> void:
 		do_jump_sway(delta)
 	else:
 		if was_just_flying:
+			if ready_to_land: 
+				do_landing_sound()
+				ready_to_land = false
 			landing_sway_adjust_cooldown += delta
 			reset_jump_sway(delta)
 			if landing_sway_adjust_cooldown >= tool_sys.equipped_tool.landing_sway_adjust_time:
 				landing_sway_adjust_cooldown = 0
 				was_just_flying = false
+				
 	
 	if camera_movement_this_frame == Vector2.ZERO:
 		idle_sway_weapon(delta, bob_this_frame)

@@ -9,6 +9,7 @@ item_name = "Your Hands"
 item_description = "These are the hands attached to your body"
 item_icon = ExtResource("1_2i1e1")
 price = 1
+item_type = "Tool"
 required_items_quip = ""
 required_items_string = ""
 required_inventory_items = Array[String]([])

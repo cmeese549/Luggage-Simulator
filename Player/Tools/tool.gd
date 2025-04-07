@@ -3,11 +3,17 @@ extends Node3D
 class_name tool
 
 @onready var animation_player = $AnimationPlayer
+@onready var player : Player = $"../../../.."
 
 var unlocked: bool = false
 var equiped: bool = false
 var tool_ready: bool = false
 var tool_full: bool = false
+
+@export var fill_audio : AudioStream
+@export var fill_volume : float = 0.0
+@export var empty_audio : AudioStream
+@export var empty_volume : float = 0.0
 
 @export var tool_name : String
 
@@ -47,13 +53,16 @@ func use(water_thing):
 		tool_ready = false
 		if !tool_full:
 			if water_thing == "WaterTop":
+				player.play_tool_sound(fill_audio, fill_volume)
 				animation_player.play("good_fill")
 				Events.remove_water.emit(capacity)
 			else:
 				animation_player.play("bad_fill")
 		else:
-			if water_thing == "DepositArea": Events.make_money.emit(capacity * water_value, true)
-			animation_player.play("empty")
+			if water_thing == "DepositArea": 
+				player.play_tool_sound(empty_audio, empty_volume)
+				Events.make_money.emit(capacity * water_value, true)
+				animation_player.play("empty")
 
 func unlock():
 	unlocked = true

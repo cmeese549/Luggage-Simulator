@@ -1,7 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://qykfij56gm1u"]
+[gd_scene load_steps=15 format=3 uid="uid://qykfij56gm1u"]
 
 [ext_resource type="Script" uid="uid://gaeegpj2o3tq" path="res://Player/Tools/tool.gd" id="1_bnf1v"]
 [ext_resource type="Material" uid="uid://bx1fytfnw6rjd" path="res://Art_Assets/Materials/HandTools/Thimble_Empty.tres" id="2_asxqj"]
+[ext_resource type="AudioStream" uid="uid://c0wbd15adsd33" path="res://Audio/Sfx/Tools/Thimble/thimble_fill.wav" id="2_t3yxb"]
+[ext_resource type="AudioStream" uid="uid://3o1owc1xkatc" path="res://Audio/Sfx/Tools/Thimble/thimble_empty.wav" id="3_5tewr"]
 [ext_resource type="Material" uid="uid://blf5ar3ss56dt" path="res://Art_Assets/Materials/HandTools/Thimble_Full.tres" id="3_bnf1v"]
 
 [sub_resource type="Animation" id="Animation_7nrwf"]
@@ -227,10 +229,28 @@ point_count = 3
 
 [node name="Thimble" type="Node3D" node_paths=PackedStringArray("jump_reset_curve")]
 script = ExtResource("1_bnf1v")
+fill_audio = ExtResource("2_t3yxb")
+fill_volume = -3.0
+empty_audio = ExtResource("3_5tewr")
+empty_volume = 2.0
 tool_name = "Thimble"
+sway_min = null
+sway_max = null
+sway_speed_rotation = null
+sway_amount_rotation = null
+random_sway_amount = null
+idle_sway_rotation_strength = null
+idle_sway_speed = null
+jump_sway_amount = null
+landing_sway_adjust_time = null
 jump_overshoot_amount = 0.15
+bob_amount = null
 jump_reset_curve = NodePath("Line2D")
+horizontal_speed = null
+horizontal_range = null
 recentering_force = 10.0
+capacity = null
+water_value = null
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

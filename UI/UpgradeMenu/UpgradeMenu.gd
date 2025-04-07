@@ -77,7 +77,7 @@ func connect_buttons(pump: Pump) -> void:
 	for button: Button in speed_upgrade_buttons:
 		var upgrade_data : pump_upgrade = pump.speed_upgrades[i]
 		button.text = upgrade_data.upgrade_name + " - " + upgrade_data.description + " - $" + str(upgrade_data.price)
-		button.pressed.connect(pump.apply_upgrade.bind(upgrade_data))
+		button.pressed.connect(apply_upgrade.bind(upgrade_data, pump))
 		i += 1
 	i = 0
 	var quality_upgrade_buttons : Array[Button] = [
@@ -88,8 +88,12 @@ func connect_buttons(pump: Pump) -> void:
 	for button: Button in quality_upgrade_buttons:
 		var upgrade_data : pump_upgrade = pump.quality_upgrades[i]
 		button.text = upgrade_data.upgrade_name + " - " + upgrade_data.description + " - $" + str(upgrade_data.price)
-		button.pressed.connect(pump.apply_upgrade.bind(upgrade_data))
+		button.pressed.connect(apply_upgrade.bind(upgrade_data, pump))
 		i += 1
+		
+func apply_upgrade(data: pump_upgrade, pump: Pump) -> void:
+	if ui.money.try_buy(data.price):
+		pump.apply_upgrade(data)
 		
 func disconnect_buttons() -> void:
 	detach_all_connections(speed_upgrade_1)

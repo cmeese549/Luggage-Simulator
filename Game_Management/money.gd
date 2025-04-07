@@ -4,6 +4,8 @@ class_name Money
 
 @export var starting_money: int = 0
 
+@onready var money_sound : AudioStreamPlayer = $MoneySound
+
 var cur_money: float
 
 func _ready():
@@ -21,6 +23,7 @@ func try_buy(amount):
 	if cur_money >= amount:
 		cur_money -= amount
 		print("Paid "+str(amount))
+		money_sound.play()
 		return true
 	else:
 		print("Not enough money, need "+str(amount)+" have "+str(cur_money))
