@@ -5,8 +5,8 @@
 
 [resource]
 script = ExtResource("1_74nl4")
-upgrade_name = "Filter"
-description = "Basic ass filter"
+upgrade_name = "Brand Name Filter"
+description = "Cleaner water sells for more!"
 price = 10
 effect = 0.1
 model = ExtResource("1_xdn43")

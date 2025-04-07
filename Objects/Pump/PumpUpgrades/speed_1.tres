@@ -5,8 +5,8 @@
 
 [resource]
 script = ExtResource("1_ihfdr")
-upgrade_name = "Speed 1"
-description = "weee go fast"
+upgrade_name = "Lil' Guy Drive"
+description = "He's doing his best to pump water faster!"
 price = 10
 effect = 0.5
 model = ExtResource("1_tsgvg")

@@ -8,5 +8,6 @@ render_priority = 1
 shader = ExtResource("1_fq4t2")
 shader_parameter/ColorMult = Color(0.52, 0.366773, 0.2496, 1)
 shader_parameter/Speed = 1.0
+shader_parameter/TextureScale = Vector2(1, 1)
 shader_parameter/Texture2DParameter = ExtResource("2_l5scm")
 shader_parameter/Opacity = 0.95
