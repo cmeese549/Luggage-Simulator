@@ -95,6 +95,7 @@ func render_shop_items() -> void:
 func attempt_purchase(item: ShopItem, button: Button) -> void:
 	var has_required_items = check_has_inventory_items(item)
 	if has_required_items:
+		print(item.item_name + " has items")
 		has_required_items = check_has_tool(item)
 	if !has_required_items:
 		dialogue_box.render_dialogue(item.required_items_quip)
@@ -119,7 +120,9 @@ func check_has_inventory_items(item: ShopItem) -> bool:
 	return true
 
 func check_has_tool(item: ShopItem) -> bool:
+	print(item.item_name)
 	for required_tool : String in item.required_tools:
+		print(required_tool)
 		var player_has_tool = player.check_has_tool(required_tool)
 		if !player_has_tool:
 			return false

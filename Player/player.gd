@@ -83,11 +83,11 @@ func pickup_item(area: Area3D) -> void:
 	if area.is_in_group("Pickupable"):
 		pickup_sound.play()
 		var new_item : InventoryItem = InventoryItem.new()
-		new_item.item_name = area.get_parent().item_name
-		new_item.item_icon = area.get_parent().item_icon
-		new_item.item_description = area.get_parent().item_description
+		new_item.item_name = area.get_parent().get_parent().item_name
+		new_item.item_icon = area.get_parent().get_parent().item_icon
+		new_item.item_description = area.get_parent().get_parent().item_description
 		inventory.append(new_item)
-		area.get_parent().call_deferred("queue_free")
+		area.get_parent().get_parent().call_deferred("queue_free")
 		
 func play_interact_sound() -> void:
 	interact_sound.play()
@@ -107,9 +107,9 @@ func check_has_tool(tool_name: String) -> bool:
 	for tool: tool in tool_sys.tools:
 		if tool.tool_name == tool_name and tool.unlocked:
 			return true
-	if tool_name == "Roller Skates" and roller_unlocked:
+	if tool_name == "Rollerskates" and roller_unlocked:
 		return true
-	elif tool_name == "Skate Board" and skate_unlocked:
+	elif tool_name == "Skateboard" and skate_unlocked:
 		return true
 	return false
 	
@@ -126,18 +126,15 @@ func remove_inventory_items(items: Array[String]) -> void:
 		inventory.erase(item)
 
 func _unhandled_input(event):
-	if ready_to_start_game and !game_started and event != InputEventMouseMotion:
+	if ready_to_start_game and !game_started and event is not InputEventMouseMotion and event is not InputEventJoypadMotion:
+		print(event)
 		start_game()
 	if event is InputEventMouseButton:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	#elif event.is_action_pressed("roller"):
-		#apply_upgrade("Roller Skates")
-	#elif event.is_action_pressed("skate"):
-		#apply_upgrade("Skateboard")
 
 func _input(event: InputEvent) -> void:
-	if ready_to_start_game and !game_started and event != InputEventMouseMotion:
-		start_game()
+	#if ready_to_start_game and !game_started and event != InputEventMouseMotion and event != InputEventJoypadMotion:
+		#start_game()
 	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED and game_started:
 		if event is InputEventMouseMotion:
 			var viewport_transform: Transform2D = get_tree().root.get_final_transform()
@@ -181,6 +178,7 @@ func _physics_process(delta):
 	
 	if slidy and !is_in_water():
 		if direction:
+			#TODO skateboard sounds????
 			velocity.x = lerp(velocity.x, direction.x * SPEED, accelartion * delta)
 			velocity.z = lerp(velocity.z, direction.z * SPEED, accelartion * delta)
 		else:
@@ -188,6 +186,9 @@ func _physics_process(delta):
 			velocity.z = lerp(velocity.z, 0.0, deceleration * delta)
 	else:
 		if direction:
+			if current_footstep_cooldown <= 0 and is_on_floor():
+				do_footstep_sound()
+				current_footstep_cooldown = footstep_cooldown
 			velocity.x = direction.x * SPEED
 			velocity.z = direction.z * SPEED
 		else:
@@ -259,19 +260,21 @@ func _process(delta : float) -> void:
 
 func apply_upgrade(upgrade: ShopItem):
 	match upgrade.item_name:
-		"Roller Skates":
+		"Rollerskates":
 			slidy = true
 			SPEED = 10
 			friction = .5
 			accelartion = 3
 			deceleration = 2
+			roller_unlocked = true
 		
-		"Skate Board":
+		"Skateboard":
 			slidy = true
 			SPEED = 20
 			friction = .2
 			accelartion = 5
 			deceleration = 3 
+			skate_unlocked = true
 
 func do_jump_sway(delta: float) -> void:
 	var _tool = tool_sys.equipped_tool

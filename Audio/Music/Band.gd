@@ -4,7 +4,7 @@ extends Node
 @onready var song_2 : AudioStreamPlayer = $Song2
 @onready var song_timer : Timer = $SongTimer
 
-var skipping_intro : bool = true
+var skipping_intro : bool = false
 
 func _ready() -> void:
 	song_1.finished.connect(start_song_timer)

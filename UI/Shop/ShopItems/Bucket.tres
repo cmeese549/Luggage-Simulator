@@ -10,8 +10,8 @@ item_description = "I found this old bucket in my garage"
 item_icon = ExtResource("1_7dod8")
 price = 1
 item_type = "Tool"
-required_items_quip = "Look at this rusty bucket.  It is so rusty.  {pause=0.5}  I wouldn't be able to sell this to you until you have a sponge to clean it with.  And while you're at it, how about you bring me that Lit Test Item from the shore just behind you."
-required_items_string = "Requires the Crusty Sponge and the \"Lit Test Item\", whatever that is..."
+required_items_quip = "Look at this [color=green]Rusty Bucket.[/color]  It is so rusty.  {pause=0.5}  I wouldn't be able to sell this to you until you have a [color=green]Sponge[/color] to clean it with.  And while you're at it, how about you bring me that [color=green]Lit Test Item[/color] from the shore just behind you?"
+required_items_string = "Requires the Crusty Sponge and the \"Lit Test Item\", which can be found along the shore near the shop."
 required_inventory_items = Array[String](["Lit Test Item"])
 required_tools = Array[String](["Crusty Sponge"])
 metadata/_custom_type_script = "uid://b1lecmjr7r5pu"

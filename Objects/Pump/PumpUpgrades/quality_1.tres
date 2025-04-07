@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="pump_upgrade" load_steps=2 format=3 uid="uid://cjn3ajir16kx"]
+[gd_resource type="Resource" script_class="pump_upgrade" load_steps=3 format=3 uid="uid://cjn3ajir16kx"]
 
 [ext_resource type="Script" uid="uid://cc2dlnfftk7rx" path="res://Objects/Pump/PumpUpgrades/pump_upgrade.gd" id="1_74nl4"]
+[ext_resource type="PackedScene" uid="uid://cvclrqubeg3y2" path="res://Art_Assets/Models/MachineUpgrades/QualityUpgradeA.tscn" id="1_xdn43"]
 
 [resource]
 script = ExtResource("1_74nl4")
@@ -8,5 +9,6 @@ upgrade_name = "Filter"
 description = "Basic ass filter"
 price = 10
 effect = 0.1
+model = ExtResource("1_xdn43")
 type = 0
 metadata/_custom_type_script = "uid://cc2dlnfftk7rx"

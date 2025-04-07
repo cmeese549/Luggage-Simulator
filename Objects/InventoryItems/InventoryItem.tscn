@@ -1,0 +1,74 @@
+[gd_scene load_steps=7 format=3 uid="uid://di1beqvco0ht6"]
+
+[ext_resource type="Script" uid="uid://ikmx0d368syv" path="res://Objects/InventoryItems/InventoryItem.gd" id="1_6uwpg"]
+[ext_resource type="Texture2D" uid="uid://dsu4otkk2qt0g" path="res://icon.svg" id="2_ddh02"]
+
+[sub_resource type="Animation" id="Animation_ddh02"]
+resource_name = "Bounce"
+loop_mode = 1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Bouncer:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0.25, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5, 1)
+}
+
+[sub_resource type="Animation" id="Animation_ywwsf"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Bouncer:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0u4tj"]
+_data = {
+&"Bounce": SubResource("Animation_ddh02"),
+&"RESET": SubResource("Animation_ywwsf")
+}
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ddh02"]
+radius = 1.323
+
+[node name="InventoryItem" type="Node3D"]
+script = ExtResource("1_6uwpg")
+item_name = "Lit Test Item"
+item_description = "Sickkkk bro"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_0u4tj")
+}
+autoplay = "Bounce"
+speed_scale = 0.5
+
+[node name="Bouncer" type="Node3D" parent="."]
+
+[node name="Sprite3D" type="Sprite3D" parent="Bouncer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.42913, 0)
+billboard = 1
+texture = ExtResource("2_ddh02")
+
+[node name="Area3D" type="Area3D" parent="Bouncer" groups=["Pickupable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.31004, 0)
+collision_layer = 256
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Bouncer/Area3D"]
+shape = SubResource("SphereShape3D_ddh02")
+
+[node name="Label3D" type="Label3D" parent="Bouncer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.39597, 0)
+billboard = 1
+text = "Lit Test Item"

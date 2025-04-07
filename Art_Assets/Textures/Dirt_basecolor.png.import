@@ -3,20 +3,19 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://fp8stqwfgm35"
-path.s3tc="res://.godot/imported/Dirt_basecolor.png-3a2a77db6ab07b2ab09bcd94c84c1eb6.s3tc.ctex"
+path="res://.godot/imported/Dirt_basecolor.png-3a2a77db6ab07b2ab09bcd94c84c1eb6.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://Art_Assets/Textures/Dirt_basecolor.png"
-dest_files=["res://.godot/imported/Dirt_basecolor.png-3a2a77db6ab07b2ab09bcd94c84c1eb6.s3tc.ctex"]
+dest_files=["res://.godot/imported/Dirt_basecolor.png-3a2a77db6ab07b2ab09bcd94c84c1eb6.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

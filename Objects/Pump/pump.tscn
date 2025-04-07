@@ -22,6 +22,21 @@ height = 1.5
 height = 1.42505
 radius = 0.372559
 
+[sub_resource type="Animation" id="Animation_xilsv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Geo/WaterPump:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -10, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_6ybtv"]
 resource_name = "build"
 length = 1.2
@@ -36,21 +51,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector3(0, -10, 0), Vector3(0, 2, 0), Vector3(0, 0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_xilsv"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Geo/WaterPump:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, -10, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7nxrv"]
@@ -130,8 +130,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.94959, 1.19312, 3.31166)
 stream = ExtResource("11_6ybtv")
 volume_db = -3.5
 unit_size = 4.5
+bus = &"Pumps"
 
 [node name="Ambience" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("12_xilsv")
 volume_db = -2.0
 unit_size = 3.5
+bus = &"Pumps"

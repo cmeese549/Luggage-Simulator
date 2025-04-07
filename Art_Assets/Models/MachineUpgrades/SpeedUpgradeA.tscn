@@ -1,0 +1,90 @@
+[gd_scene load_steps=7 format=3 uid="uid://npu45d3eqi2o"]
+
+[ext_resource type="ArrayMesh" uid="uid://jxgg6h1e08qy" path="res://Art_Assets/Models/MachineUpgrades/SpeedUpgradeA1.obj" id="1_o13yk"]
+[ext_resource type="ArrayMesh" uid="uid://do7k10q2dfgc4" path="res://Art_Assets/Models/MachineUpgrades/SpeedUpgradeA2.obj" id="2_nr401"]
+[ext_resource type="Material" uid="uid://dust56ykwm881" path="res://Art_Assets/Materials/MachineUpgrades/SpeedUpgradeA.tres" id="2_shr0w"]
+
+[sub_resource type="Animation" id="Animation_shr0w"]
+resource_name = "SpeedWheels"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpeedUpgradeA2:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 6.28319)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SpeedUpgradeA3:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 6.28319)]
+}
+
+[sub_resource type="Animation" id="Animation_6er16"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpeedUpgradeA2:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SpeedUpgradeA3:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_afy2v"]
+_data = {
+&"RESET": SubResource("Animation_6er16"),
+&"SpeedWheels": SubResource("Animation_shr0w")
+}
+
+[node name="SpeedUpgradeA" type="Node3D"]
+
+[node name="SpeedUpgradeA1" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.19209e-07, 0)
+mesh = ExtResource("1_o13yk")
+surface_material_override/0 = ExtResource("2_shr0w")
+
+[node name="SpeedUpgradeA2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.29339, -1.19209e-07, 0)
+mesh = ExtResource("2_nr401")
+surface_material_override/0 = ExtResource("2_shr0w")
+
+[node name="SpeedUpgradeA3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.314668, -1.19209e-07, 0)
+mesh = ExtResource("2_nr401")
+surface_material_override/0 = ExtResource("2_shr0w")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_afy2v")
+}
+autoplay = "SpeedWheels"
