@@ -5,13 +5,13 @@
 
 [resource]
 script = ExtResource("2_w6iy3")
-item_name = "Roller Skates"
+item_name = "Rollerskates"
 item_description = "Some sick nasty roller skates!"
 item_icon = ExtResource("1_bwkcn")
 price = 1
 item_type = "Speed"
-required_items_quip = ""
-required_items_string = ""
-required_inventory_items = Array[String]([])
+required_items_quip = "I broke my wrist 13 times in a row using these, so I angirly ripped off the [color=green]Shoelaces[/color] and forgot about them... {pause=1.0} Find those [color=green]Shoelaces,[/color] and the [color=green]Skates[/color] are yours."
+required_items_string = "Requires 2 Rollerskate Shoelaces.  I think they are around here somewhere..."
+required_inventory_items = Array[String](["Rollerskate Shoelace 1", "Rollerskate Shoelace 2"])
 required_tools = Array[String]([])
 metadata/_custom_type_script = "uid://b1lecmjr7r5pu"

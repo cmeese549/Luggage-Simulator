@@ -83,11 +83,11 @@ func pickup_item(area: Area3D) -> void:
 	if area.is_in_group("Pickupable"):
 		pickup_sound.play()
 		var new_item : InventoryItem = InventoryItem.new()
-		new_item.item_name = area.get_parent().item_name
-		new_item.item_icon = area.get_parent().item_icon
-		new_item.item_description = area.get_parent().item_description
+		new_item.item_name = area.get_parent().get_parent().item_name
+		new_item.item_icon = area.get_parent().get_parent().item_icon
+		new_item.item_description = area.get_parent().get_parent().item_description
 		inventory.append(new_item)
-		area.get_parent().call_deferred("queue_free")
+		area.get_parent().get_parent().call_deferred("queue_free")
 		
 func play_interact_sound() -> void:
 	interact_sound.play()
@@ -107,9 +107,9 @@ func check_has_tool(tool_name: String) -> bool:
 	for tool: tool in tool_sys.tools:
 		if tool.tool_name == tool_name and tool.unlocked:
 			return true
-	if tool_name == "Roller Skates" and roller_unlocked:
+	if tool_name == "Rollerskates" and roller_unlocked:
 		return true
-	elif tool_name == "Skate Board" and skate_unlocked:
+	elif tool_name == "Skateboard" and skate_unlocked:
 		return true
 	return false
 	
@@ -130,10 +130,6 @@ func _unhandled_input(event):
 		start_game()
 	if event is InputEventMouseButton:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	#elif event.is_action_pressed("roller"):
-		#apply_upgrade("Roller Skates")
-	#elif event.is_action_pressed("skate"):
-		#apply_upgrade("Skateboard")
 
 func _input(event: InputEvent) -> void:
 	if ready_to_start_game and !game_started and event != InputEventMouseMotion:
@@ -259,19 +255,21 @@ func _process(delta : float) -> void:
 
 func apply_upgrade(upgrade: ShopItem):
 	match upgrade.item_name:
-		"Roller Skates":
+		"Rollerskates":
 			slidy = true
 			SPEED = 10
 			friction = .5
 			accelartion = 3
 			deceleration = 2
+			roller_unlocked = true
 		
-		"Skate Board":
+		"Skateboard":
 			slidy = true
 			SPEED = 20
 			friction = .2
 			accelartion = 5
 			deceleration = 3 
+			skate_unlocked = true
 
 func do_jump_sway(delta: float) -> void:
 	var _tool = tool_sys.equipped_tool
