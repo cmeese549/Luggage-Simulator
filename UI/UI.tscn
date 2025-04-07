@@ -818,20 +818,28 @@ size_flags_vertical = 3
 
 [node name="Close" type="HBoxContainer" parent="PauseMenu/PanelContainer/MarginContainer/Rows"]
 layout_mode = 2
+theme_override_constants/separation = 45
 
 [node name="Control" type="Control" parent="PauseMenu/PanelContainer/MarginContainer/Rows/Close"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Close" type="Button" parent="PauseMenu/PanelContainer/MarginContainer/Rows/Close"]
-visible = false
+[node name="Resume" type="Button" parent="PauseMenu/PanelContainer/MarginContainer/Rows/Close"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.4
 theme_override_font_sizes/font_size = 31
-text = "Continue"
+text = "Resume"
+
+[node name="Unstick" type="Button" parent="PauseMenu/PanelContainer/MarginContainer/Rows/Close"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.4
+theme_override_font_sizes/font_size = 31
+text = "Help, I'm stuck!"
 
 [node name="Quit" type="Button" parent="PauseMenu/PanelContainer/MarginContainer/Rows/Close"]
+modulate = Color(1, 0.21, 0.21, 1)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.4
