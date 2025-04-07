@@ -105,6 +105,8 @@ func attempt_purchase(item: ShopItem, button: Button) -> void:
 		player.remove_inventory_items(item.required_inventory_items)
 		if item.item_type == "Tool":
 			Events.tool_purchased.emit(item)
+		elif item.item_type == "Speed":
+			Events.speed_purchased.emit(item)
 	else:
 		display_random_quip(cant_afford_quips, used_cant_afford_quips)
 

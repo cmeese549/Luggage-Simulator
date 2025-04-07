@@ -18,6 +18,8 @@
 [ext_resource type="Resource" uid="uid://cmeql7rts03ml" path="res://UI/Shop/ShopItems/Bucket.tres" id="10_hhlvi"]
 [ext_resource type="Resource" uid="uid://dufcgjuo6cucx" path="res://UI/Shop/ShopItems/WateringCan.tres" id="11_swadt"]
 [ext_resource type="Resource" uid="uid://dwctgocpxrtsi" path="res://UI/Shop/ShopItems/Jug.tres" id="12_hhlvi"]
+[ext_resource type="Resource" uid="uid://blxq2rrfwlm43" path="res://UI/Shop/ShopItems/RollerSkate.tres" id="13_hhlvi"]
+[ext_resource type="Resource" uid="uid://cpt63tjw3br52" path="res://UI/Shop/ShopItems/SkateBoard.tres" id="14_dbttc"]
 [ext_resource type="AudioStream" uid="uid://b6hawj4wlcvs2" path="res://Audio/Sfx/Ambience/water_ambience.ogg" id="15_dbttc"]
 [ext_resource type="AudioStream" uid="uid://babm51jmu7wc5" path="res://Audio/Sfx/Ambience/nature_ambience.ogg" id="18_hhlvi"]
 [ext_resource type="Script" uid="uid://c6ov71035nkfo" path="res://Audio/Music/Band.gd" id="19_qqyv7"]
@@ -54,7 +56,7 @@ bus = &"Alerts"
 [node name="UI" parent="." instance=ExtResource("1_t065x")]
 
 [node name="Shop" parent="UI" index="2"]
-shop_items = Array[ExtResource("7_o3roe")]([ExtResource("8_yhkds"), ExtResource("9_swadt"), ExtResource("10_hhlvi"), ExtResource("11_swadt"), ExtResource("12_hhlvi")])
+shop_items = Array[ExtResource("7_o3roe")]([ExtResource("8_yhkds"), ExtResource("9_swadt"), ExtResource("10_hhlvi"), ExtResource("11_swadt"), ExtResource("12_hhlvi"), ExtResource("13_hhlvi"), ExtResource("14_dbttc")])
 
 [node name="MainMenu" parent="UI" index="5"]
 script = null
