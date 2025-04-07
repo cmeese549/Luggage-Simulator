@@ -13,22 +13,27 @@ class_name PauseMenu
 
 @onready var hud : Control = $"../HUD"
 @onready var resume_button : Button = $PanelContainer/MarginContainer/Rows/Close/Resume
+@onready var help_button : Button = $PanelContainer/MarginContainer/Rows/Close/HowToPlay
 @onready var unstick_button : Button = $PanelContainer/MarginContainer/Rows/Close/Unstick
 @onready var quit_button : Button = $PanelContainer/MarginContainer/Rows/Close/Quit
 
-@onready var sensitivity_slider : HSlider = $PanelContainer/MarginContainer/Rows/HBoxContainer/VBoxContainer/Sensitivity/SensitivitySlider
-@onready var fov_slider : HSlider = $PanelContainer/MarginContainer/Rows/HBoxContainer/VBoxContainer/FOV/FOVSlider
-@onready var volume_slider : HSlider = $PanelContainer/MarginContainer/Rows/HBoxContainer/VBoxContainer/Volume/VolumeSlider
-@onready var music_slider : HSlider = $PanelContainer/MarginContainer/Rows/HBoxContainer/VBoxContainer/MusicVolume/MusicVolumeSlider
-@onready var sfx_slider : HSlider = $PanelContainer/MarginContainer/Rows/HBoxContainer/VBoxContainer/SfxVolume/SfxVolumeSlider
+@onready var sensitivity_slider : HSlider = $PanelContainer/MarginContainer/Rows/PauseDad/VBoxContainer/Sensitivity/SensitivitySlider
+@onready var fov_slider : HSlider = $PanelContainer/MarginContainer/Rows/PauseDad/VBoxContainer/FOV/FOVSlider
+@onready var volume_slider : HSlider = $PanelContainer/MarginContainer/Rows/PauseDad/VBoxContainer/Volume/VolumeSlider
+@onready var music_slider : HSlider = $PanelContainer/MarginContainer/Rows/PauseDad/VBoxContainer/MusicVolume/MusicVolumeSlider
+@onready var sfx_slider : HSlider = $PanelContainer/MarginContainer/Rows/PauseDad/VBoxContainer/SfxVolume/SfxVolumeSlider
+
+@onready var pause_dad : HBoxContainer = $PanelContainer/MarginContainer/Rows/PauseDad
+@onready var tutorial_dad : HBoxContainer = $PanelContainer/MarginContainer/Rows/Tutorial
 
 var inventory_item : PackedScene = preload("res://UI/PauseMenu/InventoryItem.tscn")
-@onready var inventory_dad : GridContainer = $PanelContainer/MarginContainer/Rows/HBoxContainer/Rows/ScrollContainer/GridContainer
+@onready var inventory_dad : GridContainer = $PanelContainer/MarginContainer/Rows/PauseDad/Rows/ScrollContainer/GridContainer
 
 func _ready() -> void:
 	quit_button.pressed.connect(get_tree().quit)
 	resume_button.pressed.connect(unpause)
 	unstick_button.pressed.connect(unstick)
+	help_button.pressed.connect(show_tutorial)
 	connect_sliders()
 	var loadStatus = config.load("user://config.ini")
 	if loadStatus == OK: #0 = loaded, so this means data found
@@ -81,7 +86,7 @@ func _unhandled_input(event):
 	if shop.visible or upgrade_menu.visible:
 		return
 		
-	if Input.is_action_just_pressed("Pause") and ui.pauseable:
+	if Input.is_action_just_pressed("Pause") and ui.pauseable and player.ready_to_start_game:
 		print("Freakin paus time")
 		toggle_pause()
 		
@@ -94,8 +99,14 @@ func toggle_pause() -> void:
 		unpause()
 	else:
 		pause()
+		
+func show_tutorial() -> void:
+	pause_dad.visible = false
+	tutorial_dad.visible = true
 
 func pause() -> void:
+	pause_dad.visible = true
+	tutorial_dad.visible = false
 	update_inventory_items()
 	self.visible = true
 	hud.visible = false
