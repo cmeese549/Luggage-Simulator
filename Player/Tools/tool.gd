@@ -63,6 +63,8 @@ func use(water_thing):
 				player.play_tool_sound(empty_audio, empty_volume)
 				Events.make_money.emit(capacity * water_value, true)
 				animation_player.play("empty")
+			else:
+				tool_ready = true
 
 func unlock():
 	unlocked = true
