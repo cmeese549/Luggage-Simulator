@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://bk7vc4usjt3od"]
+[gd_scene load_steps=41 format=3 uid="uid://bk7vc4usjt3od"]
 
 [ext_resource type="Script" uid="uid://5yb4xnha3npe" path="res://Player/player.gd" id="1_l8h54"]
 [ext_resource type="Script" uid="uid://b140mkd7ankio" path="res://Player/Tools/tool_sys.gd" id="2_btcbx"]
@@ -10,10 +10,10 @@
 [ext_resource type="PackedScene" uid="uid://ds1xn8ubdi8jv" path="res://Player/Tools/watering_can.tscn" id="7_od3ui"]
 [ext_resource type="PackedScene" uid="uid://dvgxywx0ckbxa" path="res://Player/Tools/jug.tscn" id="8_00tjw"]
 [ext_resource type="AudioStream" uid="uid://bg7jayolqaqd6" path="res://Audio/Sfx/Footsteps/Sand/1.mp3" id="10_b1ygp"]
-[ext_resource type="AudioStream" uid="uid://57dmf87xry8d" path="res://Audio/Sfx/spend_money.mp3" id="10_x3vf3"]
-[ext_resource type="AudioStream" uid="uid://ceeha64s6f58" path="res://Audio/Sfx/pikcup_item.mp3" id="11_apopc"]
+[ext_resource type="AudioStream" uid="uid://57dmf87xry8d" path="res://Audio/Sfx/Alerts/spend_money.mp3" id="10_x3vf3"]
+[ext_resource type="AudioStream" uid="uid://ceeha64s6f58" path="res://Audio/Sfx/Alerts/pikcup_item.mp3" id="11_apopc"]
 [ext_resource type="AudioStream" uid="uid://dqyn6u255qd70" path="res://Audio/Sfx/Footsteps/Sand/2.mp3" id="11_o28un"]
-[ext_resource type="AudioStream" uid="uid://dukmw41m2som5" path="res://Audio/Sfx/interact.mp3" id="12_5htga"]
+[ext_resource type="AudioStream" uid="uid://dukmw41m2som5" path="res://Audio/Sfx/Alerts/interact.mp3" id="12_5htga"]
 [ext_resource type="AudioStream" uid="uid://dvwmfa77mxvkl" path="res://Audio/Sfx/Footsteps/Sand/3.mp3" id="12_n471f"]
 [ext_resource type="AudioStream" uid="uid://cxd5wbc1mcgw5" path="res://Audio/Sfx/Footsteps/Sand/4.mp3" id="13_7emwf"]
 [ext_resource type="AudioStream" uid="uid://c2ue6qobt8ey6" path="res://Audio/Sfx/Footsteps/Sand/5.mp3" id="14_hshwv"]
@@ -32,6 +32,7 @@
 [ext_resource type="AudioStream" uid="uid://bleydfwc4rkny" path="res://Audio/Sfx/Jump/Jump/jump 3.mp3" id="27_m0h3t"]
 [ext_resource type="AudioStream" uid="uid://dlxyarhpwksq5" path="res://Audio/Sfx/Footsteps/Skateboard.ogg" id="28_bbimk"]
 [ext_resource type="AudioStream" uid="uid://i4b7vr374b2n" path="res://Audio/Sfx/Footsteps/SkateboardFade.wav" id="29_m0h3t"]
+[ext_resource type="AudioStream" uid="uid://b16op18gd5aiw" path="res://Audio/Sfx/Alerts/cant afford corn.mp3" id="33_i4o1l"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_btcbx"]
 
@@ -324,4 +325,9 @@ bus = &"Alerts"
 
 [node name="InteractSound" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource("12_5htga")
+bus = &"Alerts"
+
+[node name="CantAfford" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("33_i4o1l")
+volume_db = -4.0
 bus = &"Alerts"

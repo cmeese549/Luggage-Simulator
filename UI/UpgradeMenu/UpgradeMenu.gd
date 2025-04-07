@@ -17,6 +17,8 @@ class_name UpgradeMenu
 @onready var upgrade_slots : HBoxContainer = find_child("UpgradeSlots")
 @onready var close_button : Button = $PanelContainer/MarginContainer/Rows/Close/Button
 
+@onready var your_money : Label = $PanelContainer/MarginContainer/Rows/Close/YourMoney
+
 var all_buttons_disabled : bool = false
 
 var current_pump : Pump = null
@@ -52,6 +54,7 @@ func open(pump: Pump) -> void:
 	connect_buttons(pump)
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	ui.pauseable = false
+	your_money.text = "You have: $" + add_comma_to_int(ui.money.cur_money)
 	
 func render_upgrades(pump: Pump) -> void:
 	var i : int = 0
@@ -94,6 +97,7 @@ func connect_buttons(pump: Pump) -> void:
 func apply_upgrade(data: pump_upgrade, pump: Pump) -> void:
 	if ui.money.try_buy(data.price):
 		pump.apply_upgrade(data)
+		your_money.text = "You have: $" + add_comma_to_int(ui.money.cur_money)
 		
 func disconnect_buttons() -> void:
 	detach_all_connections(speed_upgrade_1)

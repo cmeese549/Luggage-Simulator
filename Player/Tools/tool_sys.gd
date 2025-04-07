@@ -14,6 +14,8 @@ var next_tool: tool
 @onready var water_crosshair : TextureRect = get_tree().get_first_node_in_group("WaterCrosshair")
 @onready var interact_crosshair : TextureRect = get_tree().get_first_node_in_group("InteractCrosshair")
 
+@onready var cant_afford_audio : AudioStreamPlayer = $"../../../Audio/CantAfford"
+
 #@onready var screen_rect = camera_3d.get_viewport_rect()
 #@onready var screen_center = Vector2(screen_rect.size.x / 2, screen_rect.size.y / 2)
 
@@ -69,7 +71,9 @@ func _unhandled_input(event):
 			if interact_thing.name == "WaterTop" || interact_thing.name == "DepositArea":
 				equipped_tool.use(interact_thing.name)
 			elif interact_thing.name == "PumpBuy":
-				interact_thing.find_parent("Pump*").attempt_buy()
+				var pump_built : bool = interact_thing.find_parent("Pump*").attempt_buy()
+				if !pump_built:
+					cant_afford_audio.play()
 			elif interact_thing.name == "PumpUpgrade":
 				interact_thing.find_parent("Pump*").attempt_upgrade()
 				player.play_interact_sound()

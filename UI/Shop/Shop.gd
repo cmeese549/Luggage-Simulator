@@ -11,6 +11,7 @@ class_name Shop
 @onready var dialogue_box  : DialogueBox = $PanelContainer/MarginContainer/Rows/HBoxContainer/RichTextLabel
 @onready var hud : Control = $"../HUD"
 @onready var close_button : Button = $PanelContainer/MarginContainer/Rows/Close/Button
+@onready var your_money : Label = $PanelContainer/MarginContainer/Rows/Close/YourMoney
 
 @export var shop_items : Array[ShopItem]
 
@@ -78,6 +79,7 @@ func open_shop() -> void:
 	else:
 		display_random_quip(shop_opened_quips, used_shop_opened_quips)
 	ui.pauseable = false
+	your_money.text = 'You have: $' + add_comma_to_int(ui.money.cur_money)
 	
 func deliver_final_quip() -> void:
 	player.remove_inventory_items(["Uncle Upgrade's Keys"])
@@ -141,6 +143,7 @@ func attempt_purchase(item: ShopItem, button: Button) -> void:
 		display_random_quip(item_purchased_quips, used_item_purchased_quips)
 		button.call_deferred("queue_free")
 		player.remove_inventory_items(item.required_inventory_items)
+		your_money.text = 'You have: $' + add_comma_to_int(ui.money.cur_money)
 		if item.item_type == "Tool":
 			Events.tool_purchased.emit(item)
 		elif item.item_type == "Speed":

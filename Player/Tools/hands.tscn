@@ -71,7 +71,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.4, 0.75, 1.15, 1.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector3(0, 0.219, -0.682), Vector3(0, 0.115226, -0.682), Vector3(0, -0.137744, -0.682), Vector3(0, 0.115226, -0.682), Vector3(0, 0.219, -0.682)]
+"values": [Vector3(0, 0.1, -0.682), Vector3(0, 0.115226, -0.682), Vector3(0, -0.137744, -0.682), Vector3(0, 0.115226, -0.682), Vector3(0, 0.1, -0.682)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -112,7 +112,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector3(0, 0.219, -0.682), Vector3(0, 0.115226, -0.682), Vector3(0, -0.137744, -0.682), Vector3(0, 0.115226, -0.682), Vector3(0, 0.219, -0.682)]
+"values": [Vector3(0, 0.1, -0.682), Vector3(0, 0.115226, -0.682), Vector3(0, -0.137744, -0.682), Vector3(0, 0.115226, -0.682), Vector3(0, 0.1, -0.682)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -152,7 +152,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector3(0, -1.151, -0.682), Vector3(0, 0.219, -0.682)]
+"values": [Vector3(0, -1.151, -0.682), Vector3(0, 0.1, -0.682)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -181,7 +181,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.4, 0.75, 1.15, 1.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector3(0, 0.219, -0.682), Vector3(0, 0.115226, -0.682), Vector3(0, -0.137744, -0.682), Vector3(0, 0.115226, -0.682), Vector3(0, 0.219, -0.682)]
+"values": [Vector3(0, 0.1, -0.682), Vector3(0, 0.115226, -0.682), Vector3(0, -0.137744, -0.682), Vector3(0, 0.115226, -0.682), Vector3(0, 0.1, -0.682)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -220,7 +220,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector3(0, 0.219, -0.682), Vector3(0, -1.151, -0.682)]
+"values": [Vector3(0, 0.1, -0.682), Vector3(0, -1.151, -0.682)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ube02"]

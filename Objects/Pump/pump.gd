@@ -55,9 +55,11 @@ func build():
 	Events.add_pump.emit(self)
 	$AnimationPlayer.play("build")
 
-func attempt_buy():
+func attempt_buy() -> bool:
 	if money.try_buy(price):
 		build()
+		return true
+	return false
 
 func attempt_upgrade():
 	upgrade_menu.open(self)

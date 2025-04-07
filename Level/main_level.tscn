@@ -9,7 +9,7 @@
 [ext_resource type="Script" uid="uid://brrlrkleuxt1p" path="res://Game_Management/money.gd" id="3_8vdnm"]
 [ext_resource type="Script" uid="uid://d0rpsw8qm8mxc" path="res://Level/water.gd" id="3_t065x"]
 [ext_resource type="Material" uid="uid://cc3jyugw620gk" path="res://Art_Assets/Materials/WaterVertex.tres" id="3_vad1a"]
-[ext_resource type="AudioStream" uid="uid://57dmf87xry8d" path="res://Audio/Sfx/spend_money.mp3" id="6_xpqtb"]
+[ext_resource type="AudioStream" uid="uid://57dmf87xry8d" path="res://Audio/Sfx/Alerts/spend_money.mp3" id="5_swadt"]
 [ext_resource type="AudioStream" uid="uid://b6hawj4wlcvs2" path="res://Audio/Sfx/Ambience/water_ambience.ogg" id="15_dbttc"]
 [ext_resource type="Script" uid="uid://dupj3d5ny1j3s" path="res://Level/all_pumps.gd" id="17_hhlvi"]
 [ext_resource type="PackedScene" uid="uid://hr021abwwm8b" path="res://Objects/Pump/pump.tscn" id="17_swadt"]
@@ -37,10 +37,10 @@ collision_mask = 5
 unique_name_in_owner = true
 process_mode = 3
 script = ExtResource("3_8vdnm")
-starting_money = 10
+starting_money = 50
 
 [node name="MoneySound" type="AudioStreamPlayer" parent="Money"]
-stream = ExtResource("6_xpqtb")
+stream = ExtResource("5_swadt")
 
 [node name="UI" parent="." instance=ExtResource("1_t065x")]
 

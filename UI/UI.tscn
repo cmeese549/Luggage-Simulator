@@ -11,7 +11,7 @@
 [ext_resource type="Shader" uid="uid://b54wwcsihdtoe" path="res://UI/MainMenu/FadeFromBlack.tres" id="6_jqf55"]
 [ext_resource type="Script" uid="uid://bed3d7egj53pu" path="res://UI/PauseMenu/PauseMenu.gd" id="6_qhxh2"]
 [ext_resource type="Script" uid="uid://cde2nhieog6m4" path="res://UI/UpgradeMenu/UpgradeMenu.gd" id="6_t31p1"]
-[ext_resource type="Script" uid="uid://bsyahvddt84hi" path="res://UI/delta_fade.gd" id="6_wtdy7"]
+[ext_resource type="Script" path="res://UI/delta_fade.gd" id="6_wtdy7"]
 [ext_resource type="Script" uid="uid://vcecdqq511h1" path="res://UI/Shop/Shop.gd" id="7_6q2ik"]
 [ext_resource type="Script" uid="uid://cmqb4oi3mfhb4" path="res://UI/HUD/hud.gd" id="7_017wa"]
 [ext_resource type="PackedScene" uid="uid://yg0ip3ps48ca" path="res://UI/UpgradeMenu/UpgradeSlot.tscn" id="7_kncd2"]
@@ -190,14 +190,12 @@ offset_left = 76.0
 offset_top = -68.0
 offset_right = 220.0
 offset_bottom = -17.0
-scale = Vector2(1, 1)
 theme_override_font_sizes/font_size = 50
 text = "+1"
 horizontal_alignment = 1
 script = ExtResource("6_wtdy7")
 
 [node name="UpgradeMenu" type="MarginContainer" parent="." groups=["UpgradeMenu"]]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -336,19 +334,29 @@ layout_mode = 2
 [node name="Close" type="HBoxContainer" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows"]
 layout_mode = 2
 
+[node name="YourMoney" type="Label" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/Close"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 41
+text = "You have: $1,000,000"
+
 [node name="Control" type="Control" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/Close"]
 layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="Button" type="Button" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/Close"]
+custom_minimum_size = Vector2(218.685, 0)
 layout_mode = 2
-size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.4
 theme_override_fonts/font = ExtResource("8_nxoi0")
 theme_override_font_sizes/font_size = 61
 text = "Close"
 
 [node name="Control2" type="Control" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/Close"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control3" type="Control" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/Close"]
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -398,7 +406,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/h_separation = 50
 theme_override_constants/v_separation = 50
-columns = 4
+columns = 3
 
 [node name="HSeparator3" type="HSeparator" parent="Shop/PanelContainer/MarginContainer/Rows"]
 custom_minimum_size = Vector2(0, 43.775)
@@ -452,17 +460,26 @@ layout_mode = 2
 [node name="Close" type="HBoxContainer" parent="Shop/PanelContainer/MarginContainer/Rows"]
 layout_mode = 2
 
+[node name="YourMoney" type="Label" parent="Shop/PanelContainer/MarginContainer/Rows/Close"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 41
+text = "You Have: $1,000,000"
+
 [node name="Control" type="Control" parent="Shop/PanelContainer/MarginContainer/Rows/Close"]
 layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="Button" type="Button" parent="Shop/PanelContainer/MarginContainer/Rows/Close"]
+custom_minimum_size = Vector2(310.625, 0)
 layout_mode = 2
-size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.4
 theme_override_fonts/font = ExtResource("8_nxoi0")
 theme_override_font_sizes/font_size = 66
 text = "Close"
+
+[node name="Control4" type="Control" parent="Shop/PanelContainer/MarginContainer/Rows/Close"]
+layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="Control2" type="Control" parent="Shop/PanelContainer/MarginContainer/Rows/Close"]
 layout_mode = 2
