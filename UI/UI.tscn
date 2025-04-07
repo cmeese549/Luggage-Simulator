@@ -7,12 +7,12 @@
 [ext_resource type="Texture2D" uid="uid://c8ipav7ruim5w" path="res://UI/HUD/Crosshair/crosshair2.png" id="4_f1fl4"]
 [ext_resource type="Texture2D" uid="uid://btbey8ncomyx7" path="res://UI/HUD/Crosshair/hitmorker.png" id="5_jqf55"]
 [ext_resource type="Script" uid="uid://bkn6bkk5bo3k0" path="res://UI/Dialogue/DialogueBox.gd" id="5_qgmx8"]
-[ext_resource type="Script" uid="uid://sb0v8kjwv2pv" path="res://UI/MainMenu/MainMenu.gd" id="6_byuxr"]
+[ext_resource type="Script" path="res://UI/MainMenu/MainMenu.gd" id="6_byuxr"]
 [ext_resource type="Shader" uid="uid://bkcnroaexgcpu" path="res://UI/MainMenu/FadeFromBlack.tres" id="6_jqf55"]
 [ext_resource type="Script" uid="uid://bed3d7egj53pu" path="res://UI/PauseMenu/PauseMenu.gd" id="6_qhxh2"]
 [ext_resource type="Script" uid="uid://cde2nhieog6m4" path="res://UI/UpgradeMenu/UpgradeMenu.gd" id="6_t31p1"]
 [ext_resource type="Script" uid="uid://vcecdqq511h1" path="res://UI/Shop/Shop.gd" id="7_6q2ik"]
-[ext_resource type="Script" uid="uid://cmqb4oi3mfhb4" path="res://UI/HUD/hud.gd" id="7_017wa"]
+[ext_resource type="Script" path="res://UI/HUD/hud.gd" id="7_017wa"]
 [ext_resource type="PackedScene" uid="uid://yg0ip3ps48ca" path="res://UI/UpgradeMenu/UpgradeSlot.tscn" id="7_kncd2"]
 [ext_resource type="Script" uid="uid://b1lecmjr7r5pu" path="res://UI/Shop/ShopItems/ShopItem.gd" id="9_xtxff"]
 [ext_resource type="PackedScene" uid="uid://dth0cukoj3ajb" path="res://UI/PauseMenu/InventoryItem.tscn" id="10_npmjx"]
@@ -930,7 +930,6 @@ one_shot = true
 [node name="DialogueBloop" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("11_r2vy3")
 volume_db = -19.0
-bus = &"Dialogue"
 
 [node name="TypeTimer" type="Timer" parent="."]
 wait_time = 0.04

@@ -53,6 +53,7 @@ func build():
 	$Upgrades/PumpUpgrade/CollisionShape3D.disabled = false
 	cur_wps = base_wps
 	Events.add_pump.emit(self)
+	$AnimationPlayer.play("build")
 
 func attempt_buy():
 	if money.try_buy(price):

@@ -73,6 +73,8 @@ func _unhandled_input(event):
 			elif interact_thing.name == "PumpUpgrade":
 				interact_thing.find_parent("Pump").attempt_upgrade()
 				player.play_interact_sound()
+			elif interact_thing.name == "OpenShop":
+				Events.open_shop.emit()
 
 func check_for_interactable():
 	if look_at_cast.is_colliding():
