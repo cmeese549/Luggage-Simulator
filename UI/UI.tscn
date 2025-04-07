@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://btbey8ncomyx7" path="res://UI/HUD/Crosshair/hitmorker.png" id="5_jqf55"]
 [ext_resource type="Script" uid="uid://bkn6bkk5bo3k0" path="res://UI/Dialogue/DialogueBox.gd" id="5_qgmx8"]
 [ext_resource type="Script" uid="uid://sb0v8kjwv2pv" path="res://UI/MainMenu/MainMenu.gd" id="6_byuxr"]
-[ext_resource type="Shader" uid="uid://b54wwcsihdtoe" path="res://UI/MainMenu/FadeFromBlack.tres" id="6_jqf55"]
+[ext_resource type="Shader" uid="uid://bqx34vxqbnnb6" path="res://UI/MainMenu/FadeFromBlack.tres" id="6_jqf55"]
 [ext_resource type="Script" uid="uid://bed3d7egj53pu" path="res://UI/PauseMenu/PauseMenu.gd" id="6_qhxh2"]
 [ext_resource type="Script" uid="uid://cde2nhieog6m4" path="res://UI/UpgradeMenu/UpgradeMenu.gd" id="6_t31p1"]
 [ext_resource type="Script" path="res://UI/delta_fade.gd" id="6_wtdy7"]
@@ -523,103 +523,103 @@ vertical_alignment = 1
 custom_minimum_size = Vector2(0, 37.39)
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PauseMenu/PanelContainer/MarginContainer/Rows"]
+[node name="PauseDad" type="HBoxContainer" parent="PauseMenu/PanelContainer/MarginContainer/Rows"]
 layout_mode = 2
 theme_override_constants/separation = 80
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu/PanelContainer/MarginContainer/Rows/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 75
 
-[node name="Label" type="Label" parent="PauseMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 51
 text = "Settings"
 horizontal_alignment = 1
 
-[node name="Sensitivity" type="VBoxContainer" parent="PauseMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/VBoxContainer"]
+[node name="Sensitivity" type="VBoxContainer" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="PauseMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/VBoxContainer/Sensitivity"]
+[node name="Label" type="Label" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/VBoxContainer/Sensitivity"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Look Sensitivity"
 horizontal_alignment = 1
 
-[node name="SensitivitySlider" type="HSlider" parent="PauseMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/VBoxContainer/Sensitivity"]
+[node name="SensitivitySlider" type="HSlider" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/VBoxContainer/Sensitivity"]
 layout_mode = 2
 max_value = 2.0
 step = 0.01
 value = 1.0
 
-[node name="FOV" type="VBoxContainer" parent="PauseMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/VBoxContainer"]
+[node name="FOV" type="VBoxContainer" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="PauseMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/VBoxContainer/FOV"]
+[node name="Label" type="Label" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/VBoxContainer/FOV"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Field Of View"
 horizontal_alignment = 1
 
-[node name="FOVSlider" type="HSlider" parent="PauseMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/VBoxContainer/FOV"]
+[node name="FOVSlider" type="HSlider" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/VBoxContainer/FOV"]
 layout_mode = 2
 min_value = 60.0
 max_value = 120.0
 step = 0.01
 value = 90.0
 
-[node name="Volume" type="VBoxContainer" parent="PauseMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/VBoxContainer"]
+[node name="Volume" type="VBoxContainer" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="PauseMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/VBoxContainer/Volume"]
+[node name="Label" type="Label" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/VBoxContainer/Volume"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Volume"
 horizontal_alignment = 1
 
-[node name="VolumeSlider" type="HSlider" parent="PauseMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/VBoxContainer/Volume"]
+[node name="VolumeSlider" type="HSlider" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/VBoxContainer/Volume"]
 layout_mode = 2
 max_value = 1.0
 step = 0.01
 value = 0.8
 
-[node name="MusicVolume" type="VBoxContainer" parent="PauseMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/VBoxContainer"]
+[node name="MusicVolume" type="VBoxContainer" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="PauseMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/VBoxContainer/MusicVolume"]
+[node name="Label" type="Label" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/VBoxContainer/MusicVolume"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Music Volume"
 horizontal_alignment = 1
 
-[node name="MusicVolumeSlider" type="HSlider" parent="PauseMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/VBoxContainer/MusicVolume"]
+[node name="MusicVolumeSlider" type="HSlider" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/VBoxContainer/MusicVolume"]
 layout_mode = 2
 max_value = 1.0
 step = 0.01
 value = 0.8
 
-[node name="SfxVolume" type="VBoxContainer" parent="PauseMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/VBoxContainer"]
+[node name="SfxVolume" type="VBoxContainer" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="PauseMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/VBoxContainer/SfxVolume"]
+[node name="Label" type="Label" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/VBoxContainer/SfxVolume"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Sound Effect Volume"
 horizontal_alignment = 1
 
-[node name="SfxVolumeSlider" type="HSlider" parent="PauseMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/VBoxContainer/SfxVolume"]
+[node name="SfxVolumeSlider" type="HSlider" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/VBoxContainer/SfxVolume"]
 layout_mode = 2
 max_value = 2.0
 step = 0.01
 value = 0.8
 
-[node name="Rows" type="VBoxContainer" parent="PauseMenu/PanelContainer/MarginContainer/Rows/HBoxContainer"]
+[node name="Rows" type="VBoxContainer" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.3
 
-[node name="Label" type="Label" parent="PauseMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/Rows"]
+[node name="Label" type="Label" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Rows"]
 layout_mode = 2
 size_flags_stretch_ratio = 0.0
 theme_override_font_sizes/font_size = 58
@@ -627,11 +627,11 @@ text = "Inventory"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ScrollContainer" type="ScrollContainer" parent="PauseMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/Rows"]
+[node name="ScrollContainer" type="ScrollContainer" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Rows"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="GridContainer" type="GridContainer" parent="PauseMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/Rows/ScrollContainer"]
+[node name="GridContainer" type="GridContainer" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Rows/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -639,16 +639,16 @@ theme_override_constants/h_separation = 50
 theme_override_constants/v_separation = 50
 columns = 3
 
-[node name="InventoryItem" parent="PauseMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/Rows/ScrollContainer/GridContainer" instance=ExtResource("10_npmjx")]
+[node name="InventoryItem" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Rows/ScrollContainer/GridContainer" instance=ExtResource("10_npmjx")]
 layout_mode = 2
 
-[node name="Button2" type="Button" parent="PauseMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/Rows/ScrollContainer/GridContainer"]
+[node name="Button2" type="Button" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Rows/ScrollContainer/GridContainer"]
 custom_minimum_size = Vector2(389.59, 440)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/Rows/ScrollContainer/GridContainer/Button2"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Rows/ScrollContainer/GridContainer/Button2"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -656,19 +656,19 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ItemName" type="Label" parent="PauseMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/Rows/ScrollContainer/GridContainer/Button2/VBoxContainer"]
+[node name="ItemName" type="Label" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Rows/ScrollContainer/GridContainer/Button2/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 41
 text = "Epic Inventory Item"
 horizontal_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="PauseMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/Rows/ScrollContainer/GridContainer/Button2/VBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Rows/ScrollContainer/GridContainer/Button2/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 texture = ExtResource("3_q0uhn")
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="PauseMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/Rows/ScrollContainer/GridContainer/Button2/VBoxContainer"]
+[node name="Label" type="Label" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Rows/ScrollContainer/GridContainer/Button2/VBoxContainer"]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 theme_override_font_sizes/font_size = 21
@@ -676,13 +676,13 @@ text = "This is a super awesome epic shop item"
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="Button3" type="Button" parent="PauseMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/Rows/ScrollContainer/GridContainer"]
+[node name="Button3" type="Button" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Rows/ScrollContainer/GridContainer"]
 custom_minimum_size = Vector2(389.59, 440)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/Rows/ScrollContainer/GridContainer/Button3"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Rows/ScrollContainer/GridContainer/Button3"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -690,19 +690,19 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ItemName" type="Label" parent="PauseMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/Rows/ScrollContainer/GridContainer/Button3/VBoxContainer"]
+[node name="ItemName" type="Label" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Rows/ScrollContainer/GridContainer/Button3/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 41
 text = "Epic Inventory Item"
 horizontal_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="PauseMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/Rows/ScrollContainer/GridContainer/Button3/VBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Rows/ScrollContainer/GridContainer/Button3/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 texture = ExtResource("3_q0uhn")
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="PauseMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/Rows/ScrollContainer/GridContainer/Button3/VBoxContainer"]
+[node name="Label" type="Label" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Rows/ScrollContainer/GridContainer/Button3/VBoxContainer"]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 theme_override_font_sizes/font_size = 21
@@ -710,13 +710,13 @@ text = "This is a super awesome epic shop item"
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="Button4" type="Button" parent="PauseMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/Rows/ScrollContainer/GridContainer"]
+[node name="Button4" type="Button" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Rows/ScrollContainer/GridContainer"]
 custom_minimum_size = Vector2(389.59, 440)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/Rows/ScrollContainer/GridContainer/Button4"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Rows/ScrollContainer/GridContainer/Button4"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -724,19 +724,19 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ItemName" type="Label" parent="PauseMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/Rows/ScrollContainer/GridContainer/Button4/VBoxContainer"]
+[node name="ItemName" type="Label" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Rows/ScrollContainer/GridContainer/Button4/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 41
 text = "Epic Inventory Item"
 horizontal_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="PauseMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/Rows/ScrollContainer/GridContainer/Button4/VBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Rows/ScrollContainer/GridContainer/Button4/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 texture = ExtResource("3_q0uhn")
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="PauseMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/Rows/ScrollContainer/GridContainer/Button4/VBoxContainer"]
+[node name="Label" type="Label" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Rows/ScrollContainer/GridContainer/Button4/VBoxContainer"]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 theme_override_font_sizes/font_size = 21
@@ -744,13 +744,13 @@ text = "This is a super awesome epic shop item"
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="Button5" type="Button" parent="PauseMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/Rows/ScrollContainer/GridContainer"]
+[node name="Button5" type="Button" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Rows/ScrollContainer/GridContainer"]
 custom_minimum_size = Vector2(389.59, 440)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/Rows/ScrollContainer/GridContainer/Button5"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Rows/ScrollContainer/GridContainer/Button5"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -758,19 +758,19 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ItemName" type="Label" parent="PauseMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/Rows/ScrollContainer/GridContainer/Button5/VBoxContainer"]
+[node name="ItemName" type="Label" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Rows/ScrollContainer/GridContainer/Button5/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 41
 text = "Epic Inventory Item"
 horizontal_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="PauseMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/Rows/ScrollContainer/GridContainer/Button5/VBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Rows/ScrollContainer/GridContainer/Button5/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 texture = ExtResource("3_q0uhn")
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="PauseMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/Rows/ScrollContainer/GridContainer/Button5/VBoxContainer"]
+[node name="Label" type="Label" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Rows/ScrollContainer/GridContainer/Button5/VBoxContainer"]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 theme_override_font_sizes/font_size = 21
@@ -778,13 +778,13 @@ text = "This is a super awesome epic shop item"
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="Button6" type="Button" parent="PauseMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/Rows/ScrollContainer/GridContainer"]
+[node name="Button6" type="Button" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Rows/ScrollContainer/GridContainer"]
 custom_minimum_size = Vector2(389.59, 440)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/Rows/ScrollContainer/GridContainer/Button6"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Rows/ScrollContainer/GridContainer/Button6"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -792,19 +792,19 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ItemName" type="Label" parent="PauseMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/Rows/ScrollContainer/GridContainer/Button6/VBoxContainer"]
+[node name="ItemName" type="Label" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Rows/ScrollContainer/GridContainer/Button6/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 41
 text = "Epic Inventory Item"
 horizontal_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="PauseMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/Rows/ScrollContainer/GridContainer/Button6/VBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Rows/ScrollContainer/GridContainer/Button6/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 texture = ExtResource("3_q0uhn")
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="PauseMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/Rows/ScrollContainer/GridContainer/Button6/VBoxContainer"]
+[node name="Label" type="Label" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Rows/ScrollContainer/GridContainer/Button6/VBoxContainer"]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 theme_override_font_sizes/font_size = 21
@@ -812,13 +812,13 @@ text = "This is a super awesome epic shop item"
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="Button7" type="Button" parent="PauseMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/Rows/ScrollContainer/GridContainer"]
+[node name="Button7" type="Button" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Rows/ScrollContainer/GridContainer"]
 custom_minimum_size = Vector2(389.59, 440)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/Rows/ScrollContainer/GridContainer/Button7"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Rows/ScrollContainer/GridContainer/Button7"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -826,19 +826,19 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ItemName" type="Label" parent="PauseMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/Rows/ScrollContainer/GridContainer/Button7/VBoxContainer"]
+[node name="ItemName" type="Label" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Rows/ScrollContainer/GridContainer/Button7/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 41
 text = "Epic Inventory Item"
 horizontal_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="PauseMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/Rows/ScrollContainer/GridContainer/Button7/VBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Rows/ScrollContainer/GridContainer/Button7/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 texture = ExtResource("3_q0uhn")
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="PauseMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/Rows/ScrollContainer/GridContainer/Button7/VBoxContainer"]
+[node name="Label" type="Label" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Rows/ScrollContainer/GridContainer/Button7/VBoxContainer"]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 theme_override_font_sizes/font_size = 21
@@ -846,13 +846,13 @@ text = "This is a super awesome epic shop item"
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="Button8" type="Button" parent="PauseMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/Rows/ScrollContainer/GridContainer"]
+[node name="Button8" type="Button" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Rows/ScrollContainer/GridContainer"]
 custom_minimum_size = Vector2(389.59, 440)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/Rows/ScrollContainer/GridContainer/Button8"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Rows/ScrollContainer/GridContainer/Button8"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -860,25 +860,102 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ItemName" type="Label" parent="PauseMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/Rows/ScrollContainer/GridContainer/Button8/VBoxContainer"]
+[node name="ItemName" type="Label" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Rows/ScrollContainer/GridContainer/Button8/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 41
 text = "Epic Inventory Item"
 horizontal_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="PauseMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/Rows/ScrollContainer/GridContainer/Button8/VBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Rows/ScrollContainer/GridContainer/Button8/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 texture = ExtResource("3_q0uhn")
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="PauseMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/Rows/ScrollContainer/GridContainer/Button8/VBoxContainer"]
+[node name="Label" type="Label" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Rows/ScrollContainer/GridContainer/Button8/VBoxContainer"]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 theme_override_font_sizes/font_size = 21
 text = "This is a super awesome epic shop item"
 horizontal_alignment = 1
 autowrap_mode = 2
+
+[node name="Tutorial" type="HBoxContainer" parent="PauseMenu/PanelContainer/MarginContainer/Rows"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 13.87
+
+[node name="Control2" type="Control" parent="PauseMenu/PanelContainer/MarginContainer/Rows/Tutorial"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu/PanelContainer/MarginContainer/Rows/Tutorial"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 6.57
+theme_override_constants/separation = 25
+
+[node name="Label" type="Label" parent="PauseMenu/PanelContainer/MarginContainer/Rows/Tutorial/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 66
+text = "Mr. Money’s Phenomenally Soggy Water Removal "
+horizontal_alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PauseMenu/PanelContainer/MarginContainer/Rows/Tutorial/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 36
+bbcode_enabled = true
+text = "Welcome to Mr. Money’s Phenomenally Soggy Water Removal, where you must [color=blue]drain an entire lake[/color] in search of riches.  Legends say there is [rainbow]ancient treasure[/rainbow] at the bottom of this lake, and you are far too buoyant to sink, so you are left with no choice but to [color=blue]simply remove all the water.[/color]"
+fit_content = true
+scroll_active = false
+
+[node name="Label2" type="Label" parent="PauseMenu/PanelContainer/MarginContainer/Rows/Tutorial/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 66
+text = "Tools"
+horizontal_alignment = 1
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="PauseMenu/PanelContainer/MarginContainer/Rows/Tutorial/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 36
+bbcode_enabled = true
+text = "The most basic way to drain the lake is through the use of [color=green]tools[/color], which allow you to manually scoop up water and bring it do a [color=green]deposit tank[/color].  Depositing water there will earn you [color=blue]money![/color]"
+fit_content = true
+scroll_active = false
+
+[node name="Label3" type="Label" parent="PauseMenu/PanelContainer/MarginContainer/Rows/Tutorial/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 66
+text = "Pumps"
+horizontal_alignment = 1
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="PauseMenu/PanelContainer/MarginContainer/Rows/Tutorial/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 36
+bbcode_enabled = true
+text = "Tired of carrying all that water around?  Time to build some [color=green]pumps![/color] You can build a pump at any patch of dirt.  [color=green]Pumps[/color] will automatically pump and sell water for you.  [color=green]Pumps[/color] can be [color=blue]upgraded[/color] after construction to improve their performance."
+fit_content = true
+scroll_active = false
+
+[node name="Label4" type="Label" parent="PauseMenu/PanelContainer/MarginContainer/Rows/Tutorial/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 66
+text = "Uncle Upgrade"
+horizontal_alignment = 1
+
+[node name="RichTextLabel4" type="RichTextLabel" parent="PauseMenu/PanelContainer/MarginContainer/Rows/Tutorial/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 36
+bbcode_enabled = true
+text = "[color=green]Uncle Upgrade's Tool Trove[/color] is your one stop shop for all things [color=green]tool[/color] related.  He's a bit of a weird dude and he will likely ask you to [color=blue]explore the map[/color] in order to find [color=blue]items to trade with.[/color]  Luckily, he usually gives pretty good tips about [color=blue]where to find valuable things.[/color]"
+fit_content = true
+scroll_active = false
+
+[node name="Control" type="Control" parent="PauseMenu/PanelContainer/MarginContainer/Rows/Tutorial"]
+layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="HSeparator4" type="HSeparator" parent="PauseMenu/PanelContainer/MarginContainer/Rows"]
 custom_minimum_size = Vector2(0, 43.775)
@@ -894,12 +971,22 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="Resume" type="Button" parent="PauseMenu/PanelContainer/MarginContainer/Rows/Close"]
+custom_minimum_size = Vector2(185.02, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.4
 theme_override_fonts/font = ExtResource("8_nxoi0")
 theme_override_font_sizes/font_size = 46
 text = "Resume"
+
+[node name="HowToPlay" type="Button" parent="PauseMenu/PanelContainer/MarginContainer/Rows/Close"]
+custom_minimum_size = Vector2(276.035, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.4
+theme_override_fonts/font = ExtResource("8_nxoi0")
+theme_override_font_sizes/font_size = 46
+text = "How To Play"
 
 [node name="Unstick" type="Button" parent="PauseMenu/PanelContainer/MarginContainer/Rows/Close"]
 custom_minimum_size = Vector2(296.455, 0)

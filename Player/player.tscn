@@ -22,8 +22,6 @@
 [ext_resource type="AudioStream" uid="uid://dgwd2va42vn1y" path="res://Audio/Sfx/Footsteps/Water/2.mp3" id="17_gpjlu"]
 [ext_resource type="AudioStream" uid="uid://coi3n3icw45yj" path="res://Audio/Sfx/Footsteps/Water/3.mp3" id="18_8mwp6"]
 [ext_resource type="AudioStream" uid="uid://dqk3qd1g50wgf" path="res://Audio/Sfx/Footsteps/Water/4.mp3" id="19_qemgg"]
-[ext_resource type="AudioStream" uid="uid://137soamtb3d2" path="res://Audio/Sfx/Footsteps/Water/5.mp3" id="20_gpjlu"]
-[ext_resource type="AudioStream" uid="uid://c5bn6xktl7p1f" path="res://Audio/Sfx/Footsteps/Water/6.mp3" id="21_8mwp6"]
 [ext_resource type="AudioStream" uid="uid://cmg877vxvbtad" path="res://Audio/Sfx/Jump/Land/land 1.mp3" id="22_sm0op"]
 [ext_resource type="AudioStream" uid="uid://cthctvy350lkk" path="res://Audio/Sfx/Jump/Land/land 2.mp3" id="23_76lrf"]
 [ext_resource type="AudioStream" uid="uid://6yu5bigyirv" path="res://Audio/Sfx/Jump/Land/land 3.mp3" id="24_efx54"]
@@ -31,6 +29,8 @@
 [ext_resource type="AudioStream" uid="uid://c5n1fnoclmuv0" path="res://Audio/Sfx/Jump/Jump/jump 2.mp3" id="26_bbimk"]
 [ext_resource type="AudioStream" uid="uid://bleydfwc4rkny" path="res://Audio/Sfx/Jump/Jump/jump 3.mp3" id="27_m0h3t"]
 [ext_resource type="AudioStream" uid="uid://dlxyarhpwksq5" path="res://Audio/Sfx/Footsteps/Skateboard.ogg" id="28_bbimk"]
+[ext_resource type="AudioStream" uid="uid://d0dit3xxscsu8" path="res://Audio/Sfx/Jump/Land/land in water.mp3" id="28_i4o1l"]
+[ext_resource type="AudioStream" uid="uid://dcawpalpn6y5c" path="res://Audio/Sfx/Footsteps/leave water.mp3" id="28_m0h3t"]
 [ext_resource type="AudioStream" uid="uid://i4b7vr374b2n" path="res://Audio/Sfx/Footsteps/SkateboardFade.wav" id="29_m0h3t"]
 [ext_resource type="AudioStream" uid="uid://b16op18gd5aiw" path="res://Audio/Sfx/Alerts/cant afford corn.mp3" id="33_i4o1l"]
 
@@ -266,14 +266,6 @@ bus = &"Footsteps"
 stream = ExtResource("19_qemgg")
 bus = &"Footsteps"
 
-[node name="5" type="AudioStreamPlayer" parent="Audio/Footsteps/Water"]
-stream = ExtResource("20_gpjlu")
-bus = &"Footsteps"
-
-[node name="6" type="AudioStreamPlayer" parent="Audio/Footsteps/Water"]
-stream = ExtResource("21_8mwp6")
-bus = &"Footsteps"
-
 [node name="JumpLand" type="Node" parent="Audio/Footsteps"]
 
 [node name="1" type="AudioStreamPlayer" parent="Audio/Footsteps/JumpLand"]
@@ -309,6 +301,16 @@ bus = &"Skateboard"
 [node name="SkateboardFade" type="AudioStreamPlayer" parent="Audio/Footsteps"]
 stream = ExtResource("29_m0h3t")
 bus = &"Skateboard"
+
+[node name="JumpSplash" type="AudioStreamPlayer" parent="Audio/Footsteps"]
+stream = ExtResource("28_i4o1l")
+max_polyphony = 5
+bus = &"Footsteps"
+
+[node name="LeftWater" type="AudioStreamPlayer" parent="Audio/Footsteps"]
+stream = ExtResource("28_m0h3t")
+max_polyphony = 10
+bus = &"Footsteps"
 
 [node name="ToolSounder" type="AudioStreamPlayer" parent="Audio"]
 bus = &"Tools"

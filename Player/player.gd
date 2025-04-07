@@ -24,6 +24,8 @@ var rng = RandomNumberGenerator.new()
 @onready var jump_sounds : Array[Node] = $Audio/Footsteps/Jump.get_children()
 @onready var skateboard_audio : AudioStreamPlayer = $Audio/Footsteps/Skateboard
 @onready var skateboard_fade_audio : AudioStreamPlayer = $Audio/Footsteps/SkateboardFade
+@onready var jump_splash_audio : AudioStreamPlayer = $Audio/Footsteps/JumpSplash
+@onready var left_water_audio : AudioStreamPlayer = $Audio/Footsteps/LeftWater
 var ready_to_land : bool = true
 
 const JUMP_VELOCITY = 5.2
@@ -44,7 +46,9 @@ var bob_time : float = 0
 @export var sway_noise : FastNoiseLite
 
 var footstep_cooldown = 0.4
+var water_footstep_cooldown = 1.2
 var current_footstep_cooldown = 0
+var jumped_from_water : bool = false
 
 var was_just_flying : bool = false
 var doing_landing_adjust : bool = false
@@ -164,12 +168,17 @@ func _physics_process(delta):
 		velocity += get_gravity() * delta
 	
 	if is_in_water() and !was_just_in_water:
+		if was_just_flying:
+			jump_splash_audio.play()
+		else:
+			left_water_audio.play()
 		animation_player.play("water_bob")
 		animation_player.get_animation("water_bob").loop_mode = Animation.LOOP_LINEAR
 		was_just_in_water = true
 		skateboard_audio.stop()
 	
 	if !is_in_water() and was_just_in_water:
+		left_water_audio.play()
 		animation_player.get_animation("water_bob").loop_mode = Animation.LOOP_NONE
 		was_just_in_water = false
 
@@ -179,6 +188,8 @@ func _physics_process(delta):
 		do_jump_sound()
 		skateboard_audio.stop()
 		skateboard_fade_audio.stop()
+		if is_in_water():
+			jumped_from_water = true
 		
 	# Get the input direction and handle the movement/deceleration.
 	var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_back")
@@ -201,7 +212,6 @@ func _physics_process(delta):
 		if direction:
 			if current_footstep_cooldown <= 0 and is_on_floor():
 				do_footstep_sound()
-				current_footstep_cooldown = footstep_cooldown
 			velocity.x = direction.x * SPEED
 			velocity.z = direction.z * SPEED
 		else:
@@ -223,11 +233,14 @@ func fade_in_skateboard() -> void:
 	
 func do_footstep_sound() -> void:
 	var current_sounds : Array[Node] = sand_footstep_sounds
+	current_footstep_cooldown = footstep_cooldown
 	if is_in_water():
 		current_sounds = water_footstep_sounds
+		current_footstep_cooldown = water_footstep_cooldown
 	rng.randomize()
 	var step_index = rng.randi_range(0, current_sounds.size() - 1)
 	current_sounds[step_index].play()
+	
 
 func do_landing_sound() -> void:
 	if !is_in_water():
@@ -269,6 +282,9 @@ func _process(delta : float) -> void:
 				ready_to_land = false
 			landing_sway_adjust_cooldown += delta
 			reset_jump_sway(delta)
+			if jumped_from_water:
+				jump_splash_audio.play()
+			jumped_from_water = false
 			if landing_sway_adjust_cooldown >= tool_sys.equipped_tool.landing_sway_adjust_time:
 				landing_sway_adjust_cooldown = 0
 				was_just_flying = false
@@ -321,8 +337,11 @@ func weapon_bob(delta: float) -> Vector2:
 	if bob_time > 1000000:
 		bob_time = 0
 	var bob_amount : Vector2 = Vector2.ZERO
-	bob_amount.x = sin(bob_time * footstep_cooldown * 22)
-	bob_amount.y = abs(cos(bob_time * footstep_cooldown * 22))
+	var step_cooldown : float = footstep_cooldown
+	if is_in_water():
+		step_cooldown = 0.12
+	bob_amount.x = sin(bob_time * step_cooldown * 22)
+	bob_amount.y = abs(cos(bob_time * step_cooldown * 22))
 	return bob_amount * _tool.bob_amount
 		
 func get_idle_sway(delta: float) -> Vector3:
