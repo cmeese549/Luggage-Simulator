@@ -10,7 +10,7 @@ item_description = "Vrooooooom Vrooooooooooooooooooooom!!!!"
 item_icon = ExtResource("1_xcbo1")
 price = 5000
 item_type = "Speed"
-required_items_quip = "I broke all of the bones in my body at least 137 times on this thing, so I angirly threw the [color=green]Wheels[/color] into the lake. {pause=1.0}  If you find those [color=green]Wheels,[/color] I'll sell you the [color=green]Skateboard.[/color]"
+required_items_quip = "I broke all of the bones in my body at least 137 times on this thing, so I angirly threw the [color=indigo]Wheels[/color] into the lake.{pause=1.0}  If you find those [color=indigo]Wheels,[/color] I'll sell you the [color=green]Skateboard[/color], assuming you've proven yourself to be skilled at [color=green]rollerskating.[/color]"
 required_items_string = "Requires the Rollerskates and 4 Skateboard Wheels, which Uncle Upgrade has angirly tossed into the lake."
 required_inventory_items = Array[String](["Skateboard Wheel 1", "Skateboard Wheel 2", "Skateboard Wheel 3", "Skateboard Wheel 4"])
 required_tools = Array[String](["Rollerskates"])

@@ -71,15 +71,16 @@ func open_shop() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	get_tree().paused = true
 	var player_has_keys : bool = player.check_has_inventory_item("Uncle Upgrade's Keys")
+	ui.pauseable = false
+	your_money.text = 'You have: $' + add_comma_to_int(ui.money.cur_money)
 	if player_has_keys:
 		if !has_delivered_final_quip:
 			deliver_final_quip()
 	elif has_delivered_final_quip:
-			dialogue_box.render_dialogue(final_final_quip)
+		your_money.text = " "
+		dialogue_box.render_dialogue(final_final_quip)
 	else:
 		display_random_quip(shop_opened_quips, used_shop_opened_quips)
-	ui.pauseable = false
-	your_money.text = 'You have: $' + add_comma_to_int(ui.money.cur_money)
 	
 func deliver_final_quip() -> void:
 	player.remove_inventory_items(["Uncle Upgrade's Keys"])
@@ -88,6 +89,7 @@ func deliver_final_quip() -> void:
 	hsep.visible = false
 	other_hsep.visible = false
 	scroll_container.visible = false
+	your_money.text = " "
 	
 func close_shop() -> void:
 	dialogue_box.stop_dialogue()

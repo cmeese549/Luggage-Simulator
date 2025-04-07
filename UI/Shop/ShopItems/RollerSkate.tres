@@ -10,7 +10,7 @@ item_description = "Some sick nasty roller skates!"
 item_icon = ExtResource("1_bwkcn")
 price = 500
 item_type = "Speed"
-required_items_quip = "I broke my wrist 13 times in a row using these, so I angirly ripped off the [color=green]Shoelaces[/color] and forgot about them... {pause=1.0} Find those [color=green]Shoelaces,[/color] and the [color=green]Skates[/color] are yours."
+required_items_quip = "I broke my wrist 13 times in a row using these, so I angirly ripped off the [color=indigo]Shoelaces[/color] and forgot about them...{pause=1.0} Find those [color=indigo]Shoelaces,[/color] and the [color=green]Skates[/color] are yours."
 required_items_string = "Requires 2 Rollerskate Shoelaces.  I think they are around here somewhere..."
 required_inventory_items = Array[String](["Rollerskate Shoelace 1", "Rollerskate Shoelace 2"])
 required_tools = Array[String]([])
