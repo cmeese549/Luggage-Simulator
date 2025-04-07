@@ -126,14 +126,15 @@ func remove_inventory_items(items: Array[String]) -> void:
 		inventory.erase(item)
 
 func _unhandled_input(event):
-	if ready_to_start_game and !game_started and event != InputEventMouseMotion:
+	if ready_to_start_game and !game_started and event is not InputEventMouseMotion and event is not InputEventJoypadMotion:
+		print(event)
 		start_game()
 	if event is InputEventMouseButton:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _input(event: InputEvent) -> void:
-	if ready_to_start_game and !game_started and event != InputEventMouseMotion:
-		start_game()
+	#if ready_to_start_game and !game_started and event != InputEventMouseMotion and event != InputEventJoypadMotion:
+		#start_game()
 	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED and game_started:
 		if event is InputEventMouseMotion:
 			var viewport_transform: Transform2D = get_tree().root.get_final_transform()
@@ -177,6 +178,7 @@ func _physics_process(delta):
 	
 	if slidy and !is_in_water():
 		if direction:
+			#TODO skateboard sounds????
 			velocity.x = lerp(velocity.x, direction.x * SPEED, accelartion * delta)
 			velocity.z = lerp(velocity.z, direction.z * SPEED, accelartion * delta)
 		else:
@@ -184,6 +186,9 @@ func _physics_process(delta):
 			velocity.z = lerp(velocity.z, 0.0, deceleration * delta)
 	else:
 		if direction:
+			if current_footstep_cooldown <= 0 and is_on_floor():
+				do_footstep_sound()
+				current_footstep_cooldown = footstep_cooldown
 			velocity.x = direction.x * SPEED
 			velocity.z = direction.z * SPEED
 		else:
