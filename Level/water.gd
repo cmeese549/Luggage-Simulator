@@ -9,6 +9,10 @@ var cur_amount: float
 var cur_y: float
 var cur_wps_out: float
 
+var empty : bool = false
+
+@onready var water_ambience : AudioStreamPlayer3D = $AudioStreamPlayer3D
+
 var pumps: Array[Pump] = []
 
 func _ready():
@@ -36,4 +40,6 @@ func add_pump(new_pump: Pump):
 	pumps.append(new_pump)
 
 func now_empty():
+	water_ambience.stop()
+	empty = true
 	print("All the water is gone hurray!!!")

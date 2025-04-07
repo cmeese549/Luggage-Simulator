@@ -38,7 +38,7 @@ collision_mask = 5
 unique_name_in_owner = true
 process_mode = 3
 script = ExtResource("3_8vdnm")
-starting_money = 500000000000
+starting_money = 10000000
 
 [node name="MoneySound" type="AudioStreamPlayer" parent="Money"]
 stream = ExtResource("5_swadt")
@@ -49,20 +49,24 @@ stream = ExtResource("5_swadt")
 
 [node name="LevelGeometry" parent="Enviroment" instance=ExtResource("1_1wy1g")]
 
-[node name="Water" type="Node3D" parent="."]
+[node name="Water" type="Node3D" parent="." groups=["Water"]]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 68.218, -1, 171.569)
 script = ExtResource("3_t065x")
+starting_y = -70.0
 ending_y = -80.0
 starting_amount = 1e+06
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Water"]
 process_mode = 3
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -51.2785, -7.50375, -83.7181)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -94.7402, -7.50375, -83.7181)
 stream = ExtResource("15_dbttc")
+attenuation_model = 3
 volume_db = -6.0
-unit_size = 90.0
+unit_size = 100.0
 autoplay = true
+max_distance = 411.21
+bus = &"Ambience"
 
 [node name="WaterPlane" type="MeshInstance3D" parent="Water"]
 transform = Transform3D(700, 0, 0, 0, -3.0598e-05, 1, 0, -700, -4.37114e-08, 0, 0, 0)
@@ -109,7 +113,7 @@ wait_time = 120.0
 one_shot = true
 
 [node name="InventoryItems" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 293.668, 0, 0)
+transform = Transform3D(-0.0897114, 0, 0.995968, 0, 1, 0, -0.995968, 0, -0.0897114, 223.087, 0, -59.2353)
 
 [node name="Keys" parent="InventoryItems" instance=ExtResource("2_f68k2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.86112, 0, -22.051)
