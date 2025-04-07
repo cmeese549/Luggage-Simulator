@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://btbey8ncomyx7" path="res://UI/HUD/Crosshair/hitmorker.png" id="5_jqf55"]
 [ext_resource type="Script" uid="uid://bkn6bkk5bo3k0" path="res://UI/Dialogue/DialogueBox.gd" id="5_qgmx8"]
 [ext_resource type="Script" uid="uid://sb0v8kjwv2pv" path="res://UI/MainMenu/MainMenu.gd" id="6_byuxr"]
-[ext_resource type="Shader" uid="uid://bppewofknydqu" path="res://UI/MainMenu/FadeFromBlack.tres" id="6_jqf55"]
+[ext_resource type="Shader" uid="uid://c6qdwrppkjjqy" path="res://UI/MainMenu/FadeFromBlack.tres" id="6_jqf55"]
 [ext_resource type="Script" uid="uid://bed3d7egj53pu" path="res://UI/PauseMenu/PauseMenu.gd" id="6_qhxh2"]
 [ext_resource type="Script" uid="uid://cde2nhieog6m4" path="res://UI/UpgradeMenu/UpgradeMenu.gd" id="6_t31p1"]
 [ext_resource type="Script" path="res://UI/delta_fade.gd" id="6_wtdy7"]
@@ -223,10 +223,11 @@ layout_mode = 2
 [node name="HBoxContainer2" type="HBoxContainer" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows"]
 layout_mode = 2
 
-[node name="WPS" type="Label" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/HBoxContainer2"]
+[node name="WPS" type="RichTextLabel" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 58
+theme_override_font_sizes/normal_font_size = 58
+bbcode_enabled = true
 text = "Water Per Second:"
 
 [node name="Label2" type="Label" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/HBoxContainer2"]
@@ -236,10 +237,11 @@ theme_override_font_sizes/font_size = 58
 text = "Upgrade Pump"
 horizontal_alignment = 1
 
-[node name="MPS" type="Label" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/HBoxContainer2"]
+[node name="MPS" type="RichTextLabel" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 58
+theme_override_font_sizes/normal_font_size = 58
+bbcode_enabled = true
 text = "Money Per Second:"
 horizontal_alignment = 2
 

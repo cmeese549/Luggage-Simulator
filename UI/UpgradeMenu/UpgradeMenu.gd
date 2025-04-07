@@ -17,8 +17,8 @@ class_name UpgradeMenu
 @onready var upgrade_slots : HBoxContainer = find_child("UpgradeSlots")
 @onready var close_button : Button = $PanelContainer/MarginContainer/Rows/Close/Button
 
-@onready var wps : Label = $PanelContainer/MarginContainer/Rows/HBoxContainer2/WPS
-@onready var mps : Label = $PanelContainer/MarginContainer/Rows/HBoxContainer2/MPS
+@onready var wps : RichTextLabel = $PanelContainer/MarginContainer/Rows/HBoxContainer2/WPS
+@onready var mps : RichTextLabel = $PanelContainer/MarginContainer/Rows/HBoxContainer2/MPS
 var current_wps : float = 0
 var current_mps : float = 0
 var current_quality : float = 0
@@ -56,8 +56,8 @@ func open(pump: Pump) -> void:
 	current_pump = pump
 	self.visible = true
 	get_tree().paused = true
-	wps.text = "Water Per Second: " + str(snappedf(pump.cur_wps, 0.01))
-	mps.text = "Money Per Second: " + str(snappedf(pump.cur_wps * pump.cur_quality, 0.01))
+	wps.text = "Water Per Second: [color=blue]" + str(snappedf(pump.cur_wps, 0.01)) + "[/color]"
+	mps.text = "Money Per Second: [color=green]$" + str(snappedf(pump.cur_wps * pump.cur_quality, 0.01)) + "[/color]"
 	current_wps = pump.cur_wps
 	current_mps = pump.cur_wps * pump.cur_quality
 	current_quality = pump.cur_quality
@@ -114,8 +114,8 @@ func apply_upgrade(data: pump_upgrade, pump: Pump) -> void:
 				current_mps = current_wps * current_quality
 			pump_upgrade.upgrade_type.SPEED:
 				current_wps += data.effect
-		wps.text = "Water Per Second: " + str(snappedf(current_wps, 0.01))
-		mps.text = "Money Per Second: " + str(snappedf(current_mps, 0.01))
+		wps.text = "Water Per Second: [color=blue]" + str(snappedf(current_wps, 0.01)) + "[/color]"
+		mps.text = "Money Per Second: [color=green]$" + str(snappedf(current_mps, 0.01)) + "[/color]"
 		your_money.text = "You have: $" + add_comma_to_int(ui.money.cur_money)
 		
 func disconnect_buttons() -> void:
