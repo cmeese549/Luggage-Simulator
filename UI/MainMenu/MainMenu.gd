@@ -10,6 +10,8 @@ class_name MainMenu
 
 @onready var line : Line2D = find_child("Line2D")
 
+var ready_to_start : bool = false
+
 var fade_completed = false
 var fade_delay : float = 6
 var music_fade_delay : float = 3
@@ -19,7 +21,13 @@ var fade_delay_progress : float = 0
 var fade_time : float = 6
 var lerp_progress : float = 0
 
+func start() -> void:
+	ready_to_start = true
+
 func _process(delta: float) -> void:
+	if !ready_to_start:
+		return
+	
 	if fade_completed:
 		return
 		

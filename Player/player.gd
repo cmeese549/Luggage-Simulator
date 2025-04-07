@@ -132,14 +132,13 @@ func remove_inventory_items(items: Array[String]) -> void:
 
 func _unhandled_input(event):
 	if ready_to_start_game and !game_started and event is not InputEventMouseMotion and event is not InputEventJoypadMotion:
-		print(event)
 		start_game()
 	if event is InputEventMouseButton:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _input(event: InputEvent) -> void:
-	#if ready_to_start_game and !game_started and event != InputEventMouseMotion and event != InputEventJoypadMotion:
-		#start_game()
+	if ready_to_start_game and !game_started and event is not InputEventMouseMotion and event is not InputEventJoypadMotion:
+		start_game()
 	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED and game_started:
 		if event is InputEventMouseMotion:
 			var viewport_transform: Transform2D = get_tree().root.get_final_transform()

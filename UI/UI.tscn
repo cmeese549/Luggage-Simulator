@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://exdhmbr43ger"]
+[gd_scene load_steps=30 format=3 uid="uid://exdhmbr43ger"]
 
 [ext_resource type="Script" uid="uid://dic75q4o378w6" path="res://UI/UI.gd" id="1_6dd3c"]
 [ext_resource type="Theme" uid="uid://b3kq74llqlv3x" path="res://UI/Theme/MinimalUI.tres" id="1_dhe1o"]
@@ -26,6 +26,7 @@
 [ext_resource type="Resource" uid="uid://dwctgocpxrtsi" path="res://UI/Shop/ShopItems/Jug.tres" id="14_2jerp"]
 [ext_resource type="Resource" uid="uid://blxq2rrfwlm43" path="res://UI/Shop/ShopItems/RollerSkate.tres" id="15_nxoi0"]
 [ext_resource type="Resource" uid="uid://cpt63tjw3br52" path="res://UI/Shop/ShopItems/SkateBoard.tres" id="16_jf3kf"]
+[ext_resource type="VideoStream" path="res://UI/Splashscreen/SplashScreenOGG.ogv" id="25_jf3kf"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_byuxr"]
 shader = ExtResource("6_jqf55")
@@ -49,6 +50,7 @@ theme = ExtResource("1_dhe1o")
 script = ExtResource("1_6dd3c")
 
 [node name="HUD" type="Control" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -944,6 +946,20 @@ color = Color(0, 0, 0, 1)
 
 [node name="Line2D" type="Line2D" parent="MainMenu"]
 width_curve = SubResource("Curve_uk6e0")
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+stream = ExtResource("25_jf3kf")
+volume_db = -12.0
+expand = true
+bus = &"Music"
 
 [node name="DialoguePauser" type="Node" parent="."]
 process_mode = 3
