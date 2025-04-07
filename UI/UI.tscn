@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://exdhmbr43ger"]
+[gd_scene load_steps=31 format=3 uid="uid://exdhmbr43ger"]
 
 [ext_resource type="Script" uid="uid://dic75q4o378w6" path="res://UI/UI.gd" id="1_6dd3c"]
 [ext_resource type="Theme" uid="uid://b3kq74llqlv3x" path="res://UI/Theme/MinimalUI.tres" id="1_dhe1o"]
@@ -11,6 +11,7 @@
 [ext_resource type="Shader" uid="uid://b54wwcsihdtoe" path="res://UI/MainMenu/FadeFromBlack.tres" id="6_jqf55"]
 [ext_resource type="Script" uid="uid://bed3d7egj53pu" path="res://UI/PauseMenu/PauseMenu.gd" id="6_qhxh2"]
 [ext_resource type="Script" uid="uid://cde2nhieog6m4" path="res://UI/UpgradeMenu/UpgradeMenu.gd" id="6_t31p1"]
+[ext_resource type="Script" uid="uid://bsyahvddt84hi" path="res://UI/delta_fade.gd" id="6_wtdy7"]
 [ext_resource type="Script" uid="uid://vcecdqq511h1" path="res://UI/Shop/Shop.gd" id="7_6q2ik"]
 [ext_resource type="Script" uid="uid://cmqb4oi3mfhb4" path="res://UI/HUD/hud.gd" id="7_017wa"]
 [ext_resource type="PackedScene" uid="uid://yg0ip3ps48ca" path="res://UI/UpgradeMenu/UpgradeSlot.tscn" id="7_kncd2"]
@@ -182,6 +183,18 @@ horizontal_alignment = 1
 [node name="Control2" type="Control" parent="HUD/Money/PanelContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="DeltaFade" type="Label" parent="HUD/Money"]
+layout_mode = 2
+offset_left = 76.0
+offset_top = -68.0
+offset_right = 220.0
+offset_bottom = -17.0
+scale = Vector2(1, 1)
+theme_override_font_sizes/font_size = 50
+text = "+1"
+horizontal_alignment = 1
+script = ExtResource("6_wtdy7")
 
 [node name="UpgradeMenu" type="MarginContainer" parent="." groups=["UpgradeMenu"]]
 visible = false
@@ -896,6 +909,7 @@ size_flags_horizontal = 3
 
 [node name="MainMenu" type="Control" parent="."]
 process_mode = 3
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

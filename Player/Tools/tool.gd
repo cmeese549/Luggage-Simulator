@@ -41,6 +41,7 @@ var tool_full: bool = false
 signal stow_finished(this_tool: tool)
 
 func _ready():
+	visible = false
 	if !animation_player:
 		push_error("No animation player on tool: "+name)
 

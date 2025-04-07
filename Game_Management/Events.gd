@@ -11,3 +11,5 @@ signal tool_purchased(item: ShopItem)
 signal speed_purchased(item: ShopItem)
 
 signal open_shop()
+
+signal water_dumped(amount)
