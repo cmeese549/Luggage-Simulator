@@ -157,6 +157,9 @@ func _physics_process(delta):
 	current_footstep_cooldown -= delta
 	# Add the gravity.
 	if not is_on_floor():
+		if tool_sys.equipped_tool != null:
+			do_jump_sway(delta)
+		was_just_flying = true
 		skateboard_audio.stop()
 		velocity += get_gravity() * delta
 	
@@ -175,9 +178,6 @@ func _physics_process(delta):
 		do_jump_sound()
 		skateboard_audio.stop()
 		skateboard_fade_audio.stop()
-		if tool_sys.equipped_tool != null:
-			do_jump_sway(delta)
-		was_just_flying = true
 		
 	# Get the input direction and handle the movement/deceleration.
 	var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_back")
@@ -301,7 +301,7 @@ func do_jump_sway(delta: float) -> void:
 	var _tool = tool_sys.equipped_tool
 	_tool.position.y = lerpf(
 		_tool.position.y, 
-		(_tool.position.y - (velocity.y * _tool.jump_sway_amount)) * delta, 
+		clampf(((_tool.position.y - (velocity.y * _tool.jump_sway_amount)) * delta), -0.5, 0.5), 
 		_tool.idle_sway_speed
 	)
 	
