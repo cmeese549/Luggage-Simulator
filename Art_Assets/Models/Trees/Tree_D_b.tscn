@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://sb7hdwu8apsy"]
+
+[ext_resource type="ArrayMesh" uid="uid://bhw8lbvqbtrqf" path="res://Art_Assets/Models/Trees/Tree_D.obj" id="1_1bbq0"]
+[ext_resource type="Material" uid="uid://yfk1jt1sm2ox" path="res://Art_Assets/Materials/MiscEnvMtls/TreeTop3.tres" id="2_1bbq0"]
+[ext_resource type="Material" uid="uid://b7ja4lun31xtl" path="res://Art_Assets/Materials/MiscEnvMtls/Brown1.tres" id="3_l18re"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_nm84k"]
+height = 9.14355
+radius = 0.595703
+
+[node name="TreeDB" type="Node3D"]
+
+[node name="TreeD" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_1bbq0")
+surface_material_override/0 = ExtResource("2_1bbq0")
+surface_material_override/1 = ExtResource("3_l18re")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.25635, -0.102503)
+shape = SubResource("CylinderShape3D_nm84k")

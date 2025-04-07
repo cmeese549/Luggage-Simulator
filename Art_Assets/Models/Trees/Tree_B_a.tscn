@@ -1,8 +1,23 @@
-[gd_scene load_steps=2 format=3 uid="uid://bcoc4uv2rdt4h"]
+[gd_scene load_steps=5 format=3 uid="uid://bcoc4uv2rdt4h"]
 
 [ext_resource type="ArrayMesh" uid="uid://b1eprvu6f6m3p" path="res://Art_Assets/Models/Trees/Tree_B.obj" id="1_mwmej"]
+[ext_resource type="Material" uid="uid://yfk1jt1sm2ox" path="res://Art_Assets/Materials/MiscEnvMtls/TreeTop3.tres" id="2_fckax"]
+[ext_resource type="Material" uid="uid://cleee5c1kdwun" path="res://Art_Assets/Materials/MiscEnvMtls/Brown2.tres" id="3_8d3eo"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_fckax"]
+height = 9.14355
+radius = 0.939941
 
 [node name="TreeBA" type="Node3D"]
 
 [node name="TreeB" type="MeshInstance3D" parent="."]
 mesh = ExtResource("1_mwmej")
+surface_material_override/0 = ExtResource("2_fckax")
+surface_material_override/1 = ExtResource("3_8d3eo")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.109016)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.25635, -0.191247)
+shape = SubResource("CylinderShape3D_fckax")
