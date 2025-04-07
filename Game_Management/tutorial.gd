@@ -2,6 +2,10 @@ extends Node3D
 
 @onready var label_3d: Label3D = $Label3D
 
+@onready var cough_timer : Timer = $TutorialTodd/AhemTimer
+@onready var cough : AudioStreamPlayer3D = $TutorialTodd/AudioStreamPlayer3D
+var started : bool = false
+
 enum tutorial_steps {
 	PICKUP_WATER,
 	DUMP_WATER,
@@ -44,7 +48,12 @@ func do_next_step(next_step: tutorial_steps):
 	label_3d.text = tutorial_texts[next_step]
 	print("Next location: "+str(tutorial_locations[next_step].global_position))
 	global_position = tutorial_locations[next_step].global_position
-	cur_step = next_step
+	if started:
+		cur_step = next_step
+		cough_timer.stop()
+		cough.play()
+	started = true
+	cough_timer.start()
 	if next_step == tutorial_steps.DONE:
 		await get_tree().create_timer(60).timeout
 		queue_free()

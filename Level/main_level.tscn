@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://cpuf0byync0a2"]
+[gd_scene load_steps=21 format=3 uid="uid://c0shsmlk675qm"]
 
 [ext_resource type="PackedScene" uid="uid://ddwtbnyshxxj3" path="res://Art_Assets/Levels/LevelGeometry.tscn" id="1_1wy1g"]
 [ext_resource type="PackedScene" uid="uid://bk7vc4usjt3od" path="res://Player/player.tscn" id="1_7ireg"]
@@ -13,7 +13,7 @@
 [ext_resource type="AudioStream" uid="uid://b6hawj4wlcvs2" path="res://Audio/Sfx/Ambience/water_ambience.ogg" id="15_dbttc"]
 [ext_resource type="Script" uid="uid://dupj3d5ny1j3s" path="res://Level/all_pumps.gd" id="17_hhlvi"]
 [ext_resource type="PackedScene" uid="uid://hr021abwwm8b" path="res://Objects/Pump/pump.tscn" id="17_swadt"]
-[ext_resource type="PackedScene" path="res://Game_Management/tutorial.tscn" id="18_dbttc"]
+[ext_resource type="PackedScene" uid="uid://cb77ps0e8v5xs" path="res://Game_Management/tutorial.tscn" id="18_dbttc"]
 [ext_resource type="AudioStream" uid="uid://babm51jmu7wc5" path="res://Audio/Sfx/Ambience/nature_ambience.ogg" id="18_hhlvi"]
 [ext_resource type="Script" uid="uid://c6ov71035nkfo" path="res://Audio/Music/Band.gd" id="19_qqyv7"]
 [ext_resource type="AudioStream" uid="uid://c0waf3078ni8q" path="res://Audio/Music/Song1.mp3" id="20_s4lgs"]
@@ -53,7 +53,6 @@ stream = ExtResource("5_swadt")
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 68.218, -1, 171.569)
 script = ExtResource("3_t065x")
-starting_y = -70.0
 ending_y = -80.0
 starting_amount = 1e+06
 

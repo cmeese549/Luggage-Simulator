@@ -8,8 +8,11 @@ class_name Money
 
 var cur_money: float
 
+var lifetime_money: float
+
 func _ready():
 	cur_money = starting_money
+	lifetime_money = starting_money
 	Events.make_money.connect(make_money)
 
 func make_money(amount, notify=false):
@@ -17,6 +20,7 @@ func make_money(amount, notify=false):
 		#Could emit signal for money made here for UI
 		print("Made "+str(amount)+" money")
 	cur_money += amount
+	lifetime_money += amount
 	
 
 func try_buy(amount):
