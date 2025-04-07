@@ -26,6 +26,7 @@ var rng = RandomNumberGenerator.new()
 @onready var skateboard_fade_audio : AudioStreamPlayer = $Audio/Footsteps/SkateboardFade
 @onready var jump_splash_audio : AudioStreamPlayer = $Audio/Footsteps/JumpSplash
 @onready var left_water_audio : AudioStreamPlayer = $Audio/Footsteps/LeftWater
+@onready var cant_afford : AudioStreamPlayer = $Audio/CantAfford
 var ready_to_land : bool = true
 
 const JUMP_VELOCITY = 5.2

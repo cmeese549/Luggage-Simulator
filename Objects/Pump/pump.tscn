@@ -126,8 +126,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.932, 1.193, 3.26)
 
 [node name="BuildAudio" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("11_6ybtv")
-volume_db = -2.0
-unit_size = 4.5
+volume_db = -3.5
+unit_size = 2.5
 bus = &"Pumps"
 
 [node name="Ambience" type="AudioStreamPlayer3D" parent="."]

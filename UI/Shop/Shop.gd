@@ -13,6 +13,8 @@ class_name Shop
 @onready var close_button : Button = $PanelContainer/MarginContainer/Rows/Close/Button
 @onready var your_money : Label = $PanelContainer/MarginContainer/Rows/Close/YourMoney
 
+@onready var cant_afford : AudioStreamPlayer = $"../CantAfford"
+
 @export var shop_items : Array[ShopItem]
 
 var rng = RandomNumberGenerator.new()
@@ -135,6 +137,7 @@ func attempt_purchase(item: ShopItem, button: Button) -> void:
 		print(item.item_name + " has items")
 		has_required_items = check_has_tool(item)
 	if !has_required_items:
+		cant_afford.play()
 		if dialogue_box.content.text == dialogue_box.pauser.extract_pauses_from_dialogue(item.required_items_quip):
 			dialogue_box.skip_dialogue()
 		else:
@@ -151,6 +154,7 @@ func attempt_purchase(item: ShopItem, button: Button) -> void:
 		elif item.item_type == "Speed":
 			Events.speed_purchased.emit(item)
 	else:
+		cant_afford.play()
 		display_random_quip(cant_afford_quips, used_cant_afford_quips)
 
 func check_has_inventory_items(item: ShopItem) -> bool:
