@@ -64,9 +64,10 @@ size = Vector3(8.36012, 2.27772, 1)
 
 [node name="Pump" type="Node3D" node_paths=PackedStringArray("upgrade_markers")]
 script = ExtResource("1_55ofu")
+price = 10
 speed_upgrades = Array[ExtResource("2_uvhau")]([ExtResource("3_2lgk4"), ExtResource("4_6ybtv"), ExtResource("5_xilsv")])
 quality_upgrades = Array[ExtResource("2_uvhau")]([ExtResource("6_7nxrv"), ExtResource("7_2435t"), ExtResource("8_1pin8")])
-upgrade_markers = [NodePath("Upgrades/Markers/Upgrade1"), null, null, null, null]
+upgrade_markers = [NodePath("Upgrades/Markers/Upgrade1"), NodePath("Upgrades/Markers/Upgrade2"), NodePath("Upgrades/Markers/Upgrade3"), NodePath("Upgrades/Markers/Upgrade4"), NodePath("Upgrades/Markers/Upgrade5")]
 
 [node name="Geo" type="Node3D" parent="."]
 

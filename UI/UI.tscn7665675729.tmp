@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://exdhmbr43ger"]
+[gd_scene load_steps=28 format=3 uid="uid://exdhmbr43ger"]
 
 [ext_resource type="Script" uid="uid://dic75q4o378w6" path="res://UI/UI.gd" id="1_6dd3c"]
 [ext_resource type="Theme" uid="uid://b3kq74llqlv3x" path="res://UI/Theme/MinimalUI.tres" id="1_dhe1o"]
@@ -12,9 +12,8 @@
 [ext_resource type="Script" uid="uid://bed3d7egj53pu" path="res://UI/PauseMenu/PauseMenu.gd" id="6_qhxh2"]
 [ext_resource type="Script" uid="uid://cde2nhieog6m4" path="res://UI/UpgradeMenu/UpgradeMenu.gd" id="6_t31p1"]
 [ext_resource type="Script" uid="uid://vcecdqq511h1" path="res://UI/Shop/Shop.gd" id="7_6q2ik"]
-[ext_resource type="Script" path="res://UI/HUD/hud.gd" id="7_017wa"]
+[ext_resource type="Script" uid="uid://cmqb4oi3mfhb4" path="res://UI/HUD/hud.gd" id="7_017wa"]
 [ext_resource type="PackedScene" uid="uid://yg0ip3ps48ca" path="res://UI/UpgradeMenu/UpgradeSlot.tscn" id="7_kncd2"]
-[ext_resource type="FontFile" uid="uid://dqa66k6g8kp0j" path="res://UI/Theme/C&C Red Alert [INET].ttf" id="8_nxoi0"]
 [ext_resource type="Script" uid="uid://b1lecmjr7r5pu" path="res://UI/Shop/ShopItems/ShopItem.gd" id="9_xtxff"]
 [ext_resource type="PackedScene" uid="uid://dth0cukoj3ajb" path="res://UI/PauseMenu/InventoryItem.tscn" id="10_npmjx"]
 [ext_resource type="Script" uid="uid://5ls1kx27ehtl" path="res://UI/Dialogue/DialoguePauser.gd" id="10_vx7wu"]
@@ -26,7 +25,6 @@
 [ext_resource type="Resource" uid="uid://dwctgocpxrtsi" path="res://UI/Shop/ShopItems/Jug.tres" id="14_2jerp"]
 [ext_resource type="Resource" uid="uid://blxq2rrfwlm43" path="res://UI/Shop/ShopItems/RollerSkate.tres" id="15_nxoi0"]
 [ext_resource type="Resource" uid="uid://cpt63tjw3br52" path="res://UI/Shop/ShopItems/SkateBoard.tres" id="16_jf3kf"]
-[ext_resource type="VideoStream" path="res://UI/Splashscreen/SplashScreenOGG.ogv" id="25_jf3kf"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_byuxr"]
 shader = ExtResource("6_jqf55")
@@ -50,7 +48,6 @@ theme = ExtResource("1_dhe1o")
 script = ExtResource("1_6dd3c")
 
 [node name="HUD" type="Control" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -154,7 +151,7 @@ grow_vertical = 0
 layout_mode = 0
 offset_left = 76.0
 offset_top = -21.0
-offset_right = 220.0
+offset_right = 322.0
 offset_bottom = 40.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HUD/Money/PanelContainer"]
@@ -175,13 +172,8 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 20.0
-theme_override_font_sizes/font_size = 52
-text = "$1,000"
-horizontal_alignment = 1
-
-[node name="Control2" type="Control" parent="HUD/Money/PanelContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 32
+text = "$"
 
 [node name="UpgradeMenu" type="MarginContainer" parent="." groups=["UpgradeMenu"]]
 visible = false
@@ -257,21 +249,18 @@ theme_override_constants/separation = 85
 [node name="Button" type="Button" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/SpeedUpgrades/VBoxContainer"]
 custom_minimum_size = Vector2(0, 77.235)
 layout_mode = 2
-theme_override_fonts/font = ExtResource("8_nxoi0")
 theme_override_font_sizes/font_size = 48
 text = "Extra Super Speedy Pump - $500"
 
 [node name="Button2" type="Button" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/SpeedUpgrades/VBoxContainer"]
 custom_minimum_size = Vector2(0, 77.235)
 layout_mode = 2
-theme_override_fonts/font = ExtResource("8_nxoi0")
 theme_override_font_sizes/font_size = 48
 text = "Extra Super Speedy Pump - $500"
 
 [node name="Button3" type="Button" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/SpeedUpgrades/VBoxContainer"]
 custom_minimum_size = Vector2(0, 77.235)
 layout_mode = 2
-theme_override_fonts/font = ExtResource("8_nxoi0")
 theme_override_font_sizes/font_size = 48
 text = "Extra Super Speedy Pump - $500"
 
@@ -292,21 +281,18 @@ theme_override_constants/separation = 85
 [node name="Button" type="Button" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/QualityUpgrades/VBoxContainer"]
 custom_minimum_size = Vector2(0, 77.235)
 layout_mode = 2
-theme_override_fonts/font = ExtResource("8_nxoi0")
 theme_override_font_sizes/font_size = 48
 text = "Extra Super Speedy Pump - $500"
 
 [node name="Button2" type="Button" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/QualityUpgrades/VBoxContainer"]
 custom_minimum_size = Vector2(0, 77.235)
 layout_mode = 2
-theme_override_fonts/font = ExtResource("8_nxoi0")
 theme_override_font_sizes/font_size = 48
 text = "Extra Super Speedy Pump - $500"
 
 [node name="Button3" type="Button" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/QualityUpgrades/VBoxContainer"]
 custom_minimum_size = Vector2(0, 77.235)
 layout_mode = 2
-theme_override_fonts/font = ExtResource("8_nxoi0")
 theme_override_font_sizes/font_size = 48
 text = "Extra Super Speedy Pump - $500"
 
@@ -325,8 +311,7 @@ size_flags_horizontal = 3
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.4
-theme_override_fonts/font = ExtResource("8_nxoi0")
-theme_override_font_sizes/font_size = 61
+theme_override_font_sizes/font_size = 31
 text = "Close"
 
 [node name="Control2" type="Control" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/Close"]
@@ -440,8 +425,7 @@ size_flags_horizontal = 3
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.4
-theme_override_fonts/font = ExtResource("8_nxoi0")
-theme_override_font_sizes/font_size = 66
+theme_override_font_sizes/font_size = 31
 text = "Close"
 
 [node name="Control2" type="Control" parent="Shop/PanelContainer/MarginContainer/Rows/Close"]
@@ -859,27 +843,22 @@ size_flags_horizontal = 3
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.4
-theme_override_fonts/font = ExtResource("8_nxoi0")
-theme_override_font_sizes/font_size = 46
+theme_override_font_sizes/font_size = 31
 text = "Resume"
 
 [node name="Unstick" type="Button" parent="PauseMenu/PanelContainer/MarginContainer/Rows/Close"]
-custom_minimum_size = Vector2(296.455, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.4
-theme_override_fonts/font = ExtResource("8_nxoi0")
-theme_override_font_sizes/font_size = 46
+theme_override_font_sizes/font_size = 31
 text = "Help, I'm stuck!"
 
 [node name="Quit" type="Button" parent="PauseMenu/PanelContainer/MarginContainer/Rows/Close"]
 modulate = Color(1, 0.21, 0.21, 1)
-custom_minimum_size = Vector2(310.835, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.4
-theme_override_fonts/font = ExtResource("8_nxoi0")
-theme_override_font_sizes/font_size = 46
+theme_override_font_sizes/font_size = 31
 text = "Quit To Desktop
 "
 
@@ -889,6 +868,7 @@ size_flags_horizontal = 3
 
 [node name="MainMenu" type="Control" parent="."]
 process_mode = 3
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -900,10 +880,14 @@ script = ExtResource("6_byuxr")
 
 [node name="Label" type="Label" parent="MainMenu"]
 layout_mode = 1
-offset_left = 84.0
-offset_top = 107.0
-offset_right = 1639.0
-offset_bottom = 223.0
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 86.0
+offset_top = -211.0
+offset_right = 1641.0
+offset_bottom = -95.0
+grow_vertical = 0
 size_flags_horizontal = 3
 size_flags_vertical = 1
 theme_override_colors/font_color = Color(0.0214346, 0.0214346, 0.0214346, 1)
@@ -946,20 +930,6 @@ color = Color(0, 0, 0, 1)
 
 [node name="Line2D" type="Line2D" parent="MainMenu"]
 width_curve = SubResource("Curve_uk6e0")
-
-[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-stream = ExtResource("25_jf3kf")
-volume_db = -12.0
-expand = true
-bus = &"Music"
 
 [node name="DialoguePauser" type="Node" parent="."]
 process_mode = 3

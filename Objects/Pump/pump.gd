@@ -3,7 +3,7 @@ extends Node3D
 class_name Pump
 
 @export var base_wps: float = 1
-@export var base_quality: float = 1
+@export var base_quality: float = .5
 @export var price: int = 100
 
 var cur_wps: float = 0
@@ -86,3 +86,7 @@ func apply_upgrade(new_upgrade: pump_upgrade):
 		push_error("Tried to add an upgrade to a full pump")
 	if upgrade_menu.visible:
 		upgrade_menu.render_upgrades(self)
+
+func update_price(new_price: int):
+	price = new_price
+	$Sign/BuyLabel.text = "$"+str(price)

@@ -36,6 +36,7 @@ func _ready() -> void:
 		
 func unstick() -> void:
 	player.global_position = Vector3(0, 1, 0)
+	unpause()
 		
 func connect_sliders():
 	sensitivity_slider.value_changed.connect(sensitivity_slider_changed)
