@@ -112,6 +112,11 @@ one_shot = true
 
 [node name="InventoryItems" type="Node3D" parent="."]
 
+[node name="Keys" parent="InventoryItems" instance=ExtResource("2_f68k2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.27016, 0, 0)
+item_name = "Uncle Upgrade's Keys"
+item_description = "You actually found them.  Nice."
+
 [node name="Skateboard Wheel 1" parent="InventoryItems" instance=ExtResource("2_f68k2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.55004, 0, 0)
 item_name = "Skateboard Wheel 1"

@@ -22,6 +22,8 @@ var rng = RandomNumberGenerator.new()
 @onready var water_footstep_sounds : Array[Node] = $Audio/Footsteps/Water.get_children()
 @onready var jump_land_sounds : Array[Node] = $Audio/Footsteps/JumpLand.get_children()
 @onready var jump_sounds : Array[Node] = $Audio/Footsteps/Jump.get_children()
+@onready var skateboard_audio : AudioStreamPlayer = $Audio/Footsteps/Skateboard
+@onready var skateboard_fade_audio : AudioStreamPlayer = $Audio/Footsteps/SkateboardFade
 var ready_to_land : bool = true
 
 const JUMP_VELOCITY = 5.2
@@ -47,6 +49,9 @@ var current_footstep_cooldown = 0
 var was_just_flying : bool = false
 var doing_landing_adjust : bool = false
 var landing_sway_adjust_cooldown : float = 0
+
+var moved_last_frame : bool = false
+var handled_skateboard_stop : bool = false
 
 var was_just_in_water: bool = false
 
@@ -153,6 +158,7 @@ func _physics_process(delta):
 	current_footstep_cooldown -= delta
 	# Add the gravity.
 	if not is_on_floor():
+		skateboard_audio.stop()
 		velocity += get_gravity() * delta
 	
 	if is_in_water() and !was_just_in_water:
@@ -168,6 +174,8 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 		do_jump_sound()
+		skateboard_audio.stop()
+		skateboard_fade_audio.stop()
 		if tool_sys.equipped_tool != null:
 			do_jump_sway(delta)
 		was_just_flying = true
@@ -178,10 +186,15 @@ func _physics_process(delta):
 	
 	if slidy and !is_in_water():
 		if direction:
-			#TODO skateboard sounds????
+			moved_last_frame = true
+			if is_on_floor():
+				handled_skateboard_stop = false
+				fade_in_skateboard()
 			velocity.x = lerp(velocity.x, direction.x * SPEED, accelartion * delta)
 			velocity.z = lerp(velocity.z, direction.z * SPEED, accelartion * delta)
 		else:
+			fade_out_skateboard()
+			moved_last_frame = false
 			velocity.x = lerp(velocity.x, 0.0, deceleration * delta)
 			velocity.z = lerp(velocity.z, 0.0, deceleration * delta)
 	else:
@@ -197,7 +210,16 @@ func _physics_process(delta):
 	
 	move_and_slide()
 
-
+func fade_out_skateboard() -> void:
+	skateboard_audio.stop()
+	if !skateboard_fade_audio.playing and !handled_skateboard_stop:
+		handled_skateboard_stop = true
+		skateboard_fade_audio.play()
+	
+func fade_in_skateboard() -> void:
+	if !skateboard_audio.playing:
+		skateboard_fade_audio.stop()
+		skateboard_audio.play()
 	
 func do_footstep_sound() -> void:
 	var current_sounds : Array[Node] = sand_footstep_sounds
