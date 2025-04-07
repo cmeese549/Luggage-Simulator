@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cpdh3rjxuh2yv"]
+
+[ext_resource type="ArrayMesh" uid="uid://cd7rilg3sdq62" path="res://Art_Assets/Models/MiscEnv/Rock.obj" id="1_yodoy"]
+[ext_resource type="Material" uid="uid://cccm5jtfypdav" path="res://Art_Assets/Materials/MiscEnvMtls/Grey.tres" id="2_hnkme"]
+
+[node name="Rock" type="Node3D"]
+
+[node name="Rock" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_yodoy")
+surface_material_override/0 = ExtResource("2_hnkme")

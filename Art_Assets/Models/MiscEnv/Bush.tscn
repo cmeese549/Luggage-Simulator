@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://d0l281lsoo0tt"]
+
+[ext_resource type="ArrayMesh" uid="uid://bom3dqgnc23tx" path="res://Art_Assets/Models/MiscEnv/Bush.obj" id="1_m6l3j"]
+[ext_resource type="Material" uid="uid://du2ah1pclp4ju" path="res://Art_Assets/Materials/MiscEnvMtls/Green.tres" id="2_t3pte"]
+
+[node name="Bush" type="Node3D"]
+
+[node name="Bush" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_m6l3j")
+surface_material_override/0 = ExtResource("2_t3pte")

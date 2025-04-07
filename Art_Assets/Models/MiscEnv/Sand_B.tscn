@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://dgjwqvgixy8nb"]
+
+[ext_resource type="Material" uid="uid://bhg2k1s2awm81" path="res://Art_Assets/Materials/Debris/SandCardB.tres" id="1_kseaq"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_l8lri"]
+
+[node name="SandB" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.422, 0, 0.5, 0)
+mesh = SubResource("QuadMesh_l8lri")
+surface_material_override/0 = ExtResource("1_kseaq")

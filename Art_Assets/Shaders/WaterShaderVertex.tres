@@ -1,4 +1,4 @@
-[gd_resource type="VisualShader" load_steps=58 format=3 uid="uid://1i23l6ernd27"]
+[gd_resource type="VisualShader" load_steps=59 format=3 uid="uid://d4nvfanwuu5gk"]
 
 [ext_resource type="FastNoiseLite" uid="uid://bljy2y3ta76vf" path="res://Art_Assets/Shaders/WaterNoise1.tres" id="1_qea2m"]
 [ext_resource type="FastNoiseLite" uid="uid://cvdk5kmygg4w5" path="res://Art_Assets/Shaders/WaterNoise2.tres" id="2_fwm15"]
@@ -212,6 +212,11 @@ default_input_values = [0, Quaternion(0, 0, 0, 0)]
 op_type = 2
 function = 24
 
+[sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_cc106"]
+parameter_name = "ProxFadeDistance"
+default_value_enabled = true
+default_value = 0.5
+
 [resource]
 code = "shader_type spatial;
 render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx;
@@ -221,6 +226,7 @@ uniform vec2 ColorScale = vec2(150.000000, 150.000000);
 uniform sampler2D tex_frg_34;
 uniform sampler2D tex_frg_35;
 uniform float FoamStrength = 1.25;
+uniform float ProxFadeDistance = 0.5;
 uniform sampler2D depth_tex_frg_17 : hint_depth_texture;
 uniform float WaterOpacity = 0.94999998807907;
 
@@ -315,14 +321,17 @@ void fragment() {
 	float n_out21p0 = TIME;
 
 
+// FloatParameter:70
+	float n_out70p0 = ProxFadeDistance;
+
+
 	float n_out17p0;
 // ProximityFade:17
-	float n_in17p0 = 0.50000;
 	{
 		float __depth_tex = texture(depth_tex_frg_17, SCREEN_UV).r;
 		vec4 __depth_world_pos = INV_PROJECTION_MATRIX * vec4(SCREEN_UV * 2.0 - 1.0, __depth_tex, 1.0);
 		__depth_world_pos.xyz /= __depth_world_pos.w;
-		n_out17p0 = clamp(1.0 - smoothstep(__depth_world_pos.z + n_in17p0, __depth_world_pos.z, VERTEX.z), 0.0, 1.0);
+		n_out17p0 = clamp(1.0 - smoothstep(__depth_world_pos.z + n_out70p0, __depth_world_pos.z, VERTEX.z), 0.0, 1.0);
 	}
 
 
@@ -395,6 +404,7 @@ void fragment() {
 
 }
 "
+graph_offset = Vector2(-2991.57, -1164.26)
 nodes/vertex/0/position = Vector2(1580, 180)
 nodes/fragment/0/position = Vector2(2100, -760)
 nodes/fragment/2/node = SubResource("VisualShaderNodeVec2Parameter_rd5x8")
@@ -503,4 +513,6 @@ nodes/fragment/68/node = SubResource("VisualShaderNodeVectorOp_fmkia")
 nodes/fragment/68/position = Vector2(380, -1800)
 nodes/fragment/69/node = SubResource("VisualShaderNodeVectorFunc_j3c1l")
 nodes/fragment/69/position = Vector2(600, -1780)
-nodes/fragment/connections = PackedInt32Array(2, 0, 3, 1, 16, 0, 0, 3, 17, 0, 18, 0, 24, 0, 25, 0, 18, 0, 25, 1, 18, 0, 26, 0, 26, 0, 27, 1, 25, 0, 27, 0, 31, 0, 30, 2, 32, 0, 33, 2, 30, 0, 34, 0, 33, 0, 35, 0, 34, 0, 36, 0, 35, 0, 36, 1, 12, 0, 37, 1, 36, 0, 37, 0, 13, 0, 38, 0, 38, 0, 39, 1, 21, 0, 40, 0, 18, 0, 40, 2, 40, 0, 28, 0, 28, 0, 41, 0, 41, 0, 24, 0, 39, 0, 42, 0, 15, 0, 0, 1, 3, 0, 43, 1, 43, 0, 44, 0, 44, 0, 45, 0, 46, 0, 43, 0, 46, 0, 45, 1, 45, 0, 30, 0, 45, 0, 33, 0, 37, 0, 47, 0, 47, 0, 38, 1, 48, 0, 49, 0, 49, 0, 50, 0, 51, 0, 48, 0, 51, 0, 50, 1, 27, 0, 48, 1, 61, 0, 53, 1, 54, 0, 55, 2, 55, 0, 56, 0, 53, 0, 57, 1, 57, 0, 58, 0, 58, 0, 59, 0, 60, 0, 57, 0, 60, 0, 59, 1, 59, 0, 55, 0, 63, 0, 62, 2, 62, 0, 64, 0, 64, 0, 65, 0, 59, 0, 62, 0, 56, 0, 65, 1, 67, 0, 68, 1, 68, 0, 69, 0, 65, 0, 68, 0, 69, 0, 66, 0, 50, 0, 66, 1, 42, 0, 0, 0, 42, 0, 0, 5, 50, 0, 42, 2)
+nodes/fragment/70/node = SubResource("VisualShaderNodeFloatParameter_cc106")
+nodes/fragment/70/position = Vector2(-2900, -1060)
+nodes/fragment/connections = PackedInt32Array(2, 0, 3, 1, 16, 0, 0, 3, 17, 0, 18, 0, 24, 0, 25, 0, 18, 0, 25, 1, 18, 0, 26, 0, 26, 0, 27, 1, 25, 0, 27, 0, 31, 0, 30, 2, 32, 0, 33, 2, 30, 0, 34, 0, 33, 0, 35, 0, 34, 0, 36, 0, 35, 0, 36, 1, 12, 0, 37, 1, 36, 0, 37, 0, 13, 0, 38, 0, 38, 0, 39, 1, 21, 0, 40, 0, 18, 0, 40, 2, 40, 0, 28, 0, 28, 0, 41, 0, 41, 0, 24, 0, 39, 0, 42, 0, 15, 0, 0, 1, 3, 0, 43, 1, 43, 0, 44, 0, 44, 0, 45, 0, 46, 0, 43, 0, 46, 0, 45, 1, 45, 0, 30, 0, 45, 0, 33, 0, 37, 0, 47, 0, 47, 0, 38, 1, 48, 0, 49, 0, 49, 0, 50, 0, 51, 0, 48, 0, 51, 0, 50, 1, 27, 0, 48, 1, 61, 0, 53, 1, 54, 0, 55, 2, 55, 0, 56, 0, 53, 0, 57, 1, 57, 0, 58, 0, 58, 0, 59, 0, 60, 0, 57, 0, 60, 0, 59, 1, 59, 0, 55, 0, 63, 0, 62, 2, 62, 0, 64, 0, 64, 0, 65, 0, 59, 0, 62, 0, 56, 0, 65, 1, 67, 0, 68, 1, 68, 0, 69, 0, 65, 0, 68, 0, 69, 0, 66, 0, 50, 0, 66, 1, 42, 0, 0, 0, 42, 0, 0, 5, 50, 0, 42, 2, 70, 0, 17, 0)

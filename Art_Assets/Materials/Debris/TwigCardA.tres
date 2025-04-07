@@ -1,0 +1,12 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://dgcat88n5dtyi"]
+
+[ext_resource type="Texture2D" uid="uid://8os56etapnky" path="res://Art_Assets/Textures/Debris/Twig_A.png" id="1_pmnsh"]
+
+[resource]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+albedo_texture = ExtResource("1_pmnsh")
+texture_filter = 0
+billboard_mode = 2
+billboard_keep_scale = true

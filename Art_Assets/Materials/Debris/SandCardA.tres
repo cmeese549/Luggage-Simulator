@@ -1,0 +1,12 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://b4fcwrujw3ysy"]
+
+[ext_resource type="Texture2D" uid="uid://n1r0duj7salm" path="res://Art_Assets/Textures/Debris/SandPile_A.png" id="1_7c3od"]
+
+[resource]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+albedo_texture = ExtResource("1_7c3od")
+texture_filter = 0
+billboard_mode = 2
+billboard_keep_scale = true
