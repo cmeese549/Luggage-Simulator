@@ -8,7 +8,7 @@ script = ExtResource("2_gbfql")
 item_name = "Skateboard"
 item_description = "Vrooooooom Vrooooooooooooooooooooom!!!!"
 item_icon = ExtResource("1_xcbo1")
-price = 10000
+price = 5000
 item_type = "Speed"
 required_items_quip = "I broke all of the bones in my body at least 137 times on this thing, so I angirly threw the [color=green]Wheels[/color] into the lake. {pause=1.0}  If you find those [color=green]Wheels,[/color] I'll sell you the [color=green]Skateboard.[/color]"
 required_items_string = "Requires the Rollerskates and 4 Skateboard Wheels, which Uncle Upgrade has angirly tossed into the lake."
