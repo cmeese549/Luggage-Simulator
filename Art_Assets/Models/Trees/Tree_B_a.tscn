@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bcoc4uv2rdt4h"]
+
+[ext_resource type="ArrayMesh" uid="uid://b1eprvu6f6m3p" path="res://Art_Assets/Models/Trees/Tree_B.obj" id="1_mwmej"]
+
+[node name="TreeBA" type="Node3D"]
+
+[node name="TreeB" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_mwmej")
