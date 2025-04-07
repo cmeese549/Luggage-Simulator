@@ -12,6 +12,8 @@ class_name PauseMenu
 @onready var audioServer = AudioServer
 
 @onready var hud : Control = $"../HUD"
+@onready var resume_button : Button = $PanelContainer/MarginContainer/Rows/Close/Resume
+@onready var unstick_button : Button = $PanelContainer/MarginContainer/Rows/Close/Unstick
 @onready var quit_button : Button = $PanelContainer/MarginContainer/Rows/Close/Quit
 
 @onready var sensitivity_slider : HSlider = $PanelContainer/MarginContainer/Rows/HBoxContainer/VBoxContainer/Sensitivity/SensitivitySlider
@@ -25,10 +27,15 @@ var inventory_item : PackedScene = preload("res://UI/PauseMenu/InventoryItem.tsc
 
 func _ready() -> void:
 	quit_button.pressed.connect(get_tree().quit)
+	resume_button.pressed.connect(unpause)
+	unstick_button.pressed.connect(unstick)
 	connect_sliders()
 	var loadStatus = config.load("user://config.ini")
 	if loadStatus == OK: #0 = loaded, so this means data found
 		load_config()
+		
+func unstick() -> void:
+	player.global_position = Vector3(0, 1, 0)
 		
 func connect_sliders():
 	sensitivity_slider.value_changed.connect(sensitivity_slider_changed)
