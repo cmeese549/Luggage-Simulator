@@ -167,6 +167,7 @@ func _physics_process(delta):
 		animation_player.play("water_bob")
 		animation_player.get_animation("water_bob").loop_mode = Animation.LOOP_LINEAR
 		was_just_in_water = true
+		skateboard_audio.stop()
 	
 	if !is_in_water() and was_just_in_water:
 		animation_player.get_animation("water_bob").loop_mode = Animation.LOOP_NONE
