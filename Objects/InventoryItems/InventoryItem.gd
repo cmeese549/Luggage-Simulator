@@ -13,7 +13,6 @@ class_name InventoryItem
 @onready var twinkle : AudioStreamPlayer3D = $Twinkle
 
 func _ready() -> void:
-	print(self.global_position)
 	sprite.texture = item_icon
 	text.text = item_name
 	twinkle.unit_size = twinkle_diameter_meters
