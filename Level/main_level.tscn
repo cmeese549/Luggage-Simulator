@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://d28sbjt0i0qst"]
+[gd_scene load_steps=28 format=3 uid="uid://d28sbjt0i0qst"]
 
 [ext_resource type="PackedScene" uid="uid://ddwtbnyshxxj3" path="res://Art_Assets/Levels/LevelGeometry.tscn" id="1_1wy1g"]
 [ext_resource type="PackedScene" uid="uid://bk7vc4usjt3od" path="res://Player/player.tscn" id="1_7ireg"]
@@ -51,7 +51,6 @@ starting_money = 100
 
 [node name="MoneySound" type="AudioStreamPlayer" parent="Money"]
 stream = ExtResource("6_xpqtb")
-bus = &"Alerts"
 
 [node name="UI" parent="." instance=ExtResource("1_t065x")]
 
@@ -60,6 +59,9 @@ shop_items = Array[ExtResource("7_o3roe")]([ExtResource("8_yhkds"), ExtResource(
 
 [node name="MainMenu" parent="UI" index="5"]
 script = null
+
+[node name="DialogueBloop" parent="UI" index="7"]
+bus = &"Master"
 
 [node name="Enviroment" type="Node" parent="."]
 
@@ -77,7 +79,6 @@ stream = ExtResource("15_dbttc")
 volume_db = -6.0
 unit_size = 90.0
 autoplay = true
-bus = &"Ambience"
 
 [node name="WaterPlane" type="MeshInstance3D" parent="Water"]
 transform = Transform3D(700, 0, 0, 0, -3.0598e-05, 1, 0, -700, -4.37114e-08, 0, 0, 0)
@@ -116,7 +117,6 @@ script = ExtResource("19_qqyv7")
 [node name="Nature Ambience" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource("18_hhlvi")
 autoplay = true
-bus = &"Ambience"
 
 [node name="Song1" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource("20_s4lgs")

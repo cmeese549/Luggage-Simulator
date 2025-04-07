@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://b2gqicgrkqu86" path="res://Player/Tools/hands.tscn" id="3_fhl08"]
 [ext_resource type="PackedScene" uid="uid://xxekbn0nkf7g" path="res://Player/Tools/bucket.tscn" id="3_gwnis"]
 [ext_resource type="PackedScene" uid="uid://qykfij56gm1u" path="res://Player/Tools/thimble.tscn" id="3_k53q1"]
-[ext_resource type="Script" uid="uid://ns08b0figwtw" path="res://Player/ToolCam.gd" id="4_gwnis"]
+[ext_resource type="Script" path="res://Player/ToolCam.gd" id="4_gwnis"]
 [ext_resource type="PackedScene" uid="uid://cpado1v1hq4kt" path="res://Player/Tools/sponge.tscn" id="5_vtle1"]
 [ext_resource type="PackedScene" uid="uid://ds1xn8ubdi8jv" path="res://Player/Tools/watering_can.tscn" id="7_od3ui"]
 [ext_resource type="PackedScene" uid="uid://dvgxywx0ckbxa" path="res://Player/Tools/jug.tscn" id="8_00tjw"]
@@ -108,23 +108,94 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.509695, 0)
 script = ExtResource("2_btcbx")
 
 [node name="Thimble" parent="Neck/Camera3D/ToolSys" instance=ExtResource("3_k53q1")]
+fill_audio = null
 fill_volume = null
+empty_audio = null
 empty_volume = null
+sway_min = Vector2(-30, -30)
+sway_max = Vector2(30, 30)
+sway_speed_rotation = 0.075
+sway_amount_rotation = 75.0
+random_sway_amount = 7.0
+idle_sway_rotation_strength = 35.0
+idle_sway_speed = 0.007
+jump_sway_amount = 35.0
+landing_sway_adjust_time = 0.2
+bob_amount = 20.0
+horizontal_speed = 60.0
+horizontal_range = Vector2(-0.15, 0.15)
+capacity = 1
+water_value = 1
 
 [node name="Hands" parent="Neck/Camera3D/ToolSys" instance=ExtResource("3_fhl08")]
+fill_audio = null
+fill_volume = 0.0
+empty_audio = null
+empty_volume = 0.0
+sway_min = Vector2(-30, -30)
+sway_max = Vector2(30, 30)
+sway_speed_rotation = 0.075
+sway_amount_rotation = 75.0
+random_sway_amount = 7.0
+idle_sway_rotation_strength = 35.0
+idle_sway_speed = 0.007
+jump_sway_amount = 35.0
+landing_sway_adjust_time = 0.2
+bob_amount = 20.0
+horizontal_speed = 60.0
+horizontal_range = Vector2(-0.15, 0.15)
+water_value = 1
 
 [node name="Sponge" parent="Neck/Camera3D/ToolSys" instance=ExtResource("5_vtle1")]
+fill_audio = null
+fill_volume = 0.0
+empty_audio = null
+empty_volume = 0.0
 tool_name = "Crusty Sponge"
+sway_min = Vector2(-30, -30)
+sway_max = Vector2(30, 30)
+sway_speed_rotation = 0.075
+sway_amount_rotation = 75.0
+random_sway_amount = 7.0
+idle_sway_rotation_strength = 35.0
+idle_sway_speed = 0.007
+jump_sway_amount = 35.0
+landing_sway_adjust_time = 0.2
+bob_amount = 20.0
+horizontal_speed = 60.0
+horizontal_range = Vector2(-0.15, 0.15)
 
 [node name="Bucket" parent="Neck/Camera3D/ToolSys" instance=ExtResource("3_gwnis")]
+fill_audio = null
+fill_volume = 0.0
+empty_audio = null
+empty_volume = 0.0
+sway_min = Vector2(-30, -30)
+sway_max = Vector2(30, 30)
+sway_speed_rotation = 0.075
+sway_amount_rotation = 75.0
+random_sway_amount = 7.0
+idle_sway_rotation_strength = 35.0
+idle_sway_speed = 0.007
+jump_sway_amount = 35.0
+landing_sway_adjust_time = 0.2
 jump_overshoot_amount = null
+bob_amount = 20.0
+horizontal_speed = 60.0
+horizontal_range = Vector2(-0.15, 0.15)
 recentering_force = null
+water_value = 1
 
 [node name="Watering Can" parent="Neck/Camera3D/ToolSys" instance=ExtResource("7_od3ui")]
 empty_volume = null
 
 [node name="Jug" parent="Neck/Camera3D/ToolSys" instance=ExtResource("8_00tjw")]
+fill_audio = null
+fill_volume = 0.0
+empty_audio = null
 empty_volume = null
+random_sway_amount = 7.0
+water_value = 1
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 anchors_preset = 15
@@ -173,100 +244,78 @@ shape = SubResource("CapsuleShape3D_gwnis")
 [node name="1" type="AudioStreamPlayer" parent="Audio/Footsteps/Sand"]
 stream = ExtResource("10_b1ygp")
 volume_db = -4.0
-bus = &"Footsteps"
 
 [node name="2" type="AudioStreamPlayer" parent="Audio/Footsteps/Sand"]
 stream = ExtResource("11_o28un")
 volume_db = -4.0
-bus = &"Footsteps"
 
 [node name="3" type="AudioStreamPlayer" parent="Audio/Footsteps/Sand"]
 stream = ExtResource("12_n471f")
 volume_db = -4.0
-bus = &"Footsteps"
 
 [node name="4" type="AudioStreamPlayer" parent="Audio/Footsteps/Sand"]
 stream = ExtResource("13_7emwf")
 volume_db = -4.0
-bus = &"Footsteps"
 
 [node name="5" type="AudioStreamPlayer" parent="Audio/Footsteps/Sand"]
 stream = ExtResource("14_hshwv")
 volume_db = -4.0
-bus = &"Footsteps"
 
 [node name="6" type="AudioStreamPlayer" parent="Audio/Footsteps/Sand"]
 stream = ExtResource("15_gpjlu")
 volume_db = -4.0
-bus = &"Footsteps"
 
 [node name="Water" type="Node" parent="Audio/Footsteps"]
 
 [node name="1" type="AudioStreamPlayer" parent="Audio/Footsteps/Water"]
 stream = ExtResource("16_hshwv")
-bus = &"Footsteps"
 
 [node name="2" type="AudioStreamPlayer" parent="Audio/Footsteps/Water"]
 stream = ExtResource("17_gpjlu")
-bus = &"Footsteps"
 
 [node name="3" type="AudioStreamPlayer" parent="Audio/Footsteps/Water"]
 stream = ExtResource("18_8mwp6")
-bus = &"Footsteps"
 
 [node name="4" type="AudioStreamPlayer" parent="Audio/Footsteps/Water"]
 stream = ExtResource("19_qemgg")
-bus = &"Footsteps"
 
 [node name="5" type="AudioStreamPlayer" parent="Audio/Footsteps/Water"]
 stream = ExtResource("20_gpjlu")
-bus = &"Footsteps"
 
 [node name="6" type="AudioStreamPlayer" parent="Audio/Footsteps/Water"]
 stream = ExtResource("21_8mwp6")
-bus = &"Footsteps"
 
 [node name="JumpLand" type="Node" parent="Audio/Footsteps"]
 
 [node name="1" type="AudioStreamPlayer" parent="Audio/Footsteps/JumpLand"]
 stream = ExtResource("22_sm0op")
-bus = &"JumpLand"
 
 [node name="2" type="AudioStreamPlayer" parent="Audio/Footsteps/JumpLand"]
 stream = ExtResource("23_76lrf")
-bus = &"JumpLand"
 
 [node name="3" type="AudioStreamPlayer" parent="Audio/Footsteps/JumpLand"]
 stream = ExtResource("24_efx54")
-bus = &"JumpLand"
 
 [node name="Jump" type="Node" parent="Audio/Footsteps"]
 
 [node name="1" type="AudioStreamPlayer" parent="Audio/Footsteps/Jump"]
 stream = ExtResource("25_755ss")
-bus = &"Jump"
 
 [node name="2" type="AudioStreamPlayer" parent="Audio/Footsteps/Jump"]
 stream = ExtResource("26_bbimk")
-bus = &"Jump"
 
 [node name="3" type="AudioStreamPlayer" parent="Audio/Footsteps/Jump"]
 stream = ExtResource("27_m0h3t")
-bus = &"Jump"
 
 [node name="ToolSounder" type="AudioStreamPlayer" parent="Audio"]
-bus = &"Tools"
 
 [node name="MoneySound" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource("10_x3vf3")
 volume_db = -9.0
-bus = &"Alerts"
 
 [node name="PickupSound" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource("11_apopc")
 volume_db = -6.0
-bus = &"Alerts"
 
 [node name="InteractSound" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource("12_5htga")
-bus = &"Alerts"
