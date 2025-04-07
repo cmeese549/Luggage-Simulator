@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dcawpalpn6y5c"
+path="res://.godot/imported/leave water.mp3-64708fe80602fcad5d077d80bf114462.mp3str"
+
+[deps]
+
+source_file="res://Audio/Sfx/Footsteps/leave water.mp3"
+dest_files=["res://.godot/imported/leave water.mp3-64708fe80602fcad5d077d80bf114462.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
