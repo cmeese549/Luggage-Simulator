@@ -26,7 +26,7 @@
 [ext_resource type="Resource" uid="uid://dwctgocpxrtsi" path="res://UI/Shop/ShopItems/Jug.tres" id="14_2jerp"]
 [ext_resource type="Resource" uid="uid://blxq2rrfwlm43" path="res://UI/Shop/ShopItems/RollerSkate.tres" id="15_nxoi0"]
 [ext_resource type="Resource" uid="uid://cpt63tjw3br52" path="res://UI/Shop/ShopItems/SkateBoard.tres" id="16_jf3kf"]
-[ext_resource type="VideoStream" path="res://UI/Splashscreen/SplashScreenOGG.ogv" id="25_jf3kf"]
+[ext_resource type="VideoStream" uid="uid://bhcn3jiv54xym" path="res://UI/Splashscreen/SplashScreenOGG.ogv" id="25_jf3kf"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_byuxr"]
 shader = ExtResource("6_jqf55")
