@@ -60,9 +60,6 @@ shop_items = Array[ExtResource("7_o3roe")]([ExtResource("8_yhkds"), ExtResource(
 [node name="MainMenu" parent="UI" index="5"]
 script = null
 
-[node name="DialogueBloop" parent="UI" index="7"]
-bus = &"Master"
-
 [node name="Enviroment" type="Node" parent="."]
 
 [node name="LevelGeometry" parent="Enviroment" instance=ExtResource("1_1wy1g")]
@@ -129,7 +126,7 @@ one_shot = true
 [node name="AllPumps" type="Node" parent="."]
 
 [node name="Pump" parent="AllPumps" node_paths=PackedStringArray("upgrade_markers") instance=ExtResource("9_7gvd8")]
-transform = Transform3D(-0.14104, 0, -0.990004, 0, 1, 0, 0.990004, 0, -0.14104, 13.8841, -0.581938, -2.15099)
+transform = Transform3D(-0.109544, 0, -0.993982, 0, 1, 0, 0.993982, 0, -0.109544, 24.7001, -0.581938, -9.65339)
 upgrade_markers = []
 
 [editable path="UI"]
