@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://di1beqvco0ht6"]
+[gd_scene load_steps=8 format=3 uid="uid://di1beqvco0ht6"]
 
 [ext_resource type="Script" uid="uid://ikmx0d368syv" path="res://Objects/InventoryItems/InventoryItem.gd" id="1_6uwpg"]
 [ext_resource type="Texture2D" uid="uid://dsu4otkk2qt0g" path="res://icon.svg" id="2_ddh02"]
+[ext_resource type="AudioStream" uid="uid://dawxiys4eyp3b" path="res://Audio/Sfx/Ambience/ItemTwinkle.ogg" id="3_f6imx"]
 
 [sub_resource type="Animation" id="Animation_ddh02"]
 resource_name = "Bounce"
@@ -73,3 +74,10 @@ shape = SubResource("SphereShape3D_ddh02")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.39597, 0)
 billboard = 1
 text = "Lit Test Item"
+
+[node name="Twinkle" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_f6imx")
+volume_db = 12.5
+unit_size = 0.5
+autoplay = true
+bus = &"Ambience"

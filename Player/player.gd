@@ -26,6 +26,7 @@ var rng = RandomNumberGenerator.new()
 @onready var skateboard_fade_audio : AudioStreamPlayer = $Audio/Footsteps/SkateboardFade
 @onready var jump_splash_audio : AudioStreamPlayer = $Audio/Footsteps/JumpSplash
 @onready var left_water_audio : AudioStreamPlayer = $Audio/Footsteps/LeftWater
+@onready var cant_afford : AudioStreamPlayer = $Audio/CantAfford
 var ready_to_land : bool = true
 
 const JUMP_VELOCITY = 5.2
@@ -59,7 +60,7 @@ var handled_skateboard_stop : bool = false
 
 var was_just_in_water: bool = false
 
-var ready_to_start_game = true
+var ready_to_start_game = false
 var game_started = false
 
 var inventory : Array[InventoryItem] = []
@@ -96,6 +97,7 @@ func pickup_item(area: Area3D) -> void:
 		new_item.item_icon = area.get_parent().get_parent().item_icon
 		new_item.item_description = area.get_parent().get_parent().item_description
 		inventory.append(new_item)
+		Events.item_pickedup.emit(new_item)
 		area.get_parent().get_parent().call_deferred("queue_free")
 		
 func play_interact_sound() -> void:

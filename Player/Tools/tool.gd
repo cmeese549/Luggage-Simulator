@@ -63,6 +63,7 @@ func use(water_thing):
 			if water_thing == "DepositArea": 
 				player.play_tool_sound(empty_audio, empty_volume)
 				Events.make_money.emit(capacity * water_value, true)
+				Events.water_dumped.emit(capacity)
 				animation_player.play("empty")
 			else:
 				tool_ready = true

@@ -1,12 +1,25 @@
-[gd_scene load_steps=3 format=3 uid="uid://p37k13tnkylq"]
+[gd_scene load_steps=5 format=3 uid="uid://p37k13tnkylq"]
 
+[ext_resource type="Script" uid="uid://esbku7wnk1p" path="res://Level/ToddCougher.gd" id="1_4j602"]
 [ext_resource type="Material" uid="uid://bvgyy304smt42" path="res://Art_Assets/Materials/Todd.tres" id="1_suowd"]
+[ext_resource type="AudioStream" uid="uid://kd2ly8va2exd" path="res://Audio/Sfx/Alerts/ahem.wav" id="2_r7l3t"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_r7l3t"]
 
 [node name="TutorialTodd" type="Node3D"]
+script = ExtResource("1_4j602")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(2.36955, 0, 0, 0, 2.36955, 0, 0, 0, 1, 0, 1.138, 0)
 mesh = SubResource("QuadMesh_r7l3t")
 surface_material_override/0 = ExtResource("1_suowd")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.70893, 0)
+stream = ExtResource("2_r7l3t")
+volume_db = -3.425
+bus = &"Alerts"
+
+[node name="AhemTimer" type="Timer" parent="."]
+wait_time = 30.0
+autostart = true

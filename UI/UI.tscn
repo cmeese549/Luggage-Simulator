@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://exdhmbr43ger"]
+[gd_scene load_steps=32 format=3 uid="uid://exdhmbr43ger"]
 
 [ext_resource type="Script" uid="uid://dic75q4o378w6" path="res://UI/UI.gd" id="1_6dd3c"]
 [ext_resource type="Theme" uid="uid://b3kq74llqlv3x" path="res://UI/Theme/MinimalUI.tres" id="1_dhe1o"]
@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://btbey8ncomyx7" path="res://UI/HUD/Crosshair/hitmorker.png" id="5_jqf55"]
 [ext_resource type="Script" uid="uid://bkn6bkk5bo3k0" path="res://UI/Dialogue/DialogueBox.gd" id="5_qgmx8"]
 [ext_resource type="Script" uid="uid://sb0v8kjwv2pv" path="res://UI/MainMenu/MainMenu.gd" id="6_byuxr"]
-[ext_resource type="Shader" uid="uid://bqx34vxqbnnb6" path="res://UI/MainMenu/FadeFromBlack.tres" id="6_jqf55"]
+[ext_resource type="Shader" uid="uid://c6qdwrppkjjqy" path="res://UI/MainMenu/FadeFromBlack.tres" id="6_jqf55"]
 [ext_resource type="Script" uid="uid://bed3d7egj53pu" path="res://UI/PauseMenu/PauseMenu.gd" id="6_qhxh2"]
 [ext_resource type="Script" uid="uid://cde2nhieog6m4" path="res://UI/UpgradeMenu/UpgradeMenu.gd" id="6_t31p1"]
 [ext_resource type="Script" path="res://UI/delta_fade.gd" id="6_wtdy7"]
@@ -28,6 +28,7 @@
 [ext_resource type="Resource" uid="uid://blxq2rrfwlm43" path="res://UI/Shop/ShopItems/RollerSkate.tres" id="15_nxoi0"]
 [ext_resource type="Resource" uid="uid://cpt63tjw3br52" path="res://UI/Shop/ShopItems/SkateBoard.tres" id="16_jf3kf"]
 [ext_resource type="VideoStream" uid="uid://bhcn3jiv54xym" path="res://UI/Splashscreen/SplashScreenOGG.ogv" id="25_jf3kf"]
+[ext_resource type="AudioStream" uid="uid://b16op18gd5aiw" path="res://Audio/Sfx/Alerts/cant afford corn.mp3" id="29_rbg2s"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_byuxr"]
 shader = ExtResource("6_jqf55")
@@ -219,11 +220,30 @@ theme_override_constants/margin_bottom = 15
 [node name="Rows" type="VBoxContainer" parent="UpgradeMenu/PanelContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows"]
 layout_mode = 2
+
+[node name="WPS" type="RichTextLabel" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/normal_font_size = 58
+bbcode_enabled = true
+text = "Water Per Second:"
+
+[node name="Label2" type="Label" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 58
 text = "Upgrade Pump"
 horizontal_alignment = 1
+
+[node name="MPS" type="RichTextLabel" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/normal_font_size = 58
+bbcode_enabled = true
+text = "Money Per Second:"
+horizontal_alignment = 2
 
 [node name="HSeparator" type="HSeparator" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows"]
 custom_minimum_size = Vector2(0, 61.1)
@@ -1101,3 +1121,8 @@ volume_db = -16.5
 [node name="TypeTimer" type="Timer" parent="."]
 wait_time = 0.025
 one_shot = true
+
+[node name="CantAfford" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("29_rbg2s")
+volume_db = -4.0
+bus = &"Alerts"
