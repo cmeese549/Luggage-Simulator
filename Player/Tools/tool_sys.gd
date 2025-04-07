@@ -6,6 +6,8 @@ var tools: Array[tool]
 var equipped_tool: tool
 var next_tool: tool
 
+@onready var player : Player = $"../../.."
+
 @onready var look_at_cast: RayCast3D = $"../LookAtCast"
 @onready var camera_3d: Camera3D = $".."
 
@@ -70,6 +72,7 @@ func _unhandled_input(event):
 				interact_thing.find_parent("Pump").attempt_buy()
 			elif interact_thing.name == "PumpUpgrade":
 				interact_thing.find_parent("Pump").attempt_upgrade()
+				player.play_interact_sound()
 
 func check_for_interactable():
 	if look_at_cast.is_colliding():

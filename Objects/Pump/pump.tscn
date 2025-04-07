@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://hr021abwwm8b"]
+[gd_scene load_steps=16 format=3 uid="uid://hr021abwwm8b"]
 
 [ext_resource type="Script" uid="uid://cunpmy3a5ucf6" path="res://Objects/Pump/pump.gd" id="1_55ofu"]
 [ext_resource type="ArrayMesh" uid="uid://d06xqcr5yveh0" path="res://Art_Assets/Models/MachineBLOCKOUT.obj" id="2_d18j0"]
@@ -10,6 +10,8 @@
 [ext_resource type="Resource" uid="uid://cjn3ajir16kx" path="res://Objects/Pump/PumpUpgrades/quality_1.tres" id="6_7nxrv"]
 [ext_resource type="Resource" uid="uid://cghi5igy78rs" path="res://Objects/Pump/PumpUpgrades/quality_2.tres" id="7_2435t"]
 [ext_resource type="Resource" uid="uid://bi1iaajindrpr" path="res://Objects/Pump/PumpUpgrades/quality_3.tres" id="8_1pin8"]
+[ext_resource type="AudioStream" uid="uid://blany6o2ya8a2" path="res://Audio/Sfx/Pump/pump_built.wav" id="11_6ybtv"]
+[ext_resource type="AudioStream" uid="uid://csci87kwyg66b" path="res://Audio/Sfx/Pump/pump_ambience.ogg" id="12_xilsv"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_55ofu"]
 top_radius = 0.1
@@ -82,3 +84,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.66483, 1.66063, 1.73888)
 
 [node name="Upgrade5" type="Marker3D" parent="Upgrades/Markers"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.43094, 1.66063, 1.73888)
+
+[node name="BuildAudio" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("11_6ybtv")
+volume_db = -3.5
+unit_size = 4.5
+bus = &"Pumps"
+
+[node name="Ambience" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("12_xilsv")
+volume_db = -2.0
+unit_size = 3.5
+bus = &"Pumps"

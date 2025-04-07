@@ -1,14 +1,35 @@
-[gd_scene load_steps=17 format=3 uid="uid://bk7vc4usjt3od"]
+[gd_scene load_steps=38 format=3 uid="uid://bk7vc4usjt3od"]
 
 [ext_resource type="Script" uid="uid://5yb4xnha3npe" path="res://Player/player.gd" id="1_l8h54"]
 [ext_resource type="Script" uid="uid://b140mkd7ankio" path="res://Player/Tools/tool_sys.gd" id="2_btcbx"]
 [ext_resource type="PackedScene" uid="uid://b2gqicgrkqu86" path="res://Player/Tools/hands.tscn" id="3_fhl08"]
 [ext_resource type="PackedScene" uid="uid://xxekbn0nkf7g" path="res://Player/Tools/bucket.tscn" id="3_gwnis"]
 [ext_resource type="PackedScene" uid="uid://qykfij56gm1u" path="res://Player/Tools/thimble.tscn" id="3_k53q1"]
-[ext_resource type="Script" path="res://Player/ToolCam.gd" id="4_gwnis"]
+[ext_resource type="Script" uid="uid://ns08b0figwtw" path="res://Player/ToolCam.gd" id="4_gwnis"]
 [ext_resource type="PackedScene" uid="uid://cpado1v1hq4kt" path="res://Player/Tools/sponge.tscn" id="5_vtle1"]
 [ext_resource type="PackedScene" uid="uid://ds1xn8ubdi8jv" path="res://Player/Tools/watering_can.tscn" id="7_od3ui"]
 [ext_resource type="PackedScene" uid="uid://dvgxywx0ckbxa" path="res://Player/Tools/jug.tscn" id="8_00tjw"]
+[ext_resource type="AudioStream" uid="uid://bg7jayolqaqd6" path="res://Audio/Sfx/Footsteps/Sand/1.mp3" id="10_b1ygp"]
+[ext_resource type="AudioStream" uid="uid://57dmf87xry8d" path="res://Audio/Sfx/spend_money.mp3" id="10_x3vf3"]
+[ext_resource type="AudioStream" uid="uid://ceeha64s6f58" path="res://Audio/Sfx/pikcup_item.mp3" id="11_apopc"]
+[ext_resource type="AudioStream" uid="uid://dqyn6u255qd70" path="res://Audio/Sfx/Footsteps/Sand/2.mp3" id="11_o28un"]
+[ext_resource type="AudioStream" uid="uid://dukmw41m2som5" path="res://Audio/Sfx/interact.mp3" id="12_5htga"]
+[ext_resource type="AudioStream" uid="uid://dvwmfa77mxvkl" path="res://Audio/Sfx/Footsteps/Sand/3.mp3" id="12_n471f"]
+[ext_resource type="AudioStream" uid="uid://cxd5wbc1mcgw5" path="res://Audio/Sfx/Footsteps/Sand/4.mp3" id="13_7emwf"]
+[ext_resource type="AudioStream" uid="uid://c2ue6qobt8ey6" path="res://Audio/Sfx/Footsteps/Sand/5.mp3" id="14_hshwv"]
+[ext_resource type="AudioStream" uid="uid://pp6bd0opgu6p" path="res://Audio/Sfx/Footsteps/Sand/6.mp3" id="15_gpjlu"]
+[ext_resource type="AudioStream" uid="uid://dtbhv2acpcyvy" path="res://Audio/Sfx/Footsteps/Water/1.mp3" id="16_hshwv"]
+[ext_resource type="AudioStream" uid="uid://dgwd2va42vn1y" path="res://Audio/Sfx/Footsteps/Water/2.mp3" id="17_gpjlu"]
+[ext_resource type="AudioStream" uid="uid://coi3n3icw45yj" path="res://Audio/Sfx/Footsteps/Water/3.mp3" id="18_8mwp6"]
+[ext_resource type="AudioStream" uid="uid://dqk3qd1g50wgf" path="res://Audio/Sfx/Footsteps/Water/4.mp3" id="19_qemgg"]
+[ext_resource type="AudioStream" uid="uid://137soamtb3d2" path="res://Audio/Sfx/Footsteps/Water/5.mp3" id="20_gpjlu"]
+[ext_resource type="AudioStream" uid="uid://c5bn6xktl7p1f" path="res://Audio/Sfx/Footsteps/Water/6.mp3" id="21_8mwp6"]
+[ext_resource type="AudioStream" uid="uid://cmg877vxvbtad" path="res://Audio/Sfx/Jump/Land/land 1.mp3" id="22_sm0op"]
+[ext_resource type="AudioStream" uid="uid://cthctvy350lkk" path="res://Audio/Sfx/Jump/Land/land 2.mp3" id="23_76lrf"]
+[ext_resource type="AudioStream" uid="uid://6yu5bigyirv" path="res://Audio/Sfx/Jump/Land/land 3.mp3" id="24_efx54"]
+[ext_resource type="AudioStream" uid="uid://da3x6yehfwrh" path="res://Audio/Sfx/Jump/Jump/jump 1.mp3" id="25_755ss"]
+[ext_resource type="AudioStream" uid="uid://c5n1fnoclmuv0" path="res://Audio/Sfx/Jump/Jump/jump 2.mp3" id="26_bbimk"]
+[ext_resource type="AudioStream" uid="uid://bleydfwc4rkny" path="res://Audio/Sfx/Jump/Jump/jump 3.mp3" id="27_m0h3t"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_btcbx"]
 
@@ -87,6 +108,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.509695, 0)
 script = ExtResource("2_btcbx")
 
 [node name="Thimble" parent="Neck/Camera3D/ToolSys" instance=ExtResource("3_k53q1")]
+fill_volume = null
+empty_volume = null
 
 [node name="Hands" parent="Neck/Camera3D/ToolSys" instance=ExtResource("3_fhl08")]
 
@@ -94,12 +117,14 @@ script = ExtResource("2_btcbx")
 tool_name = "Crusty Sponge"
 
 [node name="Bucket" parent="Neck/Camera3D/ToolSys" instance=ExtResource("3_gwnis")]
-jump_overshoot_amount = 0.055
-recentering_force = 55.0
+jump_overshoot_amount = null
+recentering_force = null
 
 [node name="Watering Can" parent="Neck/Camera3D/ToolSys" instance=ExtResource("7_od3ui")]
+empty_volume = null
 
 [node name="Jug" parent="Neck/Camera3D/ToolSys" instance=ExtResource("8_00tjw")]
+empty_volume = null
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 anchors_preset = 15
@@ -138,3 +163,110 @@ collision_mask = 256
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ItemPickupRange"]
 shape = SubResource("CapsuleShape3D_gwnis")
+
+[node name="Audio" type="Node" parent="."]
+
+[node name="Footsteps" type="Node" parent="Audio"]
+
+[node name="Sand" type="Node" parent="Audio/Footsteps"]
+
+[node name="1" type="AudioStreamPlayer" parent="Audio/Footsteps/Sand"]
+stream = ExtResource("10_b1ygp")
+volume_db = -4.0
+bus = &"Footsteps"
+
+[node name="2" type="AudioStreamPlayer" parent="Audio/Footsteps/Sand"]
+stream = ExtResource("11_o28un")
+volume_db = -4.0
+bus = &"Footsteps"
+
+[node name="3" type="AudioStreamPlayer" parent="Audio/Footsteps/Sand"]
+stream = ExtResource("12_n471f")
+volume_db = -4.0
+bus = &"Footsteps"
+
+[node name="4" type="AudioStreamPlayer" parent="Audio/Footsteps/Sand"]
+stream = ExtResource("13_7emwf")
+volume_db = -4.0
+bus = &"Footsteps"
+
+[node name="5" type="AudioStreamPlayer" parent="Audio/Footsteps/Sand"]
+stream = ExtResource("14_hshwv")
+volume_db = -4.0
+bus = &"Footsteps"
+
+[node name="6" type="AudioStreamPlayer" parent="Audio/Footsteps/Sand"]
+stream = ExtResource("15_gpjlu")
+volume_db = -4.0
+bus = &"Footsteps"
+
+[node name="Water" type="Node" parent="Audio/Footsteps"]
+
+[node name="1" type="AudioStreamPlayer" parent="Audio/Footsteps/Water"]
+stream = ExtResource("16_hshwv")
+bus = &"Footsteps"
+
+[node name="2" type="AudioStreamPlayer" parent="Audio/Footsteps/Water"]
+stream = ExtResource("17_gpjlu")
+bus = &"Footsteps"
+
+[node name="3" type="AudioStreamPlayer" parent="Audio/Footsteps/Water"]
+stream = ExtResource("18_8mwp6")
+bus = &"Footsteps"
+
+[node name="4" type="AudioStreamPlayer" parent="Audio/Footsteps/Water"]
+stream = ExtResource("19_qemgg")
+bus = &"Footsteps"
+
+[node name="5" type="AudioStreamPlayer" parent="Audio/Footsteps/Water"]
+stream = ExtResource("20_gpjlu")
+bus = &"Footsteps"
+
+[node name="6" type="AudioStreamPlayer" parent="Audio/Footsteps/Water"]
+stream = ExtResource("21_8mwp6")
+bus = &"Footsteps"
+
+[node name="JumpLand" type="Node" parent="Audio/Footsteps"]
+
+[node name="1" type="AudioStreamPlayer" parent="Audio/Footsteps/JumpLand"]
+stream = ExtResource("22_sm0op")
+bus = &"JumpLand"
+
+[node name="2" type="AudioStreamPlayer" parent="Audio/Footsteps/JumpLand"]
+stream = ExtResource("23_76lrf")
+bus = &"JumpLand"
+
+[node name="3" type="AudioStreamPlayer" parent="Audio/Footsteps/JumpLand"]
+stream = ExtResource("24_efx54")
+bus = &"JumpLand"
+
+[node name="Jump" type="Node" parent="Audio/Footsteps"]
+
+[node name="1" type="AudioStreamPlayer" parent="Audio/Footsteps/Jump"]
+stream = ExtResource("25_755ss")
+bus = &"Jump"
+
+[node name="2" type="AudioStreamPlayer" parent="Audio/Footsteps/Jump"]
+stream = ExtResource("26_bbimk")
+bus = &"Jump"
+
+[node name="3" type="AudioStreamPlayer" parent="Audio/Footsteps/Jump"]
+stream = ExtResource("27_m0h3t")
+bus = &"Jump"
+
+[node name="ToolSounder" type="AudioStreamPlayer" parent="Audio"]
+bus = &"Tools"
+
+[node name="MoneySound" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("10_x3vf3")
+volume_db = -9.0
+bus = &"Alerts"
+
+[node name="PickupSound" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("11_apopc")
+volume_db = -6.0
+bus = &"Alerts"
+
+[node name="InteractSound" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("12_5htga")
+bus = &"Alerts"
