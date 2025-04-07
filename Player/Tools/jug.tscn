@@ -249,8 +249,7 @@ jump_reset_curve = NodePath("Line2D")
 horizontal_speed = 50.0
 horizontal_range = Vector2(-0.1, 0.1)
 recentering_force = 10.0
-capacity = 10
-water_value = null
+capacity = 500
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

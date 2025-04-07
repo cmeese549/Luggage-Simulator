@@ -10,5 +10,5 @@ description = "Basic ass filter"
 price = 10
 effect = 0.1
 model = ExtResource("1_xdn43")
-type = 0
+type = 1
 metadata/_custom_type_script = "uid://cc2dlnfftk7rx"

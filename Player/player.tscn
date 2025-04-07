@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://b2gqicgrkqu86" path="res://Player/Tools/hands.tscn" id="3_fhl08"]
 [ext_resource type="PackedScene" uid="uid://xxekbn0nkf7g" path="res://Player/Tools/bucket.tscn" id="3_gwnis"]
 [ext_resource type="PackedScene" uid="uid://qykfij56gm1u" path="res://Player/Tools/thimble.tscn" id="3_k53q1"]
-[ext_resource type="Script" uid="uid://ns08b0figwtw" path="res://Player/ToolCam.gd" id="4_gwnis"]
+[ext_resource type="Script" path="res://Player/ToolCam.gd" id="4_gwnis"]
 [ext_resource type="PackedScene" uid="uid://cpado1v1hq4kt" path="res://Player/Tools/sponge.tscn" id="5_vtle1"]
 [ext_resource type="PackedScene" uid="uid://ds1xn8ubdi8jv" path="res://Player/Tools/watering_can.tscn" id="7_od3ui"]
 [ext_resource type="PackedScene" uid="uid://dvgxywx0ckbxa" path="res://Player/Tools/jug.tscn" id="8_00tjw"]
@@ -122,7 +122,6 @@ landing_sway_adjust_time = 0.2
 bob_amount = 20.0
 horizontal_speed = 60.0
 horizontal_range = Vector2(-0.15, 0.15)
-water_value = 1
 
 [node name="Sponge" parent="Neck/Camera3D/ToolSys" instance=ExtResource("5_vtle1")]
 tool_name = "Crusty Sponge"
@@ -154,7 +153,6 @@ bob_amount = 20.0
 horizontal_speed = 60.0
 horizontal_range = Vector2(-0.15, 0.15)
 recentering_force = 55.0
-water_value = 1
 
 [node name="Watering Can" parent="Neck/Camera3D/ToolSys" instance=ExtResource("7_od3ui")]
 sway_min = Vector2(-30, -30)
@@ -172,7 +170,6 @@ horizontal_range = Vector2(-0.15, 0.15)
 
 [node name="Jug" parent="Neck/Camera3D/ToolSys" instance=ExtResource("8_00tjw")]
 random_sway_amount = 7.0
-water_value = 1
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 anchors_preset = 15

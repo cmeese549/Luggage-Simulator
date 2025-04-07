@@ -10,5 +10,5 @@ description = "Take that RFK!"
 price = 100
 effect = 0.25
 model = ExtResource("1_jlovj")
-type = 0
+type = 1
 metadata/_custom_type_script = "uid://cc2dlnfftk7rx"
