@@ -20,7 +20,7 @@ stretch_mode = 5
 [node name="Description" type="Label" parent="."]
 custom_minimum_size = Vector2(5, 100)
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 32
 text = "Please fill me up with an upgrade pleaaase :("
 horizontal_alignment = 1
 autowrap_mode = 2
