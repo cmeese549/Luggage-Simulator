@@ -7,12 +7,12 @@
 [ext_resource type="Texture2D" uid="uid://c8ipav7ruim5w" path="res://UI/HUD/Crosshair/crosshair2.png" id="4_f1fl4"]
 [ext_resource type="Texture2D" uid="uid://btbey8ncomyx7" path="res://UI/HUD/Crosshair/hitmorker.png" id="5_jqf55"]
 [ext_resource type="Script" uid="uid://bkn6bkk5bo3k0" path="res://UI/Dialogue/DialogueBox.gd" id="5_qgmx8"]
-[ext_resource type="Script" path="res://UI/MainMenu/MainMenu.gd" id="6_byuxr"]
+[ext_resource type="Script" uid="uid://sb0v8kjwv2pv" path="res://UI/MainMenu/MainMenu.gd" id="6_byuxr"]
 [ext_resource type="Shader" uid="uid://bkcnroaexgcpu" path="res://UI/MainMenu/FadeFromBlack.tres" id="6_jqf55"]
 [ext_resource type="Script" uid="uid://bed3d7egj53pu" path="res://UI/PauseMenu/PauseMenu.gd" id="6_qhxh2"]
 [ext_resource type="Script" uid="uid://cde2nhieog6m4" path="res://UI/UpgradeMenu/UpgradeMenu.gd" id="6_t31p1"]
 [ext_resource type="Script" uid="uid://vcecdqq511h1" path="res://UI/Shop/Shop.gd" id="7_6q2ik"]
-[ext_resource type="Script" path="res://UI/HUD/hud.gd" id="7_017wa"]
+[ext_resource type="Script" uid="uid://cmqb4oi3mfhb4" path="res://UI/HUD/hud.gd" id="7_017wa"]
 [ext_resource type="PackedScene" uid="uid://yg0ip3ps48ca" path="res://UI/UpgradeMenu/UpgradeSlot.tscn" id="7_kncd2"]
 [ext_resource type="Script" uid="uid://b1lecmjr7r5pu" path="res://UI/Shop/ShopItems/ShopItem.gd" id="9_xtxff"]
 [ext_resource type="PackedScene" uid="uid://dth0cukoj3ajb" path="res://UI/PauseMenu/InventoryItem.tscn" id="10_npmjx"]
@@ -412,26 +412,6 @@ text = "Close"
 [node name="Control2" type="Control" parent="Shop/PanelContainer/MarginContainer/Rows/Close"]
 layout_mode = 2
 size_flags_horizontal = 3
-
-[node name="Inventory" type="MarginContainer" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="PanelContainer" type="PanelContainer" parent="Inventory"]
-layout_mode = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="Inventory/PanelContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 15
-theme_override_constants/margin_top = 15
-theme_override_constants/margin_right = 15
-theme_override_constants/margin_bottom = 15
 
 [node name="PauseMenu" type="MarginContainer" parent="."]
 process_mode = 3

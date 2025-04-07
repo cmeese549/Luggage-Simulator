@@ -24,12 +24,15 @@ horizontal_alignment = 1
 [node name="ItemIcon" type="TextureRect" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+size_flags_stretch_ratio = 18.51
 texture = ExtResource("1_qn5hd")
-stretch_mode = 5
+stretch_mode = 3
 
 [node name="ItemDescription" type="Label" parent="VBoxContainer"]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 9.85
 theme_override_font_sizes/font_size = 21
 text = "This is a super awesome epic shop item"
 horizontal_alignment = 1
