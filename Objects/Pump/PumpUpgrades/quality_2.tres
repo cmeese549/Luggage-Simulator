@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="pump_upgrade" load_steps=2 format=3 uid="uid://cghi5igy78rs"]
+[gd_resource type="Resource" script_class="pump_upgrade" load_steps=3 format=3 uid="uid://cghi5igy78rs"]
 
+[ext_resource type="PackedScene" uid="uid://mux46s41f8p2" path="res://Art_Assets/Models/MachineUpgrades/QualityUpgradeB.tscn" id="1_jlovj"]
 [ext_resource type="Script" uid="uid://cc2dlnfftk7rx" path="res://Objects/Pump/PumpUpgrades/pump_upgrade.gd" id="1_oo6i0"]
 
 [resource]
@@ -8,5 +9,6 @@ upgrade_name = "Fluoride Injector"
 description = "Take that RFK!"
 price = 100
 effect = 0.25
+model = ExtResource("1_jlovj")
 type = 0
 metadata/_custom_type_script = "uid://cc2dlnfftk7rx"
