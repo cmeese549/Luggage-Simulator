@@ -18,6 +18,6 @@ func find_all_pumps():
 
 func new_pump(n_pump: Pump):
 	built_pumps.append(n_pump)
-	current_pump_price = current_pump_price * (1.1)
+	current_pump_price = current_pump_price * (1.12)
 	for p in all_pumps:
 		p.update_price(int(current_pump_price))

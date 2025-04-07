@@ -8,7 +8,7 @@ script = ExtResource("2_mcuk6")
 item_name = "Big Jug"
 item_description = "A very large jug"
 item_icon = ExtResource("1_q4rvq")
-price = 1
+price = 15000
 item_type = "Tool"
 required_items_quip = "I hate this thing so much.  I'll trade you it for a [color=green]Watering Can and an Expense Report.[/color]  {pause=0.5} Please get a [color=green]Watering Can[/color] so I can get rid of this stupid [color=green]jug.[/color]"
 required_items_string = "Requires the Watering Can and an Expense Report to purchase.  Try looking over by the big trampoline!"

@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="pump_upgrade" load_steps=3 format=3 uid="uid://bi1iaajindrpr"]
 
-[ext_resource type="PackedScene" uid="uid://cpkbkwmftj7g1" path="res://Art_Assets/Models/MachineUpgrades/QualityUpgradeC.tscn" id="1_tqnvb"]
+[ext_resource type="PackedScene" path="res://Art_Assets/Models/MachineUpgrades/QualityUpgradeC.tscn" id="1_tqnvb"]
 [ext_resource type="Script" uid="uid://cc2dlnfftk7rx" path="res://Objects/Pump/PumpUpgrades/pump_upgrade.gd" id="1_vgkke"]
 
 [resource]
@@ -8,7 +8,7 @@ script = ExtResource("1_vgkke")
 upgrade_name = "Goldenizer"
 description = "Gold for everyone!"
 price = 1000
-effect = 0.5
+effect = 0.7
 model = ExtResource("1_tqnvb")
 type = 1
 metadata/_custom_type_script = "uid://cc2dlnfftk7rx"

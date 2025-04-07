@@ -249,7 +249,7 @@ jump_reset_curve = NodePath("Line2D")
 horizontal_speed = 50.0
 horizontal_range = Vector2(-0.1, 0.1)
 recentering_force = 10.0
-capacity = 500
+capacity = 10000
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

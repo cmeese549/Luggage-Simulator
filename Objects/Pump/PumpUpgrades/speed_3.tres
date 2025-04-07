@@ -1,14 +1,14 @@
 [gd_resource type="Resource" script_class="pump_upgrade" load_steps=3 format=3 uid="uid://dq4fvyul325yv"]
 
 [ext_resource type="Script" uid="uid://cc2dlnfftk7rx" path="res://Objects/Pump/PumpUpgrades/pump_upgrade.gd" id="1_jvsfm"]
-[ext_resource type="PackedScene" uid="uid://rf23iie0x7ea" path="res://Art_Assets/Models/MachineUpgrades/SpeedUpgradeC.tscn" id="1_x8u0k"]
+[ext_resource type="PackedScene" path="res://Art_Assets/Models/MachineUpgrades/SpeedUpgradeC.tscn" id="1_x8u0k"]
 
 [resource]
 script = ExtResource("1_jvsfm")
 upgrade_name = "Speed 3"
 description = "Go evenest fastest!"
 price = 1000
-effect = 10.0
+effect = 7.0
 model = ExtResource("1_x8u0k")
 type = 0
 metadata/_custom_type_script = "uid://cc2dlnfftk7rx"

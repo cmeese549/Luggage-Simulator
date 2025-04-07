@@ -8,7 +8,7 @@ script = ExtResource("2_pua8p")
 item_name = "Crusty Sponge"
 item_description = "This sponge rocks! (it's rock hard)"
 item_icon = ExtResource("1_nhvx4")
-price = 1
+price = 200
 item_type = "Tool"
 required_items_quip = "It would be difficult to use a [color=green]Sponge[/color] without [color=green]Hands.[/color]{pause=0.5}  Lucky for you, I'll sell you [color=green]Your Hands,[/color] then you can buy the [color=green]Sponge![/color]  {pause=0.5} That is, so long as you have some [color=green]Square Pants[/color] to trade with..."
 required_items_string = "Requires Your Hands and some Square Pants to purchase."
