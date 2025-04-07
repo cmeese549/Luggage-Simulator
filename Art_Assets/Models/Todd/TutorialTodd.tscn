@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://p37k13tnkylq"]
+
+[ext_resource type="Material" uid="uid://bvgyy304smt42" path="res://Art_Assets/Materials/Todd.tres" id="1_suowd"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_r7l3t"]
+
+[node name="TutorialTodd" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(2.36955, 0, 0, 0, 2.36955, 0, 0, 0, 1, 0, 1.138, 0)
+mesh = SubResource("QuadMesh_r7l3t")
+surface_material_override/0 = ExtResource("1_suowd")
