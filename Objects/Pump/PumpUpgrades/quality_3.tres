@@ -10,5 +10,5 @@ description = "Gold for everyone!"
 price = 1000
 effect = 0.5
 model = ExtResource("1_tqnvb")
-type = 0
+type = 1
 metadata/_custom_type_script = "uid://cc2dlnfftk7rx"
