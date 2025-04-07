@@ -18,6 +18,10 @@ func _ready() -> void:
 	pause_timer.timeout.connect(unpause)
 	pauser.pause_requested.connect(pause)
 	
+func skip_dialogue() -> void:
+	type_timer.stop()
+	self.content.visible_characters = self.content.text.length()
+	
 func stop_dialogue() -> void:
 	dialogue_finished.emit()
 	voice.stop()

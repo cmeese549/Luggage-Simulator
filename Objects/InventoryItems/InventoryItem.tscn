@@ -58,6 +58,7 @@ speed_scale = 0.5
 [node name="Sprite3D" type="Sprite3D" parent="Bouncer"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.42913, 0)
 billboard = 1
+render_priority = 5
 texture = ExtResource("2_ddh02")
 
 [node name="Area3D" type="Area3D" parent="Bouncer" groups=["Pickupable"]]

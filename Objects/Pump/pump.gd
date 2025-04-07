@@ -24,7 +24,6 @@ var upgrade_slots: Array[pump_upgrade] = [null, null, null, null, null]
 var money
 
 func _ready():
-	build_audio.finished.connect(start_ambience)
 	cur_quality = base_quality
 	$Geo.visible = built
 	$Sign.visible = true
@@ -46,6 +45,7 @@ func start_ambience() -> void:
 
 func build():
 	build_audio.play()
+	start_ambience()
 	built = true
 	$Geo.visible = true
 	$Sign.visible = false

@@ -40,7 +40,7 @@ var item_purchased_quips : Array[String] = [
 var used_item_purchased_quips : Array[String] = []
 
 var has_delivered_final_quip : bool = false
-var final_quip : String = "OMG!!!{pause=0.5_} MY KEYS!!!{pause=0.5_} Thank you so much.  Now I can finally get out of here.  By the way...{pause=0.5} [b]I reported you to the government.[/b]{pause=1.5}  You've been fined for damaging the environment.{pause=0.5} All of your money is gone now.{pause=1.0} [rainbow]S{pause=0.1}o{pause=0.1}r{pause=0.1}r{pause=0.1}y{pause=0.1}.{pause=0.1}.{pause=0.1}.{pause=0.1}.[/rainbow]"
+var final_quip : String = "OMG!!!{pause=0.5} MY KEYS!!!{pause=0.5} Thank you so much.  Now I can finally get out of here.  By the way...{pause=0.5} [b]I reported you to the government.[/b]{pause=1.5}  You've been fined for damaging the environment.{pause=0.5} All of your money is gone now.{pause=1.0} [rainbow]S{pause=0.1}o{pause=0.1}r{pause=0.1}r{pause=0.1}y{pause=0.1}.{pause=0.1}.{pause=0.1}.{pause=0.1}.[/rainbow]"
 @onready var hsep = $PanelContainer/MarginContainer/Rows/HSeparator4
 @onready var other_hsep = $PanelContainer/MarginContainer/Rows/HSeparator3
 @onready var scroll_container = $PanelContainer/MarginContainer/Rows/ScrollContainer
@@ -61,6 +61,8 @@ func _input(event) -> void:
 	elif Input.is_action_just_released("Pause") or Input.is_action_just_released("ui_cancel"):
 		if self.visible:
 			close_shop()
+	elif Input.is_action_just_pressed("primary") and self.visible:
+		dialogue_box.skip_dialogue()
 
 func open_shop() -> void:
 	self.visible = true
@@ -129,7 +131,10 @@ func attempt_purchase(item: ShopItem, button: Button) -> void:
 		print(item.item_name + " has items")
 		has_required_items = check_has_tool(item)
 	if !has_required_items:
-		dialogue_box.render_dialogue(item.required_items_quip)
+		if dialogue_box.content.text == dialogue_box.pauser.extract_pauses_from_dialogue(item.required_items_quip):
+			dialogue_box.skip_dialogue()
+		else:
+			dialogue_box.render_dialogue(item.required_items_quip)
 		return
 	
 	if ui.money.try_buy(item.price):

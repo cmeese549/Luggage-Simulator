@@ -206,9 +206,9 @@ point_count = 3
 [node name="Sponge" type="Node3D" node_paths=PackedStringArray("jump_reset_curve")]
 script = ExtResource("1_kl62g")
 fill_audio = ExtResource("2_itajf")
-fill_volume = null
+fill_volume = 1.5
 empty_audio = ExtResource("3_wacad")
-empty_volume = null
+empty_volume = 5.0
 tool_name = "Sponge"
 sway_min = null
 sway_max = null
