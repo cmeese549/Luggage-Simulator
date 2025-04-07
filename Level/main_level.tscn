@@ -106,10 +106,6 @@ debug_color = Color(0, 0, 0, 1)
 [node name="WaterSeller" parent="." instance=ExtResource("8_cv6sc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.71387, 0, -17.2599)
 
-[node name="Pump" parent="." node_paths=PackedStringArray("upgrade_markers") instance=ExtResource("9_7gvd8")]
-transform = Transform3D(-0.14104, 0, -0.990004, 0, 1, 0, 0.990004, 0, -0.14104, 13.8841, -0.581938, -2.15099)
-upgrade_markers = []
-
 [node name="Audio" type="Node" parent="."]
 process_mode = 3
 script = ExtResource("19_qqyv7")
@@ -129,5 +125,11 @@ bus = &"Music"
 [node name="SongTimer" type="Timer" parent="Audio"]
 wait_time = 120.0
 one_shot = true
+
+[node name="AllPumps" type="Node" parent="."]
+
+[node name="Pump" parent="AllPumps" node_paths=PackedStringArray("upgrade_markers") instance=ExtResource("9_7gvd8")]
+transform = Transform3D(-0.14104, 0, -0.990004, 0, 1, 0, 0.990004, 0, -0.14104, 13.8841, -0.581938, -2.15099)
+upgrade_markers = []
 
 [editable path="UI"]

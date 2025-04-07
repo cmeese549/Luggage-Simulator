@@ -930,7 +930,6 @@ one_shot = true
 [node name="DialogueBloop" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("11_r2vy3")
 volume_db = -19.0
-bus = &"Dialogue"
 
 [node name="TypeTimer" type="Timer" parent="."]
 wait_time = 0.04

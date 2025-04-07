@@ -37,6 +37,7 @@ var used_item_purchased_quips : Array[String] = []
 func _ready() -> void:
 	close_button.pressed.connect(close_shop)
 	render_shop_items()
+	Events.open_shop.connect(open_shop)
 
 func _input(event) -> void:
 	if Input.is_action_just_pressed("OpenShopDebug"):
