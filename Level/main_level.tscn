@@ -52,6 +52,7 @@ stream = ExtResource("5_swadt")
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 68.218, -1, 171.569)
 script = ExtResource("3_t065x")
+ending_y = -80.0
 starting_amount = 1e+06
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Water"]
