@@ -17,31 +17,43 @@ class_name Shop
 var rng = RandomNumberGenerator.new()
 
 var shop_opened_quips : Array[String] = [
-	"Howdy there young weak child, Welcome to my shop.  I am [b]UNCLE UPGRADE[/b], the greatest upgrade purveyor in all the lands...{pause=1.0}... now please [rainbow]buy something.[/rainbow]{pause=0.5} You interrupted my nap.",
-	"Boy I sure do love sellin upgrades.  {pause=0.5}And napping.  {pause=0.5}Mostly napping.  {pause=0.5}I actually only even started selling upgrades so that I could afford a better place to nap. {pause=1.0} God I love napping....",
+	"Howdy there young weak child, Welcome to my shop.  [color=blue]Have you seen my keys?[/color] I am [b]UNCLE UPGRADE[/b], the greatest upgrade purveyor in all the lands...{pause=1.0}... now please [rainbow]buy something.[/rainbow]{pause=0.5} You interrupted my nap.",
+	"Boy I sure do love sellin upgrades.  {pause=0.5}And napping.  {pause=0.5}Mostly napping.  {pause=0.5}I actually only even started selling upgrades so that I could afford a better place to nap. {pause=1.0} God I love napping.... {pause=2.0} By the way, [color=blue]Have you seen my keys?[/color]",
 	"You are the only customer I have ever had. {pause=1.0} It's tricky staying in business with just a single customer but luckily you are seemingly addicted to buying stuff at my shop.",
-	"Sup?"
+	"Sup? [color=blue]Have you seen my keys?[/color]",
+	"[color=blue]Have you seen my keys?[/color]  I really miss my [color=blue]keys.[/color]"
 ]
 var used_shop_opened_quips : Array[String] = []
 
 var cant_afford_quips : Array[String] = [
-	"Get ur money up.",
-	"You don't have enough money... {pause=1.0} You really woke me up for this?",
-	"UR BROKE.  Build more pumps to get more cash."
+	"Get ur money up.  And also can you let me know if you see my [color=blue]keys?[/color]",
+	"You don't have enough money... {pause=1.0} You really woke me up for this? {pause=0.5}  Do you at least have my [color=blue]keys?[/color]",
+	"UR BROKE.  Build more pumps to get more cash. {pause=1.0} Also [color=blue]have you seen my keys?[/color]"
 ]
 var used_cant_afford_quips : Array[String] = []
 
 var item_purchased_quips : Array[String] = [
-	"That is the worst item I have ever sold. {pause=0.5} Congrats.",
-	"Sick new item bro.  Can I go take a nap now?",
-	"I never thought I'd find a single person willing to buy that... {pause=1.0} Am I the worlds greatest salesman?"
+	"That is the worst item I have ever sold. {pause=0.5} Congrats. {pause=0.5} [color=blue]Have you seen my keys?[/color]",
+	"Sick new item bro.  Can I go take a nap now?  I wish I had my [color=blue]keys...[/color]",
+	"I never thought I'd find a single person willing to buy that... {pause=1.0}Am I the worlds greatest salesman?{pause=0.5} Even though I [color=blue]lost my keys?[/color]"
 ]
 var used_item_purchased_quips : Array[String] = []
+
+var has_delivered_final_quip : bool = false
+var final_quip : String = "OMG!!!{pause=0.5_} MY KEYS!!!{pause=0.5_} Thank you so much.  Now I can finally get out of here.  By the way...{pause=0.5} [i]I reported you to the government.[/i]{pause=1.5}  You've been fined for damaging the environment.{pause=0.5} All of your money is gone now.{pause=1.0} [rainbow]S{pause=0.1}o{pause=0.1}r{pause=0.1}r{pause=0.1}y{pause=0.1}.{pause=0.1}.{pause=0.1}.{pause=0.1}.[/rainbow]"
+@onready var hsep = $PanelContainer/MarginContainer/Rows/HSeparator4
+@onready var other_hsep = $PanelContainer/MarginContainer/Rows/HSeparator3
+@onready var scroll_container = $PanelContainer/MarginContainer/Rows/ScrollContainer
+var final_final_quip : String = "What are you still doing here?{pause=1.0} The game is over.  You can close it now."
 
 func _ready() -> void:
 	close_button.pressed.connect(close_shop)
 	render_shop_items()
 	Events.open_shop.connect(open_shop)
+	
+func _process(_delta: float) -> void:
+	if has_delivered_final_quip:
+		ui.money.cur_money = 0
 
 func _input(event) -> void:
 	if Input.is_action_just_pressed("OpenShopDebug"):
@@ -55,8 +67,23 @@ func open_shop() -> void:
 	hud.visible = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	get_tree().paused = true
-	display_random_quip(shop_opened_quips, used_shop_opened_quips)
+	var player_has_keys : bool = player.check_has_inventory_item("Uncle Upgrade's Keys")
+	if player_has_keys:
+		if !has_delivered_final_quip:
+			deliver_final_quip()
+	elif has_delivered_final_quip:
+			dialogue_box.render_dialogue(final_final_quip)
+	else:
+		display_random_quip(shop_opened_quips, used_shop_opened_quips)
 	ui.pauseable = false
+	
+func deliver_final_quip() -> void:
+	player.remove_inventory_items(["Uncle Upgrade's Keys"])
+	dialogue_box.render_dialogue(final_quip)
+	has_delivered_final_quip = true
+	hsep.visible = false
+	other_hsep.visible = false
+	scroll_container.visible = false
 	
 func close_shop() -> void:
 	dialogue_box.stop_dialogue()
