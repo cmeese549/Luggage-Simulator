@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://fp8stqwfgm35"
-path="res://.godot/imported/Dirt_basecolor.png-3a2a77db6ab07b2ab09bcd94c84c1eb6.ctex"
+uid="uid://cpife7hluirfe"
+path="res://.godot/imported/QualityUpgradeC_C.png-fb2603879aca7badaa7d4532b0b6139a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art_Assets/Textures/Dirt_basecolor.png"
-dest_files=["res://.godot/imported/Dirt_basecolor.png-3a2a77db6ab07b2ab09bcd94c84c1eb6.ctex"]
+source_file="res://Art_Assets/Textures/QualityUpgradeC_C.png"
+dest_files=["res://.godot/imported/QualityUpgradeC_C.png-fb2603879aca7badaa7d4532b0b6139a.ctex"]
 
 [params]
 
