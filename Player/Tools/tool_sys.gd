@@ -69,9 +69,9 @@ func _unhandled_input(event):
 			if interact_thing.name == "WaterTop" || interact_thing.name == "DepositArea":
 				equipped_tool.use(interact_thing.name)
 			elif interact_thing.name == "PumpBuy":
-				interact_thing.find_parent("Pump").attempt_buy()
+				interact_thing.find_parent("Pump*").attempt_buy()
 			elif interact_thing.name == "PumpUpgrade":
-				interact_thing.find_parent("Pump").attempt_upgrade()
+				interact_thing.find_parent("Pump*").attempt_upgrade()
 				player.play_interact_sound()
 			elif interact_thing.name == "OpenShop":
 				Events.open_shop.emit()
