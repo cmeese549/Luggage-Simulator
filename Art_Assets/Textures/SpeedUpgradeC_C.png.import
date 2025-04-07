@@ -2,20 +2,21 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://fp8stqwfgm35"
-path="res://.godot/imported/Dirt_basecolor.png-3a2a77db6ab07b2ab09bcd94c84c1eb6.ctex"
+uid="uid://cqoiqecam43h7"
+path.s3tc="res://.godot/imported/SpeedUpgradeC_C.png-7aed226edcfc62e12d286764cfd81c68.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
-source_file="res://Art_Assets/Textures/Dirt_basecolor.png"
-dest_files=["res://.godot/imported/Dirt_basecolor.png-3a2a77db6ab07b2ab09bcd94c84c1eb6.ctex"]
+source_file="res://Art_Assets/Textures/SpeedUpgradeC_C.png"
+dest_files=["res://.godot/imported/SpeedUpgradeC_C.png-7aed226edcfc62e12d286764cfd81c68.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
