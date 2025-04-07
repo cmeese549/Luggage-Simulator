@@ -18,19 +18,23 @@ var rng = RandomNumberGenerator.new()
 
 var shop_opened_quips : Array[String] = [
 	"Howdy there young weak child, Welcome to my shop.  I am [b]UNCLE UPGRADE[/b], the greatest upgrade purveyor in all the lands...{pause=1.0}... now please [rainbow]buy something.[/rainbow]{pause=0.5} You interrupted my nap.",
-	"Boy I sure do love sellin upgrades.  {pause=0.5}And napping.  {pause=0.5}Mostly napping.  {pause=0.5}I actually only even started selling upgrades so that I could afford a better place to nap. {pause=1.0} God I love napping...."
+	"Boy I sure do love sellin upgrades.  {pause=0.5}And napping.  {pause=0.5}Mostly napping.  {pause=0.5}I actually only even started selling upgrades so that I could afford a better place to nap. {pause=1.0} God I love napping....",
+	"You are the only customer I have ever had. {pause=1.0} It's tricky staying in business with just a single customer but luckily you are seemingly addicted to buying stuff at my shop.",
+	"Sup?"
 ]
 var used_shop_opened_quips : Array[String] = []
 
 var cant_afford_quips : Array[String] = [
-	"Get ur money up",
-	"You don't have enough money... {pause=1.0} You really woke me up for this?"
+	"Get ur money up.",
+	"You don't have enough money... {pause=1.0} You really woke me up for this?",
+	"UR BROKE.  Build more pumps to get more cash."
 ]
 var used_cant_afford_quips : Array[String] = []
 
 var item_purchased_quips : Array[String] = [
 	"That is the worst item I have ever sold. {pause=0.5} Congrats.",
-	"Sick new item bro.  Can I go take a nap now?"
+	"Sick new item bro.  Can I go take a nap now?",
+	"I never thought I'd find a single person willing to buy that... {pause=1.0} Am I the worlds greatest salesman?"
 ]
 var used_item_purchased_quips : Array[String] = []
 

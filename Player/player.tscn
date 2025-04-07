@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://bk7vc4usjt3od"]
+[gd_scene load_steps=40 format=3 uid="uid://bk7vc4usjt3od"]
 
 [ext_resource type="Script" uid="uid://5yb4xnha3npe" path="res://Player/player.gd" id="1_l8h54"]
 [ext_resource type="Script" uid="uid://b140mkd7ankio" path="res://Player/Tools/tool_sys.gd" id="2_btcbx"]
@@ -30,6 +30,8 @@
 [ext_resource type="AudioStream" uid="uid://da3x6yehfwrh" path="res://Audio/Sfx/Jump/Jump/jump 1.mp3" id="25_755ss"]
 [ext_resource type="AudioStream" uid="uid://c5n1fnoclmuv0" path="res://Audio/Sfx/Jump/Jump/jump 2.mp3" id="26_bbimk"]
 [ext_resource type="AudioStream" uid="uid://bleydfwc4rkny" path="res://Audio/Sfx/Jump/Jump/jump 3.mp3" id="27_m0h3t"]
+[ext_resource type="AudioStream" uid="uid://dlxyarhpwksq5" path="res://Audio/Sfx/Footsteps/Skateboard.ogg" id="28_bbimk"]
+[ext_resource type="AudioStream" uid="uid://i4b7vr374b2n" path="res://Audio/Sfx/Footsteps/SkateboardFade.wav" id="29_m0h3t"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_btcbx"]
 
@@ -301,6 +303,14 @@ bus = &"Jump"
 [node name="3" type="AudioStreamPlayer" parent="Audio/Footsteps/Jump"]
 stream = ExtResource("27_m0h3t")
 bus = &"Jump"
+
+[node name="Skateboard" type="AudioStreamPlayer" parent="Audio/Footsteps"]
+stream = ExtResource("28_bbimk")
+bus = &"Skateboard"
+
+[node name="SkateboardFade" type="AudioStreamPlayer" parent="Audio/Footsteps"]
+stream = ExtResource("29_m0h3t")
+bus = &"Skateboard"
 
 [node name="ToolSounder" type="AudioStreamPlayer" parent="Audio"]
 bus = &"Tools"
