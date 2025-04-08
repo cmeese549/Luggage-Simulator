@@ -131,6 +131,7 @@ collision_layer = 8
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Upgrades/PumpUpgrade2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0130873, -0.737714, -0.961257)
 shape = SubResource("BoxShape3D_xilsv")
+disabled = true
 
 [node name="Markers" type="Node3D" parent="Upgrades"]
 

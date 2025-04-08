@@ -54,7 +54,9 @@ func build():
 	$Geo.visible = true
 	$Sign.visible = false
 	$Sign/PumpBuy/CollisionShape3D.disabled = true
+	$Sign/PumpBuy2/CollisionShape3D.disabled = true
 	$Upgrades/PumpUpgrade/CollisionShape3D.disabled = false
+	$Upgrades/PumpUpgrade2/CollisionShape3D.disabled = false
 	cur_wps = base_wps
 	Events.add_pump.emit(self)
 	$AnimationPlayer.play("build")
