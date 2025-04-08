@@ -115,68 +115,17 @@ script = ExtResource("2_btcbx")
 [node name="Hands" parent="Neck/Camera3D/ToolSys" instance=ExtResource("3_fhl08")]
 fill_volume = 0.0
 empty_volume = 0.0
-sway_min = Vector2(-30, -30)
-sway_max = Vector2(30, 30)
-sway_speed_rotation = 0.075
-sway_amount_rotation = 75.0
-random_sway_amount = 7.0
-idle_sway_rotation_strength = 35.0
-idle_sway_speed = 0.007
-jump_sway_amount = 35.0
-landing_sway_adjust_time = 0.2
-bob_amount = 20.0
-horizontal_speed = 60.0
-horizontal_range = Vector2(-0.15, 0.15)
 
 [node name="Sponge" parent="Neck/Camera3D/ToolSys" instance=ExtResource("5_vtle1")]
 tool_name = "Crusty Sponge"
-sway_min = Vector2(-30, -30)
-sway_max = Vector2(30, 30)
-sway_speed_rotation = 0.075
-sway_amount_rotation = 75.0
-random_sway_amount = 7.0
-idle_sway_rotation_strength = 35.0
-idle_sway_speed = 0.007
-jump_sway_amount = 35.0
-landing_sway_adjust_time = 0.2
-bob_amount = 20.0
-horizontal_speed = 60.0
-horizontal_range = Vector2(-0.15, 0.15)
 
 [node name="Bucket" parent="Neck/Camera3D/ToolSys" instance=ExtResource("3_gwnis")]
-fill_volume = 0.0
-empty_volume = 0.0
-sway_min = Vector2(-30, -30)
-sway_max = Vector2(30, 30)
-sway_speed_rotation = 0.075
-sway_amount_rotation = 75.0
-random_sway_amount = 7.0
-idle_sway_rotation_strength = 35.0
-idle_sway_speed = 0.007
-jump_sway_amount = 35.0
-landing_sway_adjust_time = 0.2
 jump_overshoot_amount = 0.055
-bob_amount = 20.0
-horizontal_speed = 60.0
-horizontal_range = Vector2(-0.15, 0.15)
 recentering_force = 55.0
 
 [node name="Watering Can" parent="Neck/Camera3D/ToolSys" instance=ExtResource("7_od3ui")]
-sway_min = Vector2(-30, -30)
-sway_max = Vector2(30, 30)
-sway_speed_rotation = 0.075
-sway_amount_rotation = 75.0
-random_sway_amount = 7.0
-idle_sway_rotation_strength = 35.0
-idle_sway_speed = 0.007
-jump_sway_amount = 35.0
-landing_sway_adjust_time = 0.2
-bob_amount = 20.0
-horizontal_speed = 60.0
-horizontal_range = Vector2(-0.15, 0.15)
 
 [node name="Jug" parent="Neck/Camera3D/ToolSys" instance=ExtResource("8_00tjw")]
-random_sway_amount = 7.0
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 anchors_preset = 15

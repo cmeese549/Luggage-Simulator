@@ -22,7 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://dgjwqvgixy8nb" path="res://Art_Assets/Models/MiscEnv/Sand_B.tscn" id="19_riqjb"]
 [ext_resource type="PackedScene" uid="uid://0ifoqivi3n6e" path="res://Art_Assets/Models/MiscEnv/Twig_B.tscn" id="20_jx3rh"]
 [ext_resource type="PackedScene" uid="uid://m1tjnd0w58j7" path="res://Art_Assets/Models/MiscEnv/Twig_A.tscn" id="21_57yp3"]
-[ext_resource type="PackedScene" path="res://Art_Assets/Models/Trees/GlitchTree.tscn" id="22_57yp3"]
+[ext_resource type="PackedScene" uid="uid://84faitd3w5ti" path="res://Art_Assets/Models/Trees/GlitchTree.tscn" id="22_57yp3"]
 
 [sub_resource type="Resource" id="Resource_y2ajn"]
 resource_name = "Greenhouse_LODVariant"

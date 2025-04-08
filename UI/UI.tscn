@@ -926,14 +926,14 @@ theme_override_constants/separation = 25
 [node name="Label" type="Label" parent="PauseMenu/PanelContainer/MarginContainer/Rows/Tutorial/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 66
-text = "Mr. Money’s Phenomenally Soggy Water Removal "
+text = "Mr. Money’s Phenomenally Soggy Water Removal Romp"
 horizontal_alignment = 1
 
 [node name="RichTextLabel" type="RichTextLabel" parent="PauseMenu/PanelContainer/MarginContainer/Rows/Tutorial/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 36
 bbcode_enabled = true
-text = "Welcome to Mr. Money’s Phenomenally Soggy Water Removal, where you must [color=blue]drain an entire lake[/color] in search of riches.  Legends say there is [rainbow]ancient treasure[/rainbow] at the bottom of this lake, and you are far too buoyant to sink, so you are left with no choice but to [color=blue]simply remove all the water.[/color]"
+text = "Welcome to Mr. Money’s Phenomenally Soggy Water Removal Romp, where you must [color=blue]drain an entire lake[/color] in search of riches.  Legends say there is [rainbow]ancient treasure[/rainbow] at the bottom of this lake, and you are far too buoyant to sink, so you are left with no choice but to [color=blue]simply remove all the water.[/color]"
 fit_content = true
 scroll_active = false
 
@@ -1079,7 +1079,6 @@ size_flags_horizontal = 3
 
 [node name="MainMenu" type="Control" parent="."]
 process_mode = 3
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1091,15 +1090,15 @@ script = ExtResource("6_byuxr")
 
 [node name="Label" type="Label" parent="MainMenu"]
 layout_mode = 1
-offset_left = 84.0
-offset_top = 107.0
-offset_right = 1639.0
-offset_bottom = 223.0
+offset_left = 59.0
+offset_top = 46.0
+offset_right = 1614.0
+offset_bottom = 162.0
 size_flags_horizontal = 3
 size_flags_vertical = 1
 theme_override_colors/font_color = Color(0.0214346, 0.0214346, 0.0214346, 1)
 theme_override_font_sizes/font_size = 61
-text = "Mr. Money’s Phenomenally Soggy Water Removal"
+text = "Mr. Money’s Phenomenally Soggy Water Removal Romp"
 vertical_alignment = 2
 
 [node name="Begin" type="Label" parent="MainMenu"]
@@ -1110,10 +1109,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -777.5
-offset_top = -58.0
-offset_right = 777.5
-offset_bottom = 58.0
+offset_left = -719.0
+offset_top = 131.0
+offset_right = 836.0
+offset_bottom = 247.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3

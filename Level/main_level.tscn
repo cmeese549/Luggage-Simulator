@@ -32,8 +32,11 @@ visible = false
 mouse_filter = 2
 
 [node name="Player" parent="." instance=ExtResource("1_7ireg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 251.328, 1, 6.77358)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 282.008, 1, 4.831)
 collision_mask = 5
+
+[node name="Neck" parent="Player" index="2"]
+transform = Transform3D(-0.551937, 0.204558, 0.808407, 0, 0.969445, -0.245307, -0.833886, -0.135394, -0.535073, 0, 0, 0)
 
 [node name="Money" type="Node" parent="."]
 unique_name_in_owner = true
@@ -398,3 +401,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 211.281, 0, -14.6264)
 
 [node name="Done" type="Marker3D" parent="TutorialMarkers"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 235.937, 0, -6.84646)
+
+[editable path="Player"]

@@ -55,7 +55,7 @@ _data = {
 }
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_d18j0"]
-size = Vector3(9.52997, 3.25139, 1.78931)
+size = Vector3(9.52997, 4.89913, 4.07233)
 
 [node name="Pump" type="Node3D" node_paths=PackedStringArray("upgrade_markers")]
 script = ExtResource("1_55ofu")
@@ -104,7 +104,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 2.25)
 collision_layer = 8
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Upgrades/PumpUpgrade"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0130873, 0.0861574, -0.21469)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0130873, -0.737714, 0.381044)
 shape = SubResource("BoxShape3D_d18j0")
 
 [node name="Markers" type="Node3D" parent="Upgrades"]
