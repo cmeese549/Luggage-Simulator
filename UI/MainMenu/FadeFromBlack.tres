@@ -1,4 +1,4 @@
-[gd_resource type="VisualShader" load_steps=4 format=3 uid="uid://c0t3gdly4s87l"]
+[gd_resource type="VisualShader" load_steps=4 format=3 uid="uid://b85f48w1vu1cc"]
 
 [sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_occyu"]
 parameter_name = "Progress"

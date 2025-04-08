@@ -44,7 +44,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 282.008, 1, 4.831)
 collision_mask = 5
 
 [node name="Neck" parent="Player" index="2"]
-transform = Transform3D(-0.551937, 0.204558, 0.808407, 0, 0.969445, -0.245307, -0.833886, -0.135394, -0.535073, 0, 0, 0)
+transform = Transform3D(-0.551937, 0, 0.833886, 0, 1, 0, -0.833886, 0, -0.551937, 0, 0, 0)
+
+[node name="Camera3D" parent="Player/Neck" index="0"]
+transform = Transform3D(1, 0, 0, 0, 0.976672, -0.214735, 0, 0.214735, 0.976672, 0, 0.509695, 0)
+
+[node name="ToolSys" parent="Player/Neck/Camera3D" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.51, 0)
+
+[node name="ToolCam" parent="Player/SubViewportContainer/SubViewport" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="Money" type="Node" parent="."]
 unique_name_in_owner = true
@@ -63,7 +72,7 @@ stream = ExtResource("5_swadt")
 
 [node name="Water" type="Node3D" parent="." groups=["Water"]]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 68.218, -100, 171.569)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 script = ExtResource("3_t065x")
 ending_y = -80.0
 starting_amount = 1e+06

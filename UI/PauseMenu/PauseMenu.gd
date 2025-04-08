@@ -58,7 +58,7 @@ func quit() -> void:
 	get_tree().quit()
 		
 func unstick() -> void:
-	player.global_position = Vector3(0, 1, 0)
+	player.global_position = Vector3(0, 3, 0)
 	unpause()
 		
 func connect_sliders():
