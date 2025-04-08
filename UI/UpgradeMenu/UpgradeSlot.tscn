@@ -1,6 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://yg0ip3ps48ca"]
-
-[ext_resource type="Texture2D" uid="uid://dsu4otkk2qt0g" path="res://icon.svg" id="1_4i308"]
+[gd_scene format=3 uid="uid://yg0ip3ps48ca"]
 
 [node name="UpgradeSlot" type="VBoxContainer"]
 size_flags_horizontal = 3
@@ -14,7 +12,6 @@ horizontal_alignment = 1
 
 [node name="Icon" type="TextureRect" parent="."]
 layout_mode = 2
-texture = ExtResource("1_4i308")
 stretch_mode = 5
 
 [node name="Description" type="Label" parent="."]
