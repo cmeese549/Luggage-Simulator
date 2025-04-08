@@ -52,7 +52,7 @@ stream = ExtResource("5_swadt")
 
 [node name="Water" type="Node3D" parent="." groups=["Water"]]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 68.218, -1, 171.569)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 68.218, -100, 171.569)
 script = ExtResource("3_t065x")
 ending_y = -80.0
 starting_amount = 1e+06
@@ -116,60 +116,61 @@ one_shot = true
 transform = Transform3D(-0.0897114, 0, 0.995968, 0, 1, 0, -0.995968, 0, -0.0897114, 223.087, 0, -59.2353)
 
 [node name="Keys" parent="InventoryItems" instance=ExtResource("2_f68k2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.86112, 0, -22.051)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -128.568, -79.4269, -266.14)
 item_name = "Uncle Upgrade's Keys"
 item_description = "You actually found them.  Nice."
 
 [node name="Skateboard Wheel 1" parent="InventoryItems" instance=ExtResource("2_f68k2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.55004, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -115.979, -14.5442, -23.8877)
 item_name = "Skateboard Wheel 1"
 item_description = "Trade all 4 to Uncle Upgrade for a Skateboard!"
 
 [node name="Skateboard Wheel 2" parent="InventoryItems" instance=ExtResource("2_f68k2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -244.181, 0, -349.427)
 item_name = "Skateboard Wheel 2"
 item_description = "Trade all 4 to Uncle Upgrade for a Skateboard!"
 
 [node name="Skateboard Wheel 3" parent="InventoryItems" instance=ExtResource("2_f68k2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.52416, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -257.919, 5.23158, -397.006)
 item_name = "Skateboard Wheel 3"
 item_description = "Trade all 4 to Uncle Upgrade for a Skateboard!"
 
 [node name="Skateboard Wheel 4" parent="InventoryItems" instance=ExtResource("2_f68k2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.56602, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -221.364, 0, -386.241)
 item_name = "Skateboard Wheel 4"
 item_description = "Trade all 4 to Uncle Upgrade for a Skateboard!"
 
 [node name="Lit Test Item" parent="InventoryItems" instance=ExtResource("2_f68k2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.58275, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -233.905, 0, 34.6943)
 item_description = "Trade to Uncle Upgrade for a Bucket.  REMOVE BEFORE LAUNCH!!!!"
 
 [node name="Rollerskate Shoelace 1" parent="InventoryItems" instance=ExtResource("2_f68k2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.0593, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -215.811, 0, -66.6961)
 item_name = "Rollerskate Shoelace 1"
 item_description = "Trade 2 of these to Uncle Upgrade for some skates!"
 
 [node name="Rollerskate Shoelace 2" parent="InventoryItems" instance=ExtResource("2_f68k2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.7712, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -54.192, 0, -340.362)
 item_name = "Rollerskate Shoelace 2"
 item_description = "Trade 2 of these to Uncle Upgrade for some skates!"
 
 [node name="Hands For Dummies" parent="InventoryItems" instance=ExtResource("2_f68k2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.9843, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.05145, 0, 23.5825)
 item_name = "Hands For Dummies"
 item_description = "You can trade this to Uncle Upgrade to get your hands!"
 
 [node name="Square Pants" parent="InventoryItems" instance=ExtResource("2_f68k2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.48, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.5454, -0.569512, -88.0067)
 item_name = "Square Pants"
 item_description = "You can trade these to Uncle Upgrade to get a sponge!"
 
 [node name="Diamond" parent="InventoryItems" instance=ExtResource("2_f68k2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.9531, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.2708, 0, -429.742)
 item_name = "Diamond"
 item_description = "Trade this to Uncle Upgrade to get a watering can.  Great deal!"
 
 [node name="Expense Report" parent="InventoryItems" instance=ExtResource("2_f68k2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28.9398, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -131.545, -29.223, -54.2502)
 item_name = "Expense Report"
 item_description = "Trade this to Uncle Upgrade to get a big jug."
 
