@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://exdhmbr43ger"]
+[gd_scene load_steps=33 format=3 uid="uid://exdhmbr43ger"]
 
 [ext_resource type="Script" uid="uid://dic75q4o378w6" path="res://UI/UI.gd" id="1_6dd3c"]
 [ext_resource type="Theme" uid="uid://b3kq74llqlv3x" path="res://UI/Theme/MinimalUI.tres" id="1_dhe1o"]
@@ -11,7 +11,7 @@
 [ext_resource type="Shader" uid="uid://c0t3gdly4s87l" path="res://UI/MainMenu/FadeFromBlack.tres" id="6_jqf55"]
 [ext_resource type="Script" uid="uid://bed3d7egj53pu" path="res://UI/PauseMenu/PauseMenu.gd" id="6_qhxh2"]
 [ext_resource type="Script" uid="uid://cde2nhieog6m4" path="res://UI/UpgradeMenu/UpgradeMenu.gd" id="6_t31p1"]
-[ext_resource type="Script" path="res://UI/delta_fade.gd" id="6_wtdy7"]
+[ext_resource type="Script" uid="uid://bsyahvddt84hi" path="res://UI/delta_fade.gd" id="6_wtdy7"]
 [ext_resource type="Script" uid="uid://vcecdqq511h1" path="res://UI/Shop/Shop.gd" id="7_6q2ik"]
 [ext_resource type="Script" uid="uid://cmqb4oi3mfhb4" path="res://UI/HUD/hud.gd" id="7_017wa"]
 [ext_resource type="PackedScene" uid="uid://yg0ip3ps48ca" path="res://UI/UpgradeMenu/UpgradeSlot.tscn" id="7_kncd2"]
@@ -29,6 +29,9 @@
 [ext_resource type="Resource" uid="uid://cpt63tjw3br52" path="res://UI/Shop/ShopItems/SkateBoard.tres" id="16_jf3kf"]
 [ext_resource type="VideoStream" uid="uid://bhcn3jiv54xym" path="res://UI/Splashscreen/SplashScreenOGG.ogv" id="25_jf3kf"]
 [ext_resource type="AudioStream" uid="uid://b16op18gd5aiw" path="res://Audio/Sfx/Alerts/cant afford corn.mp3" id="29_rbg2s"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rbg2s"]
+bg_color = Color(0.18, 0.18, 0.18, 0.803922)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_byuxr"]
 shader = ExtResource("6_jqf55")
@@ -391,7 +394,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("7_6q2ik")
-shop_items = Array[ExtResource("9_xtxff")]([ExtResource("11_rjxvo"), ExtResource("11_uk6e0"), ExtResource("12_uk6e0"), ExtResource("13_uk6e0"), ExtResource("14_2jerp"), ExtResource("15_nxoi0"), ExtResource("16_jf3kf")])
+shop_items = Array[ExtResource("9_xtxff")]([ExtResource("11_rjxvo"), ExtResource("11_uk6e0"), ExtResource("15_nxoi0"), ExtResource("12_uk6e0"), ExtResource("13_uk6e0"), ExtResource("16_jf3kf"), ExtResource("14_2jerp")])
 
 [node name="PanelContainer" type="PanelContainer" parent="Shop"]
 layout_mode = 2
@@ -520,6 +523,7 @@ script = ExtResource("6_qhxh2")
 
 [node name="PanelContainer" type="PanelContainer" parent="PauseMenu"]
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_rbg2s")
 
 [node name="MarginContainer" type="MarginContainer" parent="PauseMenu/PanelContainer"]
 layout_mode = 2
@@ -544,6 +548,7 @@ custom_minimum_size = Vector2(0, 37.39)
 layout_mode = 2
 
 [node name="PauseDad" type="HBoxContainer" parent="PauseMenu/PanelContainer/MarginContainer/Rows"]
+custom_minimum_size = Vector2(0, 843)
 layout_mode = 2
 theme_override_constants/separation = 80
 
@@ -902,6 +907,7 @@ autowrap_mode = 2
 
 [node name="Tutorial" type="HBoxContainer" parent="PauseMenu/PanelContainer/MarginContainer/Rows"]
 visible = false
+custom_minimum_size = Vector2(0, 843)
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 13.87
@@ -981,6 +987,7 @@ size_flags_horizontal = 3
 custom_minimum_size = Vector2(0, 43.775)
 layout_mode = 2
 size_flags_vertical = 3
+size_flags_stretch_ratio = 0.7
 
 [node name="Close" type="HBoxContainer" parent="PauseMenu/PanelContainer/MarginContainer/Rows"]
 layout_mode = 2
@@ -1029,6 +1036,44 @@ text = "Quit To Desktop
 "
 
 [node name="Control2" type="Control" parent="PauseMenu/PanelContainer/MarginContainer/Rows/Close"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="QuitConfirm" type="HBoxContainer" parent="PauseMenu/PanelContainer/MarginContainer/Rows"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 45
+
+[node name="Control" type="Control" parent="PauseMenu/PanelContainer/MarginContainer/Rows/QuitConfirm"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="PauseMenu/PanelContainer/MarginContainer/Rows/QuitConfirm"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 51
+text = "Are you sure you want to quit the game?"
+
+[node name="Nevermind" type="Button" parent="PauseMenu/PanelContainer/MarginContainer/Rows/QuitConfirm"]
+custom_minimum_size = Vector2(296.455, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.4
+theme_override_fonts/font = ExtResource("8_nxoi0")
+theme_override_font_sizes/font_size = 46
+text = "Nevermind"
+
+[node name="Quit" type="Button" parent="PauseMenu/PanelContainer/MarginContainer/Rows/QuitConfirm"]
+modulate = Color(1, 0.21, 0.21, 1)
+custom_minimum_size = Vector2(310.835, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.4
+theme_override_fonts/font = ExtResource("8_nxoi0")
+theme_override_font_sizes/font_size = 46
+text = "Quit To Desktop
+"
+
+[node name="Control2" type="Control" parent="PauseMenu/PanelContainer/MarginContainer/Rows/QuitConfirm"]
 layout_mode = 2
 size_flags_horizontal = 3
 

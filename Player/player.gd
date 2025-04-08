@@ -170,7 +170,7 @@ func _physics_process(delta):
 		velocity += get_gravity() * delta
 	
 	if is_in_water() and !was_just_in_water:
-		if was_just_flying:
+		if was_just_flying and !jump_splash_audio.playing:
 			jump_splash_audio.play()
 		else:
 			left_water_audio.play()
@@ -284,7 +284,7 @@ func _process(delta : float) -> void:
 				ready_to_land = false
 			landing_sway_adjust_cooldown += delta
 			reset_jump_sway(delta)
-			if jumped_from_water:
+			if jumped_from_water and !jump_splash_audio.playing:
 				jump_splash_audio.play()
 			jumped_from_water = false
 			if landing_sway_adjust_cooldown >= tool_sys.equipped_tool.landing_sway_adjust_time:

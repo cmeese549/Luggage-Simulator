@@ -17,6 +17,11 @@ class_name PauseMenu
 @onready var unstick_button : Button = $PanelContainer/MarginContainer/Rows/Close/Unstick
 @onready var quit_button : Button = $PanelContainer/MarginContainer/Rows/Close/Quit
 
+@onready var actually_quit_button : Button = $PanelContainer/MarginContainer/Rows/QuitConfirm/Quit
+@onready var nevermind_button : Button = $PanelContainer/MarginContainer/Rows/QuitConfirm/Nevermind
+@onready var buttons : HBoxContainer = $PanelContainer/MarginContainer/Rows/Close
+@onready var quit_confirm : HBoxContainer = $PanelContainer/MarginContainer/Rows/QuitConfirm
+
 @onready var sensitivity_slider : HSlider = $PanelContainer/MarginContainer/Rows/PauseDad/VBoxContainer/Sensitivity/SensitivitySlider
 @onready var fov_slider : HSlider = $PanelContainer/MarginContainer/Rows/PauseDad/VBoxContainer/FOV/FOVSlider
 @onready var volume_slider : HSlider = $PanelContainer/MarginContainer/Rows/PauseDad/VBoxContainer/Volume/VolumeSlider
@@ -30,14 +35,27 @@ var inventory_item : PackedScene = preload("res://UI/PauseMenu/InventoryItem.tsc
 @onready var inventory_dad : GridContainer = $PanelContainer/MarginContainer/Rows/PauseDad/Rows/ScrollContainer/GridContainer
 
 func _ready() -> void:
-	quit_button.pressed.connect(get_tree().quit)
+	quit_button.pressed.connect(prompt_quit)
 	resume_button.pressed.connect(unpause)
 	unstick_button.pressed.connect(unstick)
 	help_button.pressed.connect(show_tutorial)
+	actually_quit_button.pressed.connect(quit)
+	nevermind_button.pressed.connect(cancel_quit)
 	connect_sliders()
 	var loadStatus = config.load("user://config.ini")
 	if loadStatus == OK: #0 = loaded, so this means data found
 		load_config()
+		
+func cancel_quit() -> void:
+	buttons.visible = true
+	quit_confirm.visible = false
+		
+func prompt_quit() -> void:
+	buttons.visible = false
+	quit_confirm.visible = true
+	
+func quit() -> void:
+	get_tree().quit()
 		
 func unstick() -> void:
 	player.global_position = Vector3(0, 1, 0)
