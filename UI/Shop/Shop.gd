@@ -70,18 +70,25 @@ func _input(event) -> void:
 func open_shop() -> void:
 	self.visible = true
 	hud.visible = false
-	items_dad.get_child(0).grab_focus()
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	get_tree().paused = true
+	
+	if items_dad.get_children().size() > 0:
+		items_dad.get_child(0).grab_focus()
+	else:
+		close_button.grab_focus()
+	
 	var player_has_keys : bool = player.check_has_inventory_item("Uncle Upgrade's Keys")
 	ui.pauseable = false
 	your_money.text = 'You have: $' + add_comma_to_int(ui.money.cur_money)
 	if player_has_keys:
 		if !has_delivered_final_quip:
 			deliver_final_quip()
+			close_button.grab_focus()
 	elif has_delivered_final_quip:
 		your_money.text = " "
 		dialogue_box.render_dialogue(final_final_quip.replace("$MONEY$", "$" + add_comma_to_int(ui.money.lifetime_money)))
+		close_button.grab_focus()
 	else:
 		display_random_quip(shop_opened_quips, used_shop_opened_quips)
 	
