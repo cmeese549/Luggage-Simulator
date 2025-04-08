@@ -548,6 +548,7 @@ custom_minimum_size = Vector2(0, 37.39)
 layout_mode = 2
 
 [node name="PauseDad" type="HBoxContainer" parent="PauseMenu/PanelContainer/MarginContainer/Rows"]
+custom_minimum_size = Vector2(0, 843)
 layout_mode = 2
 theme_override_constants/separation = 80
 
@@ -906,6 +907,7 @@ autowrap_mode = 2
 
 [node name="Tutorial" type="HBoxContainer" parent="PauseMenu/PanelContainer/MarginContainer/Rows"]
 visible = false
+custom_minimum_size = Vector2(0, 843)
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 13.87
@@ -985,6 +987,7 @@ size_flags_horizontal = 3
 custom_minimum_size = Vector2(0, 43.775)
 layout_mode = 2
 size_flags_vertical = 3
+size_flags_stretch_ratio = 0.7
 
 [node name="Close" type="HBoxContainer" parent="PauseMenu/PanelContainer/MarginContainer/Rows"]
 layout_mode = 2
@@ -1033,6 +1036,44 @@ text = "Quit To Desktop
 "
 
 [node name="Control2" type="Control" parent="PauseMenu/PanelContainer/MarginContainer/Rows/Close"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="QuitConfirm" type="HBoxContainer" parent="PauseMenu/PanelContainer/MarginContainer/Rows"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 45
+
+[node name="Control" type="Control" parent="PauseMenu/PanelContainer/MarginContainer/Rows/QuitConfirm"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="PauseMenu/PanelContainer/MarginContainer/Rows/QuitConfirm"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 51
+text = "Are you sure you want to quit the game?"
+
+[node name="Nevermind" type="Button" parent="PauseMenu/PanelContainer/MarginContainer/Rows/QuitConfirm"]
+custom_minimum_size = Vector2(296.455, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.4
+theme_override_fonts/font = ExtResource("8_nxoi0")
+theme_override_font_sizes/font_size = 46
+text = "Nevermind"
+
+[node name="Quit" type="Button" parent="PauseMenu/PanelContainer/MarginContainer/Rows/QuitConfirm"]
+modulate = Color(1, 0.21, 0.21, 1)
+custom_minimum_size = Vector2(310.835, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.4
+theme_override_fonts/font = ExtResource("8_nxoi0")
+theme_override_font_sizes/font_size = 46
+text = "Quit To Desktop
+"
+
+[node name="Control2" type="Control" parent="PauseMenu/PanelContainer/MarginContainer/Rows/QuitConfirm"]
 layout_mode = 2
 size_flags_horizontal = 3
 
