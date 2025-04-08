@@ -8,4 +8,5 @@ shader = ExtResource("1_qvirr")
 shader_parameter/ColorParameter = Color(0.033, 0.5764, 0.66, 1)
 shader_parameter/ColorScale = Vector2(0.5, 0.5)
 shader_parameter/FoamStrength = 0.57
+shader_parameter/ProxFadeDistance = 0.5
 shader_parameter/WaterOpacity = 0.8
