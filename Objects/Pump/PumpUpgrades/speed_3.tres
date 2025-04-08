@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="pump_upgrade" load_steps=3 format=3 uid="uid://dq4fvyul325yv"]
+[gd_resource type="Resource" script_class="pump_upgrade" load_steps=4 format=3 uid="uid://dq4fvyul325yv"]
 
 [ext_resource type="Script" uid="uid://cc2dlnfftk7rx" path="res://Objects/Pump/PumpUpgrades/pump_upgrade.gd" id="1_jvsfm"]
+[ext_resource type="Texture2D" uid="uid://fi33604j8fc2" path="res://Art_Assets/Textures/UpgradeIcons/Speed3.png" id="1_mkmmy"]
 [ext_resource type="PackedScene" uid="uid://rf23iie0x7ea" path="res://Art_Assets/Models/MachineUpgrades/SpeedUpgradeC.tscn" id="1_x8u0k"]
 
 [resource]
@@ -9,6 +10,7 @@ upgrade_name = "V8 Engine Drive"
 description = "Stolen from your neighbor's car to pump water at max speed"
 price = 1000
 effect = 7.0
+icon = ExtResource("1_mkmmy")
 model = ExtResource("1_x8u0k")
 type = 0
 metadata/_custom_type_script = "uid://cc2dlnfftk7rx"

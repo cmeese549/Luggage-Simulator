@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://c0shsmlk675qm"]
+[gd_scene load_steps=29 format=3 uid="uid://c0shsmlk675qm"]
 
 [ext_resource type="PackedScene" uid="uid://ddwtbnyshxxj3" path="res://Art_Assets/Levels/LevelGeometry.tscn" id="1_1wy1g"]
 [ext_resource type="PackedScene" uid="uid://bk7vc4usjt3od" path="res://Player/player.tscn" id="1_7ireg"]
@@ -11,13 +11,21 @@
 [ext_resource type="Material" uid="uid://cc3jyugw620gk" path="res://Art_Assets/Materials/WaterVertex.tres" id="3_vad1a"]
 [ext_resource type="AudioStream" uid="uid://57dmf87xry8d" path="res://Audio/Sfx/Alerts/spend_money.mp3" id="5_swadt"]
 [ext_resource type="AudioStream" uid="uid://b6hawj4wlcvs2" path="res://Audio/Sfx/Ambience/water_ambience.ogg" id="15_dbttc"]
+[ext_resource type="Texture2D" uid="uid://b10qgtb4o5xqi" path="res://Art_Assets/Textures/Pickups/Keys.png" id="16_dbttc"]
+[ext_resource type="Texture2D" uid="uid://bfeh5rlknnt2k" path="res://Art_Assets/Textures/Pickups/Wheel.png" id="17_giak0"]
 [ext_resource type="Script" uid="uid://dupj3d5ny1j3s" path="res://Level/all_pumps.gd" id="17_hhlvi"]
 [ext_resource type="PackedScene" uid="uid://hr021abwwm8b" path="res://Objects/Pump/pump.tscn" id="17_swadt"]
 [ext_resource type="PackedScene" uid="uid://cb77ps0e8v5xs" path="res://Game_Management/tutorial.tscn" id="18_dbttc"]
 [ext_resource type="AudioStream" uid="uid://babm51jmu7wc5" path="res://Audio/Sfx/Ambience/nature_ambience.ogg" id="18_hhlvi"]
+[ext_resource type="Texture2D" uid="uid://e6y1mopni1xh" path="res://Art_Assets/Textures/Pickups/TestIcon.png" id="18_s4lgs"]
 [ext_resource type="Script" uid="uid://c6ov71035nkfo" path="res://Audio/Music/Band.gd" id="19_qqyv7"]
+[ext_resource type="Texture2D" uid="uid://cdfbs2w5lv4ta" path="res://Art_Assets/Textures/Pickups/Shoelace.png" id="19_xpqtb"]
 [ext_resource type="AudioStream" uid="uid://c0waf3078ni8q" path="res://Audio/Music/Song1.mp3" id="20_s4lgs"]
+[ext_resource type="Texture2D" uid="uid://dxxyub6fxv6th" path="res://Art_Assets/Textures/Pickups/Book.png" id="20_xpqtb"]
+[ext_resource type="Texture2D" uid="uid://2bgxu7r0dbld" path="res://Art_Assets/Textures/Pickups/SquarePants.png" id="21_m2q4c"]
 [ext_resource type="AudioStream" uid="uid://bx6v6xklxfma" path="res://Audio/Music/Song2.mp3" id="21_qqyv7"]
+[ext_resource type="Texture2D" uid="uid://blbhhy52glucv" path="res://Art_Assets/Textures/Pickups/Diamond.png" id="22_2vllj"]
+[ext_resource type="Texture2D" uid="uid://dl23bmvpys7bq" path="res://Art_Assets/Textures/Pickups/ExpenseReport.png" id="23_i5tqg"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_t065x"]
 
@@ -122,60 +130,72 @@ transform = Transform3D(-0.0897114, 0, 0.995968, 0, 1, 0, -0.995968, 0, -0.08971
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -128.568, -79.4269, -266.14)
 item_name = "Uncle Upgrade's Keys"
 item_description = "You actually found them.  Nice."
+item_icon = ExtResource("16_dbttc")
 
 [node name="Skateboard Wheel 1" parent="InventoryItems" instance=ExtResource("2_f68k2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -115.979, -14.5442, -23.8877)
 item_name = "Skateboard Wheel 1"
 item_description = "Trade all 4 to Uncle Upgrade for a Skateboard!"
+item_icon = ExtResource("17_giak0")
 
 [node name="Skateboard Wheel 2" parent="InventoryItems" instance=ExtResource("2_f68k2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -244.181, 0, -349.427)
 item_name = "Skateboard Wheel 2"
 item_description = "Trade all 4 to Uncle Upgrade for a Skateboard!"
+item_icon = ExtResource("17_giak0")
 
 [node name="Skateboard Wheel 3" parent="InventoryItems" instance=ExtResource("2_f68k2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -257.919, 5.23158, -397.006)
 item_name = "Skateboard Wheel 3"
 item_description = "Trade all 4 to Uncle Upgrade for a Skateboard!"
+item_icon = ExtResource("17_giak0")
 
 [node name="Skateboard Wheel 4" parent="InventoryItems" instance=ExtResource("2_f68k2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -221.364, 0, -386.241)
 item_name = "Skateboard Wheel 4"
 item_description = "Trade all 4 to Uncle Upgrade for a Skateboard!"
+item_icon = ExtResource("17_giak0")
 
 [node name="Lit Test Item" parent="InventoryItems" instance=ExtResource("2_f68k2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -233.905, 0, 34.6943)
 item_description = "Trade to Uncle Upgrade for a Bucket.  REMOVE BEFORE LAUNCH!!!!"
+item_icon = ExtResource("18_s4lgs")
 
 [node name="Rollerskate Shoelace 1" parent="InventoryItems" instance=ExtResource("2_f68k2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -215.811, 0, -66.6961)
 item_name = "Rollerskate Shoelace 1"
 item_description = "Trade 2 of these to Uncle Upgrade for some skates!"
+item_icon = ExtResource("19_xpqtb")
 
 [node name="Rollerskate Shoelace 2" parent="InventoryItems" instance=ExtResource("2_f68k2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -54.192, 0, -340.362)
 item_name = "Rollerskate Shoelace 2"
 item_description = "Trade 2 of these to Uncle Upgrade for some skates!"
+item_icon = ExtResource("19_xpqtb")
 
 [node name="Hands For Dummies" parent="InventoryItems" instance=ExtResource("2_f68k2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.05145, 0, 23.5825)
 item_name = "Hands For Dummies"
 item_description = "You can trade this to Uncle Upgrade to get your hands!"
+item_icon = ExtResource("20_xpqtb")
 
 [node name="Square Pants" parent="InventoryItems" instance=ExtResource("2_f68k2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.5454, -0.569512, -88.0067)
 item_name = "Square Pants"
 item_description = "You can trade these to Uncle Upgrade to get a sponge!"
+item_icon = ExtResource("21_m2q4c")
 
 [node name="Diamond" parent="InventoryItems" instance=ExtResource("2_f68k2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.2708, 0, -429.742)
 item_name = "Diamond"
 item_description = "Trade this to Uncle Upgrade to get a watering can.  Great deal!"
+item_icon = ExtResource("22_2vllj")
 
 [node name="Expense Report" parent="InventoryItems" instance=ExtResource("2_f68k2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -131.545, -29.223, -54.2502)
 item_name = "Expense Report"
 item_description = "Trade this to Uncle Upgrade to get a big jug."
+item_icon = ExtResource("23_i5tqg")
 
 [node name="AllPumps" type="Node" parent="."]
 script = ExtResource("17_hhlvi")

@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="pump_upgrade" load_steps=3 format=3 uid="uid://cjn3ajir16kx"]
+[gd_resource type="Resource" script_class="pump_upgrade" load_steps=4 format=3 uid="uid://cjn3ajir16kx"]
 
 [ext_resource type="Script" uid="uid://cc2dlnfftk7rx" path="res://Objects/Pump/PumpUpgrades/pump_upgrade.gd" id="1_74nl4"]
+[ext_resource type="Texture2D" uid="uid://ca04lkgllws43" path="res://Art_Assets/Textures/UpgradeIcons/Quality1.png" id="1_pq7og"]
 [ext_resource type="PackedScene" uid="uid://cvclrqubeg3y2" path="res://Art_Assets/Models/MachineUpgrades/QualityUpgradeA.tscn" id="1_xdn43"]
 
 [resource]
@@ -9,6 +10,7 @@ upgrade_name = "Brand Name Filter"
 description = "Cleaner water sells for more!"
 price = 10
 effect = 0.1
+icon = ExtResource("1_pq7og")
 model = ExtResource("1_xdn43")
 type = 1
 metadata/_custom_type_script = "uid://cc2dlnfftk7rx"
