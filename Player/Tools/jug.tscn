@@ -238,7 +238,6 @@ sway_min = Vector2(-20, -20)
 sway_max = Vector2(20, 20)
 sway_speed_rotation = 0.05
 sway_amount_rotation = 60.0
-random_sway_amount = null
 idle_sway_rotation_strength = 30.0
 idle_sway_speed = 0.005
 jump_sway_amount = 25.0

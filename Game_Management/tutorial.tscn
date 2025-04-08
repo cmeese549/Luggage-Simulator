@@ -14,3 +14,5 @@ billboard = 2
 text = "Your task is to drain the depths of this here lake. Please use your thimble on the water here with the mouse primary button."
 autowrap_mode = 3
 width = 750.0
+
+[editable path="TutorialTodd"]
