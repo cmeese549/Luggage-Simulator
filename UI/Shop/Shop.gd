@@ -70,6 +70,7 @@ func _input(event) -> void:
 func open_shop() -> void:
 	self.visible = true
 	hud.visible = false
+	items_dad.get_child(0).grab_focus()
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	get_tree().paused = true
 	var player_has_keys : bool = player.check_has_inventory_item("Uncle Upgrade's Keys")

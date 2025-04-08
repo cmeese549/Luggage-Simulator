@@ -49,10 +49,12 @@ func _ready() -> void:
 func cancel_quit() -> void:
 	buttons.visible = true
 	quit_confirm.visible = false
+	resume_button.grab_focus()
 		
 func prompt_quit() -> void:
 	buttons.visible = false
 	quit_confirm.visible = true
+	nevermind_button.grab_focus()
 	
 func quit() -> void:
 	get_tree().quit()
@@ -130,7 +132,7 @@ func pause() -> void:
 	hud.visible = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	get_tree().paused = true
-	sensitivity_slider.grab_focus()
+	resume_button.grab_focus()
 
 		
 func unpause() -> void:

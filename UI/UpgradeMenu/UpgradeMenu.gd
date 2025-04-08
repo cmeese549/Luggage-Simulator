@@ -65,6 +65,7 @@ func open(pump: Pump) -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	ui.pauseable = false
 	your_money.text = "You have: $" + add_comma_to_int(ui.money.cur_money)
+	close_button.grab_focus()
 	
 func render_upgrades(pump: Pump) -> void:
 	var i : int = 0

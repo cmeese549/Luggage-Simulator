@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://btbey8ncomyx7" path="res://UI/HUD/Crosshair/hitmorker.png" id="5_jqf55"]
 [ext_resource type="Script" uid="uid://bkn6bkk5bo3k0" path="res://UI/Dialogue/DialogueBox.gd" id="5_qgmx8"]
 [ext_resource type="Script" uid="uid://sb0v8kjwv2pv" path="res://UI/MainMenu/MainMenu.gd" id="6_byuxr"]
-[ext_resource type="Shader" path="res://UI/MainMenu/FadeFromBlack.tres" id="6_jqf55"]
+[ext_resource type="Shader" uid="uid://b85f48w1vu1cc" path="res://UI/MainMenu/FadeFromBlack.tres" id="6_jqf55"]
 [ext_resource type="Script" uid="uid://bed3d7egj53pu" path="res://UI/PauseMenu/PauseMenu.gd" id="6_qhxh2"]
 [ext_resource type="Script" uid="uid://cde2nhieog6m4" path="res://UI/UpgradeMenu/UpgradeMenu.gd" id="6_t31p1"]
 [ext_resource type="Script" uid="uid://bsyahvddt84hi" path="res://UI/delta_fade.gd" id="6_wtdy7"]
@@ -292,6 +292,8 @@ theme_override_constants/separation = 85
 [node name="Button" type="Button" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/SpeedUpgrades/VBoxContainer"]
 custom_minimum_size = Vector2(0, 77.235)
 layout_mode = 2
+focus_neighbor_right = NodePath("../../../QualityUpgrades/VBoxContainer/Button")
+focus_neighbor_bottom = NodePath("../Button2")
 theme_override_fonts/font = ExtResource("8_nxoi0")
 theme_override_font_sizes/font_size = 48
 text = "Extra Super Speedy Pump - $500"
@@ -300,6 +302,9 @@ autowrap_mode = 2
 [node name="Button2" type="Button" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/SpeedUpgrades/VBoxContainer"]
 custom_minimum_size = Vector2(0, 77.235)
 layout_mode = 2
+focus_neighbor_top = NodePath("../Button")
+focus_neighbor_right = NodePath("../../../QualityUpgrades/VBoxContainer/Button2")
+focus_neighbor_bottom = NodePath("../Button3")
 theme_override_fonts/font = ExtResource("8_nxoi0")
 theme_override_font_sizes/font_size = 48
 text = "Extra Super Speedy Pump - $500"
@@ -308,6 +313,9 @@ autowrap_mode = 2
 [node name="Button3" type="Button" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/SpeedUpgrades/VBoxContainer"]
 custom_minimum_size = Vector2(0, 77.235)
 layout_mode = 2
+focus_neighbor_top = NodePath("../Button2")
+focus_neighbor_right = NodePath("../../../QualityUpgrades/VBoxContainer/Button2")
+focus_neighbor_bottom = NodePath("../../../../Close/Button")
 theme_override_fonts/font = ExtResource("8_nxoi0")
 theme_override_font_sizes/font_size = 48
 text = "Extra Super Speedy Pump - $500"
@@ -330,6 +338,8 @@ theme_override_constants/separation = 85
 [node name="Button" type="Button" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/QualityUpgrades/VBoxContainer"]
 custom_minimum_size = Vector2(0, 77.235)
 layout_mode = 2
+focus_neighbor_left = NodePath("../../../SpeedUpgrades/VBoxContainer/Button")
+focus_neighbor_bottom = NodePath("../Button2")
 theme_override_fonts/font = ExtResource("8_nxoi0")
 theme_override_font_sizes/font_size = 48
 text = "Extra Super Speedy Pump - $500"
@@ -338,6 +348,9 @@ autowrap_mode = 2
 [node name="Button2" type="Button" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/QualityUpgrades/VBoxContainer"]
 custom_minimum_size = Vector2(0, 77.235)
 layout_mode = 2
+focus_neighbor_left = NodePath("../../../SpeedUpgrades/VBoxContainer/Button2")
+focus_neighbor_top = NodePath("../Button")
+focus_neighbor_bottom = NodePath("../Button3")
 theme_override_fonts/font = ExtResource("8_nxoi0")
 theme_override_font_sizes/font_size = 48
 text = "Extra Super Speedy Pump - $500"
@@ -346,6 +359,9 @@ autowrap_mode = 2
 [node name="Button3" type="Button" parent="UpgradeMenu/PanelContainer/MarginContainer/Rows/HBoxContainer/QualityUpgrades/VBoxContainer"]
 custom_minimum_size = Vector2(0, 77.235)
 layout_mode = 2
+focus_neighbor_left = NodePath("../../../SpeedUpgrades/VBoxContainer/Button3")
+focus_neighbor_top = NodePath("../Button2")
+focus_neighbor_bottom = NodePath("../../../../Close/Button")
 theme_override_fonts/font = ExtResource("8_nxoi0")
 theme_override_font_sizes/font_size = 48
 text = "Extra Super Speedy Pump - $500"
@@ -372,6 +388,9 @@ size_flags_horizontal = 3
 custom_minimum_size = Vector2(218.685, 0)
 layout_mode = 2
 size_flags_stretch_ratio = 0.4
+focus_neighbor_left = NodePath("../../HBoxContainer/SpeedUpgrades/VBoxContainer/Button3")
+focus_neighbor_top = NodePath("../../HBoxContainer/SpeedUpgrades/VBoxContainer/Button3")
+focus_neighbor_right = NodePath("../../HBoxContainer/QualityUpgrades/VBoxContainer/Button3")
 theme_override_fonts/font = ExtResource("8_nxoi0")
 theme_override_font_sizes/font_size = 61
 text = "Close"
@@ -423,6 +442,7 @@ layout_mode = 2
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 1.88
+follow_focus = true
 
 [node name="GridContainer" type="GridContainer" parent="Shop/PanelContainer/MarginContainer/Rows/ScrollContainer"]
 layout_mode = 2
@@ -574,6 +594,8 @@ horizontal_alignment = 1
 
 [node name="SensitivitySlider" type="HSlider" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/VBoxContainer/Sensitivity"]
 layout_mode = 2
+focus_neighbor_right = NodePath("../../../Rows/ScrollContainer/GridContainer")
+focus_neighbor_bottom = NodePath("../../FOV/FOVSlider")
 max_value = 2.0
 step = 0.01
 value = 1.0
@@ -589,6 +611,9 @@ horizontal_alignment = 1
 
 [node name="FOVSlider" type="HSlider" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/VBoxContainer/FOV"]
 layout_mode = 2
+focus_neighbor_top = NodePath("../../Sensitivity/SensitivitySlider")
+focus_neighbor_right = NodePath("../../../Rows/ScrollContainer/GridContainer")
+focus_neighbor_bottom = NodePath("../../Volume/VolumeSlider")
 min_value = 60.0
 max_value = 120.0
 step = 0.01
@@ -605,6 +630,9 @@ horizontal_alignment = 1
 
 [node name="VolumeSlider" type="HSlider" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/VBoxContainer/Volume"]
 layout_mode = 2
+focus_neighbor_top = NodePath("../../FOV/FOVSlider")
+focus_neighbor_right = NodePath("../../../Rows/ScrollContainer/GridContainer")
+focus_neighbor_bottom = NodePath("../../MusicVolume/MusicVolumeSlider")
 max_value = 1.0
 step = 0.01
 value = 0.8
@@ -620,6 +648,9 @@ horizontal_alignment = 1
 
 [node name="MusicVolumeSlider" type="HSlider" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/VBoxContainer/MusicVolume"]
 layout_mode = 2
+focus_neighbor_top = NodePath("../../Volume/VolumeSlider")
+focus_neighbor_right = NodePath("../../../Rows/ScrollContainer/GridContainer")
+focus_neighbor_bottom = NodePath("../../SfxVolume/SfxVolumeSlider")
 max_value = 1.0
 step = 0.01
 value = 0.8
@@ -635,6 +666,9 @@ horizontal_alignment = 1
 
 [node name="SfxVolumeSlider" type="HSlider" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/VBoxContainer/SfxVolume"]
 layout_mode = 2
+focus_neighbor_top = NodePath("../../MusicVolume/MusicVolumeSlider")
+focus_neighbor_right = NodePath("../../../Rows/ScrollContainer/GridContainer")
+focus_neighbor_bottom = NodePath("../../../../Close/Resume")
 max_value = 2.0
 step = 0.01
 value = 0.8
@@ -655,11 +689,14 @@ vertical_alignment = 1
 [node name="ScrollContainer" type="ScrollContainer" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Rows"]
 layout_mode = 2
 size_flags_vertical = 3
+follow_focus = true
 
 [node name="GridContainer" type="GridContainer" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Rows/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+focus_neighbor_left = NodePath("../../../VBoxContainer/Sensitivity/SensitivitySlider")
+focus_neighbor_bottom = NodePath("../../../../Close/Resume")
 theme_override_constants/h_separation = 50
 theme_override_constants/v_separation = 50
 columns = 3
@@ -1002,6 +1039,8 @@ custom_minimum_size = Vector2(185.02, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.4
+focus_neighbor_top = NodePath("../../PauseDad/VBoxContainer/SfxVolume/SfxVolumeSlider")
+focus_neighbor_right = NodePath("../HowToPlay")
 theme_override_fonts/font = ExtResource("8_nxoi0")
 theme_override_font_sizes/font_size = 46
 text = "Resume"
@@ -1011,6 +1050,9 @@ custom_minimum_size = Vector2(276.035, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.4
+focus_neighbor_left = NodePath("../Resume")
+focus_neighbor_top = NodePath("../../PauseDad/Rows/ScrollContainer/GridContainer")
+focus_neighbor_right = NodePath("../Unstick")
 theme_override_fonts/font = ExtResource("8_nxoi0")
 theme_override_font_sizes/font_size = 46
 text = "How To Play"
@@ -1020,6 +1062,9 @@ custom_minimum_size = Vector2(296.455, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.4
+focus_neighbor_left = NodePath("../HowToPlay")
+focus_neighbor_top = NodePath("../../PauseDad/Rows/ScrollContainer/GridContainer")
+focus_neighbor_right = NodePath("../Quit")
 theme_override_fonts/font = ExtResource("8_nxoi0")
 theme_override_font_sizes/font_size = 46
 text = "Help, I'm stuck!"
@@ -1030,6 +1075,8 @@ custom_minimum_size = Vector2(310.835, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.4
+focus_neighbor_left = NodePath("../Unstick")
+focus_neighbor_top = NodePath("../../PauseDad/Rows/ScrollContainer/GridContainer")
 theme_override_fonts/font = ExtResource("8_nxoi0")
 theme_override_font_sizes/font_size = 46
 text = "Quit To Desktop
@@ -1058,6 +1105,7 @@ custom_minimum_size = Vector2(296.455, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.4
+focus_neighbor_right = NodePath("../Quit")
 theme_override_fonts/font = ExtResource("8_nxoi0")
 theme_override_font_sizes/font_size = 46
 text = "Nevermind"
@@ -1068,6 +1116,7 @@ custom_minimum_size = Vector2(310.835, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.4
+focus_neighbor_left = NodePath("../Nevermind")
 theme_override_fonts/font = ExtResource("8_nxoi0")
 theme_override_font_sizes/font_size = 46
 text = "Quit To Desktop
@@ -1079,6 +1128,7 @@ size_flags_horizontal = 3
 
 [node name="MainMenu" type="Control" parent="."]
 process_mode = 3
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

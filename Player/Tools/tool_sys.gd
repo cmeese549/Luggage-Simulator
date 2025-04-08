@@ -71,11 +71,11 @@ func _unhandled_input(event):
 		if interact_thing:
 			if interact_thing.name == "WaterTop" || interact_thing.name == "DepositArea":
 				equipped_tool.use(interact_thing.name)
-			elif interact_thing.name == "PumpBuy":
+			elif interact_thing.name == "PumpBuy" or interact_thing.name == "PumpBuy2":
 				var pump_built : bool = interact_thing.find_parent("Pump*").attempt_buy()
 				if !pump_built:
 					cant_afford_audio.play()
-			elif interact_thing.name == "PumpUpgrade":
+			elif interact_thing.name == "PumpUpgrade" or interact_thing.name == "PumpUpgrade2":
 				interact_thing.find_parent("Pump*").attempt_upgrade()
 				player.play_interact_sound()
 			elif interact_thing.name == "OpenShop":
