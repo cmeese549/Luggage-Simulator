@@ -195,7 +195,7 @@ item_description = "You can trade this to Uncle Upgrade to get your hands!"
 item_icon = ExtResource("20_xpqtb")
 
 [node name="Square Pants" parent="InventoryItems" instance=ExtResource("2_f68k2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.5454, -0.569512, -88.0067)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.5454, 0.634927, -88.0067)
 item_name = "Square Pants"
 item_description = "You can trade these to Uncle Upgrade to get a sponge!"
 item_icon = ExtResource("21_m2q4c")

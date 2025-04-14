@@ -259,8 +259,8 @@ func _physics_process(delta):
 	#enables midair control in pipe jumps
 	else:
 		if direction:
-			velocity.x = direction.x * SPEED * 0.05
-			velocity.z = direction.z * SPEED * 0.05
+			velocity.x = direction.x * SPEED * 0.065
+			velocity.z = direction.z * SPEED * 0.065
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 			velocity.z = move_toward(velocity.z, 0, SPEED)

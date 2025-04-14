@@ -43,7 +43,7 @@ var item_purchased_quips : Array[String] = [
 var used_item_purchased_quips : Array[String] = []
 
 var has_delivered_final_quip : bool = false
-var final_quip : String = "OMG!!!{pause=0.5} MY KEYS!!!{pause=0.5} Thank you so much.  Now I can finally get out of here.  By the way...{pause=0.5} [b]I reported you to the government.[/b]{pause=1.0}  You've been fined for damaging the environment.{pause=0.5} All of your [color=green]$MONEY$[/color] is gone now.{pause=1.0} [rainbow]S{pause=0.1}o{pause=0.1}r{pause=0.1}r{pause=0.1}y{pause=0.1}.{pause=0.1}.{pause=0.1}.{pause=0.1}.[/rainbow]"
+var final_quip : String = "OMG!!!{pause=0.5} MY KEYS!!!{pause=0.5} Thank you so much.  Now I can finally get out of here.  By the way...{pause=0.5} [b]I reported you to the government.[/b]{pause=1.0}  You've been fined [color=green]$MONEY$[/color] for damaging the environment.{pause=0.5} All of your money is gone now.{pause=1.0} [rainbow]S{pause=0.1}o{pause=0.1}r{pause=0.1}r{pause=0.1}y{pause=0.1}.{pause=0.1}.{pause=0.1}.{pause=0.1}.[/rainbow]"
 @onready var hsep = $PanelContainer/MarginContainer/Rows/HSeparator4
 @onready var other_hsep = $PanelContainer/MarginContainer/Rows/HSeparator3
 @onready var scroll_container = $PanelContainer/MarginContainer/Rows/ScrollContainer
@@ -162,6 +162,10 @@ func attempt_purchase(item: ShopItem, button: Button) -> void:
 			Events.tool_purchased.emit(item)
 		elif item.item_type == "Speed":
 			Events.speed_purchased.emit(item)
+		if items_dad.get_children().size() > 0:
+			items_dad.get_child(0).grab_focus()
+		else:
+			close_button.grab_focus()
 	else:
 		cant_afford.play()
 		display_random_quip(cant_afford_quips, used_cant_afford_quips)

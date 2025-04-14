@@ -29,7 +29,7 @@ func _ready():
 	cur_quality = base_quality
 	$Geo.visible = built
 	$Sign.visible = true
-	$Sign/BuyLabel.text = "$"+str(price)
+	$Sign/BuyLabel.text = "$"+add_comma_to_int(price)
 	Events.all_ready.connect(all_ready)
 	$Upgrades/PumpUpgrade/CollisionShape3D.disabled = true
 
@@ -98,4 +98,11 @@ func apply_upgrade(new_upgrade: pump_upgrade):
 
 func update_price(new_price: int):
 	price = new_price
-	$Sign/BuyLabel.text = "$"+str(price)
+	$Sign/BuyLabel.text = "$"+add_comma_to_int(price)
+
+func add_comma_to_int(value: int) -> String:
+	var str_value: String = str(value)
+	var loop_end: int = 0 if value > -1 else 1
+	for i in range(str_value.length()-3, loop_end, -3):
+		str_value = str_value.insert(i, ",")
+	return str_value

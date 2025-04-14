@@ -57,7 +57,7 @@ speed_scale = 0.5
 [node name="Bouncer" type="Node3D" parent="."]
 
 [node name="Sprite3D" type="Sprite3D" parent="Bouncer"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.42913, 0)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 1.42913, 0)
 billboard = 1
 render_priority = -1
 texture = ExtResource("2_ddh02")

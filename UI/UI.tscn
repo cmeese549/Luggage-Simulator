@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://btbey8ncomyx7" path="res://UI/HUD/Crosshair/hitmorker.png" id="5_jqf55"]
 [ext_resource type="Script" uid="uid://bkn6bkk5bo3k0" path="res://UI/Dialogue/DialogueBox.gd" id="5_qgmx8"]
 [ext_resource type="Script" uid="uid://sb0v8kjwv2pv" path="res://UI/MainMenu/MainMenu.gd" id="6_byuxr"]
-[ext_resource type="Shader" uid="uid://b85f48w1vu1cc" path="res://UI/MainMenu/FadeFromBlack.tres" id="6_jqf55"]
+[ext_resource type="Shader" uid="uid://b01x43o1uvews" path="res://UI/MainMenu/FadeFromBlack.tres" id="6_jqf55"]
 [ext_resource type="Script" uid="uid://bed3d7egj53pu" path="res://UI/PauseMenu/PauseMenu.gd" id="6_qhxh2"]
 [ext_resource type="Script" uid="uid://cde2nhieog6m4" path="res://UI/UpgradeMenu/UpgradeMenu.gd" id="6_t31p1"]
 [ext_resource type="Script" uid="uid://bsyahvddt84hi" path="res://UI/delta_fade.gd" id="6_wtdy7"]
@@ -596,9 +596,10 @@ horizontal_alignment = 1
 layout_mode = 2
 focus_neighbor_right = NodePath("../../../Rows/ScrollContainer/GridContainer")
 focus_neighbor_bottom = NodePath("../../FOV/FOVSlider")
-max_value = 2.0
+min_value = 0.01
+max_value = 10.0
 step = 0.01
-value = 1.0
+value = 3.0
 
 [node name="FOV" type="VBoxContainer" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/VBoxContainer"]
 layout_mode = 2
@@ -633,7 +634,7 @@ layout_mode = 2
 focus_neighbor_top = NodePath("../../FOV/FOVSlider")
 focus_neighbor_right = NodePath("../../../Rows/ScrollContainer/GridContainer")
 focus_neighbor_bottom = NodePath("../../MusicVolume/MusicVolumeSlider")
-max_value = 1.0
+max_value = 3.0
 step = 0.01
 value = 0.8
 
@@ -669,7 +670,7 @@ layout_mode = 2
 focus_neighbor_top = NodePath("../../MusicVolume/MusicVolumeSlider")
 focus_neighbor_right = NodePath("../../../Rows/ScrollContainer/GridContainer")
 focus_neighbor_bottom = NodePath("../../../../Close/Resume")
-max_value = 2.0
+max_value = 1.0
 step = 0.01
 value = 0.8
 
