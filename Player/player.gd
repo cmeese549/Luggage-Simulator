@@ -283,6 +283,7 @@ func _physics_process(delta):
 	else:
 		if direction:
 			direction = plane.project(direction)
+			print(plane.distance_to(self.global_position))
 			velocity.x = direction.x * SPEED * 0.2
 			velocity.z = direction.z * SPEED * 0.2
 		else:
@@ -307,7 +308,7 @@ func start_pipe(body: Node, area: Node) -> void:
 	ready_to_pipe_again = false
 	is_piping = true
 	pipe_landing_velocity = velocity
-	velocity.y = velocity.length() * 0.775
+	velocity.y = velocity.length() * 0.675
 	plane = Plane(area.global_basis.x.normalized())
 	do_jump_sound()
 	
