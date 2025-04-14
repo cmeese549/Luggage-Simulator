@@ -65,9 +65,10 @@ var landing_sway_adjust_cooldown : float = 0
 
 @onready var pipejumps : Array[Node] = get_tree().get_nodes_in_group("PipeJump")
 var is_piping : bool = false
+var ready_to_pipe_again : bool = false
 var old_decel : float = 0
 var old_speed : float = 0
-@onready var halfpipe_zone : Area3D = $"../Halfpipe"
+@onready var halfpipe_zone : Area3D = get_tree().get_first_node_in_group("Pipe")
 @onready var default_wall_slide_angle : float = wall_min_slide_angle
 @onready var default_floor_angle : float = floor_max_angle
 var is_in_halfpipe : bool = true
@@ -218,6 +219,9 @@ func _physics_process(delta):
 	
 	if is_on_floor() and is_piping and velocity.y <= 0:
 		stop_pipe(self)
+		
+	if (is_on_floor() or is_on_wall()) and !is_piping:
+		ready_to_pipe_again = true
 	
 	# Add the gravity.
 	if not is_on_floor() and not grinding:
@@ -277,11 +281,11 @@ func _physics_process(delta):
 	#enables midair control in pipe jumps
 	else:
 		if direction:
-			velocity.x = direction.x * SPEED * 0.065
-			velocity.z = direction.z * SPEED * 0.065
+			velocity.x = direction.x * SPEED * 0.13
+			velocity.z = direction.z * SPEED * 0.13
 		else:
-			velocity.x = move_toward(velocity.x, 0, SPEED)
-			velocity.z = move_toward(velocity.z, 0, SPEED)
+			velocity.x = move_toward(velocity.x, 0, SPEED * 0.1)
+			velocity.z = move_toward(velocity.z, 0, SPEED * 0.1)
 	
 	move_and_slide()
 	if slidy:
@@ -296,13 +300,15 @@ func do_jump():
 		jumped_from_water = true
 	
 func start_pipe(body: Node) -> void:
-	if body != self or is_piping or !slidy:
+	if body != self or is_piping or !slidy or !ready_to_pipe_again:
 		return
+	ready_to_pipe_again = false
 	is_piping = true
 	pipe_landing_velocity = velocity
-	velocity.y = velocity.length() * 0.675
-	velocity.x = 0
-	velocity.z = 0
+	velocity.y = velocity.length() * 0.775
+	#velocity.x = 0
+	#velocity.z = 0
+	do_jump_sound()
 	
 func stop_pipe(body: Node) -> void:
 	if body != self or !slidy:
