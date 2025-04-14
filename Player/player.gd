@@ -73,6 +73,7 @@ var old_speed : float = 0
 @onready var default_floor_angle : float = floor_max_angle
 var is_in_halfpipe : bool = true
 var pipe_landing_velocity : Vector3 = Vector3.ZERO
+var plane : Plane
 
 var moved_last_frame : bool = false
 var handled_skateboard_stop : bool = false
@@ -118,7 +119,7 @@ func _ready():
 	halfpipe_zone.body_exited.connect(exit_pipe)
 	
 	for jump: Node in pipejumps:
-		jump.body_entered.connect(start_pipe)
+		jump.body_entered.connect(start_pipe.bind(jump))
 		jump.body_exited.connect(stop_pipe)
 	
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -281,8 +282,9 @@ func _physics_process(delta):
 	#enables midair control in pipe jumps
 	else:
 		if direction:
-			velocity.x = direction.x * SPEED * 0.13
-			velocity.z = direction.z * SPEED * 0.13
+			direction = plane.project(direction)
+			velocity.x = direction.x * SPEED * 0.2
+			velocity.z = direction.z * SPEED * 0.2
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED * 0.1)
 			velocity.z = move_toward(velocity.z, 0, SPEED * 0.1)
@@ -299,15 +301,14 @@ func do_jump():
 	if is_in_water():
 		jumped_from_water = true
 	
-func start_pipe(body: Node) -> void:
+func start_pipe(body: Node, area: Node) -> void:
 	if body != self or is_piping or !slidy or !ready_to_pipe_again:
 		return
 	ready_to_pipe_again = false
 	is_piping = true
 	pipe_landing_velocity = velocity
 	velocity.y = velocity.length() * 0.775
-	#velocity.x = 0
-	#velocity.z = 0
+	plane = Plane(area.global_basis.x.normalized())
 	do_jump_sound()
 	
 func stop_pipe(body: Node) -> void:
@@ -547,7 +548,7 @@ func rail_grinding(delta):
 	grind_timer(delta)
 
 func update_grind_position(delta):
-	position = lerp(position, rail_grind_node.global_position + Vector3(0,1,0), delta * 10)
+	position = lerp(position, rail_grind_node.global_position + Vector3(0,1,0), delta * 30)
 
 func start_grinding(grind_rail, delta):
 	grinding = true
