@@ -68,7 +68,7 @@ var is_piping : bool = false
 var ready_to_pipe_again : bool = false
 var old_decel : float = 0
 var old_speed : float = 0
-@onready var halfpipe_zone : Area3D = get_tree().get_first_node_in_group("Pipe")
+@onready var halfpipe_zones : Array[Node] = get_tree().get_nodes_in_group("Pipe")
 @onready var default_wall_slide_angle : float = wall_min_slide_angle
 @onready var default_floor_angle : float = floor_max_angle
 var is_in_halfpipe : bool = true
@@ -115,8 +115,9 @@ func _ready():
 	#deceleration = 2
 	#roller_unlocked = true
 	
-	halfpipe_zone.body_entered.connect(enter_pipe)
-	halfpipe_zone.body_exited.connect(exit_pipe)
+	for pipe: Node in halfpipe_zones:
+		pipe.body_entered.connect(enter_pipe)
+		pipe.body_exited.connect(exit_pipe)
 	
 	for jump: Node in pipejumps:
 		jump.body_entered.connect(start_pipe.bind(jump))
@@ -283,9 +284,8 @@ func _physics_process(delta):
 	else:
 		if direction:
 			direction = plane.project(direction)
-			print(plane.distance_to(self.global_position))
-			velocity.x = direction.x * SPEED * 0.2
-			velocity.z = direction.z * SPEED * 0.2
+			velocity.x = direction.x * SPEED * 0.3
+			velocity.z = direction.z * SPEED * 0.3
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED * 0.1)
 			velocity.z = move_toward(velocity.z, 0, SPEED * 0.1)
@@ -315,6 +315,13 @@ func start_pipe(body: Node, area: Node) -> void:
 func stop_pipe(body: Node) -> void:
 	if body != self or !slidy:
 		return
+	for jump: Node in pipejumps:
+		var overlaps : Array = jump.get_overlapping_bodies()
+		for overlap in overlaps:
+			if overlap.is_in_group("Player"):
+				print("Setting new plane")
+				plane = Plane(jump.global_basis.x.normalized())
+				return
 	is_piping = false
 	
 func enter_pipe(body: Node) -> void:
@@ -330,6 +337,11 @@ func enter_pipe(body: Node) -> void:
 func exit_pipe(body: Node) -> void:
 	if body != self or !slidy:
 		return
+	for pipe: Node in halfpipe_zones:
+		var overlaps : Array = pipe.get_overlapping_bodies()
+		for overlap in overlaps:
+			if overlap.is_in_group("Player"):
+				return
 	wall_min_slide_angle = default_wall_slide_angle
 	floor_max_angle = default_floor_angle
 	deceleration = old_decel
