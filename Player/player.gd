@@ -63,6 +63,16 @@ var was_just_flying : bool = false
 var doing_landing_adjust : bool = false
 var landing_sway_adjust_cooldown : float = 0
 
+@onready var pipejumps : Array[Node] = get_tree().get_nodes_in_group("PipeJump")
+var is_piping : bool = false
+var old_decel : float = 0
+var old_speed : float = 0
+@onready var halfpipe_zone : Area3D = $"../Halfpipe"
+@onready var default_wall_slide_angle : float = wall_min_slide_angle
+@onready var default_floor_angle : float = floor_max_angle
+var is_in_halfpipe : bool = true
+var pipe_landing_velocity : Vector3 = Vector3.ZERO
+
 var moved_last_frame : bool = false
 var handled_skateboard_stop : bool = false
 
@@ -88,6 +98,27 @@ func _ready():
 	else:
 		if main_menu != null:
 			main_menu.visible = true
+			
+	slidy = true
+	SPEED = 20
+	friction = .2
+	accelartion = 5
+	deceleration = 3 
+	skate_unlocked = true
+	
+	#slidy = true
+	#SPEED = 10
+	#friction = .5
+	#accelartion = 3
+	#deceleration = 2
+	#roller_unlocked = true
+	
+	halfpipe_zone.body_entered.connect(enter_pipe)
+	halfpipe_zone.body_exited.connect(exit_pipe)
+	
+	for jump: Node in pipejumps:
+		jump.body_entered.connect(start_pipe)
+		jump.body_exited.connect(stop_pipe)
 	
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	item_pickup_range.area_entered.connect(pickup_item)
@@ -184,12 +215,17 @@ func _physics_process(delta):
 	if !ready_to_start_game:
 		return
 	current_footstep_cooldown -= delta
+	
+	if is_on_floor() and is_piping and velocity.y <= 0:
+		stop_pipe(self)
+	
 	# Add the gravity.
 	if not is_on_floor() and not grinding:
 		if tool_sys.equipped_tool != null:
 			do_jump_sway(delta)
 		was_just_flying = true
-		skateboard_audio.stop()
+		if not is_on_wall() or !is_in_halfpipe:
+			skateboard_audio.stop()
 		velocity += get_gravity() * delta
 	
 	if is_in_water() and !was_just_in_water:
@@ -215,25 +251,34 @@ func _physics_process(delta):
 	var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_back")
 	var direction = (neck.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	
-	if slidy and !is_in_water():
+	if slidy and !is_in_water() and !is_piping:
 		if direction:
 			moved_last_frame = true
-			if is_on_floor():
+			if is_on_floor() or (is_on_wall() and is_in_halfpipe):
 				handled_skateboard_stop = false
 				fade_in_skateboard()
 			velocity.x = lerp(velocity.x, direction.x * SPEED, accelartion * delta)
 			velocity.z = lerp(velocity.z, direction.z * SPEED, accelartion * delta)
 		else:
-			fade_out_skateboard()
+			if is_on_floor():
+				fade_out_skateboard()
 			moved_last_frame = false
 			velocity.x = lerp(velocity.x, 0.0, deceleration * delta)
 			velocity.z = lerp(velocity.z, 0.0, deceleration * delta)
-	else:
+	elif !is_piping:
 		if direction:
 			if current_footstep_cooldown <= 0 and is_on_floor():
 				do_footstep_sound()
 			velocity.x = direction.x * SPEED
 			velocity.z = direction.z * SPEED
+		else:
+			velocity.x = move_toward(velocity.x, 0, SPEED)
+			velocity.z = move_toward(velocity.z, 0, SPEED)
+	#enables midair control in pipe jumps
+	else:
+		if direction:
+			velocity.x = direction.x * SPEED * 0.05
+			velocity.z = direction.z * SPEED * 0.05
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 			velocity.z = move_toward(velocity.z, 0, SPEED)
@@ -249,6 +294,38 @@ func do_jump():
 	skateboard_fade_audio.stop()
 	if is_in_water():
 		jumped_from_water = true
+	
+func start_pipe(body: Node) -> void:
+	if body != self or is_piping or !slidy:
+		return
+	is_piping = true
+	pipe_landing_velocity = velocity
+	velocity.y = velocity.length() * 0.675
+	velocity.x = 0
+	velocity.z = 0
+	
+func stop_pipe(body: Node) -> void:
+	if body != self or !slidy:
+		return
+	is_piping = false
+	
+func enter_pipe(body: Node) -> void:
+	if body != self or !slidy:
+		return
+	wall_min_slide_angle = 0
+	floor_max_angle = 0
+	old_decel = deceleration
+	old_speed = SPEED
+	SPEED = 20
+	deceleration = 0
+	
+func exit_pipe(body: Node) -> void:
+	if body != self or !slidy:
+		return
+	wall_min_slide_angle = default_wall_slide_angle
+	floor_max_angle = default_floor_angle
+	deceleration = old_decel
+	SPEED = old_speed
 
 func fade_out_skateboard() -> void:
 	skateboard_audio.stop()
@@ -303,7 +380,7 @@ func _process(delta : float) -> void:
 	if input_dir != Vector2.ZERO and is_on_floor():
 		bob_this_frame = weapon_bob(delta)
 		
-	if !is_on_floor():
+	if !is_on_floor() and (!is_on_wall() and is_in_halfpipe):
 		do_jump_sway(delta)
 	else:
 		if was_just_flying:

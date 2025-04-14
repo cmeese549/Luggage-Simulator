@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://df3ijovgmdv5d"
 path.s3tc="res://.godot/imported/Thimble_Full.png-7dd88fb81649ec943bcabf6595db6d6d.s3tc.ctex"
+path.etc2="res://.godot/imported/Thimble_Full.png-7dd88fb81649ec943bcabf6595db6d6d.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Art_Assets/Textures/HandTools/Thimble_Full.png"
-dest_files=["res://.godot/imported/Thimble_Full.png-7dd88fb81649ec943bcabf6595db6d6d.s3tc.ctex"]
+dest_files=["res://.godot/imported/Thimble_Full.png-7dd88fb81649ec943bcabf6595db6d6d.s3tc.ctex", "res://.godot/imported/Thimble_Full.png-7dd88fb81649ec943bcabf6595db6d6d.etc2.ctex"]
 
 [params]
 

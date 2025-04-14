@@ -26,6 +26,7 @@ window/size/viewport_height=1080
 window/size/borderless=true
 window/stretch/mode="viewport"
 window/stretch/aspect="expand"
+window/max_fps=0
 
 [editor_plugins]
 
@@ -161,4 +162,9 @@ skate={
 
 [physics]
 
+3d/physics_engine="Jolt Physics"
 common/physics_interpolation=true
+
+[rendering]
+
+textures/vram_compression/import_etc2_astc=true

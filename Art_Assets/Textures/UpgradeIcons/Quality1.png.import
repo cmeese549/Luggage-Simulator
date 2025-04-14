@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://ca04lkgllws43"
 path.s3tc="res://.godot/imported/Quality1.png-6e0e24dc203050d2b2a2380a7424c1be.s3tc.ctex"
+path.etc2="res://.godot/imported/Quality1.png-6e0e24dc203050d2b2a2380a7424c1be.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Art_Assets/Textures/UpgradeIcons/Quality1.png"
-dest_files=["res://.godot/imported/Quality1.png-6e0e24dc203050d2b2a2380a7424c1be.s3tc.ctex"]
+dest_files=["res://.godot/imported/Quality1.png-6e0e24dc203050d2b2a2380a7424c1be.s3tc.ctex", "res://.godot/imported/Quality1.png-6e0e24dc203050d2b2a2380a7424c1be.etc2.ctex"]
 
 [params]
 

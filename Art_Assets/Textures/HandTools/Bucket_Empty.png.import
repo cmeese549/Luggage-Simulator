@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://c8kvvlfpl2poi"
 path.s3tc="res://.godot/imported/Bucket_Empty.png-4a1484109534d47db3c95df8bbf1de15.s3tc.ctex"
+path.etc2="res://.godot/imported/Bucket_Empty.png-4a1484109534d47db3c95df8bbf1de15.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Art_Assets/Textures/HandTools/Bucket_Empty.png"
-dest_files=["res://.godot/imported/Bucket_Empty.png-4a1484109534d47db3c95df8bbf1de15.s3tc.ctex"]
+dest_files=["res://.godot/imported/Bucket_Empty.png-4a1484109534d47db3c95df8bbf1de15.s3tc.ctex", "res://.godot/imported/Bucket_Empty.png-4a1484109534d47db3c95df8bbf1de15.etc2.ctex"]
 
 [params]
 

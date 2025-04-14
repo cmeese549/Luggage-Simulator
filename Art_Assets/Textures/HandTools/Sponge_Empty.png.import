@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://d1lon8tmue1aa"
 path.s3tc="res://.godot/imported/Sponge_Empty.png-6b09ae20a8e057aaf1fe383a210adf9d.s3tc.ctex"
+path.etc2="res://.godot/imported/Sponge_Empty.png-6b09ae20a8e057aaf1fe383a210adf9d.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Art_Assets/Textures/HandTools/Sponge_Empty.png"
-dest_files=["res://.godot/imported/Sponge_Empty.png-6b09ae20a8e057aaf1fe383a210adf9d.s3tc.ctex"]
+dest_files=["res://.godot/imported/Sponge_Empty.png-6b09ae20a8e057aaf1fe383a210adf9d.s3tc.ctex", "res://.godot/imported/Sponge_Empty.png-6b09ae20a8e057aaf1fe383a210adf9d.etc2.ctex"]
 
 [params]
 
