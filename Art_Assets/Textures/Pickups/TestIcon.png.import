@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://e6y1mopni1xh"
 path.s3tc="res://.godot/imported/TestIcon.png-5cb3ce1003146af006757f35eb9fd7a4.s3tc.ctex"
+path.etc2="res://.godot/imported/TestIcon.png-5cb3ce1003146af006757f35eb9fd7a4.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Art_Assets/Textures/Pickups/TestIcon.png"
-dest_files=["res://.godot/imported/TestIcon.png-5cb3ce1003146af006757f35eb9fd7a4.s3tc.ctex"]
+dest_files=["res://.godot/imported/TestIcon.png-5cb3ce1003146af006757f35eb9fd7a4.s3tc.ctex", "res://.godot/imported/TestIcon.png-5cb3ce1003146af006757f35eb9fd7a4.etc2.ctex"]
 
 [params]
 

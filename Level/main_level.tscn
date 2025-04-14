@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://c0shsmlk675qm"]
+[gd_scene load_steps=31 format=3 uid="uid://c0shsmlk675qm"]
 
 [ext_resource type="PackedScene" uid="uid://ddwtbnyshxxj3" path="res://Art_Assets/Levels/LevelGeometry.tscn" id="1_1wy1g"]
 [ext_resource type="PackedScene" uid="uid://bk7vc4usjt3od" path="res://Player/player.tscn" id="1_7ireg"]
@@ -32,6 +32,12 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_vad1a"]
 size = Vector3(1000, 1, 1000)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_i5tqg"]
+size = Vector3(11.1872, 67.0573, 9.89232)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_t5u5v"]
+size = Vector3(25.6393, 71.6446, 11.2223)
+
 [node name="MainLevel" type="Node3D"]
 script = ExtResource("1_romof")
 
@@ -40,7 +46,7 @@ visible = false
 mouse_filter = 2
 
 [node name="Player" parent="." instance=ExtResource("1_7ireg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 282.008, 1, 4.831)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -92.2842, 1.8594, 204.237)
 collision_mask = 5
 
 [node name="Neck" parent="Player" index="2"]
@@ -154,7 +160,7 @@ item_description = "Trade all 4 to Uncle Upgrade for a Skateboard!"
 item_icon = ExtResource("17_giak0")
 
 [node name="Skateboard Wheel 3" parent="InventoryItems" instance=ExtResource("2_f68k2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -257.919, 5.23158, -397.006)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -257.919, 11.0231, -395.776)
 item_name = "Skateboard Wheel 3"
 item_description = "Trade all 4 to Uncle Upgrade for a Skateboard!"
 item_icon = ExtResource("17_giak0")
@@ -430,5 +436,29 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 211.281, 0, -14.6264)
 
 [node name="Done" type="Marker3D" parent="TutorialMarkers"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 235.937, 0, -6.84646)
+
+[node name="Pipezone" type="Area3D" parent="." groups=["PipeJump"]]
+transform = Transform3D(-0.44921, 0, -0.893426, 0, 1, 0, 0.893426, 0, -0.44921, -131.274, 20.4156, 240.838)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Pipezone"]
+transform = Transform3D(0.999858, 0, 0.0168591, 0, 1, 0, -0.0168591, 0, 0.999858, 1.03717, 17.8153, -0.235458)
+shape = SubResource("BoxShape3D_i5tqg")
+debug_color = Color(0, 0.595, 0.7, 1)
+
+[node name="Pipezone2" type="Area3D" parent="." groups=["PipeJump"]]
+transform = Transform3D(-0.44921, 0, -0.893426, 0, 1, 0, 0.893426, 0, -0.44921, -147.704, 4.72336, 232.581)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Pipezone2"]
+transform = Transform3D(0.999858, 0, 0.0168591, 0, 1, 0, -0.0168591, 0, 0.999858, 0.974487, 33.5755, -3.95261)
+shape = SubResource("BoxShape3D_i5tqg")
+debug_color = Color(0, 0.595, 0.7, 1)
+
+[node name="Halfpipe" type="Area3D" parent="."]
+transform = Transform3D(0.899176, 0, -0.437587, 0, 1, 0, 0.437587, 0, 0.899176, -136.703, 0, 238.964)
+visible = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Halfpipe"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.68446, 35.0186, 0.378174)
+shape = SubResource("BoxShape3D_t5u5v")
 
 [editable path="Player"]

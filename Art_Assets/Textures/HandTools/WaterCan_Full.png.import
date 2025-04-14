@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://k16fcqlptxgg"
 path.s3tc="res://.godot/imported/WaterCan_Full.png-84a847bc86be350378598ffc43529f5d.s3tc.ctex"
+path.etc2="res://.godot/imported/WaterCan_Full.png-84a847bc86be350378598ffc43529f5d.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Art_Assets/Textures/HandTools/WaterCan_Full.png"
-dest_files=["res://.godot/imported/WaterCan_Full.png-84a847bc86be350378598ffc43529f5d.s3tc.ctex"]
+dest_files=["res://.godot/imported/WaterCan_Full.png-84a847bc86be350378598ffc43529f5d.s3tc.ctex", "res://.godot/imported/WaterCan_Full.png-84a847bc86be350378598ffc43529f5d.etc2.ctex"]
 
 [params]
 

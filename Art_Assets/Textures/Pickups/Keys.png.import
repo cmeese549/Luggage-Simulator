@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://b10qgtb4o5xqi"
 path.s3tc="res://.godot/imported/Keys.png-fe0a43aef09f0f4a145a6eadc29c3db5.s3tc.ctex"
+path.etc2="res://.godot/imported/Keys.png-fe0a43aef09f0f4a145a6eadc29c3db5.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Art_Assets/Textures/Pickups/Keys.png"
-dest_files=["res://.godot/imported/Keys.png-fe0a43aef09f0f4a145a6eadc29c3db5.s3tc.ctex"]
+dest_files=["res://.godot/imported/Keys.png-fe0a43aef09f0f4a145a6eadc29c3db5.s3tc.ctex", "res://.godot/imported/Keys.png-fe0a43aef09f0f4a145a6eadc29c3db5.etc2.ctex"]
 
 [params]
 

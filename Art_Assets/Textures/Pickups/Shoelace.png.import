@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://cdfbs2w5lv4ta"
 path.s3tc="res://.godot/imported/Shoelace.png-04513b94bcd0e02bae738fd3a5862cdd.s3tc.ctex"
+path.etc2="res://.godot/imported/Shoelace.png-04513b94bcd0e02bae738fd3a5862cdd.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Art_Assets/Textures/Pickups/Shoelace.png"
-dest_files=["res://.godot/imported/Shoelace.png-04513b94bcd0e02bae738fd3a5862cdd.s3tc.ctex"]
+dest_files=["res://.godot/imported/Shoelace.png-04513b94bcd0e02bae738fd3a5862cdd.s3tc.ctex", "res://.godot/imported/Shoelace.png-04513b94bcd0e02bae738fd3a5862cdd.etc2.ctex"]
 
 [params]
 
