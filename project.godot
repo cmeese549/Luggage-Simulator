@@ -47,6 +47,7 @@ folder_colors={
 [global_group]
 
 Interactable=""
+Rail=""
 
 [input]
 
@@ -157,6 +158,7 @@ skate={
 3d_physics/layer_2="Water Surface"
 3d_physics/layer_3="Water Float"
 3d_physics/layer_4="Interactables"
+3d_physics/layer_5="Rails"
 
 [physics]
 

@@ -7,6 +7,6 @@
 [node name="Skateboard" type="Node3D"]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+transform = Transform3D(2, 0, 0, 0, -8.74228e-08, 2, 0, -2, -8.74228e-08, 0, 0, 0)
 mesh = SubResource("QuadMesh_04hln")
 surface_material_override/0 = ExtResource("1_u6o5b")
