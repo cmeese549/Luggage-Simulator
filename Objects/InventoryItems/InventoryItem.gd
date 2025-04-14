@@ -1,3 +1,4 @@
+@tool
 extends Node
 
 class_name InventoryItem
@@ -16,3 +17,9 @@ func _ready() -> void:
 	sprite.texture = item_icon
 	text.text = item_name
 	twinkle.unit_size = twinkle_diameter_meters
+	
+func _process(_delta: float) -> void:
+	if !Engine.is_editor_hint():
+		return
+	sprite.texture = item_icon
+	text.text = item_name
