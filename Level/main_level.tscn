@@ -456,6 +456,8 @@ debug_color = Color(0, 0.595, 0.7, 1)
 [node name="Halfpipe" type="Area3D" parent="."]
 transform = Transform3D(0.899176, 0, -0.437587, 0, 1, 0, 0.437587, 0, 0.899176, -136.703, 0, 238.964)
 visible = false
+linear_damp = 0.0
+angular_damp = 0.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Halfpipe"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.68446, 35.0186, 0.378174)
