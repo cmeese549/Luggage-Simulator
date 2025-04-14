@@ -1,5 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://dfwilyex83qk5"]
+[gd_scene load_steps=6 format=3 uid="uid://dfwilyex83qk5"]
 
+[ext_resource type="Script" uid="uid://du36ad1m5n61t" path="res://Objects/Rail/rail.gd" id="1_4jl54"]
 [ext_resource type="ArrayMesh" uid="uid://b03foyvtyhndk" path="res://Art_Assets/Models/SkatePark/CurvedRail.obj" id="1_q4efw"]
 [ext_resource type="Material" uid="uid://cccm5jtfypdav" path="res://Art_Assets/Materials/MiscEnvMtls/Grey.tres" id="2_5olxb"]
 
@@ -13,13 +14,17 @@ _data = {
 }
 point_count = 3
 
-[node name="CurvedRail" type="Node3D"]
+[node name="CurvedRail" type="Node3D" node_paths=PackedStringArray("path") groups=["Rail"]]
+script = ExtResource("1_4jl54")
+DEBUG = true
+path = NodePath("CurvedRail/Path3D")
 
 [node name="CurvedRail" type="MeshInstance3D" parent="."]
 mesh = ExtResource("1_q4efw")
 surface_material_override/0 = ExtResource("2_5olxb")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="CurvedRail"]
+[node name="StaticBody3D" type="StaticBody3D" parent="CurvedRail" groups=["Rail"]]
+collision_layer = 17
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CurvedRail/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_5olxb")

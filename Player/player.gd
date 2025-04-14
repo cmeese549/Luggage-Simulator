@@ -27,6 +27,14 @@ var rng = RandomNumberGenerator.new()
 @onready var jump_splash_audio : AudioStreamPlayer = $Audio/Footsteps/JumpSplash
 @onready var left_water_audio : AudioStreamPlayer = $Audio/Footsteps/LeftWater
 @onready var cant_afford : AudioStreamPlayer = $Audio/CantAfford
+
+enum MOVE_TECH {
+	NONE,
+	ROLLER_SKATES,
+	SKATEBOARD
+}
+var cur_move_tech: MOVE_TECH = MOVE_TECH.NONE
+
 var ready_to_land : bool = true
 
 const JUMP_VELOCITY = 5.2
@@ -60,10 +68,19 @@ var handled_skateboard_stop : bool = false
 
 var was_just_in_water: bool = false
 
-var ready_to_start_game = false
+@export var ready_to_start_game = false
 var game_started = false
 
 var inventory : Array[InventoryItem] = []
+
+var grinding: bool = false
+var rail_grind_node = null
+var countdown_next_grind_max: float = 1.0
+var countdown_next_grind_left: float = 1.0
+var grind_timer_complete: bool = true
+var start_grind_timer: bool = false
+@export var grind_rays: Node3D
+
 
 func _ready():
 	if ready_to_start_game:
@@ -141,6 +158,12 @@ func _unhandled_input(event):
 		start_game()
 	if event is InputEventMouseButton:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	if event.is_action_pressed("roller"):
+		var roller_skates = load("res://UI/Shop/ShopItems/RollerSkate.tres")
+		apply_upgrade(roller_skates)
+	elif event.is_action_pressed("skate"):
+		var skate = load("res://UI/Shop/ShopItems/SkateBoard.tres")
+		apply_upgrade(skate)
 
 func _input(event: InputEvent) -> void:
 	if ready_to_start_game and !game_started and event is not InputEventMouseMotion and event is not InputEventJoypadMotion:
@@ -162,7 +185,7 @@ func _physics_process(delta):
 		return
 	current_footstep_cooldown -= delta
 	# Add the gravity.
-	if not is_on_floor():
+	if not is_on_floor() and not grinding:
 		if tool_sys.equipped_tool != null:
 			do_jump_sway(delta)
 		was_just_flying = true
@@ -186,12 +209,7 @@ func _physics_process(delta):
 
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
-		do_jump_sound()
-		skateboard_audio.stop()
-		skateboard_fade_audio.stop()
-		if is_in_water():
-			jumped_from_water = true
+		do_jump()
 		
 	# Get the input direction and handle the movement/deceleration.
 	var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_back")
@@ -221,6 +239,16 @@ func _physics_process(delta):
 			velocity.z = move_toward(velocity.z, 0, SPEED)
 	
 	move_and_slide()
+	if slidy:
+		rail_grinding(delta)
+
+func do_jump():
+	velocity.y = JUMP_VELOCITY
+	do_jump_sound()
+	skateboard_audio.stop()
+	skateboard_fade_audio.stop()
+	if is_in_water():
+		jumped_from_water = true
 
 func fade_out_skateboard() -> void:
 	skateboard_audio.stop()
@@ -417,3 +445,74 @@ func update_fov(value: float) -> void:
 
 func is_in_water() -> bool:
 	return $WaterDetecter.is_colliding()
+
+func rail_grinding(delta):
+	if not grinding and grind_timer_complete:
+		var grind_ray = get_valid_grind_ray()
+		if grind_ray:
+			start_grinding(grind_ray.get_collider().owner, delta)
+	
+	if grinding:
+		rail_grind_node.chosen = true
+		if not rail_grind_node.direction_selected:
+			rail_grind_node.forward = is_facing_same_direction(rail_grind_node)
+			rail_grind_node.direction_selected = true
+		update_grind_position(delta)
+		if rail_grind_node.detach or Input.is_action_pressed("jump"):
+			detach_from_rail()
+	
+	grind_timer(delta)
+
+func update_grind_position(delta):
+	position = lerp(position, rail_grind_node.global_position + Vector3(0,1,0), delta * 10)
+
+func start_grinding(grind_rail, delta):
+	grinding = true
+	rail_grind_node = find_nearest_rail_follower(grind_rail)
+	update_grind_position(delta)
+	grind_timer_complete = false
+
+func get_valid_grind_ray():
+	for grind_ray: RayCast3D in grind_rays.get_children():
+		if grind_ray.is_colliding() and grind_ray.get_collider() and grind_ray.get_collider().is_in_group("Rail"):
+			return grind_ray
+	return null
+
+func find_nearest_rail_follower(rail):
+	var min_distance = INF
+	var closest_follower = null
+	for follower: PathFollow3D in rail.followers:
+		var distance = global_position.distance_to(follower.global_position)
+		if distance < min_distance:
+			min_distance = distance
+			closest_follower = follower
+	return closest_follower
+
+func grind_timer(delta):
+	if start_grind_timer:
+		if countdown_next_grind_left > 0:
+			countdown_next_grind_left -= delta
+		if countdown_next_grind_left <= 0:
+			countdown_next_grind_left = countdown_next_grind_max
+			grind_timer_complete = true
+			start_grind_timer = false
+
+func is_facing_same_direction(rail_grind_node):
+	var player_forward = velocity
+	var path_follow_forward = rail_grind_node.global_basis.z.normalized()
+	var dot_result = player_forward.dot(path_follow_forward)
+	var result = dot_result < 0.5
+	print("Dot: "+str(dot_result)+" is "+str(result))
+	return result
+
+func detach_from_rail():
+	grinding = false
+	start_grind_timer = true
+	rail_grind_node.detach = false
+	rail_grind_node.chosen = false
+	#global_position = rail_grind_node.global_position
+	rail_grind_node.progress = rail_grind_node.origin_point
+	if Input.get_vector("move_left", "move_right", "move_forward", "move_back").length() < 1:
+		velocity += -neck.global_basis.z.normalized() * 5
+	do_jump()
+	

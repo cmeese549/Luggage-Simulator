@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://b2gqicgrkqu86" path="res://Player/Tools/hands.tscn" id="3_fhl08"]
 [ext_resource type="PackedScene" uid="uid://xxekbn0nkf7g" path="res://Player/Tools/bucket.tscn" id="3_gwnis"]
 [ext_resource type="PackedScene" uid="uid://qykfij56gm1u" path="res://Player/Tools/thimble.tscn" id="3_k53q1"]
-[ext_resource type="Script" uid="uid://ns08b0figwtw" path="res://Player/ToolCam.gd" id="4_gwnis"]
+[ext_resource type="Script" path="res://Player/ToolCam.gd" id="4_gwnis"]
 [ext_resource type="PackedScene" uid="uid://cpado1v1hq4kt" path="res://Player/Tools/sponge.tscn" id="5_vtle1"]
 [ext_resource type="PackedScene" uid="uid://ds1xn8ubdi8jv" path="res://Player/Tools/watering_can.tscn" id="7_od3ui"]
 [ext_resource type="PackedScene" uid="uid://dvgxywx0ckbxa" path="res://Player/Tools/jug.tscn" id="8_00tjw"]
@@ -81,11 +81,13 @@ _data = {
 radius = 0.706
 height = 2.852
 
-[node name="Player" type="CharacterBody3D" groups=["Player"]]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("grind_rays") groups=["Player"]]
 floor_stop_on_slope = false
 floor_block_on_wall = false
 script = ExtResource("1_l8h54")
 sway_noise = SubResource("FastNoiseLite_btcbx")
+ready_to_start_game = true
+grind_rays = NodePath("GrindRays")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_4ntmi")
@@ -288,3 +290,11 @@ bus = &"Alerts"
 stream = ExtResource("33_i4o1l")
 volume_db = -4.0
 bus = &"Alerts"
+
+[node name="GrindRays" type="Node3D" parent="."]
+
+[node name="RayCast3D" type="RayCast3D" parent="GrindRays"]
+target_position = Vector3(0, -2, 0)
+collision_mask = 16
+debug_shape_custom_color = Color(0, 1, 0, 1)
+debug_shape_thickness = 5
