@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://saigtfv4gdv4"]
+[gd_scene load_steps=6 format=3 uid="uid://saigtfv4gdv4"]
 
 [ext_resource type="ArrayMesh" uid="uid://bn18s3tqtodkn" path="res://Art_Assets/Models/SkatePark/WiggleRail.obj" id="1_vd732"]
+[ext_resource type="Script" uid="uid://du36ad1m5n61t" path="res://Objects/Rail/rail.gd" id="1_x8r1g"]
 [ext_resource type="Material" uid="uid://cccm5jtfypdav" path="res://Art_Assets/Materials/MiscEnvMtls/Grey.tres" id="2_dbd8b"]
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_dbd8b"]
@@ -13,13 +14,16 @@ _data = {
 }
 point_count = 5
 
-[node name="WiggleRail" type="Node3D"]
+[node name="WiggleRail" type="Node3D" node_paths=PackedStringArray("path") groups=["Rail"]]
+script = ExtResource("1_x8r1g")
+path = NodePath("WiggleRail/Path3D")
 
 [node name="WiggleRail" type="MeshInstance3D" parent="."]
 mesh = ExtResource("1_vd732")
 surface_material_override/0 = ExtResource("2_dbd8b")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="WiggleRail"]
+[node name="StaticBody3D" type="StaticBody3D" parent="WiggleRail" groups=["Rail"]]
+collision_layer = 17
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="WiggleRail/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_dbd8b")

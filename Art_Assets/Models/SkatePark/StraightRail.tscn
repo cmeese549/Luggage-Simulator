@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://b1rpqtghxtk7v"]
+[gd_scene load_steps=6 format=3 uid="uid://b1rpqtghxtk7v"]
 
 [ext_resource type="ArrayMesh" uid="uid://bmue2va1paafr" path="res://Art_Assets/Models/SkatePark/StraightRail.obj" id="1_6c0uh"]
+[ext_resource type="Script" uid="uid://du36ad1m5n61t" path="res://Objects/Rail/rail.gd" id="1_mjrcg"]
 [ext_resource type="Material" uid="uid://cccm5jtfypdav" path="res://Art_Assets/Materials/MiscEnvMtls/Grey.tres" id="2_ou4er"]
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_ou4er"]
@@ -13,13 +14,16 @@ _data = {
 }
 point_count = 2
 
-[node name="StraightRail" type="Node3D"]
+[node name="StraightRail" type="Node3D" node_paths=PackedStringArray("path") groups=["Rail"]]
+script = ExtResource("1_mjrcg")
+path = NodePath("StraightRail/Path3D")
 
 [node name="StraightRail" type="MeshInstance3D" parent="."]
 mesh = ExtResource("1_6c0uh")
 surface_material_override/0 = ExtResource("2_ou4er")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="StraightRail"]
+[node name="StaticBody3D" type="StaticBody3D" parent="StraightRail" groups=["Rail"]]
+collision_layer = 17
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StraightRail/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_ou4er")
