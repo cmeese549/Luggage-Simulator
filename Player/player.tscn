@@ -298,3 +298,6 @@ target_position = Vector3(0, -2, 0)
 collision_mask = 16
 debug_shape_custom_color = Color(0, 1, 0, 1)
 debug_shape_thickness = 5
+
+[node name="GrindingTimer" type="Timer" parent="."]
+one_shot = true

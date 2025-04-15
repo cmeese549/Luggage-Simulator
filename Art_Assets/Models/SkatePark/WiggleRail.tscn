@@ -22,10 +22,10 @@ path = NodePath("WiggleRail/Path3D")
 mesh = ExtResource("1_vd732")
 surface_material_override/0 = ExtResource("2_dbd8b")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="WiggleRail" groups=["Rail"]]
+[node name="WiggleRailSC" type="StaticBody3D" parent="WiggleRail" groups=["Rail"]]
 collision_layer = 17
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="WiggleRail/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WiggleRail/WiggleRailSC"]
 shape = SubResource("ConcavePolygonShape3D_dbd8b")
 
 [node name="Path3D" type="Path3D" parent="WiggleRail"]

@@ -22,10 +22,10 @@ path = NodePath("StraightRail/Path3D")
 mesh = ExtResource("1_6c0uh")
 surface_material_override/0 = ExtResource("2_ou4er")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="StraightRail" groups=["Rail"]]
+[node name="StraightRailSC" type="StaticBody3D" parent="StraightRail" groups=["Rail"]]
 collision_layer = 17
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StraightRail/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StraightRail/StraightRailSC"]
 shape = SubResource("ConcavePolygonShape3D_ou4er")
 
 [node name="Path3D" type="Path3D" parent="StraightRail"]

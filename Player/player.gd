@@ -87,11 +87,12 @@ var inventory : Array[InventoryItem] = []
 
 var grinding: bool = false
 var rail_grind_node = null
-var countdown_next_grind_max: float = 1.0
-var countdown_next_grind_left: float = 1.0
-var grind_timer_complete: bool = true
-var start_grind_timer: bool = false
+#var countdown_next_grind_max: float = 1.0
+#var countdown_next_grind_left: float = 1.0
+#var grind_timer_complete: bool = true
+#var start_grind_timer: bool = false
 @export var grind_rays: Node3D
+@onready var grinding_timer = $GrindingTimer
 
 
 func _ready():
@@ -544,7 +545,7 @@ func is_in_water() -> bool:
 	return $WaterDetecter.is_colliding()
 
 func rail_grinding(delta):
-	if not grinding and grind_timer_complete:
+	if not grinding and grinding_timer.time_left == 0:
 		var grind_ray = get_valid_grind_ray()
 		if grind_ray:
 			start_grinding(grind_ray.get_collider().owner, delta)
@@ -552,13 +553,12 @@ func rail_grinding(delta):
 	if grinding:
 		rail_grind_node.chosen = true
 		if not rail_grind_node.direction_selected:
+			print("Selecting direction")
 			rail_grind_node.forward = is_facing_same_direction(rail_grind_node)
 			rail_grind_node.direction_selected = true
 		update_grind_position(delta)
-		if rail_grind_node.detach or Input.is_action_pressed("jump"):
+		if Input.is_action_pressed("jump"):
 			detach_from_rail()
-	
-	grind_timer(delta)
 
 func update_grind_position(delta):
 	position = lerp(position, rail_grind_node.global_position + Vector3(0,1,0), delta * 30)
@@ -566,8 +566,9 @@ func update_grind_position(delta):
 func start_grinding(grind_rail, delta):
 	grinding = true
 	rail_grind_node = find_nearest_rail_follower(grind_rail)
+	rail_grind_node.end_of_rail.connect(detach_from_rail)
+	rail_grind_node.move_speed = SPEED
 	update_grind_position(delta)
-	grind_timer_complete = false
 
 func get_valid_grind_ray():
 	for grind_ray: RayCast3D in grind_rays.get_children():
@@ -585,26 +586,18 @@ func find_nearest_rail_follower(rail):
 			closest_follower = follower
 	return closest_follower
 
-func grind_timer(delta):
-	if start_grind_timer:
-		if countdown_next_grind_left > 0:
-			countdown_next_grind_left -= delta
-		if countdown_next_grind_left <= 0:
-			countdown_next_grind_left = countdown_next_grind_max
-			grind_timer_complete = true
-			start_grind_timer = false
-
-func is_facing_same_direction(rail_grind_node):
+func is_facing_same_direction(this_rail_grind_node):
 	var player_forward = velocity
-	var path_follow_forward = rail_grind_node.global_basis.z.normalized()
+	var path_follow_forward = this_rail_grind_node.global_basis.z.normalized()
 	var dot_result = player_forward.dot(path_follow_forward)
 	var result = dot_result < 0.5
-	print("Dot: "+str(dot_result)+" is "+str(result))
+	#print("Dot: "+str(dot_result)+" is "+str(result))
 	return result
 
 func detach_from_rail():
+	print("Detatching from rail")
 	grinding = false
-	start_grind_timer = true
+	grinding_timer.start()
 	rail_grind_node.detach = false
 	rail_grind_node.chosen = false
 	#global_position = rail_grind_node.global_position
