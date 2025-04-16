@@ -410,15 +410,20 @@ transform = Transform3D(0.735151, 0, -0.677903, 0, 1, 0, 0.677903, 0, 0.735151, 
 
 [node name="Tutorial" parent="." node_paths=PackedStringArray("tutorial_locations") instance=ExtResource("18_dbttc")]
 tutorial_locations = {
-0: NodePath("../TutorialMarkers/WaterPickup"),
-1: NodePath("../TutorialMarkers/WaterDump"),
-2: NodePath("../TutorialMarkers/Pump"),
-3: NodePath("../TutorialMarkers/Shop"),
-4: NodePath("../TutorialMarkers/FindItem"),
-5: NodePath("../TutorialMarkers/Done")
+0: NodePath("../TutorialMarkers/Welcome"),
+1: NodePath("../TutorialMarkers/WaterPickup"),
+2: NodePath("../TutorialMarkers/WaterDump"),
+3: NodePath("../TutorialMarkers/Pump"),
+4: NodePath("../TutorialMarkers/Pump"),
+5: NodePath("../TutorialMarkers/Shop"),
+6: NodePath("../TutorialMarkers/FindItem"),
+7: NodePath("../TutorialMarkers/Done")
 }
 
 [node name="TutorialMarkers" type="Node" parent="."]
+
+[node name="Welcome" type="Marker3D" parent="TutorialMarkers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 254.479, 0, 7.44866)
 
 [node name="WaterPickup" type="Marker3D" parent="TutorialMarkers"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 243.11, -0.492689, 6.9516)
