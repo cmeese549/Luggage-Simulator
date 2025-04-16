@@ -299,5 +299,23 @@ collision_mask = 16
 debug_shape_custom_color = Color(0, 1, 0, 1)
 debug_shape_thickness = 5
 
+[node name="RayCast3D2" type="RayCast3D" parent="GrindRays"]
+target_position = Vector3(0, -1.8, -1.2)
+collision_mask = 16
+debug_shape_custom_color = Color(0, 1, 0, 1)
+debug_shape_thickness = 5
+
+[node name="RayCast3D3" type="RayCast3D" parent="GrindRays"]
+target_position = Vector3(1, -1.7, -0.7)
+collision_mask = 16
+debug_shape_custom_color = Color(0, 1, 0, 1)
+debug_shape_thickness = 5
+
+[node name="RayCast3D4" type="RayCast3D" parent="GrindRays"]
+target_position = Vector3(-1, -1.7, -0.7)
+collision_mask = 16
+debug_shape_custom_color = Color(0, 1, 0, 1)
+debug_shape_thickness = 5
+
 [node name="GrindingTimer" type="Timer" parent="."]
 one_shot = true
