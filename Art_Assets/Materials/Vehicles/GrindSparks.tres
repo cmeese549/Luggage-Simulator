@@ -1,0 +1,19 @@
+[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://c3dpqe3rqyl3f"]
+
+[ext_resource type="Texture2D" uid="uid://chrutksjapnhx" path="res://Art_Assets/Textures/Vehicles/GrindSparks_F1.png" id="1_rkusp"]
+[ext_resource type="Texture2D" uid="uid://dw5e4q1htfkpk" path="res://Art_Assets/Textures/Vehicles/GrindSparks_F2.png" id="2_bdpme"]
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_ajqf7"]
+frames = 2
+speed_scale = 8.0
+frame_0/texture = ExtResource("1_rkusp")
+frame_1/texture = ExtResource("2_bdpme")
+frame_1/duration = 1.0
+
+[resource]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+albedo_texture = SubResource("AnimatedTexture_ajqf7")
+texture_filter = 0
+billboard_keep_scale = true
