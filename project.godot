@@ -26,6 +26,7 @@ window/size/viewport_height=1080
 window/size/borderless=true
 window/stretch/mode="viewport"
 window/stretch/aspect="expand"
+window/vsync/vsync_mode=2
 window/max_fps=0
 
 [editor_plugins]
