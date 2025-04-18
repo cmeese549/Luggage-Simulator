@@ -1,0 +1,12 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://0c7mlxnf6cf5"]
+
+[ext_resource type="Texture2D" uid="uid://dwqnd84sfovob" path="res://Art_Assets/Textures/RadicalRachel.png" id="1_c2dfs"]
+
+[resource]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+albedo_texture = ExtResource("1_c2dfs")
+texture_filter = 0
+billboard_mode = 2
+billboard_keep_scale = true

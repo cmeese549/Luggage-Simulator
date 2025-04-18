@@ -1,18 +1,77 @@
-[gd_scene load_steps=3 format=3 uid="uid://cb77ps0e8v5xs"]
+[gd_scene load_steps=7 format=3 uid="uid://cb77ps0e8v5xs"]
 
 [ext_resource type="Script" uid="uid://deii0kw8qnwt6" path="res://Game_Management/tutorial.gd" id="1_cuxgw"]
 [ext_resource type="PackedScene" uid="uid://p37k13tnkylq" path="res://Art_Assets/Models/Todd/TutorialTodd.tscn" id="1_pl4mw"]
+
+[sub_resource type="Animation" id="Animation_cuxgw"]
+resource_name = "down"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("./TutorialTodd:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, -3.36867, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_0dldt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("./TutorialTodd:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_br6if"]
+resource_name = "up"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("./TutorialTodd:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, -3.38657, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ra722"]
+_data = {
+&"RESET": SubResource("Animation_0dldt"),
+&"down": SubResource("Animation_cuxgw"),
+&"up": SubResource("Animation_br6if")
+}
 
 [node name="Tutorial" type="Node3D"]
 script = ExtResource("1_cuxgw")
 
 [node name="TutorialTodd" parent="." instance=ExtResource("1_pl4mw")]
 
-[node name="Label3D" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.65894, 0)
+[node name="Label3D" type="Label3D" parent="TutorialTodd"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.71842, 0)
 billboard = 2
 text = "Your task is to drain the depths of this here lake. Please use your thimble on the water here with the mouse primary button."
 autowrap_mode = 3
 width = 750.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_ra722")
+}
 
 [editable path="TutorialTodd"]

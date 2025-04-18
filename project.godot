@@ -13,6 +13,7 @@ config_version=5
 config/name="Mr. Money's Phenomenally Soggy Water Removal"
 run/main_scene="uid://c0shsmlk675qm"
 config/features=PackedStringArray("4.4", "Forward Plus")
+boot_splash/image="uid://cskuyk4l7khj7"
 config/icon="res://icon.svg"
 
 [autoload]

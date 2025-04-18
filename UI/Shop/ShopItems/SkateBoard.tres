@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ShopItem" load_steps=3 format=3 uid="uid://cpt63tjw3br52"]
 
-[ext_resource type="Texture2D" uid="uid://bfeh5rlknnt2k" path="res://Art_Assets/Textures/Pickups/Wheel.png" id="1_xcbo1"]
+[ext_resource type="Texture2D" uid="uid://bu80iqnlh8gk6" path="res://Art_Assets/Textures/Vehicles/Skateboard/Skateboard_Idle.png" id="1_xcbo1"]
 [ext_resource type="Script" uid="uid://b1lecmjr7r5pu" path="res://UI/Shop/ShopItems/ShopItem.gd" id="2_gbfql"]
 
 [resource]

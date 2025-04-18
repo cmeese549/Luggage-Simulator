@@ -15,6 +15,8 @@ var origin_point: float
 
 @export var move_speed: float = 8.0
 
+signal end_of_rail()
+
 func _ready():
 	origin_point = progress
 	if DEBUG: $Debug_Orb.visible = true
@@ -27,9 +29,10 @@ func _process(delta):
 			progress -= move_speed * delta
 		
 		if progress_ratio >= 0.99 or progress_ratio <= 0.002:
+			end_of_rail.emit()
 			detach = true
 			grinding = false
-			direction_selected = false
+			#direction_selected = false
 	
 	if chosen:
 		grinding = true
