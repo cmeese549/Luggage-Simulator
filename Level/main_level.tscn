@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://c0shsmlk675qm"]
+[gd_scene load_steps=29 format=3 uid="uid://bpisaxbeyscs7"]
 
 [ext_resource type="PackedScene" uid="uid://ddwtbnyshxxj3" path="res://Art_Assets/Levels/LevelGeometry.tscn" id="1_1wy1g"]
 [ext_resource type="PackedScene" uid="uid://bk7vc4usjt3od" path="res://Player/player.tscn" id="1_7ireg"]
@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://exdhmbr43ger" path="res://UI/UI.tscn" id="1_t065x"]
 [ext_resource type="PackedScene" uid="uid://di1beqvco0ht6" path="res://Objects/InventoryItems/InventoryItem.tscn" id="2_f68k2"]
 [ext_resource type="PackedScene" uid="uid://cwuhc7fibr0jj" path="res://UI/water_level_debug.tscn" id="2_hyf1s"]
-[ext_resource type="PackedScene" uid="uid://qgfbm7o67k0q" path="res://Art_Assets/Models/SkatePark/HalfPipe.tscn" id="2_t5u5v"]
 [ext_resource type="Script" uid="uid://brrlrkleuxt1p" path="res://Game_Management/money.gd" id="3_8vdnm"]
 [ext_resource type="Script" uid="uid://d0rpsw8qm8mxc" path="res://Level/water.gd" id="3_t065x"]
 [ext_resource type="Material" uid="uid://cc3jyugw620gk" path="res://Art_Assets/Materials/WaterVertex.tres" id="3_vad1a"]
@@ -36,18 +35,12 @@ size = Vector3(1000, 1, 1000)
 [node name="MainLevel" type="Node3D"]
 script = ExtResource("1_romof")
 
-[node name="HalfPipe" parent="." instance=ExtResource("2_t5u5v")]
-transform = Transform3D(0.898924, 0, -0.438104, 0, 1, 0, 0.438104, 0, 0.898924, -143.12, 3.16425, 248.66)
-
-[node name="HalfPipe2" parent="." instance=ExtResource("2_t5u5v")]
-transform = Transform3D(0.966322, 0, -0.257335, 0, 1, 0, 0.257335, 0, 0.966322, -115.94, 1.01363, 234.177)
-
 [node name="Water_Level_Debug" parent="." instance=ExtResource("2_hyf1s")]
 visible = false
 mouse_filter = 2
 
 [node name="Player" parent="." instance=ExtResource("1_7ireg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -92.2842, 1.8594, 204.237)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 282, 1, 4.831)
 collision_mask = 5
 
 [node name="Neck" parent="Player" index="2"]
@@ -70,6 +63,7 @@ starting_money = 5
 
 [node name="MoneySound" type="AudioStreamPlayer" parent="Money"]
 stream = ExtResource("5_swadt")
+volume_db = -4.0
 
 [node name="UI" parent="." instance=ExtResource("1_t065x")]
 

@@ -51,7 +51,7 @@ func _ready():
 	Events.pump_upgrade_menu.connect(pump_upgraded)
 	Events.close_shop.connect(shop_closed)
 	Events.item_pickedup.connect(item_found)
-	await get_tree().create_timer(5).timeout
+	await get_tree().create_timer(15).timeout
 	do_next_step(tutorial_steps.PICKUP_WATER)
 
 func do_next_step(next_step: tutorial_steps):

@@ -80,7 +80,7 @@ var handled_skateboard_stop : bool = false
 
 var was_just_in_water: bool = false
 
-@export var ready_to_start_game = false
+var ready_to_start_game : bool = false
 var game_started = false
 
 var inventory : Array[InventoryItem] = []
@@ -101,20 +101,6 @@ func _ready():
 	else:
 		if main_menu != null:
 			main_menu.visible = true
-			
-	slidy = true
-	SPEED = 20
-	friction = .2
-	accelartion = 5
-	deceleration = 3 
-	skate_unlocked = true
-	
-	#slidy = true
-	#SPEED = 10
-	#friction = .5
-	#accelartion = 3
-	#deceleration = 2
-	#roller_unlocked = true
 	
 	for pipe: Node in halfpipe_zones:
 		pipe.body_entered.connect(enter_pipe)

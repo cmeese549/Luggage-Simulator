@@ -13,6 +13,7 @@ var pauseable : bool = true
 func _ready():
 	Events.all_ready.connect(all_ready)
 	if !player.ready_to_start_game:
+		print("Yesss")
 		splashscreen.visible = true
 		splashscreen.play()
 		splashscreen.finished.connect(main_menu.start)
