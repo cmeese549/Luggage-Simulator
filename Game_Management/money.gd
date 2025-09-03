@@ -10,6 +10,16 @@ var cur_money: float
 
 var lifetime_money: float
 
+func get_save_data() -> Dictionary:
+	var data: Dictionary = {}
+	data.cur_money = cur_money
+	data.lifetime_money = lifetime_money
+	return data
+
+func load_save_data(data: Dictionary) -> void:
+	cur_money = data.cur_money
+	lifetime_money = data.lifetime_money
+
 func _ready():
 	cur_money = starting_money
 	lifetime_money = starting_money

@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://dqgxn0rseema5"]
 
-[ext_resource type="Script" uid="uid://coq4s8mqdyk05" path="res://Level/box_spawner.gd" id="1_rh200"]
+[ext_resource type="Script" uid="uid://coq4s8mqdyk05" path="res://Objects/Boxes/box_spawner.gd" id="1_rh200"]
 [ext_resource type="PackedScene" uid="uid://b8js4tiuw5jeg" path="res://Objects/Boxes/box.tscn" id="2_jqoio"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_dbttc"]

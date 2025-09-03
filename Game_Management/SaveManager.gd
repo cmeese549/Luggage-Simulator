@@ -8,6 +8,8 @@ func save_game() -> bool:
 	# Save buildables
 	save_data.buildables = collect_buildable_data()
 	save_data.boxes = collect_all_boxes()
+	save_data.money = collect_money_data()
+	save_data.box_spawners = collect_box_spawners()
 	# Save player data
 	var player = get_tree().get_first_node_in_group("Player")
 	if player:
@@ -27,11 +29,33 @@ func load_game() -> bool:
 	# Clear existing buildables and restore from save
 	clear_existing_buildables()
 	clear_existing_boxes()
+	clear_existing_spawners()
 	restore_buildables(save_data.buildables)
 	restore_boxes(save_data.boxes)
+	restore_money(save_data.money)
+	restore_spawners(save_data.box_spawners)
 	restore_player_data(save_data)
 	
 	return true
+	
+func collect_money_data() -> Dictionary:
+	return get_tree().get_first_node_in_group("Money").get_save_data()
+	
+func collect_box_spawners() -> Array[Dictionary]:
+	var spawner_data: Array[Dictionary] = []
+	var spawners =  get_tree().get_nodes_in_group("BoxSpawner")
+	
+	for spawner in spawners:
+		var data = {
+			"scene_path": spawner.scene_file_path,
+			"global_position": spawner.global_position,
+			"rotation": spawner.rotation,
+			"type": spawner.get_script().get_global_name(),
+		}
+		if spawner.has_method("get_save_data"):
+			data = add_all_properties_to_dictionary(data, spawner.get_save_data())
+		spawner_data.append(data)
+	return spawner_data
 
 func collect_all_boxes() -> Array[Dictionary]:
 	var boxes_data: Array[Dictionary] = []
@@ -84,6 +108,24 @@ func clear_existing_boxes():
 	var boxes = get_tree().get_nodes_in_group("Box")
 	for box in boxes:
 		box.queue_free()
+		
+func restore_money(data: Dictionary) -> void:
+	get_tree().get_first_node_in_group("Money").load_save_data(data)
+	
+func clear_existing_spawners() -> void:
+	var spawners = get_tree().get_nodes_in_group("BoxSpawner")
+	for spawner in spawners:
+		spawner.queue_free()
+	
+func restore_spawners(data: Array[Dictionary]) -> void:
+	var main_level = get_tree().root.get_node("MainLevel")
+	for spawner in data:
+		var scene = load(spawner.scene_path) as PackedScene
+		if not scene:
+			continue
+		var new_spawner = scene.instantiate()
+		new_spawner.load_save_data(spawner)
+		main_level.add_child(new_spawner)
 
 func restore_buildables(buildables_data: Array[Dictionary]):
 	var building_system = get_tree().get_first_node_in_group("BuildingSystem")

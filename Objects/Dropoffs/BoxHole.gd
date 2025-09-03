@@ -25,6 +25,7 @@ func _on_deposit_zone_body_entered(body):
 		else:
 			rejection_sound.play()
 			%Money.make_money(body.value * -1)
+		body.queue_free()
 
 func check_box_legit(box: Box) -> bool:
 	if box.approval_state == Box.ApprovalState.NONE:

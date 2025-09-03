@@ -8033,7 +8033,7 @@ total_boxes = 5000
 [node name="Box" parent="." instance=ExtResource("8_o3roe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.971883, 0, -2.9398952)
 
-[node name="Money" type="Node" parent="."]
+[node name="Money" type="Node" parent="." groups=["Money"]]
 unique_name_in_owner = true
 script = ExtResource("21_s4lgs")
 

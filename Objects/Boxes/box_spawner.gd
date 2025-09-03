@@ -19,6 +19,34 @@ var boxes_spawned: int = 0
 var spawn_timer: float = 0.0
 var active: bool = false
 
+func get_save_data() -> Dictionary:
+	var data: Dictionary = {}
+	data.total_boxes = total_boxes
+	data.spawn_rate = spawn_rate
+	data.destinations = destinations
+	data.active_destinations = active_destinations
+	data.boxes_spawned = boxes_spawned
+	data.spawn_timer = spawn_timer
+	data.active = active
+	data.global_position = global_position
+	data.rotation = rotation
+	return data
+
+func load_save_data(data: Dictionary) -> void:
+	total_boxes = data.total_boxes
+	spawn_rate = data.spawn_rate
+	destinations = data.destinations
+	active_destinations = data.active_destinations
+	boxes_spawned = data.boxes_spawned
+	spawn_timer = data.spawn_timer
+	active = data.active
+	global_position = data.global_position
+	rotation = data.rotation
+	if active:
+		$Label3D.text = "Click to pause box spawning"
+	else:
+		$Label3D.text = "Click to start box spawning"
+
 func interact():
 	active = !active
 	if active:
@@ -28,6 +56,9 @@ func interact():
 
 func _process(delta: float) -> void:
 	if boxes_spawned >= total_boxes or !active:
+		if active:
+			active = false
+			print("All boxes spawned!")
 		return
 
 	spawn_timer += delta
