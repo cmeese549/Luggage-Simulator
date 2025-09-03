@@ -1,10 +1,11 @@
-[gd_scene load_steps=15 format=3 uid="uid://qykfij56gm1u"]
+[gd_scene load_steps=20 format=3 uid="uid://qykfij56gm1u"]
 
 [ext_resource type="Script" uid="uid://gaeegpj2o3tq" path="res://Player/Tools/tool.gd" id="1_bnf1v"]
-[ext_resource type="Material" uid="uid://bx1fytfnw6rjd" path="res://Art_Assets/Materials/HandTools/Thimble_Empty.tres" id="2_asxqj"]
 [ext_resource type="AudioStream" uid="uid://c0wbd15adsd33" path="res://Audio/Sfx/Tools/Thimble/thimble_fill.wav" id="2_t3yxb"]
 [ext_resource type="AudioStream" uid="uid://3o1owc1xkatc" path="res://Audio/Sfx/Tools/Thimble/thimble_empty.wav" id="3_5tewr"]
-[ext_resource type="Material" uid="uid://blf5ar3ss56dt" path="res://Art_Assets/Materials/HandTools/Thimble_Full.tres" id="3_bnf1v"]
+
+[sub_resource type="Resource" id="Resource_bnf1v"]
+metadata/__load_path__ = "res://Art_Assets/Materials/HandTools/Thimble_Empty.tres"
 
 [sub_resource type="Animation" id="Animation_7nrwf"]
 length = 0.001
@@ -42,7 +43,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("2_asxqj")]
+"values": [SubResource("Resource_bnf1v")]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -56,6 +57,12 @@ tracks/3/keys = {
 "update": 1,
 "values": [true]
 }
+
+[sub_resource type="Resource" id="Resource_8jr4u"]
+metadata/__load_path__ = "res://Art_Assets/Materials/HandTools/Thimble_Empty.tres"
+
+[sub_resource type="Resource" id="Resource_asxqj"]
+metadata/__load_path__ = "res://Art_Assets/Materials/HandTools/Thimble_Empty.tres"
 
 [sub_resource type="Animation" id="Animation_0uoli"]
 resource_name = "fill"
@@ -95,8 +102,14 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.75),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [ExtResource("2_asxqj"), ExtResource("2_asxqj")]
+"values": [SubResource("Resource_8jr4u"), SubResource("Resource_asxqj")]
 }
+
+[sub_resource type="Resource" id="Resource_t3yxb"]
+metadata/__load_path__ = "res://Art_Assets/Materials/HandTools/Thimble_Full.tres"
+
+[sub_resource type="Resource" id="Resource_5tewr"]
+metadata/__load_path__ = "res://Art_Assets/Materials/HandTools/Thimble_Empty.tres"
 
 [sub_resource type="Animation" id="Animation_qpq6h"]
 resource_name = "empty"
@@ -124,7 +137,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.6),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [ExtResource("3_bnf1v"), ExtResource("2_asxqj")]
+"values": [SubResource("Resource_t3yxb"), SubResource("Resource_5tewr")]
 }
 
 [sub_resource type="Animation" id="Animation_ube02"]
@@ -154,6 +167,12 @@ tracks/1/keys = {
 "update": 1,
 "values": [true]
 }
+
+[sub_resource type="Resource" id="Resource_1dk4e"]
+metadata/__load_path__ = "res://Art_Assets/Materials/HandTools/Thimble_Empty.tres"
+
+[sub_resource type="Resource" id="Resource_fuvvt"]
+metadata/__load_path__ = "res://Art_Assets/Materials/HandTools/Thimble_Full.tres"
 
 [sub_resource type="Animation" id="Animation_rf4ol"]
 resource_name = "fill"
@@ -193,7 +212,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.75),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [ExtResource("2_asxqj"), ExtResource("3_bnf1v")]
+"values": [SubResource("Resource_1dk4e"), SubResource("Resource_fuvvt")]
 }
 
 [sub_resource type="Animation" id="Animation_ji2kk"]
@@ -244,14 +263,13 @@ libraries = {
 }
 
 [node name="AnimatedPos" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.972516, 0.232834, 0, -0.232834, 0.972516, 0.450099, 0.219473, -0.681934)
+transform = Transform3D(1, 0, 0, 0, 0.97251594, 0.23283413, 0, -0.23283413, 0.97251594, 0.450099, 0.219473, -0.681934)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="AnimatedPos"]
 transform = Transform3D(0.615741, 0, 0, 0, 0.674067, 0, 0, 0, 0.796476, 0, 0, 0)
 layers = 2
 mesh = SubResource("QuadMesh_7nrwf")
 skeleton = NodePath("../../..")
-surface_material_override/0 = ExtResource("2_asxqj")
 
 [node name="Line2D" type="Line2D" parent="."]
 width_curve = SubResource("Curve_bn1s3")

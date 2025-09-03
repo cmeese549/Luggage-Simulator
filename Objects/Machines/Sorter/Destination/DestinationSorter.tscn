@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://c2cubt8v14jn2"]
+
+[ext_resource type="Script" uid="uid://bpl3q5gy4grkp" path="res://Objects/Machines/Sorter/Destination/destination_sorter.gd" id="1_qjnfb"]
+[ext_resource type="PackedScene" uid="uid://bi2kps5vge088" path="res://Objects/Machines/Sorter/Base/base_sorter.tscn" id="2_oqulr"]
+
+[node name="DestinationSorter" type="Node3D"]
+script = ExtResource("1_qjnfb")
+output_icon = "🛫"
+
+[node name="BaseSorter" parent="." instance=ExtResource("2_oqulr")]

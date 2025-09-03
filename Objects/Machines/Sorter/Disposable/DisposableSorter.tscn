@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cbdult74gyte2"]
+
+[ext_resource type="Script" uid="uid://cwmsk50e3pdgp" path="res://Objects/Machines/Sorter/Disposable/disposable_sorter.gd" id="1_uf4c1"]
+[ext_resource type="PackedScene" uid="uid://bi2kps5vge088" path="res://Objects/Machines/Sorter/Base/base_sorter.tscn" id="2_hryum"]
+
+[node name="DisposableSorter" type="Node3D"]
+script = ExtResource("1_uf4c1")
+output_icon = "⚠"
+
+[node name="BaseSorter" parent="." instance=ExtResource("2_hryum")]

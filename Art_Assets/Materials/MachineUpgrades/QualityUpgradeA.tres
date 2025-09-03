@@ -1,8 +1,0 @@
-[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://bsn4tx27xmtsw"]
-
-[ext_resource type="Texture2D" uid="uid://b4ivtgeouw7b8" path="res://Art_Assets/Textures/QualityUpgradeA_C.png" id="1_t0oys"]
-
-[resource]
-cull_mode = 2
-albedo_texture = ExtResource("1_t0oys")
-texture_filter = 0

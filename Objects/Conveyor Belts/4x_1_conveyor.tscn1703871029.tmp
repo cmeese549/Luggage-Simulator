@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://bxke2df04lpet"]
+
+[ext_resource type="Script" uid="uid://bllkrujo0vy3m" path="res://Objects/Conveyor Belts/Conveyor.gd" id="1_2kn55"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_o3roe"]
+size = Vector3(2, 1, 42.595)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_o3roe"]
+data = PackedVector3Array(-1, 0.5, 21.297499, 1, 0.5, 21.297499, -1, -0.5, 21.297499, 1, 0.5, 21.297499, 1, -0.5, 21.297499, -1, -0.5, 21.297499, 1, 0.5, -21.297499, -1, 0.5, -21.297499, 1, -0.5, -21.297499, -1, 0.5, -21.297499, -1, -0.5, -21.297499, 1, -0.5, -21.297499, 1, 0.5, 21.297499, 1, 0.5, -21.297499, 1, -0.5, 21.297499, 1, 0.5, -21.297499, 1, -0.5, -21.297499, 1, -0.5, 21.297499, -1, 0.5, -21.297499, -1, 0.5, 21.297499, -1, -0.5, -21.297499, -1, 0.5, 21.297499, -1, -0.5, 21.297499, -1, -0.5, -21.297499, 1, 0.5, 21.297499, -1, 0.5, 21.297499, 1, 0.5, -21.297499, -1, 0.5, 21.297499, -1, 0.5, -21.297499, 1, 0.5, -21.297499, -1, -0.5, 21.297499, 1, -0.5, 21.297499, -1, -0.5, -21.297499, 1, -0.5, 21.297499, 1, -0.5, -21.297499, -1, -0.5, -21.297499)
+
+[node name="4x1 Conveyor" type="Node3D"]
+script = ExtResource("1_2kn55")
+belt_speed = null
+belt_direction = null
+is_built = null
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("BoxMesh_o3roe")
+skeleton = NodePath("Belt")
+
+[node name="Belt" type="StaticBody3D" parent="MeshInstance3D"]
+collision_layer = 257
+collision_mask = 257
+constant_linear_velocity = Vector3(0, 0, 2)
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="MeshInstance3D/Belt"]
+shape = SubResource("ConcavePolygonShape3D_o3roe")
+
+[node name="BuildingCollider" type="Area3D" parent="."]
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="BuildingCollider"]
+shape = SubResource("ConcavePolygonShape3D_o3roe")

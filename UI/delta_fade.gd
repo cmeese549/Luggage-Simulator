@@ -3,9 +3,6 @@ extends Label
 @export var fade_time := 0.0
 @export var fade_duration := 1
 
-func _ready():
-	Events.water_dumped.connect(start_fade)
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if fade_time > 0:

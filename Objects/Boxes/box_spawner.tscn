@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=3 uid="uid://dqgxn0rseema5"]
+
+[ext_resource type="Script" uid="uid://coq4s8mqdyk05" path="res://Level/box_spawner.gd" id="1_rh200"]
+[ext_resource type="PackedScene" uid="uid://b8js4tiuw5jeg" path="res://Objects/Boxes/box.tscn" id="2_jqoio"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dbttc"]
+size = Vector3(1.9102783, 1.6145935, 1.9855957)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rh200"]
+size = Vector3(1.9102783, 0.9657974, 1.9855957)
+
+[node name="BoxSpawner" type="Node3D" groups=["BoxSpawner"]]
+script = ExtResource("1_rh200")
+total_boxes = 50
+box_scene = ExtResource("2_jqoio")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 1024
+collision_mask = 1024
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.030820847, 0.16259623, -0.004760742)
+shape = SubResource("BoxShape3D_dbttc")
+debug_color = Color(0, 0.62827486, 0.46024847, 1)
+
+[node name="Area3D2" type="Area3D" parent="." groups=["Interactable"]]
+collision_layer = 1048576
+collision_mask = 1048576
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.030820847, 1.4688516, -0.004760742)
+shape = SubResource("BoxShape3D_rh200")
+debug_color = Color(0, 0.62827486, 0.46024847, 1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4391723, 0)
+billboard = 2
+text = "Click to start box spawning"
+
+[node name="Marker3D" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.98816895, 0)

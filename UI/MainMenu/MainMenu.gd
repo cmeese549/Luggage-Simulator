@@ -49,5 +49,3 @@ func _process(delta: float) -> void:
 		shader.set_shader_parameter("Progress", 1.0)
 		fade_completed = true 
 		begin_prompt.visible = true
-		if player != null:
-			player.ready_to_start_game = true

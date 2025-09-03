@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cwk27w4wexnsb"]
+
+[ext_resource type="Script" uid="uid://wkv1v1u2c8jb" path="res://Objects/Machines/Processor/rejection_processor.gd" id="1_785rq"]
+[ext_resource type="PackedScene" uid="uid://ck74iel6gyc81" path="res://Objects/Machines/Processor/base_processor.tscn" id="2_wyo6n"]
+
+[node name="RejectionProcessor" type="Node3D"]
+script = ExtResource("1_785rq")
+output_icon = "❌"
+
+[node name="BaseProcessor" parent="." instance=ExtResource("2_wyo6n")]

@@ -1,0 +1,74 @@
+[gd_scene load_steps=9 format=3 uid="uid://bxke2df04lpet"]
+
+[ext_resource type="Script" uid="uid://bllkrujo0vy3m" path="res://Objects/Conveyor Belts/Conveyor.gd" id="1_2kn55"]
+[ext_resource type="Shape3D" uid="uid://ci4r7q0hoi5qb" path="res://Objects/Conveyor Belts/BeltCollider.tres" id="2_gy1r2"]
+[ext_resource type="Material" uid="uid://eycjiewsl5mx" path="res://Objects/Conveyor Belts/WallMat.tres" id="2_ruomi"]
+[ext_resource type="PhysicsMaterial" uid="uid://ivdkkjeky60h" path="res://Objects/Conveyor Belts/WallPhysics.tres" id="3_mlt1i"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_o3roe"]
+size = Vector3(2, 0.1, 10)
+
+[sub_resource type="BoxMesh" id="BoxMesh_2kn55"]
+size = Vector3(0.1, 1, 10)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ruomi"]
+size = Vector3(0.10522461, 1, 9.982578)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2kn55"]
+size = Vector3(1.7935791, 1, 9.74707)
+
+[node name="4x1 Conveyor" type="Node3D"]
+script = ExtResource("1_2kn55")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_o3roe")
+skeleton = NodePath("Belt")
+
+[node name="Belt" type="StaticBody3D" parent="MeshInstance3D" groups=["Belt"]]
+collision_layer = 257
+collision_mask = 257
+constant_linear_velocity = Vector3(0, 0, 2)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/Belt"]
+transform = Transform3D(1, 0, 0, 0, 0.9999863, 0.0053668628, 0, -0.005235964, 1.0249859, 0.0001875665, -6.250036e-05, 0.005951382)
+shape = ExtResource("2_gy1r2")
+
+[node name="left wall" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.94074154, 0.5, 0)
+mesh = SubResource("BoxMesh_2kn55")
+skeleton = NodePath("Belt")
+surface_material_override/0 = ExtResource("2_ruomi")
+
+[node name="Belt" type="StaticBody3D" parent="left wall"]
+physics_material_override = ExtResource("3_mlt1i")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="left wall/Belt"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.018197894, 0, 0.016469479)
+shape = SubResource("BoxShape3D_ruomi")
+
+[node name="right wall" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.95145106, 0.5, 0)
+mesh = SubResource("BoxMesh_2kn55")
+skeleton = NodePath("Belt")
+surface_material_override/0 = ExtResource("2_ruomi")
+
+[node name="Belt" type="StaticBody3D" parent="right wall"]
+physics_material_override = ExtResource("3_mlt1i")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="right wall/Belt"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.015258789, 0, 0.0040278435)
+shape = SubResource("BoxShape3D_ruomi")
+
+[node name="BuildingCollider" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.52, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BuildingCollider"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.010437012, 0, -0.025878906)
+visible = false
+shape = SubResource("BoxShape3D_2kn55")
+debug_color = Color(0.8095152, 0.34423837, 0.5672048, 1)
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 2.239428, 0.06798601)
+text = "👈"
+font_size = 347

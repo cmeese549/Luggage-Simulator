@@ -1,4 +1,4 @@
-extends Node
+extends Buildable
 
 @export var rail_follower = preload("res://Objects/Rail/rail_follower.tscn")
 

@@ -8,7 +8,8 @@ var next_tool: tool
 
 @onready var player : Player = $"../../.."
 
-@onready var look_at_cast: RayCast3D = $"../LookAtCast"
+@onready var look_at_cast: RayCast3D = $"../InteractCast"
+@onready var box_cast: RayCast3D = $"../BoxCast"
 @onready var camera_3d: Camera3D = $".."
 
 @onready var water_crosshair : TextureRect = get_tree().get_first_node_in_group("WaterCrosshair")
@@ -29,24 +30,17 @@ func start_game():
 	tools[0].unlock()
 	equipped_tool = tools[0]
 	
-func _process(_delta: float) -> void:
-	if water_crosshair != null:
+func _process(_delta: float) -> void:	
+	if interact_crosshair != null and !player.building_system.building_mode_active and !player.building_system.destroy_mode_active and !player.held_box:
 		var looked_at_object = check_for_interactable()
-		if looked_at_object != null and looked_at_object.name == "WaterTop":
-			if !water_crosshair.visible:
-				water_crosshair.visible = true
-		else:
-			if water_crosshair.visible:
-				water_crosshair.visible = false
-	
-	if interact_crosshair != null:
-		var looked_at_object = check_for_interactable()
-		if looked_at_object != null and looked_at_object.name != "WaterTop":
+		if looked_at_object != null:
 			if !interact_crosshair.visible:
 				interact_crosshair.visible = true
 		else:
 			if interact_crosshair.visible:
 				interact_crosshair.visible = false
+	elif interact_crosshair != null and interact_crosshair.visible and (player.held_box or player.building_system.building_mode_active or player.building_system.destroy_mode_active):
+		interact_crosshair.visible = false
 
 func upgrade_tool(tool_name: String):
 	equipped_tool.stow_finished.connect(equip_next_tool)
@@ -66,26 +60,29 @@ func equip_next_tool(old_tool):
 	equipped_tool.unlock()
 
 func _unhandled_input(event):
-	if event.is_action_pressed("primary"):
-		var interact_thing = check_for_interactable()
-		if interact_thing:
-			if interact_thing.name == "WaterTop" || interact_thing.name == "DepositArea":
-				equipped_tool.use(interact_thing.name)
-			elif interact_thing.name == "PumpBuy" or interact_thing.name == "PumpBuy2":
-				var pump_built : bool = interact_thing.find_parent("Pump*").attempt_buy()
-				if !pump_built:
-					cant_afford_audio.play()
-			elif interact_thing.name == "PumpUpgrade" or interact_thing.name == "PumpUpgrade2":
-				interact_thing.find_parent("Pump*").attempt_upgrade()
-				player.play_interact_sound()
-			elif interact_thing.name == "OpenShop":
-				Events.open_shop.emit()
+	if !player.building_system.building_mode_active and !player.building_system.destroy_mode_active and !player.held_box:
+		if event.is_action_pressed("primary"):
+			var interact_thing = check_for_interactable()
+			if interact_thing and interact_thing.has_method("interact"):
+				print("Ballin")
+				interact_thing.interact()
+			elif interact_thing:
+				interact_thing = interact_thing.get_parent()
+				if interact_thing and interact_thing.has_method("interact"):
+					interact_thing.interact()
+		elif event.is_action_pressed("secondary"):
+			var interact_thing = check_for_interactable()
+			if interact_thing and interact_thing.has_method("secondary_interact"):
+				interact_thing.secondary_interact()
+			elif interact_thing:
+				interact_thing = interact_thing.get_parent()
+				if interact_thing and interact_thing.has_method("secondary_interact"):
+					interact_thing.secondary_interact()
 
 func check_for_interactable():
 	if look_at_cast.is_colliding():
 		var col = look_at_cast.get_collider()
 		#print("Looking at "+col.name)
 		if "Interactable" in col.get_groups():
-			return col
-	return null
+			return col.get_parent()
 	

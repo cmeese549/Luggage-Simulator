@@ -1,0 +1,153 @@
+[gd_scene load_steps=6 format=3 uid="uid://bi2kps5vge088"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_qqyv7"]
+points = PackedVector3Array(-3, -1, -3, -3, 1, -3, 3, -1, -3, -3, -1, 3, -3, 1, 3, 3, 1, -3, 3, -1, 3, 3, 1, 3)
+
+[sub_resource type="BoxMesh" id="BoxMesh_qqyv7"]
+size = Vector3(6, 2, 6)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_itwom"]
+size = Vector3(5.77948, 1.8399658, 5.7738647)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ri7ab"]
+size = Vector3(1.0775757, 1.4753418, 1.90271)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_r7u4f"]
+size = Vector3(6.2596436, 2.194992, 6.285034)
+
+[node name="BaseSorter" type="Node3D"]
+
+[node name="Building" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.013537884, 1, -0.009413004)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Building"]
+shape = SubResource("ConvexPolygonShape3D_qqyv7")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Building"]
+mesh = SubResource("BoxMesh_qqyv7")
+skeleton = NodePath("../../..")
+
+[node name="Output Icon Label" type="Label3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 3.0330238, 1.3736993, -1.9542031)
+text = "🌐"
+font_size = 157
+
+[node name="OutputArrow" type="Label3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 3.0330238, 0.544646, -1.9542031)
+text = "OUT"
+font_size = 62
+
+[node name="OutputArrow2" type="Label3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 3.0330238, 0.544646, 2.1143918)
+text = "OUT"
+font_size = 62
+
+[node name="InputArrow" type="Label3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -2.9910781, 0.544646, -0.008230448)
+text = "IN"
+font_size = 62
+
+[node name="BuildingCollider" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1185379, 0, -1.009413)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BuildingCollider"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1238098, 0.98773193, 0.96102905)
+visible = false
+shape = SubResource("BoxShape3D_itwom")
+debug_color = Color(0.82, 0.29520002, 0.7062933, 1)
+
+[node name="Box Detectors" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1185379, 0, -1.009413)
+
+[node name="Input" type="Area3D" parent="Box Detectors"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.3030453, 0.56461024, 1.0015585)
+collision_layer = 524288
+collision_mask = 524288
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Box Detectors/Input"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.72476196, 0.16223145, 0.007507324)
+shape = SubResource("BoxShape3D_ri7ab")
+debug_color = Color(0, 0.62, 0.52699995, 1)
+
+[node name="Other Output" type="Area3D" parent="Box Detectors"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2307463, 0.5449174, 3.0044625)
+collision_layer = 524288
+collision_mask = 524288
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Box Detectors/Other Output"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.72476196, 0.16223145, 0.007507324)
+shape = SubResource("BoxShape3D_ri7ab")
+debug_color = Color(0, 0.62, 0.52699995, 1)
+
+[node name="Sorted Output" type="Area3D" parent="Box Detectors"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2307463, 0.5449174, -1.0108788)
+collision_layer = 524288
+collision_mask = 524288
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Box Detectors/Sorted Output"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.72476196, 0.16223145, 0.007507324)
+shape = SubResource("BoxShape3D_ri7ab")
+debug_color = Color(0, 0.62, 0.52699995, 1)
+
+[node name="Box Droppers" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1185379, 0, -1.009413)
+
+[node name="Sorted" type="Marker3D" parent="Box Droppers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6692739, 0.8835839, -1.1165442)
+
+[node name="Other" type="Marker3D" parent="Box Droppers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6692739, 0.8835839, 3.1222138)
+
+[node name="County Labels" type="Node3D" parent="."]
+
+[node name="County 1" type="Label3D" parent="County Labels"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 1.2872722, 1.1031617, -3.020522)
+text = "1/10"
+font_size = 147
+
+[node name="County 2" type="Label3D" parent="County Labels"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2872722, 1.1031617, 2.9941368)
+text = "1/10"
+font_size = 147
+
+[node name="County 3" type="Label3D" parent="County Labels"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 3.0330238, 0.5158354, -0.024892926)
+text = "1/10"
+font_size = 147
+
+[node name="County 4" type="Label3D" parent="County Labels"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -2.9997997, 1.0136925, 2.1034355)
+text = "1/10"
+font_size = 147
+
+[node name="Turned Off Labels" type="Node3D" parent="."]
+
+[node name="Turned Off 1" type="Label3D" parent="Turned Off Labels"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -1.1334779, 0.8857213, -3.020522)
+visible = false
+text = "⛔"
+font_size = 262
+
+[node name="Turned Off 2" type="Label3D" parent="Turned Off Labels"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1334779, 0.8857213, 2.9941368)
+visible = false
+text = "⛔"
+font_size = 262
+
+[node name="Turned Off 3" type="Label3D" parent="Turned Off Labels"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 3.0330238, 1.3736993, -0.024892926)
+text = "⛔"
+font_size = 157
+
+[node name="Turned Off 4" type="Label3D" parent="Turned Off Labels"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -2.986472, 0.92156017, -1.840346)
+text = "⛔"
+font_size = 157
+
+[node name="Interact" type="Area3D" parent="." groups=["Interactable"]]
+collision_layer = 1048576
+collision_mask = 1048576
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Interact"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.003967285, 1.0175247, -0.020202637)
+shape = SubResource("BoxShape3D_r7u4f")

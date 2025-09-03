@@ -1,5 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://qgfbm7o67k0q"]
+[gd_scene load_steps=8 format=3 uid="uid://qgfbm7o67k0q"]
 
+[ext_resource type="Script" uid="uid://dfmu1e3iy7mmy" path="res://Game_Management/BuildingSystem/buildable.gd" id="1_7uohd"]
 [ext_resource type="ArrayMesh" uid="uid://d3m3atsf1c6h5" path="res://Art_Assets/Models/SkatePark/HalfPipe.obj" id="1_n6sud"]
 [ext_resource type="Material" uid="uid://dayxh1xplm3bg" path="res://Art_Assets/Materials/HalfPipe.tres" id="2_6kd3n"]
 
@@ -12,13 +13,19 @@ size = Vector3(9.23703, 64.9767, 11.1809)
 [sub_resource type="BoxShape3D" id="BoxShape3D_7uohd"]
 size = Vector3(26.5696, 71.6446, 11.2223)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_xgasq"]
+size = Vector3(27.690002, 6.0321045, 12.051041)
+
 [node name="HalfPipe" type="Node3D"]
+script = ExtResource("1_7uohd")
 
 [node name="HalfPipe" type="MeshInstance3D" parent="."]
 mesh = ExtResource("1_n6sud")
 surface_material_override/0 = ExtResource("2_6kd3n")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="HalfPipe"]
+collision_layer = 1025
+collision_mask = 1025
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HalfPipe/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_n6sud")
@@ -47,3 +54,9 @@ metadata/_edit_lock_ = true
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Halfpipe"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00722569, 35.0186, 0.378174)
 shape = SubResource("BoxShape3D_7uohd")
+
+[node name="BuildingCollider" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BuildingCollider"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.011077881, 2.5160522, 0.08835602)
+shape = SubResource("BoxShape3D_xgasq")

@@ -1,0 +1,77 @@
+[gd_scene load_steps=8 format=3 uid="uid://dbu3dnmlljrlq"]
+
+[ext_resource type="Script" uid="uid://bllkrujo0vy3m" path="res://Objects/Conveyor Belts/Conveyor.gd" id="1_83wa3"]
+[ext_resource type="Material" uid="uid://eycjiewsl5mx" path="res://Objects/Conveyor Belts/WallMat.tres" id="2_aonnj"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_83wa3"]
+size = Vector3(2, 0.1, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_83wa3"]
+size = Vector3(1.989502, 0.09588623, 1.9949951)
+
+[sub_resource type="BoxMesh" id="BoxMesh_lce0e"]
+size = Vector3(0.1, 1, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_b6b1u"]
+size = Vector3(0.07373047, 1, 1.408844)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_slit8"]
+size = Vector3(1, 0.84210205, 1.8186607)
+
+[node name="Up Conveyor" type="Node3D"]
+script = ExtResource("1_83wa3")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5638692, 0)
+mesh = SubResource("BoxMesh_83wa3")
+skeleton = NodePath("Belt")
+
+[node name="Belt" type="StaticBody3D" parent="MeshInstance3D2" groups=["Belt"]]
+collision_layer = 257
+collision_mask = 257
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D2/Belt"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0018310547, 0.0009460449, -6.1035156e-05)
+shape = SubResource("BoxShape3D_83wa3")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 2.1579108, 0.021109581)
+text = "👈"
+font_size = 347
+
+[node name="left wall" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9463005, 4.007571, 0)
+mesh = SubResource("BoxMesh_lce0e")
+skeleton = NodePath("Belt")
+surface_material_override/0 = ExtResource("2_aonnj")
+
+[node name="Belt" type="StaticBody3D" parent="left wall"]
+collision_layer = 257
+collision_mask = 257
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="left wall/Belt"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0007324219, 0, 0.14352417)
+visible = false
+shape = SubResource("BoxShape3D_b6b1u")
+
+[node name="left wall2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9503114, 4.007571, 0)
+mesh = SubResource("BoxMesh_lce0e")
+skeleton = NodePath("Belt")
+surface_material_override/0 = ExtResource("2_aonnj")
+
+[node name="Belt" type="StaticBody3D" parent="left wall2"]
+collision_layer = 257
+collision_mask = 257
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="left wall2/Belt"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0007324219, 0, 0.100234985)
+visible = false
+shape = SubResource("BoxShape3D_b6b1u")
+
+[node name="BuildingCollider" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.52, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BuildingCollider"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5413513, 0.0048160553)
+shape = SubResource("BoxShape3D_slit8")

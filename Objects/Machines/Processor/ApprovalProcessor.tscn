@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://deaet6jbk5mve"]
+
+[ext_resource type="Script" uid="uid://c0d3wf461iet2" path="res://Objects/Machines/Processor/approval_processor.gd" id="1_ouvhj"]
+[ext_resource type="PackedScene" uid="uid://ck74iel6gyc81" path="res://Objects/Machines/Processor/base_processor.tscn" id="2_1ni3b"]
+
+[node name="ApprovalProcessor" type="Node3D"]
+script = ExtResource("1_ouvhj")
+output_icon = "✔️"
+
+[node name="BaseProcessor" parent="." instance=ExtResource("2_1ni3b")]

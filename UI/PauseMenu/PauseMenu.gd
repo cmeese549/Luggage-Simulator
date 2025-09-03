@@ -5,8 +5,6 @@ class_name PauseMenu
 @onready var player : Player = get_tree().get_first_node_in_group("Player")
 
 @onready var ui : UI = $".."
-@onready var shop : Shop = $"../Shop"
-@onready var upgrade_menu : MarginContainer = $"../UpgradeMenu"
 
 @onready var config = ConfigFile.new()
 @onready var audioServer = AudioServer
@@ -41,6 +39,9 @@ func _ready() -> void:
 	help_button.pressed.connect(show_tutorial)
 	actually_quit_button.pressed.connect(quit)
 	nevermind_button.pressed.connect(cancel_quit)
+
+func init_player(_player: Player) -> void:
+	player = _player
 	connect_sliders()
 	var loadStatus = config.load("user://config.ini")
 	if loadStatus == OK: #0 = loaded, so this means data found
@@ -102,11 +103,8 @@ func update_inventory_items() -> void:
 		new_item.find_child("ItemIcon").texture = item.item_icon
 		inventory_dad.add_child(new_item)
 	
-func _unhandled_input(event):
-	if shop.visible or upgrade_menu.visible:
-		return
-		
-	if Input.is_action_just_pressed("Pause") and ui.pauseable and player.ready_to_start_game:
+func _unhandled_input(event):	
+	if Input.is_action_just_pressed("Pause") and ui.pauseable:
 		print("Freakin paus time")
 		toggle_pause()
 		
