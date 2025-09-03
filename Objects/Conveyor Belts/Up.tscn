@@ -35,6 +35,8 @@ size = Vector3(1, 4.4624023, 9.8090515)
 
 [node name="Up Conveyor" type="Node3D"]
 script = ExtResource("1_3rp0l")
+category = "Sky Conveyors"
+building_name = "Ramp Conveyor"
 
 [node name="bottom" type="MeshInstance3D" parent="."]
 transform = Transform3D(1.04, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://bpisaxbeyscs7"]
+[gd_scene load_steps=35 format=3 uid="uid://bpisaxbeyscs7"]
 
 [ext_resource type="Script" uid="uid://bu07i0b06sujv" path="res://Game_Management/main_level.gd" id="1_romof"]
 [ext_resource type="PackedScene" uid="uid://exdhmbr43ger" path="res://UI/UI.tscn" id="2_bblu0"]
@@ -13,7 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://cvtsl1w5dvdxx" path="res://Objects/Conveyor Belts/Up.tscn" id="15_yhkds"]
 [ext_resource type="PackedScene" uid="uid://ddx1802cmq06h" path="res://Objects/Conveyor Belts/4x_1_raised.tscn" id="16_yhkds"]
 [ext_resource type="PackedScene" uid="uid://dbu3dnmlljrlq" path="res://Objects/Conveyor Belts/1x_1_raised.tscn" id="17_swadt"]
-[ext_resource type="PackedScene" uid="uid://h6r74mt2iyu4" path="res://Objects/Conveyor Belts/corner_conveyor_new.tscn" id="18_dbttc"]
+[ext_resource type="PackedScene" uid="uid://h6r74mt2iyu4" path="res://Objects/Conveyor Belts/corner_conveyor.tscn" id="18_dbttc"]
 [ext_resource type="AudioStream" uid="uid://babm51jmu7wc5" path="res://Audio/Sfx/Ambience/nature_ambience.ogg" id="18_hhlvi"]
 [ext_resource type="PackedScene" uid="uid://cp0minb2i8x1p" path="res://Objects/Dropoffs/BoxHole.tscn" id="19_giak0"]
 [ext_resource type="Script" uid="uid://c6ov71035nkfo" path="res://Audio/Music/Band.gd" id="19_qqyv7"]
@@ -27,6 +27,10 @@
 [ext_resource type="AudioStream" uid="uid://57dmf87xry8d" path="res://Audio/Sfx/Alerts/spend_money.mp3" id="22_qqyv7"]
 [ext_resource type="PackedScene" uid="uid://cwk27w4wexnsb" path="res://Objects/Machines/Processor/RejectionProcessor.tscn" id="22_t5u5v"]
 [ext_resource type="PackedScene" uid="uid://cxs2llho6fkuu" path="res://Objects/Machines/Sorter/International/InternationalSorter.tscn" id="23_xpqtb"]
+[ext_resource type="PackedScene" uid="uid://qgfbm7o67k0q" path="res://Art_Assets/Models/SkatePark/HalfPipe.tscn" id="24_txu36"]
+[ext_resource type="PackedScene" uid="uid://dfwilyex83qk5" path="res://Art_Assets/Models/SkatePark/CurvedRail.tscn" id="25_mgrxx"]
+[ext_resource type="PackedScene" uid="uid://b1rpqtghxtk7v" path="res://Art_Assets/Models/SkatePark/StraightRail.tscn" id="26_s43jd"]
+[ext_resource type="PackedScene" uid="uid://saigtfv4gdv4" path="res://Art_Assets/Models/SkatePark/WiggleRail.tscn" id="27_6wem4"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_bblu0"]
 
@@ -8024,7 +8028,7 @@ one_shot = true
 [node name="BuildingSystem" type="Node3D" parent="." node_paths=PackedStringArray("level_generator") groups=["BuildingSystem"]]
 script = ExtResource("15_o3roe")
 level_generator = NodePath("../Enviroment/LevelGenerator")
-buildable_objects = Array[PackedScene]([ExtResource("7_yhkds"), ExtResource("13_tcp6c"), ExtResource("18_dbttc"), ExtResource("15_yhkds"), ExtResource("16_yhkds"), ExtResource("17_swadt"), ExtResource("23_xpqtb"), ExtResource("21_2vllj"), ExtResource("21_t5u5v"), ExtResource("21_i5tqg"), ExtResource("22_t5u5v")])
+buildable_objects = Array[PackedScene]([ExtResource("7_yhkds"), ExtResource("13_tcp6c"), ExtResource("18_dbttc"), ExtResource("15_yhkds"), ExtResource("16_yhkds"), ExtResource("17_swadt"), ExtResource("23_xpqtb"), ExtResource("21_2vllj"), ExtResource("21_t5u5v"), ExtResource("21_i5tqg"), ExtResource("22_t5u5v"), ExtResource("24_txu36"), ExtResource("25_mgrxx"), ExtResource("26_s43jd"), ExtResource("27_6wem4")])
 
 [node name="BoxSpawner" parent="." instance=ExtResource("20_qqyv7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.021827, 0.7202852, -3.0098095)
@@ -8036,6 +8040,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.971883, 0, -2.9398952)
 [node name="Money" type="Node" parent="." groups=["Money"]]
 unique_name_in_owner = true
 script = ExtResource("21_s4lgs")
+starting_money = 50
 
 [node name="MoneySound" type="AudioStreamPlayer" parent="Money"]
 stream = ExtResource("22_qqyv7")

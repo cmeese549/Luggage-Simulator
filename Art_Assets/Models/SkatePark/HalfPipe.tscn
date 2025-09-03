@@ -18,6 +18,8 @@ size = Vector3(27.690002, 6.0321045, 12.051041)
 
 [node name="HalfPipe" type="Node3D"]
 script = ExtResource("1_7uohd")
+category = "Skating"
+building_name = "Halfpipe"
 
 [node name="HalfPipe" type="MeshInstance3D" parent="."]
 mesh = ExtResource("1_n6sud")

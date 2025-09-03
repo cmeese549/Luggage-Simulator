@@ -21,6 +21,7 @@ size = Vector3(1.8860602, 0.96832275, 1.6546476)
 [node name="1x1 Conveyor" type="Node3D"]
 script = ExtResource("1_an2mm")
 rotation_offset = -1.0
+building_name = "1x1 Conveyor"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_o3roe")

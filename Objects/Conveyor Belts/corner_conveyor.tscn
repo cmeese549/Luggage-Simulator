@@ -21,6 +21,7 @@ size = Vector3(1.8860602, 0.96832275, 1.6546476)
 script = ExtResource("1_5gshr")
 is_corner = true
 corner_pull_strength = 1.2
+building_name = "Corner Conveyor"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_o3roe")

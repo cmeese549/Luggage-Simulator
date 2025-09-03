@@ -21,6 +21,8 @@ size = Vector3(3.422203, 1.159668, 15.412767)
 script = ExtResource("1_4jl54")
 DEBUG = true
 path = NodePath("CurvedRail/Path3D")
+category = "Skating"
+building_name = "Curved Rail"
 
 [node name="CurvedRail" type="MeshInstance3D" parent="."]
 mesh = ExtResource("1_q4efw")

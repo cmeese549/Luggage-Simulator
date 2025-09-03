@@ -20,6 +20,8 @@ size = Vector3(0.28060913, 1.159668, 15.412767)
 [node name="StraightRail" type="Node3D" node_paths=PackedStringArray("path") groups=["Rail"]]
 script = ExtResource("1_mjrcg")
 path = NodePath("StraightRail/Path3D")
+category = "Skating"
+building_name = "Straight Rail"
 
 [node name="StraightRail" type="MeshInstance3D" parent="."]
 mesh = ExtResource("1_6c0uh")

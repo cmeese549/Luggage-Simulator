@@ -2,6 +2,8 @@ extends Node3D
 
 class_name BuildingSystem
 
+@onready var building_ui = get_tree().get_first_node_in_group("BuildingUI")
+
 @export var level_generator: Node3D
 var tile_size
 var grid_width
@@ -49,11 +51,19 @@ func toggle_building_mode():
 	elif building_mode_active:
 		reverse_belt = false
 		
+	if building_ui:
+		if building_mode_active:
+			building_ui.show_ui()
+		else:
+			building_ui.hide_ui()
+		
 func toggle_destroy_mode():
 	destroy_mode_active = !destroy_mode_active
 	
 	# Clear building ghost when entering destroy mode
 	if destroy_mode_active and building_mode_active:
+		if building_ui:
+			building_ui.hide_ui()
 		building_mode_active = false
 		if ghost_object:
 			ghost_object.queue_free()
@@ -110,10 +120,10 @@ func update_ghost_color():
 		print("No Ghost Object")
 		return
 	
-	var material = 0 if can_build_at_position(cursor_position) else 1
+	var material = 0 if %Money.check_can_buy(ghost_object.price) and can_build_at_position(cursor_position) else 1
 	ghost_object.material_index = material
 	
-func setup_ghost_object(obj: Node3D):	
+func setup_ghost_object(obj: Node3D):
 	# Apply ghost material to all mesh instances
 	var material = 0 if can_build_at_position(cursor_position) else 1
 	ghost_object.material_index = material
@@ -180,10 +190,14 @@ func place_object_at_cursor():
 		
 	if buildable_objects.is_empty() or selected_object_index >= buildable_objects.size():
 		return
+		
 	
 	# Directly instantiate and place the object
 	var object_scene = buildable_objects[selected_object_index]
 	var object_instance = object_scene.instantiate()
+	if not %Money.try_buy(object_instance.price):
+		object_instance.queue_free()
+		return
 	object_instance.position = cursor_position
 	object_instance.rotation_degrees.y = get_object_rotation_degrees()
 	

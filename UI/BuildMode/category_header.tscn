@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://cv1s4myg1y3c6"]
+
+[node name="CategoryHeader" type="ColorRect"]
+size_flags_horizontal = 3
+color = Color(0.26666668, 0.30588236, 0.34509805, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 4.0
+offset_right = 384.0
+offset_bottom = 103.0
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "[font_size={32}]Ground Conveyors"
+horizontal_alignment = 1
+vertical_alignment = 1

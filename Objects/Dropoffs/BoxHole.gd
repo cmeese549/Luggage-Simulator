@@ -21,7 +21,8 @@ func _on_deposit_zone_body_entered(body):
 		if check_box_legit(body):
 			acceptance_sound.pitch_scale = randf_range(0.75, 1.1)
 			acceptance_sound.play()
-			%Money.make_money(body.value)
+			var total_stickers: int = body.active_qualification_icons.size() + 1
+			%Money.make_money(body.value * total_stickers)
 		else:
 			rejection_sound.play()
 			%Money.make_money(body.value * -1)

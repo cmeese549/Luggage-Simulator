@@ -6,5 +6,7 @@
 [node name="RejectionProcessor" type="Node3D"]
 script = ExtResource("1_785rq")
 output_icon = "❌"
+category = "Processors"
+building_name = "Rejection Processor"
 
 [node name="BaseProcessor" parent="." instance=ExtResource("2_wyo6n")]

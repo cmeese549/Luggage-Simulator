@@ -6,5 +6,7 @@
 [node name="DestinationSorter" type="Node3D"]
 script = ExtResource("1_qjnfb")
 output_icon = "🛫"
+category = "Sorters"
+building_name = "Destination Sorter"
 
 [node name="BaseSorter" parent="." instance=ExtResource("2_oqulr")]

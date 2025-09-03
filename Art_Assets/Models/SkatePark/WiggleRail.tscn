@@ -21,6 +21,8 @@ size = Vector3(6.041382, 1.159668, 28.404572)
 [node name="WiggleRail" type="Node3D" node_paths=PackedStringArray("path") groups=["Rail"]]
 script = ExtResource("1_x8r1g")
 path = NodePath("WiggleRail/Path3D")
+category = "Skating"
+building_name = "Wiggle Rail"
 
 [node name="WiggleRail" type="MeshInstance3D" parent="."]
 mesh = ExtResource("1_vd732")

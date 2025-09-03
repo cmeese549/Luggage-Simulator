@@ -1,8 +1,7 @@
-[gd_resource type="Theme" load_steps=56 format=3 uid="uid://b3kq74llqlv3x"]
+[gd_resource type="Theme" load_steps=55 format=3 uid="uid://b3kq74llqlv3x"]
 
 [ext_resource type="FontFile" uid="uid://sa73l7s65chj" path="res://UI/Theme/OpenSans-Regular.ttf" id="1_drk14"]
 [ext_resource type="Texture2D" uid="uid://dfhofmnqg0yb7" path="res://UI/Theme/icons.svg" id="2_fgrxh"]
-[ext_resource type="FontFile" uid="uid://dqa66k6g8kp0j" path="res://UI/Theme/C&C Red Alert [INET].ttf" id="3_fgrxh"]
 
 [sub_resource type="FontFile" id="21"]
 fallbacks = Array[Font]([ExtResource("1_drk14")])
@@ -435,7 +434,7 @@ corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
 [resource]
-default_font = ExtResource("3_fgrxh")
+default_font = ExtResource("1_drk14")
 Button/colors/font_color = Color(1, 1, 1, 1)
 Button/colors/font_disabled_color = Color(0.9, 0.9, 0.9, 0.2)
 Button/colors/font_hover_color = Color(0.94, 0.94, 0.94, 1)

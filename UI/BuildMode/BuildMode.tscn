@@ -1,0 +1,187 @@
+[gd_scene load_steps=6 format=3 uid="uid://ebs3x8yehb0t"]
+
+[ext_resource type="Script" uid="uid://deketg6nsdosp" path="res://UI/BuildMode/build_mode_ui.gd" id="1_th45o"]
+[ext_resource type="PackedScene" uid="uid://cv1s4myg1y3c6" path="res://UI/BuildMode/category_header.tscn" id="2_m0l6w"]
+
+[sub_resource type="Animation" id="Animation_m0l6w"]
+resource_name = "slide_up"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(0.25000003, 0.016746454),
+"update": 0,
+"values": [Vector2(0, 1092.765), Vector2(0, 764)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_urh23"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 764)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wf230"]
+_data = {
+&"RESET": SubResource("Animation_urh23"),
+&"slide_up": SubResource("Animation_m0l6w")
+}
+
+[node name="BuildMode" type="Control" groups=["BuildingUI"]]
+custom_minimum_size = Vector2(0, 315.655)
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -960.0
+offset_top = -316.0
+offset_right = 960.0
+offset_bottom = -0.34484863
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("1_th45o")
+active_category_color = Color(0.26666668, 0.30588236, 0.34509805, 1)
+inactive_category_color = Color(0.1764706, 0.19215687, 0.22745098, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_wf230")
+}
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.26666668, 0.30588236, 0.34509805, 1)
+
+[node name="Categories" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -960.0
+offset_right = 960.0
+offset_bottom = 103.65503
+grow_horizontal = 2
+theme_override_constants/separation = 0
+
+[node name="CategoryHeader" parent="Categories" instance=ExtResource("2_m0l6w")]
+layout_mode = 2
+
+[node name="GroundConveyors2" type="ColorRect" parent="Categories"]
+layout_mode = 2
+size_flags_horizontal = 3
+color = Color(0.1764706, 0.19215687, 0.22745098, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Categories/GroundConveyors2"]
+layout_mode = 0
+offset_left = 4.0
+offset_right = 384.0
+offset_bottom = 103.0
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "[font_size={32}]Sky Conveyors"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GroundConveyors3" type="ColorRect" parent="Categories"]
+layout_mode = 2
+size_flags_horizontal = 3
+color = Color(0.1764706, 0.19215687, 0.22745098, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Categories/GroundConveyors3"]
+layout_mode = 0
+offset_left = 4.0
+offset_right = 384.0
+offset_bottom = 103.0
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "[font_size={32}]Sorters"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GroundConveyors4" type="ColorRect" parent="Categories"]
+layout_mode = 2
+size_flags_horizontal = 3
+color = Color(0.1764706, 0.19215687, 0.22745098, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Categories/GroundConveyors4"]
+layout_mode = 0
+offset_left = 4.0
+offset_right = 384.0
+offset_bottom = 103.0
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "[font_size={32}]Processors"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GroundConveyors5" type="ColorRect" parent="Categories"]
+layout_mode = 2
+size_flags_horizontal = 3
+color = Color(0.1764706, 0.19215687, 0.22745098, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Categories/GroundConveyors5"]
+layout_mode = 0
+offset_left = 4.0
+offset_right = 384.0
+offset_bottom = 103.0
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "[font_size={32}]Skating
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Buildables" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(0, 209.575)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 44

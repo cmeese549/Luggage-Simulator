@@ -6,5 +6,7 @@
 [node name="DisposableSorter" type="Node3D"]
 script = ExtResource("1_uf4c1")
 output_icon = "⚠"
+category = "Sorters"
+building_name = "Disposable Sorter"
 
 [node name="BaseSorter" parent="." instance=ExtResource("2_hryum")]

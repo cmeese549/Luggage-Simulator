@@ -32,8 +32,14 @@ func make_money(amount, notify=false):
 	cur_money += amount
 	lifetime_money += amount
 	
+func check_can_buy(amount: float) -> bool:
+	if roundi(cur_money) >= amount:
+		return true
+	else:
+		return false
+	
 
-func try_buy(amount):
+func try_buy(amount: float) -> bool:
 	if roundi(cur_money) >= amount:
 		cur_money -= amount
 		print("Paid "+str(amount))

@@ -1,10 +1,14 @@
 extends Node3D
 class_name Buildable
 
+@export var price: float = 10
+
 var material_index = 0 : set = set_material
 var valid_ghost_material : StandardMaterial3D
 var invalid_ghost_material : StandardMaterial3D
 @export var is_built: bool = false
+@export var category: String = "Ground Conveyors"
+@export var building_name: String = "4x1 Conveyor"
 
 func get_save_data() -> Dictionary:
 	return {}
