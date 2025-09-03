@@ -11,6 +11,8 @@ class_name Sorter
 @onready var other_output_detector: Area3D = $"BaseSorter/Box Detectors/Other Output"
 @onready var sorted_output_detector: Area3D = $"BaseSorter/Box Detectors/Sorted Output"
 
+@onready var output_icon_label: Label3D = $"BaseSorter/Output Icon Label"
+
 @onready var other_spawn_point: Marker3D = $"BaseSorter/Box Droppers/Other"
 @onready var sorted_spawn_point: Marker3D = $"BaseSorter/Box Droppers/Sorted"
 
@@ -22,6 +24,7 @@ var turned_off: bool = false
 var queue: Array[Box] = []
 var processing_progress: float = processing_time
 var waiting_to_export: bool = false
+var reversed: bool = false
 
 func get_save_data() -> Dictionary:
 	var data: Dictionary = {}
@@ -33,6 +36,7 @@ func get_save_data() -> Dictionary:
 	data.output_icon = output_icon
 	data.waiting_to_export = waiting_to_export
 	data.expected_destination = expected_destination
+	data.reversed = reversed
 	return data
 
 func load_save_data(data: Dictionary) -> void:
@@ -53,13 +57,14 @@ func load_save_data(data: Dictionary) -> void:
 	expected_destination = data.expected_destination
 	global_position = data.global_position
 	rotation = data.rotation
+	reversed = data.reversed
 	is_built = true
 
 func _ready() -> void:
 	if is_built:
 		input_detector.body_entered.connect(new_box_available)
 	update_county_labels()
-	$"BaseSorter/Output Icon Label".text = output_icon
+	output_icon_label.text = output_icon
 	
 func _process(delta: float) -> void:
 	if turned_off: 
@@ -111,11 +116,14 @@ func on_object_built():
 	input_detector.body_entered.connect(new_box_available)
 	
 func attempt_export() -> void:
-	var export_zone = sorted_output_detector if check_sort(queue[0]) else other_output_detector
+	var sort_result =  check_sort(queue[0])
+	var use_sorted_output = sort_result if not reversed else not sort_result
+	var export_zone = sorted_output_detector if use_sorted_output else other_output_detector
+	var spawn_point = sorted_spawn_point if use_sorted_output else other_spawn_point
 	var blocked = export_zone.get_overlapping_bodies().size() > 0
 	if not blocked:
 		get_tree().root.get_node("MainLevel").add_child(queue[0])
-		queue[0].global_position = sorted_spawn_point.global_position if check_sort(queue[0]) else other_spawn_point.global_position
+		queue[0].global_position = spawn_point.global_position
 		queue.remove_at(0)
 		waiting_to_export = false
 		attempt_import()
@@ -129,3 +137,8 @@ func attempt_import() -> void:
 func check_sort(_box: Box) -> bool:
 	#Meant to be overwritten
 	return false
+	
+func set_belt_reversed(is_reversed: bool) -> void:
+	if reversed != is_reversed:
+		$"BaseSorter/Output Icon Label".position = Vector3($"BaseSorter/Output Icon Label".position.x, $"BaseSorter/Output Icon Label".position.y, $"BaseSorter/Output Icon Label".position.z * -1)
+	reversed = is_reversed

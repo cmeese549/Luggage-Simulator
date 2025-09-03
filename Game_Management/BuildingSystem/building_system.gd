@@ -189,7 +189,7 @@ func place_object_at_cursor():
 	
 	# Apply belt reversal for conveyors
 	if object_instance.has_method("set_belt_reversed"):
-		object_instance.set_belt_reversed(reverse_belt)
+			object_instance.set_belt_reversed(reverse_belt)
 	
 	add_child(object_instance)
 	

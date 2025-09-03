@@ -172,7 +172,6 @@ func generate_visuals():
 	is_ready = true
 	
 func load_rotation_offset() -> void:
-	print("Loading rotation offset")
 	if not is_instance_valid(collision_shape) or is_corner:
 		return
 	if reversed:
