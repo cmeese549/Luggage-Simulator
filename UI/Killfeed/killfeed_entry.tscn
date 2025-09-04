@@ -1,0 +1,41 @@
+[gd_scene load_steps=2 format=3 uid="uid://bgosal81skldi"]
+
+[ext_resource type="Script" uid="uid://csbc38lw50b1j" path="res://UI/Killfeed/killfeed_entry.gd" id="1_wiy68"]
+
+[node name="KillfeedEntry" type="Control"]
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_wiy68")
+green_bg = Color(0.05490196, 0.6313726, 0.44705883, 0.32156864)
+red_bg = Color(0.64705884, 0, 0.02745098, 0.32156864)
+
+[node name="AnimationWrapper" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="AnimationWrapper"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.64705884, 0, 0.02745098, 0.32156864)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="AnimationWrapper"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "[font_size=28]-10 DEN JK"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -14,3 +14,5 @@ signal close_shop()
 signal item_pickedup(item)
 
 signal game_loaded()
+
+signal box_deposited(money_amount: int, destination: String, success: bool)

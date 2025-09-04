@@ -23,8 +23,10 @@ func _on_deposit_zone_body_entered(body):
 			acceptance_sound.play()
 			var total_stickers: int = body.active_qualification_icons.size() + 1
 			%Money.make_money(body.value * total_stickers)
+			Events.box_deposited.emit(body.value * total_stickers, body.destination, true)
 		else:
 			rejection_sound.play()
+			Events.box_deposited.emit(body.value * -1, body.destination, false)
 			%Money.make_money(body.value * -1)
 		body.queue_free()
 

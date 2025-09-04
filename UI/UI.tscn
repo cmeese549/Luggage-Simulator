@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" uid="uid://dic75q4o378w6" path="res://UI/UI.gd" id="1_6dd3c"]
 [ext_resource type="Theme" uid="uid://b3kq74llqlv3x" path="res://UI/Theme/MinimalUI.tres" id="1_dhe1o"]
-[ext_resource type="Script" uid="uid://linjogyb5w0j" path="res://UI/Hotkeys/hotkeys_ui.gd" id="3_017wa"]
 [ext_resource type="Texture2D" uid="uid://dsu4otkk2qt0g" path="res://icon.svg" id="3_q0uhn"]
+[ext_resource type="PackedScene" uid="uid://bbiv7n10cddy3" path="res://UI/Hotkeys/hotkeys.tscn" id="3_qhxh2"]
 [ext_resource type="PackedScene" uid="uid://ebs3x8yehb0t" path="res://UI/BuildMode/BuildMode.tscn" id="3_r2vy3"]
+[ext_resource type="Script" uid="uid://b6jifj4bjajmg" path="res://UI/Killfeed/killfeed.gd" id="4_017wa"]
 [ext_resource type="Texture2D" uid="uid://c8ipav7ruim5w" path="res://UI/HUD/Crosshair/crosshair2.png" id="4_f1fl4"]
-[ext_resource type="PackedScene" uid="uid://c0xeed5wvxrr0" path="res://UI/Hotkeys/hotkey.tscn" id="4_npmjx"]
 [ext_resource type="Texture2D" uid="uid://btbey8ncomyx7" path="res://UI/HUD/Crosshair/hitmorker.png" id="5_jqf55"]
 [ext_resource type="Script" uid="uid://bed3d7egj53pu" path="res://UI/PauseMenu/PauseMenu.gd" id="6_qhxh2"]
 [ext_resource type="Script" uid="uid://bsyahvddt84hi" path="res://UI/delta_fade.gd" id="6_wtdy7"]
@@ -109,60 +109,20 @@ mouse_filter = 2
 theme = ExtResource("1_dhe1o")
 script = ExtResource("1_6dd3c")
 
-[node name="Hotkeys" type="Control" parent="." groups=["HotkeysUI"]]
-custom_minimum_size = Vector2(0, 71.96)
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -97.03003
-offset_bottom = -25.069336
-grow_horizontal = 2
-grow_vertical = 0
-script = ExtResource("3_017wa")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Hotkeys"]
+[node name="HUD" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 44
-alignment = 1
+mouse_filter = 2
+script = ExtResource("7_017wa")
 
-[node name="Hotkey0" parent="Hotkeys/HBoxContainer" instance=ExtResource("4_npmjx")]
-layout_mode = 2
+[node name="Hotkeys" parent="HUD" instance=ExtResource("3_qhxh2")]
+layout_mode = 1
 
-[node name="Hotkey1" parent="Hotkeys/HBoxContainer" instance=ExtResource("4_npmjx")]
-layout_mode = 2
-
-[node name="Hotkey2" parent="Hotkeys/HBoxContainer" instance=ExtResource("4_npmjx")]
-layout_mode = 2
-
-[node name="Hotkey3" parent="Hotkeys/HBoxContainer" instance=ExtResource("4_npmjx")]
-layout_mode = 2
-
-[node name="Hotkey4" parent="Hotkeys/HBoxContainer" instance=ExtResource("4_npmjx")]
-layout_mode = 2
-
-[node name="Hotkey5" parent="Hotkeys/HBoxContainer" instance=ExtResource("4_npmjx")]
-layout_mode = 2
-
-[node name="Hotkey6" parent="Hotkeys/HBoxContainer" instance=ExtResource("4_npmjx")]
-layout_mode = 2
-
-[node name="Hotkey7" parent="Hotkeys/HBoxContainer" instance=ExtResource("4_npmjx")]
-layout_mode = 2
-
-[node name="Hotkey8" parent="Hotkeys/HBoxContainer" instance=ExtResource("4_npmjx")]
-layout_mode = 2
-
-[node name="Hotkey9" parent="Hotkeys/HBoxContainer" instance=ExtResource("4_npmjx")]
-layout_mode = 2
-
-[node name="BuildMode" parent="." instance=ExtResource("3_r2vy3")]
+[node name="BuildMode" parent="HUD" instance=ExtResource("3_r2vy3")]
 visible = false
 layout_mode = 1
 anchors_preset = 12
@@ -172,7 +132,7 @@ offset_left = 0.0
 offset_right = 0.0
 offset_bottom = -0.3449707
 
-[node name="DestroyMode" type="Control" parent="." groups=["DestroyUI"]]
+[node name="DestroyMode" type="Control" parent="HUD" groups=["DestroyUI"]]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -180,13 +140,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="DestroyMode"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HUD/DestroyMode"]
 reset_on_save = false
 libraries = {
 &"": SubResource("AnimationLibrary_npmjx")
 }
 
-[node name="Panel" type="Panel" parent="DestroyMode"]
+[node name="Panel" type="Panel" parent="HUD/DestroyMode"]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -196,7 +156,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_r2vy3")
 
-[node name="Panel2" type="Panel" parent="DestroyMode"]
+[node name="Panel2" type="Panel" parent="HUD/DestroyMode"]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -210,16 +170,6 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.95, 0.9)
 theme_override_styles/panel = SubResource("StyleBoxFlat_qhxh2")
-
-[node name="HUD" type="Control" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-script = ExtResource("7_017wa")
 
 [node name="Crosshairs" type="Control" parent="HUD"]
 layout_mode = 1
@@ -354,6 +304,27 @@ theme_override_font_sizes/font_size = 50
 text = "+1"
 horizontal_alignment = 1
 script = ExtResource("6_wtdy7")
+
+[node name="Killfeed" type="Control" parent="HUD"]
+layout_mode = 1
+anchors_preset = 0
+offset_left = 77.655
+offset_top = 97.52
+offset_right = 117.65499
+offset_bottom = 137.51997
+script = ExtResource("4_017wa")
+
+[node name="Entries" type="VBoxContainer" parent="HUD/Killfeed"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -1.978
+anchor_top = -2.539
+anchor_right = -1.978
+anchor_bottom = -2.539
+offset_left = 44.46499
+offset_top = 46.039948
+offset_right = 84.46499
+offset_bottom = 86.03995
 
 [node name="PauseMenu" type="MarginContainer" parent="."]
 process_mode = 3

@@ -1,0 +1,57 @@
+[gd_scene load_steps=3 format=3 uid="uid://bbiv7n10cddy3"]
+
+[ext_resource type="Script" uid="uid://linjogyb5w0j" path="res://UI/Hotkeys/hotkeys_ui.gd" id="1_jf0ah"]
+[ext_resource type="PackedScene" uid="uid://c0xeed5wvxrr0" path="res://UI/Hotkeys/hotkey.tscn" id="2_3bybx"]
+
+[node name="Hotkeys" type="Control" groups=["HotkeysUI"]]
+custom_minimum_size = Vector2(0, 71.96)
+layout_mode = 3
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -97.03003
+offset_bottom = -25.069336
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("1_jf0ah")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 44
+alignment = 1
+
+[node name="Hotkey0" parent="HBoxContainer" instance=ExtResource("2_3bybx")]
+layout_mode = 2
+
+[node name="Hotkey1" parent="HBoxContainer" instance=ExtResource("2_3bybx")]
+layout_mode = 2
+
+[node name="Hotkey2" parent="HBoxContainer" instance=ExtResource("2_3bybx")]
+layout_mode = 2
+
+[node name="Hotkey3" parent="HBoxContainer" instance=ExtResource("2_3bybx")]
+layout_mode = 2
+
+[node name="Hotkey4" parent="HBoxContainer" instance=ExtResource("2_3bybx")]
+layout_mode = 2
+
+[node name="Hotkey5" parent="HBoxContainer" instance=ExtResource("2_3bybx")]
+layout_mode = 2
+
+[node name="Hotkey6" parent="HBoxContainer" instance=ExtResource("2_3bybx")]
+layout_mode = 2
+
+[node name="Hotkey7" parent="HBoxContainer" instance=ExtResource("2_3bybx")]
+layout_mode = 2
+
+[node name="Hotkey8" parent="HBoxContainer" instance=ExtResource("2_3bybx")]
+layout_mode = 2
+
+[node name="Hotkey9" parent="HBoxContainer" instance=ExtResource("2_3bybx")]
+layout_mode = 2

@@ -12,7 +12,7 @@ border_color = Color(0.1764706, 0.19215687, 0.22745098, 1)
 border_blend = true
 
 [node name="Hotkey0" type="VBoxContainer"]
-custom_minimum_size = Vector2(50, 50)
+custom_minimum_size = Vector2(75, 75)
 theme_override_constants/separation = 0
 
 [node name="Control" type="Control" parent="."]
@@ -50,13 +50,10 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_017wa")
 [node name="TextureRect" type="TextureRect" parent="Panel"]
 custom_minimum_size = Vector2(38.165, 42.725)
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
+anchors_preset = 14
 anchor_top = 0.5
-anchor_right = 0.5
+anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -13.5
-offset_right = 13.5
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_li2kb")
