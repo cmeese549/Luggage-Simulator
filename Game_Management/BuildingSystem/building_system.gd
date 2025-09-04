@@ -32,20 +32,38 @@ var current_rotation: int = 0  # 0, 1, 2, 3 for 0°, 90°, 180°, 270°
 var destroy_mode_active: bool = false
 
 var hotkeys : Dictionary = {
-	"0": null,
-	"1": null,
-	"2": null,
-	"3": null,
-	"4": null,
-	"5": null,
-	"6": null,
-	"7": null,
-	"8": null,
-	"9": null,
+	0: null,
+	1: null,
+	2: null,
+	3: null,
+	4: null,
+	5: null,
+	6: null,
+	7: null,
+	8: null,
+	9: null,
 }
 
+func get_save_data() -> Dictionary:
+	var data = {}
+	for key in hotkeys.keys():
+		if hotkeys[key]:
+			var instance = hotkeys[key].instantiate()
+			data[key] = instance.scene_file_path
+		else:
+			data[key] = null
+	return data
+	
+func load_save_data(data: Dictionary) -> void:
+	for key in data.keys():
+		if data[key]:
+			hotkeys[key] = load(data[key])
+		else:
+			hotkeys[key] = null
+	print(hotkeys)
 
 func _ready():
+	print(get_save_data())
 	# Get values directly from level generator
 	tile_size = level_generator.tile_size
 	grid_width = level_generator.width
@@ -53,14 +71,13 @@ func _ready():
 	generate_grid_positions()
 
 func pressed_hotkey(index: int) -> void:
-	print("Hotkey pressed: " + str(index))
 	if index < 0 or index >= hotkeys.keys().size():
 		return
 		
-	if not hotkeys[str(index)]:
+	if not hotkeys[index]:
 		return
 		
-	var hotkey_instance = hotkeys[str(index)].instantiate()
+	var hotkey_instance = hotkeys[index].instantiate()
 	print(hotkey_instance.scene_file_path)
 	print(hotkey_instance.building_name)
 	select_buildable(hotkey_instance)
@@ -68,10 +85,9 @@ func pressed_hotkey(index: int) -> void:
 
 func stored_hotkey(index: int) -> void:
 	if building_mode_active:
-		print("Hotkey stored: " + str(index))
 		if index < 0 or index >= hotkeys.keys().size():
 			return
-		hotkeys[str(index)] = buildable_objects[selected_object_index]
+		hotkeys[index] = buildable_objects[selected_object_index]
 
 
 func toggle_building_mode():
@@ -191,14 +207,12 @@ func select_buildable(buildable: Buildable):
 	var packed_scene = PackedScene.new()
 	packed_scene.pack(buildable)
 	var target_scene_path = buildable.scene_file_path
-	selected_object_index = buildable_objects.find(packed_scene)
-	# Find which category contains this buildable
-	if building_ui:
-		building_ui.select_buildable_by_scene_path(target_scene_path)
-	
 	# Enter building mode if not already active
 	if not building_mode_active:
 		toggle_building_mode()
+	# Find which category contains this buildable
+	if building_ui:
+		building_ui.select_buildable_by_scene_path(target_scene_path)
 	
 	
 func cycle_selected_object(direction: int = 1):

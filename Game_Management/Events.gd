@@ -12,3 +12,5 @@ signal open_shop()
 signal close_shop()
 
 signal item_pickedup(item)
+
+signal game_loaded()

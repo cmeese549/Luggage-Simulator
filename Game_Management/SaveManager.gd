@@ -10,6 +10,7 @@ func save_game() -> bool:
 	save_data.boxes = collect_all_boxes()
 	save_data.money = collect_money_data()
 	save_data.box_spawners = collect_box_spawners()
+	save_data.hotkeys = collect_hotkeys()
 	# Save player data
 	var player = get_tree().get_first_node_in_group("Player")
 	if player:
@@ -33,10 +34,18 @@ func load_game() -> bool:
 	restore_buildables(save_data.buildables)
 	restore_boxes(save_data.boxes)
 	restore_money(save_data.money)
+	restore_hotkeys(save_data.hotkeys)
 	restore_spawners(save_data.box_spawners)
 	restore_player_data(save_data)
 	
+	Events.game_loaded.emit()
 	return true
+	
+func collect_hotkeys() -> Dictionary:
+	return get_tree().get_first_node_in_group("BuildingSystem").get_save_data()
+	
+func restore_hotkeys(data: Dictionary):
+	get_tree().get_first_node_in_group("BuildingSystem").load_save_data(data)
 	
 func collect_money_data() -> Dictionary:
 	return get_tree().get_first_node_in_group("Money").get_save_data()

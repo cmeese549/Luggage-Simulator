@@ -179,19 +179,19 @@ func generate_buildable_textures():
 			instance.queue_free()
 			
 func select_buildable_by_scene_path(scene_path: String):
+	print("x " + scene_path)
 	# Find the category and index
 	for cat_index in range(categories.size()):
 		var category = categories[cat_index]
 		for build_index in range(category.buildables.size()):
-			if category.buildables[build_index].resource_path == scene_path:
-				print(scene_path)
 				# Switch to this category and select the item
 				current_category_index = cat_index
-				building_system.selected_object_index = build_index
-				
 				# Update UI
 				update_category_colors()
 				update_building_system_active_buildables()
+				# Force ghost update if in building mode
+				if building_system.building_mode_active:
+					building_system.update_ghost_preview()
 				populate_buildable_row()
 				return
 	
