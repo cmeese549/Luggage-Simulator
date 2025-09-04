@@ -40,6 +40,8 @@ visible = false
 curve = SubResource("Curve3D_5olxb")
 
 [node name="BuildingCollider" type="Area3D" parent="."]
+collision_layer = 2147483649
+collision_mask = 2147483649
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="BuildingCollider"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.572979, 0.079833984, -0.0012369156)

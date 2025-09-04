@@ -107,8 +107,8 @@ text = "⛔"
 font_size = 262
 
 [node name="Interact" type="Area3D" parent="." groups=["Interactable"]]
-collision_layer = 1048576
-collision_mask = 1048576
+collision_layer = 2148532224
+collision_mask = 2148532224
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Interact"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.003967285, 0.99961853, -0.017044067)

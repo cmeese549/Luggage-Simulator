@@ -58,6 +58,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00722569, 35.0186, 0.378174
 shape = SubResource("BoxShape3D_7uohd")
 
 [node name="BuildingCollider" type="Area3D" parent="."]
+collision_layer = 2147483649
+collision_mask = 2147483649
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="BuildingCollider"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.011077881, 2.5160522, 0.08835602)

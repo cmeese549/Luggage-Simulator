@@ -12,6 +12,8 @@ class_name Player
 
 @onready var look_at_cast : RayCast3D = $Neck/Camera3D/LookAtCast
 @onready var box_cast : RayCast3D = $Neck/Camera3D/BoxCast
+@onready var delete_cast : RayCast3D = $Neck/Camera3D/DeleteCast
+@onready var eyedropper_cast : RayCast3D = $Neck/Camera3D/EyedropperCast
 @onready var item_pickup_range : Area3D = find_child("ItemPickupRange")
 
 var SPEED = 5.0
@@ -262,11 +264,15 @@ func handle_building_inputs() -> void:
 		building_system.rotate_object(1)
 	elif Input.is_action_just_pressed("change_belt_direction"):
 		building_system.reverse_belt = !building_system.reverse_belt
+	elif Input.is_action_just_pressed("Pause"):
+		building_system.toggle_building_mode()
 		
 func handle_destroy_inputs() -> void:
 		if Input.is_action_just_pressed("primary"):
 			building_system.destroy_object_at_cursor()
 			update_pipes()
+		elif Input.is_action_just_pressed("Pause"):
+			building_system.toggle_destroy_mode()
 	
 func _physics_process(delta):
 	current_footstep_cooldown -= delta
@@ -298,6 +304,9 @@ func _physics_process(delta):
 	elif Input.is_action_just_pressed("Destroy"):
 		building_system.toggle_destroy_mode()
 		drop_box()
+	
+	if Input.is_action_just_pressed("Eyedropper"):
+		building_system.eyedropper_select_buildable(building_system.find_buildable_at_position(eyedropper_cast))
 	
 	if Input.is_action_just_pressed("primary"):
 		if !building_system.building_mode_active:

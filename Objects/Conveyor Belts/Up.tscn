@@ -104,6 +104,8 @@ shape = SubResource("BoxShape3D_5our1")
 
 [node name="BuildingCollider" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.52, 0)
+collision_layer = 2147483649
+collision_mask = 2147483649
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="BuildingCollider"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7312012, -0.0110321045)

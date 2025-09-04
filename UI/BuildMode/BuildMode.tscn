@@ -1,7 +1,47 @@
-[gd_scene load_steps=6 format=3 uid="uid://ebs3x8yehb0t"]
+[gd_scene load_steps=8 format=3 uid="uid://ebs3x8yehb0t"]
 
 [ext_resource type="Script" uid="uid://deketg6nsdosp" path="res://UI/BuildMode/build_mode_ui.gd" id="1_th45o"]
 [ext_resource type="PackedScene" uid="uid://cv1s4myg1y3c6" path="res://UI/BuildMode/category_header.tscn" id="2_m0l6w"]
+[ext_resource type="PackedScene" uid="uid://d1gj5eua8tsuw" path="res://UI/BuildMode/buildable_preview.tscn" id="3_urh23"]
+
+[sub_resource type="Animation" id="Animation_urh23"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 764)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Buildables:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_m0l6w"]
 resource_name = "slide_up"
@@ -31,36 +71,26 @@ tracks/1/keys = {
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_urh23"]
-length = 0.001
+[sub_resource type="Animation" id="Animation_wf230"]
+resource_name = "fade_buildables"
+length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
+tracks/0/path = NodePath("Buildables:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 0.07694657),
 "update": 0,
-"values": [Vector2(0, 764)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_wf230"]
 _data = {
 &"RESET": SubResource("Animation_urh23"),
+&"fade_buildables": SubResource("Animation_wf230"),
 &"slide_up": SubResource("Animation_m0l6w")
 }
 
@@ -176,12 +206,44 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Buildables" type="HBoxContainer" parent="."]
-custom_minimum_size = Vector2(0, 209.575)
+custom_minimum_size = Vector2(0, 212.295)
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = -209.575
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_constants/separation = 44
+theme_override_constants/separation = 79
+
+[node name="Control" type="Control" parent="Buildables" groups=["Spacer"]]
+layout_mode = 2
+
+[node name="BuildablePreview3" parent="Buildables" instance=ExtResource("3_urh23")]
+layout_mode = 2
+
+[node name="BuildablePreview4" parent="Buildables" instance=ExtResource("3_urh23")]
+layout_mode = 2
+
+[node name="BuildablePreview5" parent="Buildables" instance=ExtResource("3_urh23")]
+layout_mode = 2
+
+[node name="BuildablePreview6" parent="Buildables" instance=ExtResource("3_urh23")]
+layout_mode = 2
+
+[node name="BuildablePreview7" parent="Buildables" instance=ExtResource("3_urh23")]
+layout_mode = 2
+
+[node name="Control2" type="Control" parent="Buildables" groups=["Spacer"]]
+layout_mode = 2
+
+[node name="HR" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 102.79
+offset_bottom = 103.79
+grow_horizontal = 2
+color = Color(0.1764706, 0.19215687, 0.22745098, 1)

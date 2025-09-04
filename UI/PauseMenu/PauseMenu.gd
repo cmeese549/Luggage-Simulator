@@ -104,8 +104,7 @@ func update_inventory_items() -> void:
 		inventory_dad.add_child(new_item)
 	
 func _unhandled_input(event):	
-	if Input.is_action_just_pressed("Pause") and ui.pauseable:
-		print("Freakin paus time")
+	if Input.is_action_just_pressed("Pause") and ui.pauseable and !player.building_system.building_mode_active and !player.building_system.destroy_mode_active:
 		toggle_pause()
 		
 	if event is InputEventJoypadButton and event.is_action_pressed("ui_cancel") and ui.pauseable:

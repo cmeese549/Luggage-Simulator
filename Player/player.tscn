@@ -94,14 +94,26 @@ collide_with_areas = true
 debug_shape_thickness = 1
 
 [node name="InteractCast" type="RayCast3D" parent="Neck/Camera3D"]
-target_position = Vector3(0, 0, -2)
-collision_mask = 1048576
+target_position = Vector3(0, 0, -4)
+collision_mask = 2148532224
 collide_with_areas = true
 debug_shape_thickness = 1
 
 [node name="BoxCast" type="RayCast3D" parent="Neck/Camera3D"]
 target_position = Vector3(0, 0, -2)
 collision_mask = 256
+collide_with_areas = true
+debug_shape_thickness = 1
+
+[node name="DeleteCast" type="RayCast3D" parent="Neck/Camera3D"]
+target_position = Vector3(0, 0, -10)
+collision_mask = 2147483648
+collide_with_areas = true
+debug_shape_thickness = 1
+
+[node name="EyedropperCast" type="RayCast3D" parent="Neck/Camera3D"]
+target_position = Vector3(0, 0, -20)
+collision_mask = 2147483648
 collide_with_areas = true
 debug_shape_thickness = 1
 

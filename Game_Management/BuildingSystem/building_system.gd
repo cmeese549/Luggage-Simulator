@@ -3,6 +3,7 @@ extends Node3D
 class_name BuildingSystem
 
 @onready var building_ui = get_tree().get_first_node_in_group("BuildingUI")
+@onready var player: Player = get_tree().get_first_node_in_group("Player")
 
 @export var level_generator: Node3D
 var tile_size
@@ -141,6 +142,19 @@ func disable_ghost_physics(node: Node):
 	# Recursively disable for children
 	for child in node.get_children():
 		disable_ghost_physics(child)
+		
+func eyedropper_select_buildable(buildable: Buildable):
+	if not buildable:
+		return
+	var target_scene_path = buildable.scene_file_path
+	
+	# Find which category contains this buildable
+	if building_ui:
+		building_ui.select_buildable_by_scene_path(target_scene_path)
+	
+	# Enter building mode if not already active
+	if not building_mode_active:
+		toggle_building_mode()
 	
 func cycle_selected_object(direction: int = 1):
 	if buildable_objects.is_empty():
@@ -153,6 +167,9 @@ func cycle_selected_object(direction: int = 1):
 		selected_object_index = 0
 	elif selected_object_index < 0:
 		selected_object_index = buildable_objects.size() - 1
+		
+	if building_ui and building_ui.visible:
+		building_ui.update_buildable_selection()
 
 func get_selected_object_name() -> String:
 	if buildable_objects.is_empty() or selected_object_index >= buildable_objects.size():
@@ -256,27 +273,19 @@ func destroy_object_at_cursor():
 	if not destroy_mode_active or not valid_cursor_position:
 		return
 		
-	var buildable_to_destroy = find_buildable_at_position(cursor_position)
+	var buildable_to_destroy = find_buildable_at_position(player.delete_cast)
 	if buildable_to_destroy and buildable_to_destroy.is_built:
 		buildable_to_destroy.queue_free()
+		
 
-func find_buildable_at_position(pos: Vector3) -> Buildable:
+func find_buildable_at_position(caster: RayCast3D) -> Buildable:
 	# Use a shape query at the cursor position instead of distance checking
-	var space_state = get_world_3d().direct_space_state
-	var query = PhysicsPointQueryParameters3D.new()
-	query.position = pos
-	query.collision_mask = 1  # Adjust to match your collision layers
-	
-	var results = space_state.intersect_point(query)
-	for result in results:
-		var collider = result.collider
-		# Walk up the node tree to find the Buildable parent
-		var current_node = collider
+	if caster.is_colliding():
+		var current_node = caster.get_collider()
 		while current_node:
 			if current_node is Buildable and current_node.is_built:
 				return current_node
 			current_node = current_node.get_parent()
-	
 	return null
 	
 func update_destroy_ghost_preview():
@@ -284,7 +293,7 @@ func update_destroy_ghost_preview():
 		clear_destroy_preview()
 		return
 	
-	var buildable_to_destroy = find_buildable_at_position(cursor_position)
+	var buildable_to_destroy = find_buildable_at_position(player.delete_cast)
 	
 	if buildable_to_destroy and buildable_to_destroy.is_built:
 		if ghost_object != buildable_to_destroy:
