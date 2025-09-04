@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://dstl1q7emqroo"]
+
+[ext_resource type="Script" uid="uid://b1oyhywc0aqrk" path="res://Objects/Machines/Sorter/ValidDestination/valid_destination_sorter.gd" id="1_3n3ng"]
+[ext_resource type="PackedScene" uid="uid://bi2kps5vge088" path="res://Objects/Machines/Sorter/Base/base_sorter.tscn" id="2_olx4y"]
+
+[node name="ValidDestinatinSorter" type="Node3D"]
+script = ExtResource("1_3n3ng")
+output_icon = "☑️"
+expected_destination = ""
+category = "Sorters"
+building_name = "Valid-Destination Sorter"
+
+[node name="BaseSorter" parent="." instance=ExtResource("2_olx4y")]

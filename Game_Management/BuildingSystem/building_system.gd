@@ -3,6 +3,7 @@ extends Node3D
 class_name BuildingSystem
 
 @onready var building_ui = get_tree().get_first_node_in_group("BuildingUI")
+@onready var destroy_ui = get_tree().get_first_node_in_group("DestroyUI")
 @onready var player: Player = get_tree().get_first_node_in_group("Player")
 
 @export var level_generator: Node3D
@@ -44,6 +45,7 @@ func toggle_building_mode():
 	# Clear destroy preview when entering build mode
 	if building_mode_active and destroy_mode_active:
 		clear_destroy_preview()
+		destroy_ui.get_child(0).play_backwards("fade_destroy_border")
 		destroy_mode_active = false
 	
 	if not building_mode_active and ghost_object:
@@ -59,6 +61,10 @@ func toggle_building_mode():
 			building_ui.hide_ui()
 		
 func toggle_destroy_mode():
+	if destroy_mode_active:
+		destroy_ui.get_child(0).play_backwards("fade_destroy_border")
+	else:
+		destroy_ui.get_child(0).play("fade_destroy_border")
 	destroy_mode_active = !destroy_mode_active
 	
 	# Clear building ghost when entering destroy mode
@@ -275,7 +281,7 @@ func destroy_object_at_cursor():
 		
 	var buildable_to_destroy = find_buildable_at_position(player.delete_cast)
 	if buildable_to_destroy and buildable_to_destroy.is_built:
-		buildable_to_destroy.queue_free()
+		buildable_to_destroy.die()
 		
 
 func find_buildable_at_position(caster: RayCast3D) -> Buildable:

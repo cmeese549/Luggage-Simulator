@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://exdhmbr43ger"]
+[gd_scene load_steps=18 format=3 uid="uid://exdhmbr43ger"]
 
 [ext_resource type="Script" uid="uid://dic75q4o378w6" path="res://UI/UI.gd" id="1_6dd3c"]
 [ext_resource type="Theme" uid="uid://b3kq74llqlv3x" path="res://UI/Theme/MinimalUI.tres" id="1_dhe1o"]
@@ -11,6 +11,85 @@
 [ext_resource type="Script" uid="uid://cmqb4oi3mfhb4" path="res://UI/HUD/hud.gd" id="7_017wa"]
 [ext_resource type="FontFile" uid="uid://dqa66k6g8kp0j" path="res://UI/Theme/C&C Red Alert [INET].ttf" id="8_nxoi0"]
 [ext_resource type="PackedScene" uid="uid://dth0cukoj3ajb" path="res://UI/PauseMenu/InventoryItem.tscn" id="10_npmjx"]
+
+[sub_resource type="Animation" id="Animation_qhxh2"]
+resource_name = "fade_destroy_border"
+length = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.13333334),
+"transitions": PackedFloat32Array(1, 0.066985935),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Panel2:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.13333334),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_017wa"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Panel2:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_npmjx"]
+_data = {
+&"RESET": SubResource("Animation_017wa"),
+&"fade_destroy_border": SubResource("Animation_qhxh2")
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r2vy3"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 25
+border_width_top = 25
+border_width_right = 25
+border_width_bottom = 25
+border_color = Color(0.99607843, 0.46666667, 0, 1)
+border_blend = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qhxh2"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 15
+border_width_top = 15
+border_width_right = 15
+border_width_bottom = 15
+border_color = Color(1, 0.4666667, 0, 0.3647059)
+border_blend = true
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rbg2s"]
 bg_color = Color(0.18, 0.18, 0.18, 0.803922)
@@ -30,6 +109,45 @@ script = ExtResource("1_6dd3c")
 
 [node name="BuildMode" parent="." instance=ExtResource("3_r2vy3")]
 layout_mode = 1
+
+[node name="DestroyMode" type="Control" parent="." groups=["DestroyUI"]]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="DestroyMode"]
+reset_on_save = false
+libraries = {
+&"": SubResource("AnimationLibrary_npmjx")
+}
+
+[node name="Panel" type="Panel" parent="DestroyMode"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_r2vy3")
+
+[node name="Panel2" type="Panel" parent="DestroyMode"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 47.2
+offset_top = 49.37
+offset_right = 47.19995
+offset_bottom = 49.369995
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.95, 0.9)
+theme_override_styles/panel = SubResource("StyleBoxFlat_qhxh2")
 
 [node name="HUD" type="Control" parent="."]
 layout_mode = 1

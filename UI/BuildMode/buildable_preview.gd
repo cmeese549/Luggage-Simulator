@@ -10,7 +10,7 @@ class_name BuildablePreview
 
 func setup(buildable_instance: Node3D, cached_texture: Texture2D, is_selected: bool):
 	name_label.text = buildable_instance.building_name
-	price_label.text = "$" + str(buildable_instance.price)
+	price_label.text = "$" + str(roundi(buildable_instance.price))
 	icon.texture = cached_texture
 	
 	if is_selected:

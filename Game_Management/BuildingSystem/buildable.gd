@@ -2,6 +2,7 @@ extends Node3D
 class_name Buildable
 
 @export var price: float = 10
+@onready var money = get_tree().get_first_node_in_group("Money") as Money
 
 var material_index = 0 : set = set_material
 var valid_ghost_material : StandardMaterial3D
@@ -15,6 +16,10 @@ func get_save_data() -> Dictionary:
 
 func load_save_data(_data: Dictionary) -> void:
 	pass
+	
+func die():
+	money.make_money(price)
+	queue_free()
 
 func _ready():
 	create_ghost_materials()

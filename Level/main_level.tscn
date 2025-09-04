@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://bpisaxbeyscs7"]
+[gd_scene load_steps=36 format=3 uid="uid://bpisaxbeyscs7"]
 
 [ext_resource type="Script" uid="uid://bu07i0b06sujv" path="res://Game_Management/main_level.gd" id="1_romof"]
 [ext_resource type="PackedScene" uid="uid://exdhmbr43ger" path="res://UI/UI.tscn" id="2_bblu0"]
@@ -31,6 +31,7 @@
 [ext_resource type="PackedScene" uid="uid://dfwilyex83qk5" path="res://Art_Assets/Models/SkatePark/CurvedRail.tscn" id="25_mgrxx"]
 [ext_resource type="PackedScene" uid="uid://b1rpqtghxtk7v" path="res://Art_Assets/Models/SkatePark/StraightRail.tscn" id="26_s43jd"]
 [ext_resource type="PackedScene" uid="uid://saigtfv4gdv4" path="res://Art_Assets/Models/SkatePark/WiggleRail.tscn" id="27_6wem4"]
+[ext_resource type="PackedScene" uid="uid://dstl1q7emqroo" path="res://Objects/Machines/Sorter/ValidDestination/ValidDestinationSorter.tscn" id="28_mgrxx"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_bblu0"]
 
@@ -8028,7 +8029,7 @@ one_shot = true
 [node name="BuildingSystem" type="Node3D" parent="." node_paths=PackedStringArray("level_generator") groups=["BuildingSystem"]]
 script = ExtResource("15_o3roe")
 level_generator = NodePath("../Enviroment/LevelGenerator")
-buildable_objects = Array[PackedScene]([ExtResource("7_yhkds"), ExtResource("13_tcp6c"), ExtResource("18_dbttc"), ExtResource("15_yhkds"), ExtResource("16_yhkds"), ExtResource("17_swadt"), ExtResource("23_xpqtb"), ExtResource("21_2vllj"), ExtResource("21_t5u5v"), ExtResource("21_i5tqg"), ExtResource("22_t5u5v"), ExtResource("24_txu36"), ExtResource("25_mgrxx"), ExtResource("26_s43jd"), ExtResource("27_6wem4")])
+buildable_objects = Array[PackedScene]([ExtResource("7_yhkds"), ExtResource("13_tcp6c"), ExtResource("18_dbttc"), ExtResource("15_yhkds"), ExtResource("16_yhkds"), ExtResource("17_swadt"), ExtResource("23_xpqtb"), ExtResource("21_2vllj"), ExtResource("21_t5u5v"), ExtResource("21_i5tqg"), ExtResource("22_t5u5v"), ExtResource("24_txu36"), ExtResource("25_mgrxx"), ExtResource("26_s43jd"), ExtResource("27_6wem4"), ExtResource("28_mgrxx")])
 
 [node name="BoxSpawner" parent="." instance=ExtResource("20_qqyv7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.021827, 0.7202852, -3.0098095)
