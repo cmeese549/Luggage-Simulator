@@ -31,6 +31,19 @@ var current_rotation: int = 0  # 0, 1, 2, 3 for 0°, 90°, 180°, 270°
 
 var destroy_mode_active: bool = false
 
+var hotkeys : Dictionary = {
+	"0": null,
+	"1": null,
+	"2": null,
+	"3": null,
+	"4": null,
+	"5": null,
+	"6": null,
+	"7": null,
+	"8": null,
+	"9": null,
+}
+
 
 func _ready():
 	# Get values directly from level generator
@@ -38,6 +51,28 @@ func _ready():
 	grid_width = level_generator.width
 	grid_height = level_generator.height
 	generate_grid_positions()
+
+func pressed_hotkey(index: int) -> void:
+	print("Hotkey pressed: " + str(index))
+	if index < 0 or index >= hotkeys.keys().size():
+		return
+		
+	if not hotkeys[str(index)]:
+		return
+		
+	var hotkey_instance = hotkeys[str(index)].instantiate()
+	print(hotkey_instance.scene_file_path)
+	print(hotkey_instance.building_name)
+	select_buildable(hotkey_instance)
+	hotkey_instance.queue_free()
+
+func stored_hotkey(index: int) -> void:
+	if building_mode_active:
+		print("Hotkey stored: " + str(index))
+		if index < 0 or index >= hotkeys.keys().size():
+			return
+		hotkeys[str(index)] = buildable_objects[selected_object_index]
+
 
 func toggle_building_mode():
 	building_mode_active = !building_mode_active
@@ -149,11 +184,14 @@ func disable_ghost_physics(node: Node):
 	for child in node.get_children():
 		disable_ghost_physics(child)
 		
-func eyedropper_select_buildable(buildable: Buildable):
+func select_buildable(buildable: Buildable):
 	if not buildable:
 		return
+	print(buildable.name)
+	var packed_scene = PackedScene.new()
+	packed_scene.pack(buildable)
 	var target_scene_path = buildable.scene_file_path
-	
+	selected_object_index = buildable_objects.find(packed_scene)
 	# Find which category contains this buildable
 	if building_ui:
 		building_ui.select_buildable_by_scene_path(target_scene_path)
@@ -161,6 +199,7 @@ func eyedropper_select_buildable(buildable: Buildable):
 	# Enter building mode if not already active
 	if not building_mode_active:
 		toggle_building_mode()
+	
 	
 func cycle_selected_object(direction: int = 1):
 	if buildable_objects.is_empty():

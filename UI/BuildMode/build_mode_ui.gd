@@ -184,6 +184,7 @@ func select_buildable_by_scene_path(scene_path: String):
 		var category = categories[cat_index]
 		for build_index in range(category.buildables.size()):
 			if category.buildables[build_index].resource_path == scene_path:
+				print(scene_path)
 				# Switch to this category and select the item
 				current_category_index = cat_index
 				building_system.selected_object_index = build_index

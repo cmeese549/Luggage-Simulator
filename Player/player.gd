@@ -268,11 +268,53 @@ func handle_building_inputs() -> void:
 		building_system.toggle_building_mode()
 		
 func handle_destroy_inputs() -> void:
-		if Input.is_action_just_pressed("primary"):
-			building_system.destroy_object_at_cursor()
-			update_pipes()
-		elif Input.is_action_just_pressed("Pause"):
-			building_system.toggle_destroy_mode()
+	if Input.is_action_just_pressed("primary"):
+		building_system.destroy_object_at_cursor()
+		update_pipes()
+	elif Input.is_action_just_pressed("Pause"):
+		building_system.toggle_destroy_mode()
+
+func handle_hotkey_inputs() -> void:
+	if Input.is_action_just_pressed("hotkey_1") and not Input.is_key_pressed(KEY_CTRL):
+		building_system.pressed_hotkey(0)
+	elif Input.is_action_just_pressed("hotkey_2") and not Input.is_key_pressed(KEY_CTRL):
+		building_system.pressed_hotkey(1)
+	elif Input.is_action_just_pressed("hotkey_3") and not Input.is_key_pressed(KEY_CTRL):
+		building_system.pressed_hotkey(2)
+	elif Input.is_action_just_pressed("hotkey_4") and not Input.is_key_pressed(KEY_CTRL):
+		building_system.pressed_hotkey(3)
+	elif Input.is_action_just_pressed("hotkey_5") and not Input.is_key_pressed(KEY_CTRL):
+		building_system.pressed_hotkey(4)
+	elif Input.is_action_just_pressed("hotkey_6") and not Input.is_key_pressed(KEY_CTRL):
+		building_system.pressed_hotkey(5)
+	elif Input.is_action_just_pressed("hotkey_7") and not Input.is_key_pressed(KEY_CTRL):
+		building_system.pressed_hotkey(6)
+	elif Input.is_action_just_pressed("hotkey_8") and not Input.is_key_pressed(KEY_CTRL):
+		building_system.pressed_hotkey(7)
+	elif Input.is_action_just_pressed("hotkey_9") and not Input.is_key_pressed(KEY_CTRL):
+		building_system.pressed_hotkey(8)
+	elif Input.is_action_just_pressed("hotkey_10") and not Input.is_key_pressed(KEY_CTRL):
+		building_system.pressed_hotkey(9)
+	elif Input.is_action_just_pressed("set_hotkey_1"):
+		building_system.stored_hotkey(0)
+	elif Input.is_action_just_pressed("set_hotkey_2"):
+		building_system.stored_hotkey(1)
+	elif Input.is_action_just_pressed("set_hotkey_3"):
+		building_system.stored_hotkey(2)
+	elif Input.is_action_just_pressed("set_hotkey_4"):
+		building_system.stored_hotkey(3)
+	elif Input.is_action_just_pressed("set_hotkey_5"):
+		building_system.stored_hotkey(4)
+	elif Input.is_action_just_pressed("set_hotkey_6"):
+		building_system.stored_hotkey(5)
+	elif Input.is_action_just_pressed("set_hotkey_7"):
+		building_system.stored_hotkey(6)
+	elif Input.is_action_just_pressed("set_hotkey_8"):
+		building_system.stored_hotkey(7)
+	elif Input.is_action_just_pressed("set_hotkey_9"):
+		building_system.stored_hotkey(8)
+	elif Input.is_action_just_pressed("set_hotkey_10"):
+		building_system.stored_hotkey(9)
 	
 func _physics_process(delta):
 	current_footstep_cooldown -= delta
@@ -306,7 +348,7 @@ func _physics_process(delta):
 		drop_box()
 	
 	if Input.is_action_just_pressed("Eyedropper"):
-		building_system.eyedropper_select_buildable(building_system.find_buildable_at_position(eyedropper_cast))
+		building_system.select_buildable(building_system.find_buildable_at_position(eyedropper_cast))
 	
 	if Input.is_action_just_pressed("primary"):
 		if !building_system.building_mode_active:
@@ -314,6 +356,9 @@ func _physics_process(delta):
 				drop_box()
 			else:
 				try_pickup_box()
+
+	if not held_box:
+		handle_hotkey_inputs()
 
 	if building_system.building_mode_active:
 		handle_building_inputs()
