@@ -109,7 +109,7 @@ mouse_filter = 2
 theme = ExtResource("1_dhe1o")
 script = ExtResource("1_6dd3c")
 
-[node name="Hotkeys" type="Control" parent="."]
+[node name="Hotkeys" type="Control" parent="." groups=["HotkeysUI"]]
 custom_minimum_size = Vector2(0, 71.96)
 layout_mode = 1
 anchors_preset = 12

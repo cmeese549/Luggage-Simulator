@@ -4,6 +4,7 @@ class_name BuildingSystem
 
 @onready var building_ui = get_tree().get_first_node_in_group("BuildingUI")
 @onready var destroy_ui = get_tree().get_first_node_in_group("DestroyUI")
+@onready var hotkeys_ui = get_tree().get_first_node_in_group("HotkeysUI")
 @onready var player: Player = get_tree().get_first_node_in_group("Player")
 
 @export var level_generator: Node3D
@@ -48,8 +49,7 @@ func get_save_data() -> Dictionary:
 	var data = {}
 	for key in hotkeys.keys():
 		if hotkeys[key]:
-			var instance = hotkeys[key].instantiate()
-			data[key] = instance.scene_file_path
+			data[key] =  hotkeys[key].resource_path
 		else:
 			data[key] = null
 	return data
@@ -60,10 +60,8 @@ func load_save_data(data: Dictionary) -> void:
 			hotkeys[key] = load(data[key])
 		else:
 			hotkeys[key] = null
-	print(hotkeys)
 
 func _ready():
-	print(get_save_data())
 	# Get values directly from level generator
 	tile_size = level_generator.tile_size
 	grid_width = level_generator.width
@@ -78,8 +76,6 @@ func pressed_hotkey(index: int) -> void:
 		return
 		
 	var hotkey_instance = hotkeys[index].instantiate()
-	print(hotkey_instance.scene_file_path)
-	print(hotkey_instance.building_name)
 	select_buildable(hotkey_instance)
 	hotkey_instance.queue_free()
 
@@ -88,6 +84,7 @@ func stored_hotkey(index: int) -> void:
 		if index < 0 or index >= hotkeys.keys().size():
 			return
 		hotkeys[index] = buildable_objects[selected_object_index]
+		hotkeys_ui.update_hotkeys()
 
 
 func toggle_building_mode():
@@ -203,7 +200,6 @@ func disable_ghost_physics(node: Node):
 func select_buildable(buildable: Buildable):
 	if not buildable:
 		return
-	print(buildable.name)
 	var packed_scene = PackedScene.new()
 	packed_scene.pack(buildable)
 	var target_scene_path = buildable.scene_file_path

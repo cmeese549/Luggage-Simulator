@@ -9,13 +9,20 @@ class_name HotkeysUI
 func _ready():
 	Events.game_loaded.connect(update_hotkeys)
 	update_labels()
+	update_hotkeys()
 			
 func update_hotkeys() -> void:
 	for i in 10:
+		var texture_rext: TextureRect = hotkeys[i].get_child(1).get_child(0)
 		var buildable: PackedScene = building_system.hotkeys[i]
 		if buildable:
-			#TODO: get cached texture for buildable
-			pass
+			texture_rext.show()
+			var cached_texture = building_ui.buildable_textures.get(buildable.resource_path)
+			if cached_texture:
+				if texture_rext:
+					texture_rext.texture = cached_texture
+		else:
+			texture_rext.hide()
 			
 func update_labels() -> void:
 	var i = 1
