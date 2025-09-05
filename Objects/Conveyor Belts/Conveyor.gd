@@ -16,7 +16,7 @@ class_name Conveyor
 var collision_shapes : Array[CollisionShape3D]
 @onready var building_system = get_tree().get_first_node_in_group("BuildingSystem")
 
-var material: StandardMaterial3D
+var stored_materials: Dictionary = {}
 var uv_offset: float = 0.0
 
 var is_ready = false
@@ -57,6 +57,7 @@ func load_save_data(_data: Dictionary) -> void:
 	is_built = true
 
 func _ready():
+	store_original_materials(self)
 	var shapes = find_children("*", "CollisionShape3D", true, false)
 	for shape in shapes:
 		if shape.get_parent().is_in_group("Belt"):
@@ -65,6 +66,12 @@ func _ready():
 		on_object_built()
 	if not is_built:
 		apply_building_rotation()
+		
+func store_original_materials(node: Node):
+	if node is MeshInstance3D and node.material_override:
+		stored_materials[node] = node.material_override
+	for child in node.get_children():
+		store_original_materials(child)
 		
 func on_object_built():
 	is_built = true
@@ -186,3 +193,24 @@ func set_belt_reversed(is_reversed) -> void:
 		belt_direction *= -1
 		$Label3D.rotation_degrees.y = 90
 	setup_direction_and_physics()
+	
+func set_destroy_preview(show_preview: bool):
+	if not is_built:
+		return
+		
+	if show_preview:
+		if not invalid_ghost_material:
+			create_ghost_materials()
+		apply_ghost(self, invalid_ghost_material)
+	else:
+		# Restore original materials instead of just setting to null
+		restore_original_materials(self)
+
+func restore_original_materials(node: Node):
+	if node is MeshInstance3D:
+		if node in stored_materials:
+			node.material_override = stored_materials[node]
+		else:
+			node.material_override = null
+	for child in node.get_children():
+		restore_original_materials(child)
