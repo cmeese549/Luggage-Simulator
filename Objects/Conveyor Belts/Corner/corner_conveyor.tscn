@@ -1,0 +1,44 @@
+[gd_scene load_steps=5 format=3 uid="uid://h6r74mt2iyu4"]
+
+[ext_resource type="Script" uid="uid://bllkrujo0vy3m" path="res://Objects/Conveyor Belts/Conveyor.gd" id="1_5gshr"]
+[ext_resource type="Shape3D" uid="uid://ci4r7q0hoi5qb" path="res://Objects/Conveyor Belts/BeltCollider.tres" id="2_3eaih"]
+[ext_resource type="PackedScene" uid="uid://duf1brj2l4iyn" path="res://Objects/Conveyor Belts/Corner/corner_skeleton.tscn" id="2_gtre6"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6qs70"]
+size = Vector3(1.8860602, 0.96832275, 1.6546476)
+
+[node name="1x1 Conveyor" type="Node3D"]
+script = ExtResource("1_5gshr")
+is_corner = true
+corner_pull_strength = 1.2
+building_name = "Corner Conveyor"
+
+[node name="1x1" parent="." instance=ExtResource("2_gtre6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.052334785, 0, 0.14927998)
+
+[node name="Belt" type="StaticBody3D" parent="." groups=["Belt"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.09415537, 0)
+collision_layer = 257
+collision_mask = 257
+constant_linear_velocity = Vector3(0, 0, 2)
+constant_angular_velocity = Vector3(0, 0.034906585, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Belt"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.025474608, 0.00019133091)
+shape = ExtResource("2_3eaih")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 2.239428, 0.16694641)
+text = "👈"
+font_size = 347
+
+[node name="BuildingCollider" type="Area3D" parent="." groups=["BuildingCollider"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.52, 0)
+collision_layer = 2147483649
+collision_mask = 2147483649
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BuildingCollider"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0062811375, -0.020111084, 0.023114562)
+visible = false
+shape = SubResource("BoxShape3D_6qs70")
+debug_color = Color(0.8467888, 0.057471223, 0.8774108, 1)

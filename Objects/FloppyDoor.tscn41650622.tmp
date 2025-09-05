@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://6okfq7k5x1au"]
+
+[ext_resource type="Script" uid="uid://deqx01o81cejp" path="res://Objects/FloppyDoor.gd" id="1_j7rsu"]
+
+[node name="FloppyDoor" type="Node3D"]
+script = ExtResource("1_j7rsu")

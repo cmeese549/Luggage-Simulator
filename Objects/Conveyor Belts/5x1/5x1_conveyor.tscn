@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://bxke2df04lpet"]
+
+[ext_resource type="Script" uid="uid://bllkrujo0vy3m" path="res://Objects/Conveyor Belts/Conveyor.gd" id="1_2kn55"]
+[ext_resource type="PackedScene" uid="uid://bkvxqm1yil6" path="res://Objects/Conveyor Belts/5x1/5x1_sekletons.tscn" id="2_8ywyi"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2kn55"]
+size = Vector3(1.7935791, 1.5401611, 9.74707)
+
+[node name="5x1 Conveyor" type="Node3D"]
+script = ExtResource("1_2kn55")
+
+[node name="Skeletons" parent="." instance=ExtResource("2_8ywyi")]
+
+[node name="BuildingCollider" type="Area3D" parent="." groups=["BuildingCollider"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.52, 0)
+collision_layer = 2147483649
+collision_mask = 2147483649
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BuildingCollider"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.010437012, 0.27008057, -0.025878906)
+shape = SubResource("BoxShape3D_2kn55")
+debug_color = Color(0.8095152, 0.34423837, 0.5672048, 1)
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 2.239428, 0.06798601)
+text = "👈"
+font_size = 347

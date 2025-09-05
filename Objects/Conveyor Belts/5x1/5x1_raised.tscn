@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://ddx1802cmq06h"]
+
+[ext_resource type="Script" uid="uid://bllkrujo0vy3m" path="res://Objects/Conveyor Belts/Conveyor.gd" id="1_slit8"]
+[ext_resource type="PackedScene" uid="uid://bkvxqm1yil6" path="res://Objects/Conveyor Belts/5x1/5x1_sekletons.tscn" id="2_kq8vw"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_slit8"]
+size = Vector3(1.9141235, 0.92433167, 9.846909)
+
+[node name="5x1 Raised" type="Node3D"]
+script = ExtResource("1_slit8")
+category = "Sky Conveyors"
+building_name = "4x1 Sky Conveyor"
+
+[node name="Skeletons" parent="." instance=ExtResource("2_kq8vw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.665281, 0)
+
+[node name="BuildingCollider" type="Area3D" parent="." groups=["BuildingCollider"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3670714, 0)
+collision_layer = 2147483649
+collision_mask = 2147483649
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BuildingCollider"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00039672852, 4.407501, 0.007896423)
+shape = SubResource("BoxShape3D_slit8")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 2.1579108, 0.021109581)
+text = "👈"
+font_size = 347

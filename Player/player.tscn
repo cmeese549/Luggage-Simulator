@@ -68,8 +68,8 @@ radius = 0.706
 height = 2.852
 
 [node name="Player" type="CharacterBody3D" groups=["Player"]]
-collision_layer = 132097
-collision_mask = 132097
+collision_layer = 537003009
+collision_mask = 537003009
 floor_stop_on_slope = false
 floor_block_on_wall = false
 script = ExtResource("1_l8h54")

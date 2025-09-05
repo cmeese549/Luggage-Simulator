@@ -1,0 +1,153 @@
+[gd_scene load_steps=12 format=3 uid="uid://cvtsl1w5dvdxx"]
+
+[ext_resource type="Script" uid="uid://bllkrujo0vy3m" path="res://Objects/Conveyor Belts/Conveyor.gd" id="1_3rp0l"]
+[ext_resource type="PackedScene" uid="uid://b2vo5k8d5egaw" path="res://Objects/Conveyor Belts/1x1/1x1_skeleton.tscn" id="3_hiyip"]
+[ext_resource type="ArrayMesh" uid="uid://de6ifd6pjej8f" path="res://Art_Assets/Models/Voxel/Test/1x1_test-1.obj" id="3_r0a75"]
+[ext_resource type="Shape3D" uid="uid://dq5i80gon5ltw" path="res://Objects/Conveyor Belts/1x1/1x1_skeleton.tres" id="4_27b5x"]
+[ext_resource type="Shape3D" uid="uid://bx5uqv58s0hum" path="res://Objects/Conveyor Belts/1x1/ConveyorWallHitbox.tres" id="5_66rme"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_wrhv7"]
+size = Vector3(2, 5.415, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wrhv7"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_3rp0l"]
+points = PackedVector3Array(-1, -2.7075, -0.5, -1, -2.7075, 0.5, -1, 2.7075, -0.5, 1, -2.7075, -0.5, 1, -2.7075, 0.5, -1, 2.7075, 0.5, 1, 2.7075, -0.5, 1, 2.7075, 0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wrhv7"]
+size = Vector3(1, 3.2233887, 9.577925)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_r0a75"]
+size = Vector3(1, 4.51062, 2.751659)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_27b5x"]
+size = Vector3(1, 4.51062, 0.7370422)
+
+[node name="Up Conveyor" type="Node3D"]
+script = ExtResource("1_3rp0l")
+category = "Sky Conveyors"
+building_name = "Ramp Conveyor"
+
+[node name="Skeletons" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, -0.055946346, 0.6283157)
+
+[node name="1x1" parent="Skeletons" instance=ExtResource("3_hiyip")]
+transform = Transform3D(1, 0, 0, 0, 0.9291326, 0.36974674, 0, -0.36974674, 0.9291326, 0.00038957596, 0.40674168, -3.994397)
+
+[node name="1x2" parent="Skeletons" instance=ExtResource("3_hiyip")]
+transform = Transform3D(1, 0, 0, 0, 0.9291326, 0.36974674, 0, -0.36974674, 0.9291326, 0, 1.1462051, -2.1375954)
+
+[node name="1x3" parent="Skeletons" instance=ExtResource("3_hiyip")]
+transform = Transform3D(1, 0, 0, 0, 0.9291326, 0.36974674, 0, -0.36974674, 0.9291326, 0, 1.8855336, -0.27974516)
+
+[node name="1x4" parent="Skeletons" instance=ExtResource("3_hiyip")]
+transform = Transform3D(1, 0, 0, 0, 0.9291326, 0.36974674, 0, -0.36974674, 0.9291326, 0, 2.6246433, 1.5775557)
+
+[node name="1x5" parent="Skeletons" instance=ExtResource("3_hiyip")]
+transform = Transform3D(1, 0, 0, 0, 0.9291326, 0.36974674, 0, -0.36974674, 0.9291326, 0, 3.3656583, 3.4396443)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.6785077, 0, 0.83129203, 4.649488)
+mesh = SubResource("BoxMesh_wrhv7")
+skeleton = NodePath("Belt")
+surface_material_override/0 = SubResource("StandardMaterial3D_wrhv7")
+
+[node name="Belt" type="StaticBody3D" parent="MeshInstance3D2"]
+collision_layer = 131073
+collision_mask = 131073
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D2/Belt"]
+shape = SubResource("ConvexPolygonShape3D_3rp0l")
+
+[node name="BuildingCollider" type="Area3D" parent="." groups=["BuildingCollider"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.52, 0)
+collision_layer = 2147483649
+collision_mask = 2147483649
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BuildingCollider"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.350708, 0.044854164)
+shape = SubResource("BoxShape3D_wrhv7")
+debug_color = Color(0.91, 0.009099992, 0.7298202, 1)
+
+[node name="BuildingCollider2" type="Area3D" parent="." groups=["BuildingCollider"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.52, 0)
+collision_layer = 2147483649
+collision_mask = 2147483649
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BuildingCollider2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7070923, -3.3682787)
+shape = SubResource("BoxShape3D_r0a75")
+debug_color = Color(0.91, 0.009099992, 0.7298202, 1)
+
+[node name="BuildingCollider3" type="Area3D" parent="." groups=["BuildingCollider"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.52, 0)
+collision_layer = 2147483649
+collision_mask = 2147483649
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BuildingCollider3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7070923, 4.4595437)
+shape = SubResource("BoxShape3D_27b5x")
+debug_color = Color(0.91, 0.009099992, 0.7298202, 1)
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 4.827585, 0.021109581)
+text = "👈"
+font_size = 347
+
+[node name="connector" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.3515115, 0, 0.0007149484, -4.647495)
+
+[node name="Offset" type="Node3D" parent="connector"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.049, 0, -0.099)
+
+[node name="Belt" type="StaticBody3D" parent="connector/Offset" groups=["Belt"]]
+transform = Transform3D(0.49999994, 0, 0, 0, 0.49999994, 0, 0, 0, 0.49999994, 0, 0.04114455, 0)
+collision_layer = 536871168
+collision_mask = 536871168
+constant_linear_velocity = Vector3(0, 0, 2)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="connector/Offset/Belt"]
+transform = Transform3D(1, 0, 0, 0, 0.9998477, 0.017452406, 0, -0.017452406, 0.9998477, -0.08061409, 0.23949307, 0.21509755)
+shape = ExtResource("4_27b5x")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="connector/Offset" groups=["ConveyorMesh"]]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+mesh = ExtResource("3_r0a75")
+skeleton = NodePath("../Belt")
+
+[node name="Left Wall" type="StaticBody3D" parent="connector/Offset"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.87263983, 0.5, 0)
+collision_layer = 536870912
+collision_mask = 536870912
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="connector/Offset/Left Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0023040771, 0.05029297, 0.09966695)
+shape = ExtResource("5_66rme")
+
+[node name="Left Belt" type="StaticBody3D" parent="connector/Offset" groups=["Belt"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.87263983, 0.5, 0)
+collision_layer = 256
+collision_mask = 256
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="connector/Offset/Left Belt"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0023040771, 0.05029297, 0.09966695)
+shape = ExtResource("5_66rme")
+
+[node name="Right Wall" type="StaticBody3D" parent="connector/Offset"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.97636145, 0.5, 0)
+collision_layer = 536870912
+collision_mask = 536870912
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="connector/Offset/Right Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.001, 0, 0.1)
+shape = ExtResource("5_66rme")
+
+[node name="Right Belt" type="StaticBody3D" parent="connector/Offset" groups=["Belt"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.97636145, 0.5, 0)
+collision_layer = 256
+collision_mask = 256
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="connector/Offset/Right Belt"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.001, 0, 0.1)
+shape = ExtResource("5_66rme")

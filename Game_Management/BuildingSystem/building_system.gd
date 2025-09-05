@@ -237,21 +237,26 @@ func can_build_at_position(grid_pos: Vector3) -> bool:
 	
 	# Use the ghost object's collision shape to test
 	var space_state = get_world_3d().direct_space_state
-	var query = PhysicsShapeQueryParameters3D.new()
 	
 	# Get the collision shape from the ghost object
-	var collision_shape = ghost_object.find_child("BuildingCollider").get_child(0).shape
-	if not collision_shape:
-		print("NO collision shape for ")
-		print(ghost_object.name)
-		return true  # No collider means we can place it
-	
-	query.shape = collision_shape
-	query.transform = Transform3D(Basis().rotated(Vector3.UP, deg_to_rad(get_object_rotation_degrees())), grid_pos)
-	query.collision_mask = 1  # Adjust to match your collision layers
-	
-	var result = space_state.intersect_shape(query)
-	return result.is_empty()
+	var valid = true
+	var collision_shapes = ghost_object.find_children("*", "Area3D", true, false)
+	for shape in collision_shapes:
+		if shape.is_in_group("BuildingCollider"):
+			var query = PhysicsShapeQueryParameters3D.new()
+			var collision_shape = shape.get_child(0).shape
+			
+			query.shape = collision_shape
+			var offset = 0
+			if ghost_object.building_name != "Ramp Conveyor":
+				offset = ghost_object.get_child(0).position.y
+			query.transform = Transform3D(Basis().rotated(Vector3.UP, deg_to_rad(get_object_rotation_degrees())), Vector3(grid_pos.x, grid_pos.y + offset, grid_pos.z))
+			query.collision_mask = 1  # Adjust to match your collision layers
+			
+			if valid:
+				valid = space_state.intersect_shape(query).is_empty()
+
+	return valid
 
 func place_object_at_cursor():
 	if not building_mode_active or not valid_cursor_position:

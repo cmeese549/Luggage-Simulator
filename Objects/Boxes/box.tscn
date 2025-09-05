@@ -4,6 +4,7 @@
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_tcp6c"]
 friction = 0.5
+bounce = 0.15
 absorbent = true
 
 [node name="RigidBody3D" type="RigidBody3D" groups=["Box", "Interactable"]]

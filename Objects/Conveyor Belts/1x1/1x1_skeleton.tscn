@@ -1,0 +1,61 @@
+[gd_scene load_steps=4 format=3 uid="uid://b2vo5k8d5egaw"]
+
+[ext_resource type="ArrayMesh" uid="uid://de6ifd6pjej8f" path="res://Art_Assets/Models/Voxel/Test/1x1_test-1.obj" id="1_svoj8"]
+[ext_resource type="Shape3D" uid="uid://dq5i80gon5ltw" path="res://Objects/Conveyor Belts/1x1/1x1_skeleton.tres" id="2_ccxwb"]
+[ext_resource type="Shape3D" uid="uid://bx5uqv58s0hum" path="res://Objects/Conveyor Belts/1x1/ConveyorWallHitbox.tres" id="3_bbxwi"]
+
+[node name="1x1" type="Node3D"]
+
+[node name="Offset" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.049, 0, -0.099)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Offset" groups=["ConveyorMesh"]]
+transform = Transform3D(-0.5, 0, -4.371139e-08, 0, 0.5, 0, 4.371139e-08, 0, -0.5, -0.09516215, 0, 0.20449749)
+mesh = ExtResource("1_svoj8")
+skeleton = NodePath("../Belt")
+
+[node name="Belt" type="StaticBody3D" parent="Offset" groups=["Belt"]]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+collision_layer = 257
+collision_mask = 257
+constant_linear_velocity = Vector3(0, 0, 2)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Offset/Belt"]
+transform = Transform3D(1, 0, 0, 0, 0.9998477, 0.017452406, 0, -0.017452406, 0.9998477, -0.08061409, 0.23949307, 0.21509755)
+shape = ExtResource("2_ccxwb")
+
+[node name="Left Wall" type="StaticBody3D" parent="Offset"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.87263983, 0.5, 0)
+collision_layer = 536870912
+collision_mask = 536870912
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Offset/Left Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0023040771, 0.05029297, 0.09966695)
+shape = ExtResource("3_bbxwi")
+
+[node name="Left Belt" type="StaticBody3D" parent="Offset" groups=["Belt"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.87263983, 0.5, 0)
+collision_layer = 256
+collision_mask = 256
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Offset/Left Belt"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0023040771, 0.05029297, 0.09966695)
+shape = ExtResource("3_bbxwi")
+
+[node name="Right Wall" type="StaticBody3D" parent="Offset"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.97636145, 0.5, 0)
+collision_layer = 536870912
+collision_mask = 536870912
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Offset/Right Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.001, 0, 0.1)
+shape = ExtResource("3_bbxwi")
+
+[node name="Right Belt" type="StaticBody3D" parent="Offset" groups=["Belt"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.97636145, 0.5, 0)
+collision_layer = 256
+collision_mask = 256
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Offset/Right Belt"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.001, 0, 0.1)
+shape = ExtResource("3_bbxwi")

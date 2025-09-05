@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://bkvxqm1yil6"]
+
+[ext_resource type="PackedScene" uid="uid://b2vo5k8d5egaw" path="res://Objects/Conveyor Belts/1x1/1x1_skeleton.tscn" id="1_qpvr7"]
+
+[node name="Skeletons" type="Node3D"]
+
+[node name="1x3" parent="." instance=ExtResource("1_qpvr7")]
+
+[node name="1x6" parent="." instance=ExtResource("1_qpvr7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+
+[node name="1x7" parent="." instance=ExtResource("1_qpvr7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+
+[node name="1x4" parent="." instance=ExtResource("1_qpvr7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+
+[node name="1x5" parent="." instance=ExtResource("1_qpvr7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)

@@ -7,8 +7,8 @@ class_name BoxSpawner
 @export var box_scene: PackedScene  # your Box.tscn
 
 # Randomization ranges
-@export var min_box_size: Vector3 = Vector3(0.5, 0.5, 0.5)
-@export var max_box_size: Vector3 = Vector3(1, 1, 1)
+@export var min_box_size: Vector3 = Vector3(0.4, 0.4, 0.4)
+@export var max_box_size: Vector3 = Vector3(0.8, 0.8, 0.8)
 @export var colors: Array[Color] = [Color.PALE_VIOLET_RED, Color.DODGER_BLUE, Color.FOREST_GREEN, Color.SANDY_BROWN]
 @export var destinations: Array[String] = ["DEN", "LAX", "JFK", "ORD"]
 var active_destinations: Array[String] =  ["DEN", "LAX", "JFK"]

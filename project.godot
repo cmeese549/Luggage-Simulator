@@ -55,6 +55,9 @@ Box=""
 Belt=""
 Prebuilt=""
 Spacer=""
+Booster=""
+BuildingCollider=""
+ConveyorMesh=""
 
 [gui]
 
