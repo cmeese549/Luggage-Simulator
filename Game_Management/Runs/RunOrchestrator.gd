@@ -31,11 +31,9 @@ func start_new_run(seed: int = -1) -> void:
 	start_day(1)
 
 func setup_box_holes() -> void:
-	print("Setting up ", current_run_config.box_holes.size(), " box holes")
 	
 	for i in range(current_run_config.box_holes.size()):
 		var hole_config = current_run_config.box_holes[i]
-		print("Creating hole ", i, ": ", hole_config.destination, " at ", hole_config.position)
 		
 		var hole_instance = box_hole_scene.instantiate()
 		hole_instance.destination = hole_config.destination
@@ -47,7 +45,6 @@ func setup_box_holes() -> void:
 		hole_instance.scale = Vector3(6, 6, 6)
 		# Update label based on active state
 		if not hole_config.active:
-			print("inactive mode")
 			hole_instance.get_node("Label3D").text = "Inactive"
 
 func start_day(day_number: int) -> void:
@@ -73,7 +70,6 @@ func start_day(day_number: int) -> void:
 	
 	day_started.emit(day_number)
 	print("Day ", day_number, " started - Target: ", day_config.quota_target, " boxes")
-	print_active_holes_status()
 
 func activate_holes_for_day(day: int) -> void:
 	var newly_activated = 0
@@ -90,24 +86,12 @@ func activate_holes_for_day(day: int) -> void:
 			if i < scene_holes.size():
 				var scene_hole = scene_holes[i]
 				# Restore the proper label (re-run the label setup logic)
-				print("Before _ready() - Scene hole: dest=", scene_hole.destination, " intl=", scene_hole.international, " disposal=", scene_hole.is_disposal)
 				scene_hole._ready()
-				print("After _ready() - Scene hole: dest=", scene_hole.destination, " intl=", scene_hole.international, " disposal=", scene_hole.is_disposal)
-				
-			print("Activated hole: ", hole_config.destination if not hole_config.is_disposal else "DISPOSAL", 
-				  " (", "International" if hole_config.international else "Domestic", ")")
 	
 	if newly_activated > 0:
 		print("Activated ", newly_activated, " new holes for day ", day)
 
-func print_active_holes_status() -> void:
-	var active_holes = current_run_config.box_holes.filter(func(hole): return hole.active)
-	print("Active holes (", active_holes.size(), "/", current_run_config.box_holes.size(), "):")
-	for hole in active_holes:
-		if hole.is_disposal:
-			print("  - DISPOSAL (", "International" if hole.international else "Domestic", ")")
-		else:
-			print("  - ", hole.destination, " (", "International" if hole.international else "Domestic", ")")
+
 
 func get_current_day_config() -> DayConfig:
 	if current_day <= 0 or current_day > current_run_config.daily_spawning.size():
@@ -122,8 +106,11 @@ func _process(delta: float) -> void:
 	if not day_config:
 		return
 	
+	var box_spawners = get_tree().get_nodes_in_group("BoxSpawner")
+	var any_spawner_active = box_spawners.any(func(spawner): return spawner.active)
+	
 	# Handle box spawning
-	if boxes_spawned_today < day_config.quota_target:
+	if boxes_spawned_today < day_config.quota_target and any_spawner_active:
 		spawn_timer += delta
 		if spawn_timer >= current_spawn_interval:
 			spawn_box(day_config)
@@ -142,17 +129,12 @@ func spawn_box(day_config: DayConfig) -> void:
 	
 	# Pick random spawner
 	var spawner = box_spawners[randi() % box_spawners.size()]
+	if  spawner.is_spawn_blocked():
+		return
 	
 	# Apply box type probabilities from day config
 	var box_properties = generate_box_properties(day_config)
-	
-	# Tell spawner to spawn a box with these properties
-	if spawner.has_method("spawn_box_with_properties"):
-		spawner.spawn_box_with_properties(box_properties)
-	else:
-		# Fallback to default spawning
-		if spawner.has_method("spawn_box"):
-			spawner.spawn_box()
+	spawner.spawn_box_with_properties(box_properties)
 	
 	boxes_spawned_today += 1
 

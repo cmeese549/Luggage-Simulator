@@ -23,7 +23,6 @@ func collect_preset_positions() -> void:
 	for hole in existing_holes:
 		preset_hole_positions.append(hole.global_position)
 		hole.queue_free()
-	print("Collected ", preset_hole_positions.size(), " preset positions")
 
 func get_preset_hole_position(index: int) -> Vector3:
 	if index < preset_hole_positions.size():

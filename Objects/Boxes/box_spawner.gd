@@ -2,7 +2,6 @@ extends Node3D
 
 class_name BoxSpawner
 
-@export var total_boxes: int = 500
 @export var spawn_rate: float = 1  # boxes per second
 @export var box_scene: PackedScene  # your Box.tscn
 
@@ -22,7 +21,6 @@ var active: bool = false
 
 func get_save_data() -> Dictionary:
 	var data: Dictionary = {}
-	data.total_boxes = total_boxes
 	data.spawn_rate = spawn_rate
 	data.destinations = destinations
 	data.active_destinations = active_destinations
@@ -34,7 +32,6 @@ func get_save_data() -> Dictionary:
 	return data
 
 func load_save_data(data: Dictionary) -> void:
-	total_boxes = data.total_boxes
 	spawn_rate = data.spawn_rate
 	destinations = data.destinations
 	active_destinations = data.active_destinations
@@ -49,19 +46,18 @@ func load_save_data(data: Dictionary) -> void:
 		$Label3D.text = "Click to start box spawning"
 
 func interact():
+	toggle_active()
+	
+func toggle_active():
 	active = !active
 	if active:
 		$Label3D.text = "Click to pause box spawning"
 	else:
 		$Label3D.text = "Click to start box spawning"
-
+		
 func _process(delta: float) -> void:
-	if boxes_spawned >= total_boxes or !active:
-		if active:
-			active = false
-			print("All boxes spawned!")
+	if not active or not run_orchestrator.is_day_active:
 		return
-
 	spawn_timer += delta
 	if spawn_timer >= 1.0 / spawn_rate:
 		spawn_timer = 0.0
