@@ -55,33 +55,55 @@ func generate_run_config(seed: int = -1) -> RunConfig:
 
 func generate_box_holes(rng: RandomNumberGenerator) -> Array[BoxHoleConfig]:
 	var holes: Array[BoxHoleConfig] = []
-	var hole_count = rng.randi_range(min_box_holes, max_box_holes)
 	
-	# Always add disposal hole first
-	for i in disposal_holes_count:
-		var disposal_hole = BoxHoleConfig.new()
-		disposal_hole.is_disposal = true
-		disposal_hole.international = rng.randf() < 0.5  # Can handle either
-		disposal_hole.position = get_preset_hole_position(holes.size())
-		holes.append(disposal_hole)
+	# Always add both disposal holes first (active from day 1)
+	var disposal_domestic = BoxHoleConfig.new()
+	disposal_domestic.is_disposal = true
+	disposal_domestic.international = false
+	disposal_domestic.destination = ""  # Empty destination for disposal holes
+	disposal_domestic.active = true
+	disposal_domestic.activation_day = 1
+	disposal_domestic.position = get_preset_hole_position(holes.size())
+	holes.append(disposal_domestic)
 	
-	# Add regular destination holes
-	var used_destinations: Array[String] = []
-	for i in range(disposal_holes_count, hole_count):
+	var disposal_international = BoxHoleConfig.new()
+	disposal_international.is_disposal = true
+	disposal_international.international = true
+	disposal_international.destination = ""  # Empty destination for disposal holes
+	disposal_international.active = true
+	disposal_international.activation_day = 1
+	disposal_international.position = get_preset_hole_position(holes.size())
+	holes.append(disposal_international)
+	
+	# Generate 6 regular holes (8 total - 2 disposal = 6 regular)
+	var used_combinations: Array[String] = []
+	var activation_schedule = [1, 1, 1, 2, 4, 6]  # Days when each regular hole activates
+	
+	for i in range(6):
 		var hole = BoxHoleConfig.new()
 		
-		# Pick unique destination
-		var available_destinations = possible_destinations.filter(func(dest): return dest not in used_destinations)
-		if available_destinations.is_empty():
-			used_destinations.clear()  # Reset if we run out
-			available_destinations = possible_destinations
+		# Try to find unique destination+international combination
+		var attempts = 0
+		var combination_key = ""
 		
-		hole.destination = available_destinations[rng.randi() % available_destinations.size()]
-		used_destinations.append(hole.destination)
+		while attempts < 50:  # Prevent infinite loops
+			# Pick destination
+			hole.destination = possible_destinations[rng.randi() % possible_destinations.size()]
+			hole.international = rng.randf() < international_chance
+			
+			combination_key = hole.destination + ("_intl" if hole.international else "_dom")
+			
+			if combination_key not in used_combinations:
+				break
+			attempts += 1
 		
-		hole.international = rng.randf() < international_chance
+		used_combinations.append(combination_key)
 		hole.position = get_preset_hole_position(holes.size())
 		hole.value_multiplier = rng.randf_range(0.8, 1.2)
+		
+		# Set activation day and initial active state
+		hole.activation_day = activation_schedule[i]
+		hole.active = (hole.activation_day == 1)
 		
 		holes.append(hole)
 	
@@ -90,12 +112,12 @@ func generate_box_holes(rng: RandomNumberGenerator) -> Array[BoxHoleConfig]:
 func generate_daily_configs(rng: RandomNumberGenerator) -> Array[DayConfig]:
 	var days: Array[DayConfig] = []
 	
-	for day in range(1, 11):  # Days 1-10
+	for day in range(1, 8):  # Days 1-7 instead of 1-10
 		var day_config = DayConfig.new()
 		day_config.day_number = day
 		
 		# Progressive difficulty scaling
-		var progress = float(day - 1) / 9.0  # 0.0 to 1.0
+		var progress = float(day - 1) / 6.0  # 0.0 to 1.0 over 6 days instead of 9
 		
 		# Exponential growth for boxes and spawn rate
 		day_config.total_boxes = int(lerp(starting_boxes, ending_boxes, pow(progress, 1.5)))

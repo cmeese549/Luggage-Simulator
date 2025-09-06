@@ -33,7 +33,7 @@ mesh = SubResource("CylinderMesh_n3nnx")
 surface_material_override/0 = SubResource("StandardMaterial3D_6bv5a")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
-transform = Transform3D(1.01, 0, 0, 0, 0.51, 0, 0, 0, 1.01, 0, 0.10551034, 0)
+transform = Transform3D(1, 0, 0, 0, 0.51, 0, 0, 0, 1, 0, 0.10551034, 0)
 mesh = SubResource("CylinderMesh_ptrfe")
 surface_material_override/0 = SubResource("StandardMaterial3D_6bv5a")
 
@@ -43,6 +43,8 @@ shape = SubResource("ConcavePolygonShape3D_ptrfe")
 
 [node name="DepositZone" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+collision_layer = 2147483649
+collision_mask = 2147483649
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DepositZone"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.9170685, 0)

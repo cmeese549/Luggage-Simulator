@@ -39,12 +39,40 @@ func _on_deposit_zone_body_entered(body):
 		body.queue_free()
 
 func check_box_legit(box: Box) -> bool:
+	#print("=== BOX VALIDATION DEBUG ===")
+	#print("Box: dest=", box.destination, " intl=", box.international, " disposable=", box.disposeable, " valid_dest=", box.has_valid_destination, " approval=", box.approval_state)
+	#print("Hole: dest=", destination, " intl=", international, " is_disposal=", is_disposal)
+	
 	if box.approval_state == Box.ApprovalState.NONE:
+		#print("REJECTED: Box has no approval state")
 		return false
+	
 	if is_disposal and box.international == international:
+		#print("Checking disposal hole logic...")
 		if box.disposeable or not box.has_valid_destination:
-			return box.approval_state == Box.ApprovalState.REJECTED
+			if box.approval_state == Box.ApprovalState.REJECTED:
+				#print("ACCEPTED: Disposal hole - rejected box with disposable/invalid dest")
+				return true
+			else:
+				#print("REJECTED: Disposal hole - box should be rejected but was approved")
+				return false
+		else:
+			#print("REJECTED: Disposal hole - box is not disposable and has valid destination")
+			return false
 	elif box.destination == destination and box.international == international:
+		#print("Checking regular hole logic...")
 		if not box.disposeable:
-			return box.approval_state == Box.ApprovalState.APPROVED
-	return false
+			if box.approval_state == Box.ApprovalState.APPROVED:
+				#print("ACCEPTED: Regular hole - approved non-disposable box")
+				return true
+			else:
+				#print("REJECTED: Regular hole - non-disposable box should be approved but was rejected")
+				return false
+		else:
+			#print("REJECTED: Regular hole - disposable box should go to disposal")
+			return false
+	else:
+		#print("REJECTED: Box doesn't match this hole's criteria")
+		#print("  - Destination match: ", box.destination == destination)
+		#print("  - International match: ", box.international == international)
+		return false

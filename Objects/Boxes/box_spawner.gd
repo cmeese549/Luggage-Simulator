@@ -14,6 +14,7 @@ class_name BoxSpawner
 var active_destinations: Array[String] =  ["DEN", "LAX", "JFK"]
 
 @onready var spawn_area : Area3D = $Area3D
+@onready var run_orchestrator = get_tree().get_first_node_in_group("RunOrchestrator")
 
 var boxes_spawned: int = 0
 var spawn_timer: float = 0.0
@@ -102,8 +103,15 @@ func spawn_box_with_properties(properties: Dictionary) -> void:
 		box.disposeable = false
 	
 	# Set validity based on active destinations
-	box.has_valid_destination = active_destinations.has(box.destination)
-
+	if run_orchestrator and run_orchestrator.current_run_config:
+		var matching_holes = run_orchestrator.current_run_config.box_holes.filter(func(hole):
+			return hole.destination == box.destination and hole.international == box.international and not hole.is_disposal
+			)
+		box.has_valid_destination = not matching_holes.is_empty()
+	else:
+		box.has_valid_destination = false
+	
+	box.just_loaded = true
 	get_tree().root.get_node("MainLevel").add_child(box)
 	box.global_position = $Marker3D.global_position
 	boxes_spawned += 1

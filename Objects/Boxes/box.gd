@@ -106,7 +106,19 @@ func _ready():
 	create_destination_label()
 	create_approval_icons()
 	
-	if not just_loaded:
+	if just_loaded:
+		# Create stickers for explicitly set properties only
+		if international:
+			var intl_icon = {"icon": "🌐", "text": "International"}
+			active_qualification_icons.append(intl_icon)
+			create_icon_label(intl_icon)
+		if disposeable:
+			var disp_icon = {"icon": "⚠", "text": "Disposeable"}
+			active_qualification_icons.append(disp_icon)
+			create_icon_label(disp_icon)
+		update_approval_icons()
+	else:
+		# Original random generation logic
 		for icon in all_qualification_icons:
 			if randf() < icon.chance:
 				active_qualification_icons.append(icon)
@@ -115,9 +127,6 @@ func _ready():
 				elif icon.text == "International":
 					international = true
 				create_icon_label(icon)
-	else:
-		for icon in active_qualification_icons:
-			create_icon_label(icon)
 		update_approval_icons()
 
 func create_box_visual():
@@ -172,7 +181,6 @@ func create_box_collision():
 	add_child(collision_shape)
 	
 func set_approval_state(state: ApprovalState):
-	print("Setting approval ", state)
 	approval_state = state
 	update_approval_icons()
 	
