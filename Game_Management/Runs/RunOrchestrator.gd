@@ -110,7 +110,7 @@ func _process(delta: float) -> void:
 	var any_spawner_active = box_spawners.any(func(spawner): return spawner.active)
 	
 	# Handle box spawning
-	if boxes_spawned_today < day_config.quota_target and any_spawner_active:
+	if boxes_spawned_today < day_config.total_boxes  and any_spawner_active:
 		spawn_timer += delta
 		if spawn_timer >= current_spawn_interval:
 			spawn_box(day_config)
@@ -121,6 +121,8 @@ func _process(delta: float) -> void:
 		complete_day()
 
 func spawn_box(day_config: DayConfig) -> void:
+	if boxes_spawned_today >= day_config.total_boxes:
+		return
 	# This would integrate with your existing box spawning system
 	var box_spawners = get_tree().get_nodes_in_group("BoxSpawner")
 	if box_spawners.is_empty():

@@ -15,6 +15,8 @@ class_name RunGenerator
 @export var starting_spawn_rate: float = 0.5
 @export var ending_spawn_rate: float = 3.0
 
+
+
 var preset_hole_positions: Array[Vector3] = []
 
 func collect_preset_positions() -> void:
@@ -24,12 +26,12 @@ func collect_preset_positions() -> void:
 		preset_hole_positions.append(hole.global_position)
 		hole.queue_free()
 
-func get_preset_hole_position(index: int) -> Vector3:
+func get_preset_hole_position(rng: RandomNumberGenerator, index: int) -> Vector3:
 	if index < preset_hole_positions.size():
 		return preset_hole_positions[index]
 	else:
 		# Fallback to grid if we need more positions than presets
-		return get_random_hole_position(RandomNumberGenerator.new(), index)
+		return get_random_hole_position(rng, index)
 
 func generate_run_config(seed: int = -1) -> RunConfig:
 	var config = RunConfig.new()
@@ -54,6 +56,7 @@ func generate_run_config(seed: int = -1) -> RunConfig:
 
 func generate_box_holes(rng: RandomNumberGenerator) -> Array[BoxHoleConfig]:
 	var holes: Array[BoxHoleConfig] = []
+	var used_positions: Array[int] = []
 	
 	# Always add both disposal holes first (active from day 1)
 	var disposal_domestic = BoxHoleConfig.new()
@@ -62,7 +65,11 @@ func generate_box_holes(rng: RandomNumberGenerator) -> Array[BoxHoleConfig]:
 	disposal_domestic.destination = ""  # Empty destination for disposal holes
 	disposal_domestic.active = true
 	disposal_domestic.activation_day = 1
-	disposal_domestic.position = get_preset_hole_position(holes.size())
+	
+	# Randomly select position for domestic disposal
+	var domestic_pos_index = rng.randi() % preset_hole_positions.size()
+	disposal_domestic.position = preset_hole_positions[domestic_pos_index]
+	used_positions.append(domestic_pos_index)
 	holes.append(disposal_domestic)
 	
 	var disposal_international = BoxHoleConfig.new()
@@ -71,12 +78,18 @@ func generate_box_holes(rng: RandomNumberGenerator) -> Array[BoxHoleConfig]:
 	disposal_international.destination = ""  # Empty destination for disposal holes
 	disposal_international.active = true
 	disposal_international.activation_day = 1
-	disposal_international.position = get_preset_hole_position(holes.size())
+	
+	# Randomly select different position for international disposal
+	var intl_pos_index = domestic_pos_index
+	while intl_pos_index == domestic_pos_index:
+		intl_pos_index = rng.randi() % preset_hole_positions.size()
+	disposal_international.position = preset_hole_positions[intl_pos_index]
+	used_positions.append(intl_pos_index)
 	holes.append(disposal_international)
 	
 	# Generate 6 regular holes (8 total - 2 disposal = 6 regular)
 	var used_combinations: Array[String] = []
-	var activation_schedule = [1, 1, 1, 2, 4, 6]  # Days when each regular hole activates
+	var activation_schedule = [1, 1, 1, 8, 16, 24]  # Days when each regular hole activates
 	
 	for i in range(6):
 		var hole = BoxHoleConfig.new()
@@ -97,7 +110,21 @@ func generate_box_holes(rng: RandomNumberGenerator) -> Array[BoxHoleConfig]:
 			attempts += 1
 		
 		used_combinations.append(combination_key)
-		hole.position = get_preset_hole_position(holes.size())
+		
+		# Select random unused position
+		var available_positions = []
+		for j in range(preset_hole_positions.size()):
+			if j not in used_positions:
+				available_positions.append(j)
+		
+		if available_positions.size() > 0:
+			var selected_index = available_positions[rng.randi() % available_positions.size()]
+			hole.position = preset_hole_positions[selected_index]
+			used_positions.append(selected_index)
+		else:
+			# Fallback to grid if we run out of preset positions
+			hole.position = get_random_hole_position(rng, holes.size())
+		
 		hole.value_multiplier = rng.randf_range(0.8, 1.2)
 		
 		# Set activation day and initial active state
@@ -115,18 +142,15 @@ func generate_daily_configs(rng: RandomNumberGenerator) -> Array[DayConfig]:
 		var day_config = DayConfig.new()
 		day_config.day_number = day
 		
-		# Progressive difficulty scaling
-		var progress = float(day - 1) / 6.0  # 0.0 to 1.0 over 6 days instead of 9
-		
-		# Exponential growth for boxes and spawn rate
-		day_config.total_boxes = int(lerp(starting_boxes, ending_boxes, pow(progress, 1.5)))
-		day_config.boxes_per_second = lerp(starting_spawn_rate, ending_spawn_rate, pow(progress, 1.2))
-		day_config.quota_target = int(day_config.total_boxes * 0.85)  # 85% success rate required
+		# Use economy config for progression
+		var eco_data = Economy.config.get_day_config(day)
+		day_config.total_boxes = eco_data.total_boxes
+		day_config.boxes_per_second = eco_data.boxes_per_second
+		day_config.quota_target = eco_data.total_boxes  # Must hit exact number
 		
 		# Add box type probabilities
+		var progress = Economy.config.calculate_day_progression(day)
 		day_config.box_types = generate_box_type_probabilities(rng, progress)
-		
-		# Add special modifiers for later days
 		day_config.special_modifiers = generate_special_modifiers(rng, day)
 		
 		days.append(day_config)

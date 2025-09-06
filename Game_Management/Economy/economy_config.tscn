@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dps87o4w0r5im"]
+
+[ext_resource type="Script" uid="uid://cfk8l5ywbdmh8" path="res://Game_Management/Economy/economy.gd" id="1_l6c5t"]
+
+[node name="EconomyConfig" type="Node"]
+script = ExtResource("1_l6c5t")

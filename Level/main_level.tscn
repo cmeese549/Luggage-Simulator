@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://bpisaxbeyscs7"]
+[gd_scene load_steps=42 format=3 uid="uid://bpisaxbeyscs7"]
 
 [ext_resource type="Script" uid="uid://bu07i0b06sujv" path="res://Game_Management/main_level.gd" id="1_romof"]
 [ext_resource type="PackedScene" uid="uid://exdhmbr43ger" path="res://UI/UI.tscn" id="2_bblu0"]
@@ -33,7 +33,9 @@
 [ext_resource type="PackedScene" uid="uid://dstl1q7emqroo" path="res://Objects/Machines/Sorter/ValidDestination/ValidDestinationSorter.tscn" id="28_mgrxx"]
 [ext_resource type="PackedScene" uid="uid://d300ama6b8ua7" path="res://Objects/Conveyor Belts/Corner/raised_corner_conveyor.tscn" id="29_6wem4"]
 [ext_resource type="Script" uid="uid://kcbtemwpdm7r" path="res://Game_Management/Runs/RunOrchestrator.gd" id="33_s43jd"]
+[ext_resource type="PackedScene" uid="uid://dps87o4w0r5im" path="res://Game_Management/Economy/economy_config.tscn" id="35_eqlt2"]
 [ext_resource type="Script" uid="uid://dxnt8ieb7667d" path="res://Game_Management/Runs/RunGenerator.gd" id="35_w50gc"]
+[ext_resource type="Script" uid="uid://cfk8l5ywbdmh8" path="res://Game_Management/Economy/economy.gd" id="36_52kmw"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_bblu0"]
 
@@ -8273,7 +8275,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.021827, 0.7202852, -3.0098
 [node name="Money" type="Node" parent="." groups=["Money"]]
 unique_name_in_owner = true
 script = ExtResource("21_s4lgs")
-starting_money = 50000
 
 [node name="MoneySound" type="AudioStreamPlayer" parent="Money"]
 stream = ExtResource("22_qqyv7")
@@ -8297,3 +8298,7 @@ box_hole_scene = ExtResource("19_giak0")
 
 [node name="RunGenerator" type="Node3D" parent="RunOrchestrator"]
 script = ExtResource("35_w50gc")
+
+[node name="EconomyConfig" parent="." instance=ExtResource("35_eqlt2")]
+script = ExtResource("36_52kmw")
+config = null

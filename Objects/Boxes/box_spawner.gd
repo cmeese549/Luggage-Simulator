@@ -66,7 +66,7 @@ func _process(delta: float) -> void:
 			spawn_random_box()
 
 func is_spawn_blocked() -> bool:
-	return false if spawn_area.get_overlapping_bodies().size() == 0 else true
+	return false if spawn_area.get_overlapping_bodies().size() < 4 else true
 	
 func spawn_random_box() -> void:
 	spawn_box_with_properties({})
@@ -101,7 +101,7 @@ func spawn_box_with_properties(properties: Dictionary) -> void:
 	# Set validity based on active destinations
 	if run_orchestrator and run_orchestrator.current_run_config:
 		var matching_holes = run_orchestrator.current_run_config.box_holes.filter(func(hole):
-			return hole.destination == box.destination and hole.international == box.international and not hole.is_disposal
+			return hole.active and hole.destination == box.destination and hole.international == box.international and not hole.is_disposal
 			)
 		box.has_valid_destination = not matching_holes.is_empty()
 	else:

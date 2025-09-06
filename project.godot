@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 
 Events="*res://Game_Management/Events.gd"
 SaveManager="*res://Game_Management/SaveManager.gd"
+Economy="*res://Game_Management/Economy/economy_config.tscn"
 
 [display]
 

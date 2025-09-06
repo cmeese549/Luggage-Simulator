@@ -2,7 +2,6 @@ extends StaticBody3D
 
 class_name BoxHole
 
-@export var economy_config: EconomyConfig = preload("res://Game_Management/Economy/configs/basic_config.tres")
 @export var destination: String = "DEN"
 @export var international: bool = false
 @export var is_disposal: bool = false
@@ -27,15 +26,15 @@ func _on_deposit_zone_body_entered(body):
 			acceptance_sound.pitch_scale = randf_range(0.75, 1.1)
 			acceptance_sound.play()
 			var total_stickers: int = body.active_qualification_icons.size()
-			var value = economy_config.base_box_value
+			var value = Economy.config.base_box_value
 			if total_stickers > 0:
-				value *= pow(economy_config.sticker_multiplier, total_stickers)
+				value *= pow(Economy.config.sticker_multiplier, total_stickers)
 			money.make_money(value)
 			Events.box_deposited.emit(value, body.destination, true)
 		else:
 			rejection_sound.play()
-			Events.box_deposited.emit(economy_config.base_box_value * economy_config.penalty_multiplier, body.destination, false)
-			money.make_money(economy_config.base_box_value * economy_config.penalty_multiplier)
+			Events.box_deposited.emit(Economy.config.base_box_value * Economy.config.penalty_multiplier, body.destination, false)
+			money.make_money(Economy.config.base_box_value * Economy.config.penalty_multiplier)
 		# Notify LevelManager about box processing
 		
 		if run_orchestrator and run_orchestrator.has_method("on_box_processed"):

@@ -48,7 +48,6 @@ class_name EconomyConfig
 @export var ending_boxes: int = 600
 @export var starting_spawn_rate: float = 0.3
 @export var ending_spawn_rate: float = 5.0
-@export var base_quota_percentage: float = 0.80  # 80% success required
 
 # Progression curve type
 @export_enum("Linear", "Exponential", "Sigmoid", "Custom") var progression_type: String = "Sigmoid"
@@ -107,7 +106,6 @@ func get_day_config(day: int) -> Dictionary:
 		"expected_income": 0  # Will be calculated
 	}
 	
-	config.quota_target = int(config.total_boxes * base_quota_percentage)
 	config.expected_income = config.quota_target * base_box_value
 	
 	return config
