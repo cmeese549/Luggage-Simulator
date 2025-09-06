@@ -58,6 +58,7 @@ Spacer=""
 Booster=""
 BuildingCollider=""
 ConveyorMesh=""
+BoxHole=""
 
 [gui]
 

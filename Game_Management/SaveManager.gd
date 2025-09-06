@@ -11,6 +11,7 @@ func save_game() -> bool:
 	save_data.money = collect_money_data()
 	save_data.box_spawners = collect_box_spawners()
 	save_data.hotkeys = collect_hotkeys()
+	save_data.run_orchestrator_data = collect_run_data()
 	# Save player data
 	var player = get_tree().get_first_node_in_group("Player")
 	if player:
@@ -37,9 +38,13 @@ func load_game() -> bool:
 	restore_hotkeys(save_data.hotkeys)
 	restore_spawners(save_data.box_spawners)
 	restore_player_data(save_data)
+	restore_run_data(save_data.run_orchestrator_data)
 	
 	Events.game_loaded.emit()
 	return true
+	
+func collect_run_data() -> Dictionary:
+	return get_tree().get_first_node_in_group("RunOrchestrator").get_save_data()
 	
 func collect_hotkeys() -> Dictionary:
 	return get_tree().get_first_node_in_group("BuildingSystem").get_save_data()
@@ -117,6 +122,9 @@ func clear_existing_boxes():
 	var boxes = get_tree().get_nodes_in_group("Box")
 	for box in boxes:
 		box.queue_free()
+	
+func restore_run_data(data: Dictionary) -> void:
+	get_tree().get_first_node_in_group("RunOrchestrator").load_save_data(data)
 		
 func restore_money(data: Dictionary) -> void:
 	get_tree().get_first_node_in_group("Money").load_save_data(data)

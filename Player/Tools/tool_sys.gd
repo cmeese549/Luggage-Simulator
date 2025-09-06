@@ -83,6 +83,6 @@ func check_for_interactable():
 	if look_at_cast.is_colliding():
 		var col = look_at_cast.get_collider()
 		#print("Looking at "+col.name)
-		if "Interactable" in col.get_groups():
+		if col and "Interactable" in col.get_groups():
 			return col.get_parent()
 	

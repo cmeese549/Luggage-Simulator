@@ -1,11 +1,11 @@
-extends Node
+extends Node3D
 class_name RunOrchestrator
 
 signal day_started(day_number: int)
 signal day_completed(day_number: int, success: bool)
 signal run_completed(success: bool)
 
-@onready var level_generator: LevelGenerator = $LevelGenerator
+@onready var run_generator: RunGenerator = $RunGenerator
 @export var box_hole_scene: PackedScene  # Assign your BoxHole scene in inspector
 
 var current_run_config: RunConfig
@@ -19,31 +19,46 @@ var boxes_spawned_today: int = 0
 var spawn_timer: float = 0.0
 var current_spawn_interval: float = 1.0
 
+func _ready():
+	await get_tree().process_frame
+	start_new_run()
+
 func start_new_run(seed: int = -1) -> void:
-	current_run_config = level_generator.generate_run_config(seed)
+	run_generator.collect_preset_positions()
+	current_run_config = run_generator.generate_run_config(seed)
 	current_day = 1
 	setup_box_holes()
 	start_day(1)
 
 func setup_box_holes() -> void:
-	# Clear existing box holes
-	var existing_holes = get_tree().get_nodes_in_group("BoxHole")
-	for hole in existing_holes:
-		hole.queue_free()
+	print("Setting up ", current_run_config.box_holes.size(), " box holes")
 	
-	# Spawn new box holes based on configuration
-	for hole_config in current_run_config.box_holes:
-		if not box_hole_scene:
-			print("Error: BoxHole scene not assigned to RunOrchestrator")
-			continue
-			
+	# Debug: Check the scene path
+	print("BoxHole scene path: ", box_hole_scene.resource_path if box_hole_scene else "NULL")
+	
+	for i in range(current_run_config.box_holes.size()):
+		var hole_config = current_run_config.box_holes[i]
+		print("Creating hole ", i, ": ", hole_config.destination, " at ", hole_config.position)
+		
 		var hole_instance = box_hole_scene.instantiate()
+		print("Hole instance created: ", hole_instance)
+		print("Hole instance name: ", hole_instance.name)
+		
 		hole_instance.destination = hole_config.destination
 		hole_instance.international = hole_config.international
 		hole_instance.is_disposal = hole_config.is_disposal
 		hole_instance.global_position = hole_config.position
+		hole_instance.scale = Vector3(6, 6, 6)
 		
-		get_tree().current_scene.add_child(hole_instance)
+		print("About to add to scene...")
+		print("MainLevel node exists: ", get_tree().root.has_node("MainLevel"))
+		print("MainLevel node: ", get_tree().root.get_node_or_null("MainLevel"))
+		print("Current scene: ", get_tree().current_scene)
+		print("Current scene name: ", get_tree().current_scene.name if get_tree().current_scene else "NULL")
+		get_tree().root.get_node("MainLevel").add_child(hole_instance)
+		print("Added to scene. Is in tree: ", hole_instance.is_inside_tree())
+		print("Final position: ", hole_instance.global_position)
+		print("Scene tree child count: ", get_tree().current_scene.get_child_count())
 
 func start_day(day_number: int) -> void:
 	if day_number > current_run_config.daily_spawning.size():

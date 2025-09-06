@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://cl1amvrtmvb5i" path="res://Art_Assets/Models/Wall_Tall.tscn" id="6_o3roe"]
 [ext_resource type="Script" uid="uid://6boni430y3o" path="res://Level/LevelGenerator.gd" id="7_o3roe"]
 [ext_resource type="PackedScene" uid="uid://bxke2df04lpet" path="res://Objects/Conveyor Belts/5x1/5x1_conveyor.tscn" id="7_yhkds"]
-[ext_resource type="PackedScene" uid="uid://b8js4tiuw5jeg" path="res://Objects/Boxes/box.tscn" id="8_o3roe"]
 [ext_resource type="PackedScene" uid="uid://c5r0xmqtlub67" path="res://Objects/Conveyor Belts/1x1/1x1_conveyor.tscn" id="13_tcp6c"]
 [ext_resource type="Script" uid="uid://c8bubis6m0ist" path="res://Game_Management/BuildingSystem/building_system.gd" id="15_o3roe"]
 [ext_resource type="PackedScene" uid="uid://cvtsl1w5dvdxx" path="res://Objects/Conveyor Belts/Ramp.tscn" id="15_yhkds"]
@@ -34,6 +33,7 @@
 [ext_resource type="PackedScene" uid="uid://dstl1q7emqroo" path="res://Objects/Machines/Sorter/ValidDestination/ValidDestinationSorter.tscn" id="28_mgrxx"]
 [ext_resource type="PackedScene" uid="uid://d300ama6b8ua7" path="res://Objects/Conveyor Belts/Corner/raised_corner_conveyor.tscn" id="29_6wem4"]
 [ext_resource type="Script" uid="uid://kcbtemwpdm7r" path="res://Game_Management/Runs/RunOrchestrator.gd" id="33_s43jd"]
+[ext_resource type="Script" uid="uid://dxnt8ieb7667d" path="res://Game_Management/Runs/RunGenerator.gd" id="35_w50gc"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_bblu0"]
 
@@ -2142,6 +2142,222 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23, 0, 19)
 
 [node name="Floor_13_35" parent="Enviroment/LevelGenerator/GeneratedTiles" instance=ExtResource("5_bblu0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23, 0, 21)
+
+[node name="Floor_11_50" parent="Enviroment/LevelGenerator/GeneratedTiles" instance=ExtResource("5_bblu0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.007965, 0, 17)
+
+[node name="Floor_11_51" parent="Enviroment/LevelGenerator/GeneratedTiles" instance=ExtResource("5_bblu0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.007965, 0, 19)
+
+[node name="Floor_11_52" parent="Enviroment/LevelGenerator/GeneratedTiles" instance=ExtResource("5_bblu0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.007965, 0, 21)
+
+[node name="Floor_12_50" parent="Enviroment/LevelGenerator/GeneratedTiles" instance=ExtResource("5_bblu0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.007965, 0, 17)
+
+[node name="Floor_12_51" parent="Enviroment/LevelGenerator/GeneratedTiles" instance=ExtResource("5_bblu0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.007965, 0, 19)
+
+[node name="Floor_12_52" parent="Enviroment/LevelGenerator/GeneratedTiles" instance=ExtResource("5_bblu0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.007965, 0, 21)
+
+[node name="Floor_13_50" parent="Enviroment/LevelGenerator/GeneratedTiles" instance=ExtResource("5_bblu0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.007965, 0, 17)
+
+[node name="Floor_13_51" parent="Enviroment/LevelGenerator/GeneratedTiles" instance=ExtResource("5_bblu0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.007965, 0, 19)
+
+[node name="Floor_13_52" parent="Enviroment/LevelGenerator/GeneratedTiles" instance=ExtResource("5_bblu0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.007965, 0, 21)
+
+[node name="Floor_11_53" parent="Enviroment/LevelGenerator/GeneratedTiles" instance=ExtResource("5_bblu0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.017727, 0, 17)
+
+[node name="Floor_11_54" parent="Enviroment/LevelGenerator/GeneratedTiles" instance=ExtResource("5_bblu0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.017727, 0, 19)
+
+[node name="Floor_11_55" parent="Enviroment/LevelGenerator/GeneratedTiles" instance=ExtResource("5_bblu0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.017727, 0, 21)
+
+[node name="Floor_12_53" parent="Enviroment/LevelGenerator/GeneratedTiles" instance=ExtResource("5_bblu0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0177269, 0, 17)
+
+[node name="Floor_12_54" parent="Enviroment/LevelGenerator/GeneratedTiles" instance=ExtResource("5_bblu0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0177269, 0, 19)
+
+[node name="Floor_12_55" parent="Enviroment/LevelGenerator/GeneratedTiles" instance=ExtResource("5_bblu0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0177269, 0, 21)
+
+[node name="Floor_13_53" parent="Enviroment/LevelGenerator/GeneratedTiles" instance=ExtResource("5_bblu0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9822731, 0, 17)
+
+[node name="Floor_13_54" parent="Enviroment/LevelGenerator/GeneratedTiles" instance=ExtResource("5_bblu0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9822731, 0, 19)
+
+[node name="Floor_13_55" parent="Enviroment/LevelGenerator/GeneratedTiles" instance=ExtResource("5_bblu0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9822731, 0, 21)
+
+[node name="Floor_11_56" parent="Enviroment/LevelGenerator/GeneratedTiles" instance=ExtResource("5_bblu0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.996674, 0, 17)
+
+[node name="Floor_11_57" parent="Enviroment/LevelGenerator/GeneratedTiles" instance=ExtResource("5_bblu0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.996674, 0, 19)
+
+[node name="Floor_11_58" parent="Enviroment/LevelGenerator/GeneratedTiles" instance=ExtResource("5_bblu0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.996674, 0, 21)
+
+[node name="Floor_12_56" parent="Enviroment/LevelGenerator/GeneratedTiles" instance=ExtResource("5_bblu0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.996674, 0, 17)
+
+[node name="Floor_12_57" parent="Enviroment/LevelGenerator/GeneratedTiles" instance=ExtResource("5_bblu0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.996674, 0, 19)
+
+[node name="Floor_12_58" parent="Enviroment/LevelGenerator/GeneratedTiles" instance=ExtResource("5_bblu0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.996674, 0, 21)
+
+[node name="Floor_13_56" parent="Enviroment/LevelGenerator/GeneratedTiles" instance=ExtResource("5_bblu0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.996674, 0, 17)
+
+[node name="Floor_13_57" parent="Enviroment/LevelGenerator/GeneratedTiles" instance=ExtResource("5_bblu0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.996674, 0, 19)
+
+[node name="Floor_13_58" parent="Enviroment/LevelGenerator/GeneratedTiles" instance=ExtResource("5_bblu0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.996674, 0, 21)
+
+[node name="Floor_11_59" parent="Enviroment/LevelGenerator/GeneratedTiles" instance=ExtResource("5_bblu0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.979183, 0, 4.9808693)
+
+[node name="Floor_11_60" parent="Enviroment/LevelGenerator/GeneratedTiles" instance=ExtResource("5_bblu0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.979183, 0, 6.9808693)
+
+[node name="Floor_11_61" parent="Enviroment/LevelGenerator/GeneratedTiles" instance=ExtResource("5_bblu0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.979183, 0, 8.980869)
+
+[node name="Floor_12_59" parent="Enviroment/LevelGenerator/GeneratedTiles" instance=ExtResource("5_bblu0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.979183, 0, 4.9808693)
+
+[node name="Floor_12_60" parent="Enviroment/LevelGenerator/GeneratedTiles" instance=ExtResource("5_bblu0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.979183, 0, 6.9808693)
+
+[node name="Floor_12_61" parent="Enviroment/LevelGenerator/GeneratedTiles" instance=ExtResource("5_bblu0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.979183, 0, 8.980869)
+
+[node name="Floor_13_59" parent="Enviroment/LevelGenerator/GeneratedTiles" instance=ExtResource("5_bblu0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.979183, 0, 4.9808693)
+
+[node name="Floor_13_60" parent="Enviroment/LevelGenerator/GeneratedTiles" instance=ExtResource("5_bblu0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.979183, 0, 6.9808693)
+
+[node name="Floor_13_61" parent="Enviroment/LevelGenerator/GeneratedTiles" instance=ExtResource("5_bblu0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.979183, 0, 8.980869)
+
+[node name="Floor_11_62" parent="Enviroment/LevelGenerator/GeneratedTiles" instance=ExtResource("5_bblu0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.99695, 0, -6.997205)
+
+[node name="Floor_11_63" parent="Enviroment/LevelGenerator/GeneratedTiles" instance=ExtResource("5_bblu0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.99695, 0, -4.997205)
+
+[node name="Floor_11_64" parent="Enviroment/LevelGenerator/GeneratedTiles" instance=ExtResource("5_bblu0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.99695, 0, -2.9972045)
+
+[node name="Floor_12_62" parent="Enviroment/LevelGenerator/GeneratedTiles" instance=ExtResource("5_bblu0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.99695, 0, -6.997205)
+
+[node name="Floor_12_63" parent="Enviroment/LevelGenerator/GeneratedTiles" instance=ExtResource("5_bblu0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.99695, 0, -4.997205)
+
+[node name="Floor_12_64" parent="Enviroment/LevelGenerator/GeneratedTiles" instance=ExtResource("5_bblu0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.99695, 0, -2.9972045)
+
+[node name="Floor_13_62" parent="Enviroment/LevelGenerator/GeneratedTiles" instance=ExtResource("5_bblu0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.99695, 0, -6.997205)
+
+[node name="Floor_13_63" parent="Enviroment/LevelGenerator/GeneratedTiles" instance=ExtResource("5_bblu0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.99695, 0, -4.997205)
+
+[node name="Floor_13_64" parent="Enviroment/LevelGenerator/GeneratedTiles" instance=ExtResource("5_bblu0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.99695, 0, -2.9972045)
+
+[node name="Floor_11_65" parent="Enviroment/LevelGenerator/GeneratedTiles" instance=ExtResource("5_bblu0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.981377, 0, -18.99731)
+
+[node name="Floor_11_66" parent="Enviroment/LevelGenerator/GeneratedTiles" instance=ExtResource("5_bblu0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.981377, 0, -16.99731)
+
+[node name="Floor_11_67" parent="Enviroment/LevelGenerator/GeneratedTiles" instance=ExtResource("5_bblu0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.981377, 0, -14.9973135)
+
+[node name="Floor_12_65" parent="Enviroment/LevelGenerator/GeneratedTiles" instance=ExtResource("5_bblu0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.981377, 0, -18.99731)
+
+[node name="Floor_12_66" parent="Enviroment/LevelGenerator/GeneratedTiles" instance=ExtResource("5_bblu0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.981377, 0, -16.99731)
+
+[node name="Floor_12_67" parent="Enviroment/LevelGenerator/GeneratedTiles" instance=ExtResource("5_bblu0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.981377, 0, -14.9973135)
+
+[node name="Floor_13_65" parent="Enviroment/LevelGenerator/GeneratedTiles" instance=ExtResource("5_bblu0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.981377, 0, -18.99731)
+
+[node name="Floor_13_66" parent="Enviroment/LevelGenerator/GeneratedTiles" instance=ExtResource("5_bblu0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.981377, 0, -16.99731)
+
+[node name="Floor_13_67" parent="Enviroment/LevelGenerator/GeneratedTiles" instance=ExtResource("5_bblu0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.981377, 0, -14.9973135)
+
+[node name="Floor_11_68" parent="Enviroment/LevelGenerator/GeneratedTiles" instance=ExtResource("5_bblu0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0015888, 0, -18.99731)
+
+[node name="Floor_11_69" parent="Enviroment/LevelGenerator/GeneratedTiles" instance=ExtResource("5_bblu0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0015888, 0, -16.99731)
+
+[node name="Floor_11_70" parent="Enviroment/LevelGenerator/GeneratedTiles" instance=ExtResource("5_bblu0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0015888, 0, -14.9973135)
+
+[node name="Floor_12_68" parent="Enviroment/LevelGenerator/GeneratedTiles" instance=ExtResource("5_bblu0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0015888, 0, -18.99731)
+
+[node name="Floor_12_69" parent="Enviroment/LevelGenerator/GeneratedTiles" instance=ExtResource("5_bblu0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0015888, 0, -16.99731)
+
+[node name="Floor_12_70" parent="Enviroment/LevelGenerator/GeneratedTiles" instance=ExtResource("5_bblu0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0015888, 0, -14.9973135)
+
+[node name="Floor_13_68" parent="Enviroment/LevelGenerator/GeneratedTiles" instance=ExtResource("5_bblu0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9984112, 0, -18.99731)
+
+[node name="Floor_13_69" parent="Enviroment/LevelGenerator/GeneratedTiles" instance=ExtResource("5_bblu0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9984112, 0, -16.99731)
+
+[node name="Floor_13_70" parent="Enviroment/LevelGenerator/GeneratedTiles" instance=ExtResource("5_bblu0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9984112, 0, -14.9973135)
+
+[node name="Floor_11_71" parent="Enviroment/LevelGenerator/GeneratedTiles" instance=ExtResource("5_bblu0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.00313, 0, -18.99731)
+
+[node name="Floor_11_72" parent="Enviroment/LevelGenerator/GeneratedTiles" instance=ExtResource("5_bblu0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.00313, 0, -16.99731)
+
+[node name="Floor_11_73" parent="Enviroment/LevelGenerator/GeneratedTiles" instance=ExtResource("5_bblu0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.00313, 0, -14.9973135)
+
+[node name="Floor_12_71" parent="Enviroment/LevelGenerator/GeneratedTiles" instance=ExtResource("5_bblu0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.00313, 0, -18.99731)
+
+[node name="Floor_12_72" parent="Enviroment/LevelGenerator/GeneratedTiles" instance=ExtResource("5_bblu0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.00313, 0, -16.99731)
+
+[node name="Floor_12_73" parent="Enviroment/LevelGenerator/GeneratedTiles" instance=ExtResource("5_bblu0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.00313, 0, -14.9973135)
+
+[node name="Floor_13_71" parent="Enviroment/LevelGenerator/GeneratedTiles" instance=ExtResource("5_bblu0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.00313, 0, -18.99731)
+
+[node name="Floor_13_72" parent="Enviroment/LevelGenerator/GeneratedTiles" instance=ExtResource("5_bblu0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.00313, 0, -16.99731)
+
+[node name="Floor_13_73" parent="Enviroment/LevelGenerator/GeneratedTiles" instance=ExtResource("5_bblu0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.00313, 0, -14.9973135)
 
 [node name="Floor_13_36" parent="Enviroment/LevelGenerator/GeneratedTiles" instance=ExtResource("5_bblu0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23, 0, 23)
@@ -7984,43 +8200,44 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 0, 49)
 [node name="BoxHoles" type="Node3D" parent="Enviroment"]
 
 [node name="DEN D-Hole" parent="Enviroment/BoxHoles" instance=ExtResource("19_giak0")]
-transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, -1.004872, -0.2931695, 19.012526)
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, -1.004872, -0.039516926, 19.012526)
 
 [node name="LAX D-Hole" parent="Enviroment/BoxHoles" instance=ExtResource("19_giak0")]
-transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, -19.012047, -0.2931695, 19.012526)
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, -19.012047, -0.039516926, 19.012526)
 destination = "LAX"
 
 [node name="JFK D-Hole" parent="Enviroment/BoxHoles" instance=ExtResource("19_giak0")]
-transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 17.003094, -0.2931695, 19.012526)
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 17.003094, -0.039516926, 19.012526)
 destination = "JFK"
 
 [node name="LAX I-Hole" parent="Enviroment/BoxHoles" instance=ExtResource("19_giak0")]
-transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, -18.980398, -0.2931695, -16.996803)
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, -18.980398, -0.039516926, -16.996803)
 destination = "LAX"
 international = true
 
 [node name="DEN I-Hole" parent="Enviroment/BoxHoles" instance=ExtResource("19_giak0")]
-transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, -0.99677944, -0.2931695, -16.965155)
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, -0.99677944, -0.039516926, -16.965155)
 international = true
 
 [node name="JFK I-Hole" parent="Enviroment/BoxHoles" instance=ExtResource("19_giak0")]
-transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 17.003162, -0.2931695, -16.996803)
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 17.003162, -0.039516926, -16.996803)
 destination = "JFK"
 international = true
 
 [node name="Rejected I-Hole" parent="Enviroment/BoxHoles" instance=ExtResource("19_giak0")]
-transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 34.9864, -0.2931695, -4.9983754)
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 34.9864, -0.039516926, -4.9983754)
 destination = ""
 international = true
 is_disposal = true
 
 [node name="Rejected D-Hole" parent="Enviroment/BoxHoles" instance=ExtResource("19_giak0")]
-transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 35.014084, -0.2931695, 7.00597)
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 35.014084, -0.039516926, 7.00597)
 destination = ""
 is_disposal = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Enviroment"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.035427, 0)
+visible = false
 mesh = SubResource("BoxMesh_s43jd")
 surface_material_override/0 = SubResource("StandardMaterial3D_s43jd")
 
@@ -8054,9 +8271,6 @@ buildable_objects = Array[PackedScene]([ExtResource("7_yhkds"), ExtResource("13_
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.021827, 0.7202852, -3.0098095)
 total_boxes = 5000
 
-[node name="Box" parent="." instance=ExtResource("8_o3roe")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.971883, 0, -2.9398952)
-
 [node name="Money" type="Node" parent="." groups=["Money"]]
 unique_name_in_owner = true
 script = ExtResource("21_s4lgs")
@@ -8067,14 +8281,20 @@ stream = ExtResource("22_qqyv7")
 volume_db = -5.0
 
 [node name="Label3D" type="Label3D" parent="."]
-transform = Transform3D(24.655, 0, 0, 0, -1.0777043e-06, 24.655, 0, -24.655, -1.0777043e-06, 204.85489, 457.52872, -25.178146)
+transform = Transform3D(24.655, 0, 0, 0, -1.0777043e-06, 24.655, 0, -24.655, -1.0777043e-06, 204.89406, 457.52872, -24.881542)
+visible = false
 text = "👈"
 font_size = 2980
 
 [node name="Label3D2" type="Label3D" parent="."]
 transform = Transform3D(-24.655, -4.310817e-06, -9.42159e-14, 9.42159e-14, -1.0777043e-06, 24.655, 4.310817e-06, -24.655, -1.0777043e-06, -188.82275, 457.52872, -25.178146)
+visible = false
 text = "👈"
 font_size = 2980
 
-[node name="RunOrchestrator" type="Node" parent="."]
+[node name="RunOrchestrator" type="Node3D" parent="." groups=["RunOrchestrator"]]
 script = ExtResource("33_s43jd")
+box_hole_scene = ExtResource("19_giak0")
+
+[node name="RunGenerator" type="Node3D" parent="RunOrchestrator"]
+script = ExtResource("35_w50gc")

@@ -66,20 +66,42 @@ func _process(delta: float) -> void:
 		spawn_timer = 0.0
 		# Check if spawn area is free
 		if not is_spawn_blocked():
-			spawn_box()
+			spawn_random_box()
 
 func is_spawn_blocked() -> bool:
 	return false if spawn_area.get_overlapping_bodies().size() == 0 else true
+	
+func spawn_random_box() -> void:
+	spawn_box_with_properties({})
 
-func spawn_box() -> void:
+func spawn_box_with_properties(properties: Dictionary) -> void:
 	var box = box_scene.instantiate() as Box
+	
+	# Apply default randomization first
 	box.box_size = Vector3(
 		randf_range(min_box_size.x, max_box_size.x),
 		randf_range(min_box_size.y, max_box_size.y),
 		randf_range(min_box_size.z, max_box_size.z)
 	)
 	box.box_color = colors[randi() % colors.size()]
-	box.destination = destinations[randi() % destinations.size()]
+	
+	# Override with specific properties from LevelManager
+	if properties.has("destination"):
+		box.destination = properties.destination
+	else:
+		box.destination = destinations[randi() % destinations.size()]
+	
+	if properties.has("international"):
+		box.international = properties.international
+	else:
+		box.international = false
+	
+	if properties.has("disposable"):
+		box.disposeable = properties.disposable
+	else:
+		box.disposeable = false
+	
+	# Set validity based on active destinations
 	box.has_valid_destination = active_destinations.has(box.destination)
 
 	get_tree().root.get_node("MainLevel").add_child(box)

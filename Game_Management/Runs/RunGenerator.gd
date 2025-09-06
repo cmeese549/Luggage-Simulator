@@ -1,6 +1,6 @@
 # LevelGenerator.gd
-extends Node
-class_name LevelGenerator
+extends Node3D
+class_name RunGenerator
 
 # Configuration parameters
 @export var possible_destinations: Array[String] = ["DEN", "LAX", "JFK", "ATL", "ORD"]
@@ -14,6 +14,23 @@ class_name LevelGenerator
 @export var ending_boxes: int = 100
 @export var starting_spawn_rate: float = 0.5
 @export var ending_spawn_rate: float = 3.0
+
+var preset_hole_positions: Array[Vector3] = []
+
+func collect_preset_positions() -> void:
+	preset_hole_positions.clear()
+	var existing_holes = get_tree().get_nodes_in_group("BoxHole")
+	for hole in existing_holes:
+		preset_hole_positions.append(hole.global_position)
+		hole.queue_free()
+	print("Collected ", preset_hole_positions.size(), " preset positions")
+
+func get_preset_hole_position(index: int) -> Vector3:
+	if index < preset_hole_positions.size():
+		return preset_hole_positions[index]
+	else:
+		# Fallback to grid if we need more positions than presets
+		return get_random_hole_position(RandomNumberGenerator.new(), index)
 
 func generate_run_config(seed: int = -1) -> RunConfig:
 	var config = RunConfig.new()
@@ -45,7 +62,7 @@ func generate_box_holes(rng: RandomNumberGenerator) -> Array[BoxHoleConfig]:
 		var disposal_hole = BoxHoleConfig.new()
 		disposal_hole.is_disposal = true
 		disposal_hole.international = rng.randf() < 0.5  # Can handle either
-		disposal_hole.position = get_random_hole_position(rng, holes.size())
+		disposal_hole.position = get_preset_hole_position(holes.size())
 		holes.append(disposal_hole)
 	
 	# Add regular destination holes
@@ -63,7 +80,7 @@ func generate_box_holes(rng: RandomNumberGenerator) -> Array[BoxHoleConfig]:
 		used_destinations.append(hole.destination)
 		
 		hole.international = rng.randf() < international_chance
-		hole.position = get_random_hole_position(rng, holes.size())
+		hole.position = get_preset_hole_position(holes.size())
 		hole.value_multiplier = rng.randf_range(0.8, 1.2)
 		
 		holes.append(hole)
