@@ -64,7 +64,6 @@ func _unhandled_input(event):
 		if event.is_action_pressed("primary"):
 			var interact_thing = check_for_interactable()
 			if interact_thing and interact_thing.has_method("interact"):
-				print("Ballin")
 				interact_thing.interact()
 			elif interact_thing:
 				interact_thing = interact_thing.get_parent()

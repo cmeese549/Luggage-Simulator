@@ -52,6 +52,8 @@ var highlight_material: StandardMaterial3D
 var is_highlighted: bool = false
 var just_loaded: bool = false
 
+var spawn_location: Vector3
+
 func get_save_data() -> Dictionary:
 	var data: Dictionary = {}
 	data.box_size = box_size
@@ -260,6 +262,12 @@ func create_icon_label(icon: Dictionary):
 		
 	position_label_at_corner(icon_label, corner)
 	add_child(icon_label)
+	
+func _physics_process(delta):
+	# Respawn if fallen through map
+	if global_position.y < -50:
+		global_position = Vector3(0, 5, 0)
+		linear_velocity = Vector3.ZERO
 	
 func position_label_at_corner(label: Label3D, corner: String):
 	var half = box_size * 0.5

@@ -65,6 +65,11 @@ func start_day(day_number: int) -> void:
 	current_spawn_interval = 1.0 / day_config.boxes_per_second
 	spawn_timer = 0.0
 	
+	var box_spawners = get_tree().get_nodes_in_group("BoxSpawner")
+	for spawner in box_spawners:
+		spawner.active = false
+		spawner.get_node("Label3D").text = "Click to start day"
+	
 	# Apply special modifiers
 	apply_special_modifiers(day_config.special_modifiers)
 	
@@ -110,14 +115,19 @@ func _process(delta: float) -> void:
 	var any_spawner_active = box_spawners.any(func(spawner): return spawner.active)
 	
 	# Handle box spawning
-	if boxes_spawned_today < day_config.total_boxes  and any_spawner_active:
+	if boxes_spawned_today < day_config.total_boxes and any_spawner_active:
 		spawn_timer += delta
 		if spawn_timer >= current_spawn_interval:
 			spawn_box(day_config)
 			spawn_timer = 0.0
+			# Force pause spawners when done spawning
+			if boxes_spawned_today >= day_config.total_boxes:
+				for spawner in box_spawners:
+					spawner.active = false
+					spawner.get_node("Label3D").text = "Quota reached - finish processing!"
 
 	# Check if day is complete  
-	elif boxes_processed_today >= day_config.quota_target:
+	if boxes_spawned_today >= day_config.total_boxes and boxes_processed_correctly >= day_config.total_boxes:
 		complete_day()
 
 func spawn_box(day_config: DayConfig) -> void:

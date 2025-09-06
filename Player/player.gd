@@ -747,14 +747,20 @@ func pickup_box(box: RigidBody3D):
 	box_relative_rotation = box.rotation - neck.rotation
 	# Switch to kinematic mode to stop physics
 	box.freeze_mode = RigidBody3D.FREEZE_MODE_KINEMATIC
-	box.freeze = true
+	held_box = box
+	print("Before: ", held_box.rotation)
+	held_box.rotation = Vector3.ZERO
+	print("After: ", held_box.rotation)
+	held_box.set_freeze_enabled(true)
+	print("After freeze: ", held_box.rotation)
+
+	
 	# Disable collision with player to prevent conflicts
 	box.set_collision_layer_value(1, false)
 	box.set_collision_layer_value(9, false)
 	box.set_collision_layer_value(11, false)
 	box.set_collision_layer_value(20, false)
-	box.set_collision_mask_value(1, false)
-	box.set_collision_mask_value(1, false)
+	box.set_collision_layer_value(21, false)
 	
 func drop_box():
 	if not held_box:
@@ -768,8 +774,7 @@ func drop_box():
 	held_box.set_collision_layer_value(9, true)
 	held_box.set_collision_layer_value(11, true)
 	held_box.set_collision_layer_value(20, true)
-	held_box.set_collision_mask_value(1, true)
-	held_box.set_collision_mask_value(1, true)
+	held_box.set_collision_layer_value(21, true)
 	
 	held_box = null
 

@@ -4,12 +4,11 @@
 
 [resource]
 script = ExtResource("1_08545")
-base_box_value = 2
+base_box_value = 3
 sorter_prices = {
 "Destination Sorter": 400,
 "Disposable Sorter": 400,
 "International Sorter": 300,
 "Valid Destinatoin Sorter": 500
 }
-starting_boxes = 12
 metadata/_custom_type_script = "uid://d2e5r47avqehj"

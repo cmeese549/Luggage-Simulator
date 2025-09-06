@@ -55,15 +55,16 @@ func toggle_active():
 	else:
 		$Label3D.text = "Click to start box spawning"
 		
-func _process(delta: float) -> void:
-	if not active or not run_orchestrator.is_day_active:
-		return
-	spawn_timer += delta
-	if spawn_timer >= 1.0 / spawn_rate:
-		spawn_timer = 0.0
-		# Check if spawn area is free
-		if not is_spawn_blocked():
-			spawn_random_box()
+#func _process(delta: float) -> void:
+	#if not active or not run_orchestrator.is_day_active:
+		#return
+	#
+	#spawn_timer += delta
+	#if spawn_timer >= 1.0 / spawn_rate:
+		#spawn_timer = 0.0
+		## Check if spawn area is free
+		#if not is_spawn_blocked():
+			#spawn_random_box()
 
 func is_spawn_blocked() -> bool:
 	return false if spawn_area.get_overlapping_bodies().size() < 4 else true
@@ -110,4 +111,5 @@ func spawn_box_with_properties(properties: Dictionary) -> void:
 	box.just_loaded = true
 	get_tree().root.get_node("MainLevel").add_child(box)
 	box.global_position = $Marker3D.global_position
+	box.spawn_location = $Marker3D.global_position
 	boxes_spawned += 1

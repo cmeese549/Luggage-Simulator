@@ -8,7 +8,7 @@ bounce = 0.15
 absorbent = true
 
 [node name="RigidBody3D" type="RigidBody3D" groups=["Box", "Interactable"]]
-collision_layer = 1574145
+collision_layer = 270009601
 collision_mask = 1574145
 physics_material_override = SubResource("PhysicsMaterial_tcp6c")
 can_sleep = false

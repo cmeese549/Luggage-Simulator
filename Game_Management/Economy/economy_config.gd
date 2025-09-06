@@ -102,11 +102,10 @@ func get_day_config(day: int) -> Dictionary:
 	var config = {
 		"total_boxes": int(lerp(starting_boxes, ending_boxes, box_progress)),
 		"boxes_per_second": lerp(starting_spawn_rate, ending_spawn_rate, spawn_progress),
-		"quota_target": 0,  # Will be calculated next
 		"expected_income": 0  # Will be calculated
 	}
 	
-	config.expected_income = config.quota_target * base_box_value
+	config.expected_income = config.total_boxes * base_box_value
 	
 	return config
 
@@ -133,11 +132,10 @@ func _validate_economy_balance(value: bool):
 			var estimated_earnings_period = daily_income * days_since_last
 			total_earnings += estimated_earnings_period
 			
-			print("Day %2d | Boxes: %3d @ %.1f/sec | Quota: %3d | Income: $%4d" % [
+			print("Day %2d | Boxes: %3d @ %.1f/sec | Income: $%4d" % [
 				day, 
 				config.total_boxes, 
 				config.boxes_per_second, 
-				config.quota_target,
 				daily_income
 			])
 		
