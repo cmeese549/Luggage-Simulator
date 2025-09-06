@@ -8,6 +8,7 @@ size = Vector3(1.7935791, 1.5401611, 9.74707)
 
 [node name="5x1 Conveyor" type="Node3D"]
 script = ExtResource("1_2kn55")
+building_name = "5x1 Conveyor"
 
 [node name="Skeletons" parent="." instance=ExtResource("2_8ywyi")]
 

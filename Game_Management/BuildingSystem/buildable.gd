@@ -1,7 +1,8 @@
 extends Node3D
 class_name Buildable
 
-@export var price: float = 10
+@export var economy_config: EconomyConfig = preload("res://Game_Management/Economy/configs/basic_config.tres")
+
 @onready var money = get_tree().get_first_node_in_group("Money") as Money
 
 var material_index = 0 : set = set_material
@@ -10,6 +11,9 @@ var invalid_ghost_material : StandardMaterial3D
 @export var is_built: bool = false
 @export var category: String = "Ground Conveyors"
 @export var building_name: String = "4x1 Conveyor"
+
+var price: float = 0:
+	get : return economy_config.get_buildable_price(category, building_name)
 
 func get_save_data() -> Dictionary:
 	return {}

@@ -9,7 +9,7 @@ size = Vector3(1.9141235, 0.92433167, 9.846909)
 [node name="5x1 Raised" type="Node3D"]
 script = ExtResource("1_slit8")
 category = "Sky Conveyors"
-building_name = "4x1 Sky Conveyor"
+building_name = "5x1 Sky Conveyor"
 
 [node name="Skeletons" parent="." instance=ExtResource("2_kq8vw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.665281, 0)

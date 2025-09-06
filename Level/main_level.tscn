@@ -8269,7 +8269,6 @@ buildable_objects = Array[PackedScene]([ExtResource("7_yhkds"), ExtResource("13_
 
 [node name="BoxSpawner" parent="." instance=ExtResource("20_qqyv7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.021827, 0.7202852, -3.0098095)
-total_boxes = 5000
 
 [node name="Money" type="Node" parent="." groups=["Money"]]
 unique_name_in_owner = true
