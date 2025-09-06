@@ -23,10 +23,10 @@ class_name EconomyConfig
 }
 
 @export var sorter_prices: Dictionary = {
-	"Destination Sorter": 400,
+	"Destination Sorter": 500,
 	"International Sorter": 300,
 	"Disposable Sorter": 400,
-	"Valid Destinatoin Sorter": 500
+	"Valid Destination Sorter": 300
 }
 
 @export var processor_prices: Dictionary = {
