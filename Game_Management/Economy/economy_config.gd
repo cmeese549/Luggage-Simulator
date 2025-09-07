@@ -4,11 +4,34 @@ class_name EconomyConfig
 
 @export var run_test: bool = false : set = _validate_economy_balance
 
+@export var _seed: int
+
 # Box Value Settings
 @export_group("Box Values")
 @export var base_box_value: int = 1
 @export var sticker_multiplier: float = 1.5  # Each sticker adds 50% value
 @export var penalty_multiplier: float = -2.0  # Mistakes cost double
+
+# ==================== HEALTH/PRESSURE SYSTEM ====================
+@export_group("Health System")
+@export var health_starting_max: float = 100.0
+@export var health_ending_max: float = 250.0
+@export var health_max_per_day_bonus: float = 5.0  # Additional max health per day
+
+@export_subgroup("Drain Rates")
+@export var health_drain_base: float = 1.0  # Starting drain per second
+@export var health_drain_per_day: float = 0.5  # Additional drain per day
+@export var health_drain_curve_power: float = 1.0  # Exponential curve modifier
+
+@export_subgroup("Recovery & Penalties")
+@export var starting_health_percent: float = 1.0
+@export var health_recovery_base: float = 15.0  # Health gained per correct box
+@export var health_recovery_reduction_per_day: float = 0.3
+@export var health_recovery_min: float = 3.0  # Never go below this
+
+@export var health_penalty_base: float = 20.0  # Health lost per wrong box
+@export var health_penalty_increase_per_day: float = 0.5
+@export var health_penalty_max: float = 40.0  # Cap the penalty
 
 # Buildable Prices - Organized by category and progression tier
 @export_group("Buildable Prices")
@@ -59,6 +82,23 @@ class_name EconomyConfig
 @export var expected_income_day_10: int = 400  # Can buy first sorter
 @export var expected_income_day_20: int = 2000  # Multiple purchases per day
 @export var expected_income_day_31: int = 8000  # End-game optimization
+
+func get_health_config(day: int) -> Dictionary:
+	"""Generate health system config for a specific day"""
+	var progress = calculate_day_progression(day)
+	
+	# Apply different curves to different aspects
+	var drain_progress = pow(progress, health_drain_curve_power)
+	
+	var config = {
+		"max_health": lerp(health_starting_max, health_ending_max, progress) + (day * health_max_per_day_bonus),
+		"drain_per_second": health_drain_base + (day * health_drain_per_day),
+		"recovery_per_correct": max(health_recovery_min, health_recovery_base - (day * health_recovery_reduction_per_day)),
+		"penalty_per_wrong": min(health_penalty_max, health_penalty_base + (day * health_penalty_increase_per_day)),
+		"starting_health_percent": starting_health_percent  # Start each day at 80% of max
+	}
+	
+	return config
 
 func get_buildable_price(category: String, buildable_name: String) -> float:
 	match category:
@@ -117,8 +157,7 @@ func _validate_economy_balance(value: bool):
 		print("==============================")
 		
 		var milestones = [1, 5, 10, 15, 20, 25, 31]
-		var total_earnings = 0
-		var last_milestone_earnings = 0
+		var _total_earnings = 0
 		
 		print("\n📊 DAILY PROGRESSION:")
 		print("----------------------------------------")
@@ -130,7 +169,7 @@ func _validate_economy_balance(value: bool):
 			# Calculate cumulative earnings up to this day
 			var days_since_last = 1 if day == 1 else (day - milestones[max(0, milestones.find(day) - 1)])
 			var estimated_earnings_period = daily_income * days_since_last
-			total_earnings += estimated_earnings_period
+			_total_earnings += estimated_earnings_period
 			
 			print("Day %2d | Boxes: %3d @ %.1f/sec | Income: $%4d" % [
 				day, 

@@ -35,7 +35,7 @@
 [ext_resource type="Script" uid="uid://kcbtemwpdm7r" path="res://Game_Management/Runs/RunOrchestrator.gd" id="33_s43jd"]
 [ext_resource type="PackedScene" uid="uid://dps87o4w0r5im" path="res://Game_Management/Economy/economy_config.tscn" id="35_eqlt2"]
 [ext_resource type="Script" uid="uid://dxnt8ieb7667d" path="res://Game_Management/Runs/RunGenerator.gd" id="35_w50gc"]
-[ext_resource type="Script" uid="uid://cfk8l5ywbdmh8" path="res://Game_Management/Economy/economy.gd" id="36_52kmw"]
+[ext_resource type="Script" uid="uid://tyykda81wqtq" path="res://Game_Management/Health/health_system.gd" id="36_eqlt2"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_bblu0"]
 
@@ -8239,7 +8239,6 @@ is_disposal = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Enviroment"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.035427, 0)
-visible = false
 mesh = SubResource("BoxMesh_s43jd")
 surface_material_override/0 = SubResource("StandardMaterial3D_s43jd")
 
@@ -8299,6 +8298,8 @@ box_hole_scene = ExtResource("19_giak0")
 [node name="RunGenerator" type="Node3D" parent="RunOrchestrator"]
 script = ExtResource("35_w50gc")
 
+[node name="Health" type="Node" parent="RunOrchestrator"]
+script = ExtResource("36_eqlt2")
+
 [node name="EconomyConfig" parent="." instance=ExtResource("35_eqlt2")]
-script = ExtResource("36_52kmw")
 config = null

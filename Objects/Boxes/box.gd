@@ -188,7 +188,7 @@ func set_approval_state(state: ApprovalState):
 	
 func create_approval_icons():
 	var half = box_size * 0.5
-	var offset = 0.02
+	var offset = 0.01
 	
 	# Create icons on the 4 main faces (front, back, left, right)
 	var face_configs = [

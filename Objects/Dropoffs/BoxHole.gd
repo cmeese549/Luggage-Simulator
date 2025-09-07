@@ -30,10 +30,10 @@ func _on_deposit_zone_body_entered(body):
 			if total_stickers > 0:
 				value *= pow(Economy.config.sticker_multiplier, total_stickers)
 			money.make_money(value)
-			Events.box_deposited.emit(value, body.destination, true)
+			Events.box_deposited.emit(value, body, true)
 		else:
 			rejection_sound.play()
-			Events.box_deposited.emit(Economy.config.base_box_value * Economy.config.penalty_multiplier, body.destination, false)
+			Events.box_deposited.emit(Economy.config.base_box_value * Economy.config.penalty_multiplier, body, false)
 			money.make_money(Economy.config.base_box_value * Economy.config.penalty_multiplier)
 		# Notify LevelManager about box processing
 		

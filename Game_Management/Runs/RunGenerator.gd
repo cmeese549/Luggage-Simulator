@@ -3,11 +3,10 @@ extends Node3D
 class_name RunGenerator
 
 # Configuration parameters
-@export var possible_destinations: Array[String] = ["DEN", "LAX", "JFK", "ATL", "ORD"]
+@export var possible_destinations: Array[String] = ["DEN", "LAX", "JFK", "ORD", "ATL", "SFO", "BOS", "TOR"]
 @export var min_box_holes: int = 4
 @export var max_box_holes: int = 8
 @export var international_chance: float = 0.3
-@export var disposal_holes_count: int = 1
 
 # Difficulty scaling
 @export var starting_boxes: int = 10
@@ -33,18 +32,16 @@ func get_preset_hole_position(rng: RandomNumberGenerator, index: int) -> Vector3
 		# Fallback to grid if we need more positions than presets
 		return get_random_hole_position(rng, index)
 
-func generate_run_config(seed: int = -1) -> RunConfig:
+func generate_run_config(_seed: int = -1) -> RunConfig:
 	var config = RunConfig.new()
 	
 	# Set seed for consistent generation
-	if seed == -1:
-		seed = randi()
-	config.run_seed = seed
-	config.run_name = "Run " + str(seed)
+	config.run_seed = _seed
+	config.run_name = "Run " + str(_seed)
 	
 	# Use seed for consistent random generation
 	var rng = RandomNumberGenerator.new()
-	rng.seed = seed
+	rng.seed = _seed
 	
 	# Generate box holes
 	config.box_holes = generate_box_holes(rng)
@@ -157,7 +154,7 @@ func generate_daily_configs(rng: RandomNumberGenerator) -> Array[DayConfig]:
 	
 	return days
 
-func generate_box_type_probabilities(rng: RandomNumberGenerator, progress: float) -> Array[Dictionary]:
+func generate_box_type_probabilities(_rng: RandomNumberGenerator, progress: float) -> Array[Dictionary]:
 	var probabilities: Array[Dictionary] = []
 	
 	# Base probability for international boxes increases over time

@@ -235,12 +235,7 @@ func _input(event: InputEvent) -> void:
 				rotate_held_box(mouse_delta)
 			else:
 				camera_movement_this_frame += mouse_delta
-		elif event is InputEventMouseButton:
-			if event.button_index == MOUSE_BUTTON_RIGHT:
-				if event.pressed and held_box:
-					start_box_rotation()
-				elif not event.pressed and is_rotating_box:
-					stop_box_rotation()
+				
 			
 func gamepad_aim(delta: float) -> void:
 	var axis_vector = Vector2.ZERO
@@ -352,10 +347,19 @@ func _physics_process(delta):
 	
 	if Input.is_action_just_pressed("primary"):
 		if !building_system.building_mode_active:
-			if held_box:
-				drop_box()
-			else:
-				try_pickup_box()
+			try_pickup_box()
+	elif Input.is_action_just_released("primary"):
+		if held_box:
+			drop_box()
+			if is_rotating_box:
+				stop_box_rotation()
+			
+	if Input.is_action_just_pressed("secondary"):
+		if held_box:
+			start_box_rotation()
+	elif Input.is_action_just_released("secondary"):
+		if is_rotating_box:
+			stop_box_rotation()
 
 	if not held_box:
 		handle_hotkey_inputs()
@@ -748,12 +752,8 @@ func pickup_box(box: RigidBody3D):
 	# Switch to kinematic mode to stop physics
 	box.freeze_mode = RigidBody3D.FREEZE_MODE_KINEMATIC
 	held_box = box
-	print("Before: ", held_box.rotation)
 	held_box.rotation = Vector3.ZERO
-	print("After: ", held_box.rotation)
 	held_box.set_freeze_enabled(true)
-	print("After freeze: ", held_box.rotation)
-
 	
 	# Disable collision with player to prevent conflicts
 	box.set_collision_layer_value(1, false)

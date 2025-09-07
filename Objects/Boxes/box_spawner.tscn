@@ -4,14 +4,13 @@
 [ext_resource type="PackedScene" uid="uid://b8js4tiuw5jeg" path="res://Objects/Boxes/box.tscn" id="2_jqoio"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_dbttc"]
-size = Vector3(1.9102783, 1.6145935, 1.9855957)
+size = Vector3(1.9102783, 1.0395966, 1.9855957)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_rh200"]
-size = Vector3(1.9102783, 0.9657974, 1.9855957)
+size = Vector3(1.9102783, 0.67723465, 1.9855957)
 
 [node name="BoxSpawner" type="Node3D" groups=["BoxSpawner"]]
 script = ExtResource("1_rh200")
-total_boxes = 50
 box_scene = ExtResource("2_jqoio")
 
 [node name="Area3D" type="Area3D" parent="."]
@@ -19,7 +18,7 @@ collision_layer = 1024
 collision_mask = 1024
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.030820847, 0.16259623, -0.004760742)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.030820847, -0.12490225, -0.004760742)
 shape = SubResource("BoxShape3D_dbttc")
 debug_color = Color(0, 0.62827486, 0.46024847, 1)
 
@@ -28,14 +27,15 @@ collision_layer = 1048576
 collision_mask = 1048576
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.030820847, 1.4688516, -0.004760742)
+transform = Transform3D(0.988515, 0.1511228, 0, -0.1511228, 0.988515, 0, 0, 0, 1, -0.030820847, 1.7631485, -0.004760742)
 shape = SubResource("BoxShape3D_rh200")
 debug_color = Color(0, 0.62827486, 0.46024847, 1)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1500156, 0)
 
 [node name="Label3D" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4391723, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5891879, 0)
 billboard = 2
 text = "Click to start box spawning"
 

@@ -15,4 +15,4 @@ signal item_pickedup(item)
 
 signal game_loaded()
 
-signal box_deposited(money_amount: int, destination: String, success: bool)
+signal box_deposited(money_amount: int, box: Box, success: bool)

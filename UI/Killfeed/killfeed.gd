@@ -14,10 +14,10 @@ var processing_queue: bool = false
 func _ready():
 	Events.box_deposited.connect(_on_box_deposited)
 	
-func _on_box_deposited(money_amount: int, destination: String, success: bool):
+func _on_box_deposited(money_amount: int, box: Box, success: bool):
 	entry_queue.append({
 		"money": money_amount,
-		"destination": destination, 
+		"box": box, 
 		"success": success
 	})
 	
@@ -31,16 +31,16 @@ func process_queue():
 		
 	processing_queue = true
 	var entry_data = entry_queue.pop_front()
-	add_entry(entry_data.money, entry_data.destination, entry_data.success)
+	add_entry(entry_data.money, entry_data.box, entry_data.success)
 	
 	await get_tree().create_timer(batch_delay).timeout
 	process_queue()
 
 
-func add_entry(money_amount: int, destination: String, success: bool):
+func add_entry(money_amount: int, box: Box, success: bool):
 	var entry = entry_scene.instantiate()
 	entries_container.add_child(entry)
-	entry.setup(money_amount, destination, success)
+	entry.setup(money_amount, box, success)
 	
 	# Remove oldest if exceeding max
 	while entries_container.get_child_count() > max_entries:

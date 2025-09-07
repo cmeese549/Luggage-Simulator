@@ -326,6 +326,84 @@ offset_top = 46.039948
 offset_right = 84.46499
 offset_bottom = 86.03995
 
+[node name="HealthBar" type="Control" parent="HUD" groups=["HealthBar"]]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -338.0
+offset_top = 66.33
+offset_right = 343.99976
+offset_bottom = 112.329994
+grow_horizontal = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="HUD/HealthBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 21.669998
+offset_right = 2.0
+offset_bottom = 21.669998
+grow_horizontal = 2
+grow_vertical = 2
+max_value = 1.0
+value = 1.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="HUD/HealthBar"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 1.0
+offset_top = -57.33
+offset_right = 1.0
+offset_bottom = 19.669998
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 56
+text = "KPI-o-meter"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BoxCounter" type="Control" parent="HUD"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -417.0
+offset_top = 114.935
+offset_right = -31.0
+offset_bottom = 195.93518
+grow_horizontal = 0
+
+[node name="PanelContainer" type="PanelContainer" parent="HUD/BoxCounter"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/BoxCounter/PanelContainer"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="HUD/BoxCounter/PanelContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="HUD/BoxCounter/PanelContainer/HBoxContainer" groups=["BoxCounter"]]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 20.0
+theme_override_font_sizes/font_size = 52
+text = "Boxes: 133/103"
+horizontal_alignment = 1
+
+[node name="Control2" type="Control" parent="HUD/BoxCounter/PanelContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
 [node name="PauseMenu" type="MarginContainer" parent="."]
 process_mode = 3
 visible = false

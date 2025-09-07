@@ -5,14 +5,17 @@ class_name BoxSpawner
 @export var spawn_rate: float = 1  # boxes per second
 @export var box_scene: PackedScene  # your Box.tscn
 
+signal clicked(spawner: BoxSpawner)
+
 # Randomization ranges
 @export var min_box_size: Vector3 = Vector3(0.4, 0.4, 0.4)
 @export var max_box_size: Vector3 = Vector3(0.8, 0.8, 0.8)
 @export var colors: Array[Color] = [Color.PALE_VIOLET_RED, Color.DODGER_BLUE, Color.FOREST_GREEN, Color.SANDY_BROWN]
-@export var destinations: Array[String] = ["DEN", "LAX", "JFK", "ORD"]
+var destinations: Array[String] = ["DEN", "LAX", "JFK", "ORD"]
 var active_destinations: Array[String] =  ["DEN", "LAX", "JFK"]
 
 @onready var spawn_area : Area3D = $Area3D
+@onready var label : Label3D = $Label3D
 @onready var run_orchestrator = get_tree().get_first_node_in_group("RunOrchestrator")
 
 var boxes_spawned: int = 0
@@ -40,34 +43,15 @@ func load_save_data(data: Dictionary) -> void:
 	active = data.active
 	global_position = data.global_position
 	rotation = data.rotation
-	if active:
-		$Label3D.text = "Click to pause box spawning"
-	else:
-		$Label3D.text = "Click to start box spawning"
 
 func interact():
-	toggle_active()
+	clicked.emit(self)
 	
 func toggle_active():
 	active = !active
-	if active:
-		$Label3D.text = "Click to pause box spawning"
-	else:
-		$Label3D.text = "Click to start box spawning"
-		
-#func _process(delta: float) -> void:
-	#if not active or not run_orchestrator.is_day_active:
-		#return
-	#
-	#spawn_timer += delta
-	#if spawn_timer >= 1.0 / spawn_rate:
-		#spawn_timer = 0.0
-		## Check if spawn area is free
-		#if not is_spawn_blocked():
-			#spawn_random_box()
 
 func is_spawn_blocked() -> bool:
-	return false if spawn_area.get_overlapping_bodies().size() < 4 else true
+	return false if spawn_area.get_overlapping_bodies().size() < 2 else true
 	
 func spawn_random_box() -> void:
 	spawn_box_with_properties({})

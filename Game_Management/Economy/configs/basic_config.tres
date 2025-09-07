@@ -1,10 +1,10 @@
-[gd_resource type="Resource" load_steps=2 format=3 uid="uid://bpyw58bscus0c"]
+[gd_resource type="Resource" script_class="EconomyConfig" load_steps=2 format=3 uid="uid://bpyw58bscus0c"]
 
 [ext_resource type="Script" uid="uid://d2e5r47avqehj" path="res://Game_Management/Economy/economy_config.gd" id="1_08545"]
 
 [resource]
 script = ExtResource("1_08545")
-base_box_value = 3
+base_box_value = 12
 sorter_prices = {
 "Destination Sorter": 400,
 "Disposable Sorter": 400,

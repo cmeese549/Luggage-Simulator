@@ -6,6 +6,8 @@ signal day_completed(day_number: int, success: bool)
 signal run_completed(success: bool)
 
 @onready var run_generator: RunGenerator = $RunGenerator
+@onready var health_system: HealthSystem = $Health
+@onready var box_counter: Label = get_tree().get_first_node_in_group("BoxCounter")
 @export var box_hole_scene: PackedScene  # Assign your BoxHole scene in inspector
 
 var current_run_config: RunConfig
@@ -19,19 +21,44 @@ var boxes_spawned_today: int = 0
 var spawn_timer: float = 0.0
 var current_spawn_interval: float = 1.0
 
+func get_save_data() -> Dictionary:
+	var data = {}
+	data.current_run_config = current_run_config
+	data.current_day = current_day
+	data.boxes_processed_today = boxes_processed_today
+	data.boxes_processed_correctly = boxes_processed_correctly
+	data.is_day_active = is_day_active
+	data.boxes_spawned_today = boxes_spawned_today
+	return data
+
+func load_save_data(data: Dictionary) -> void:
+	current_run_config = data.current_run_config
+	current_day = data.current_day
+	boxes_processed_today = data.boxes_processed_today
+	boxes_processed_correctly = data.boxes_processed_correctly
+	is_day_active = data.is_day_active
+	boxes_spawned_today = data.boxes_spawned_today
+	
+	if current_run_config:
+		setup_box_holes()
+		if is_day_active:
+			var day_config = get_current_day_config()
+			current_spawn_interval = 1.0 / day_config.boxes_per_second
+
 func _ready():
 	await get_tree().process_frame
 	start_new_run()
 
-func start_new_run(seed: int = -1) -> void:
+func start_new_run() -> void:
 	run_generator.collect_preset_positions()
-	current_run_config = run_generator.generate_run_config(seed)
+	if Economy.config._seed == 0:
+		Economy.config._seed = randi()
+	current_run_config = run_generator.generate_run_config(Economy.config._seed)
 	current_day = 1
 	setup_box_holes()
 	start_day(1)
 
 func setup_box_holes() -> void:
-	
 	for i in range(current_run_config.box_holes.size()):
 		var hole_config = current_run_config.box_holes[i]
 		
@@ -48,7 +75,7 @@ func setup_box_holes() -> void:
 			hole_instance.get_node("Label3D").text = "Inactive"
 
 func start_day(day_number: int) -> void:
-	if day_number > 7:  # Changed from 10 to 7 days
+	if day_number > 31:  
 		complete_run(true)
 		return
 	
@@ -56,25 +83,53 @@ func start_day(day_number: int) -> void:
 	boxes_processed_today = 0
 	boxes_processed_correctly = 0
 	boxes_spawned_today = 0
-	is_day_active = true
+	is_day_active = false  # Don't start active until player clicks spawner
 	
-	# Activate holes for this day
+	# Setup health for this day
+	health_system.setup_for_day(day_number)
+	health_system.stop_draining()  # Don't drain until day actually starts
+	
+	# Connect health depletion signal if not already connected
+	if not health_system.health_depleted.is_connected(_on_health_depleted):
+		health_system.health_depleted.connect(_on_health_depleted)
+	
 	activate_holes_for_day(day_number)
 	
 	var day_config = get_current_day_config()
 	current_spawn_interval = 1.0 / day_config.boxes_per_second
 	spawn_timer = 0.0
-	
+	box_counter.text = "Boxes: 0/" + str(day_config.total_boxes)
 	var box_spawners = get_tree().get_nodes_in_group("BoxSpawner")
 	for spawner in box_spawners:
 		spawner.active = false
-		spawner.get_node("Label3D").text = "Click to start day"
+		spawner.label.text = "Click to start day"
+		
+		# Connect spawner click to start the day
+		if not spawner.clicked.is_connected(_on_spawner_clicked):
+			spawner.clicked.connect(_on_spawner_clicked)
 	
-	# Apply special modifiers
 	apply_special_modifiers(day_config.special_modifiers)
 	
 	day_started.emit(day_number)
 	print("Day ", day_number, " started - Target: ", day_config.quota_target, " boxes")
+	
+func _on_spawner_clicked(spawner) -> void:
+	if not is_day_active and boxes_spawned_today == 0:
+		is_day_active = true
+		spawner.active = true
+		health_system.start_draining()
+		spawner.label.text = "Click to pause box spawning"
+		print("Day %d active - health draining started" % current_day)
+	elif is_day_active:
+		var day_config: DayConfig = get_current_day_config()
+		if boxes_spawned_today < day_config.total_boxes:
+			spawner.toggle_active()
+			if not spawner.active:
+				spawner.label.text = "Click to resume box spawning"
+			else:
+				spawner.label.text = "Click to pause box spawning"
+	
+
 
 func activate_holes_for_day(day: int) -> void:
 	var newly_activated = 0
@@ -104,7 +159,7 @@ func get_current_day_config() -> DayConfig:
 	return current_run_config.daily_spawning[current_day - 1]
 
 func _process(delta: float) -> void:
-	if not is_day_active:
+	if not is_day_active or health_system.current_health <= 0:
 		return
 	
 	var day_config = get_current_day_config()
@@ -124,10 +179,10 @@ func _process(delta: float) -> void:
 			if boxes_spawned_today >= day_config.total_boxes:
 				for spawner in box_spawners:
 					spawner.active = false
-					spawner.get_node("Label3D").text = "Quota reached - finish processing!"
+					spawner.label.text = "Quota reached - finish processing!"
 
 	# Check if day is complete  
-	if boxes_spawned_today >= day_config.total_boxes and boxes_processed_correctly >= day_config.total_boxes:
+	if boxes_spawned_today >= day_config.total_boxes and boxes_processed_today >= day_config.total_boxes:
 		complete_day()
 
 func spawn_box(day_config: DayConfig) -> void:
@@ -150,44 +205,50 @@ func spawn_box(day_config: DayConfig) -> void:
 	
 	boxes_spawned_today += 1
 
+# Modify generate_box_properties() in RunOrchestrator.gd
+
 func generate_box_properties(day_config: DayConfig) -> Dictionary:
 	var properties = {}
 	
-	# Apply box type probabilities
-	for box_type in day_config.box_types:
-		if randf() < box_type.chance:
-			if box_type.type == "international":
-				properties.international = true
-			elif box_type.type == "disposable":
-				properties.disposable = true
+	# First check if this should be an invalid destination box (10-30% chance scaling with day)
+	var invalid_chance = lerp(0.1, 0.3, float(current_day) / 31.0)
+	if randf() < invalid_chance:
+		# Pick a destination that has NO active holes
+		var all_destinations = run_generator.possible_destinations
+		var active_destinations = []
+		
+		# Collect all active destinations from holes
+		for hole in current_run_config.box_holes:
+			if hole.active and not hole.is_disposal and hole.destination not in active_destinations:
+				active_destinations.append(hole.destination)
+		
+		# Find destinations that don't have active holes
+		var invalid_destinations = []
+		for dest in all_destinations:
+			if dest not in active_destinations:
+				invalid_destinations.append(dest)
+		
+		# If we have invalid destinations available, use one
+		if invalid_destinations.size() > 0:
+			properties["destination"] = invalid_destinations[randi() % invalid_destinations.size()]
+			properties["international"] = randf() < 0.3  # Can be international too
+			return properties  # Return early, this box is invalid
 	
-	# Ensure international flag is set (default to false if not set)
-	if not properties.has("international"):
-		properties.international = false
-	
-	# Get all ACTIVE holes that match the international flag
-	var active_holes = current_run_config.box_holes.filter(func(hole): 
-		return hole.active and hole.international == properties.international
+	# Otherwise, pick a valid destination from active holes
+	var valid_holes = current_run_config.box_holes.filter(func(hole): 
+		return hole.active and not hole.is_disposal
 	)
 	
-	if active_holes.is_empty():
-		print("Warning: No active holes found for international=", properties.international)
-		# Fallback: pick any active hole and adjust international to match
-		var all_active = current_run_config.box_holes.filter(func(hole): return hole.active)
-		if not all_active.is_empty():
-			var fallback_hole = all_active[randi() % all_active.size()]
-			properties.international = fallback_hole.international
-			active_holes = [fallback_hole]
+	if valid_holes.size() > 0:
+		var selected_hole = valid_holes[randi() % valid_holes.size()]
+		properties["destination"] = selected_hole.destination
+		properties["international"] = selected_hole.international
 	
-	if not active_holes.is_empty():
-		var selected_hole = active_holes[randi() % active_holes.size()]
-		
-		if selected_hole.is_disposal:
-			# For disposal holes, we don't set a destination - disposable boxes can have any/invalid destination
-			properties.disposable = true
-		else:
-			# For regular holes, set the destination
-			properties.destination = selected_hole.destination
+	# Apply box type probabilities for disposable flag
+	for box_type in day_config.box_types:
+		if box_type.type == "disposable" and randf() < box_type.chance:
+			properties["disposable"] = true
+			break
 	
 	return properties
 
@@ -195,9 +256,12 @@ func on_box_processed(correct: bool) -> void:
 	boxes_processed_today += 1
 	if correct:
 		boxes_processed_correctly += 1
+	health_system.on_box_processed(correct)
+	box_counter.text = "Boxes: " + str(boxes_processed_today) + "/" + str(get_current_day_config().total_boxes)
 
 func complete_day() -> void:
 	is_day_active = false
+	health_system.stop_draining()
 	var day_config = get_current_day_config()
 	var success = true
 	
@@ -211,6 +275,9 @@ func complete_day() -> void:
 		complete_run(true)
 	else:
 		# Start next day after a brief delay
+		var box_spawners = get_tree().get_nodes_in_group("BoxSpawner")
+		for spawner in box_spawners:
+			spawner.label.text = ""
 		await get_tree().create_timer(2.0).timeout
 		start_day(current_day + 1)
 
@@ -234,26 +301,17 @@ func apply_special_modifiers(modifiers: Array[String]) -> void:
 				print("Special modifier: Stricter inspection required!")
 				# Could require more careful processing
 
-func get_save_data() -> Dictionary:
-	var data = {}
-	data.current_run_config = current_run_config
-	data.current_day = current_day
-	data.boxes_processed_today = boxes_processed_today
-	data.boxes_processed_correctly = boxes_processed_correctly
-	data.is_day_active = is_day_active
-	data.boxes_spawned_today = boxes_spawned_today
-	return data
-
-func load_save_data(data: Dictionary) -> void:
-	current_run_config = data.current_run_config
-	current_day = data.current_day
-	boxes_processed_today = data.boxes_processed_today
-	boxes_processed_correctly = data.boxes_processed_correctly
-	is_day_active = data.is_day_active
-	boxes_spawned_today = data.boxes_spawned_today
+# Add health depletion handler
+func _on_health_depleted() -> void:
+	print("FAILED: Health depleted on day %d" % current_day)
+	is_day_active = false
+	health_system.stop_draining()
 	
-	if current_run_config:
-		setup_box_holes()
-		if is_day_active:
-			var day_config = get_current_day_config()
-			current_spawn_interval = 1.0 / day_config.boxes_per_second
+	# Stop all spawners
+	var box_spawners = get_tree().get_nodes_in_group("BoxSpawner")
+	for spawner in box_spawners:
+		spawner.active = false
+	
+	day_completed.emit(current_day, false)
+	
+	get_tree().quit()

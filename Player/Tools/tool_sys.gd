@@ -33,7 +33,7 @@ func start_game():
 func _process(_delta: float) -> void:	
 	if interact_crosshair != null and !player.building_system.building_mode_active and !player.building_system.destroy_mode_active and !player.held_box:
 		var looked_at_object = check_for_interactable()
-		if looked_at_object != null:
+		if looked_at_object != null and (looked_at_object.has_method("interact") or looked_at_object.has_method("secondary_interact")):
 			if !interact_crosshair.visible:
 				interact_crosshair.visible = true
 		else:

@@ -28,7 +28,7 @@ func _ready():
 func make_money(amount, notify=false):
 	if notify:
 		#Could emit signal for money made here for UI
-		print("Made "+str(amount)+" money")
+		pass
 	cur_money += amount
 	lifetime_money += amount
 	
