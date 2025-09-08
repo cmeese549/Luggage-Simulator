@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://b2vo5k8d5egaw"]
 
-[ext_resource type="ArrayMesh" uid="uid://de6ifd6pjej8f" path="res://Art_Assets/Models/Voxel/Test/1x1_test-1.obj" id="1_svoj8"]
+[ext_resource type="ArrayMesh" uid="uid://m4m0me2eoips" path="res://Art_Assets/Models/Voxel/OBJ/Factory Bits-1-1X1.obj" id="1_j1egq"]
 [ext_resource type="Shape3D" uid="uid://dq5i80gon5ltw" path="res://Objects/Conveyor Belts/1x1/1x1_skeleton.tres" id="2_ccxwb"]
 [ext_resource type="Shape3D" uid="uid://bx5uqv58s0hum" path="res://Objects/Conveyor Belts/1x1/ConveyorWallHitbox.tres" id="3_bbxwi"]
 
@@ -9,10 +9,10 @@
 [node name="Offset" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.049, 0, -0.099)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Offset" groups=["ConveyorMesh"]]
-transform = Transform3D(-0.5, 0, -4.371139e-08, 0, 0.5, 0, 4.371139e-08, 0, -0.5, -0.09516215, 0, 0.20449749)
-mesh = ExtResource("1_svoj8")
-skeleton = NodePath("../Belt")
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Offset"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.049, 0, 0.099)
+mesh = ExtResource("1_j1egq")
+skeleton = NodePath("../..")
 
 [node name="Belt" type="StaticBody3D" parent="Offset" groups=["Belt"]]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)

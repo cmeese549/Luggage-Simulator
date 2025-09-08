@@ -85,6 +85,7 @@ func stored_hotkey(index: int) -> void:
 			return
 		hotkeys[index] = buildable_objects[selected_object_index]
 		hotkeys_ui.update_hotkeys()
+		ProfileManager.update_hotkeys(get_save_data())
 
 
 func toggle_building_mode():

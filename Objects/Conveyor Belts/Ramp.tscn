@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://bllkrujo0vy3m" path="res://Objects/Conveyor Belts/Conveyor.gd" id="1_3rp0l"]
 [ext_resource type="PackedScene" uid="uid://b2vo5k8d5egaw" path="res://Objects/Conveyor Belts/1x1/1x1_skeleton.tscn" id="3_hiyip"]
-[ext_resource type="ArrayMesh" uid="uid://de6ifd6pjej8f" path="res://Art_Assets/Models/Voxel/Test/1x1_test-1.obj" id="3_r0a75"]
 [ext_resource type="Shape3D" uid="uid://dq5i80gon5ltw" path="res://Objects/Conveyor Belts/1x1/1x1_skeleton.tres" id="4_27b5x"]
+[ext_resource type="ArrayMesh" uid="uid://m4m0me2eoips" path="res://Art_Assets/Models/Voxel/OBJ/Factory Bits-1-1X1.obj" id="4_r0a75"]
 [ext_resource type="Shape3D" uid="uid://bx5uqv58s0hum" path="res://Objects/Conveyor Belts/1x1/ConveyorWallHitbox.tres" id="5_66rme"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_wrhv7"]
@@ -113,7 +113,7 @@ shape = ExtResource("4_27b5x")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="connector/Offset" groups=["ConveyorMesh"]]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
-mesh = ExtResource("3_r0a75")
+mesh = ExtResource("4_r0a75")
 skeleton = NodePath("../Belt")
 
 [node name="Left Wall" type="StaticBody3D" parent="connector/Offset"]

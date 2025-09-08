@@ -54,9 +54,7 @@ ambient_light_energy = 1.04
 size = Vector3(105.73, 1, 107.205)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s43jd"]
-diffuse_mode = 3
-specular_mode = 1
-albedo_color = Color(0.46724528, 0.4456023, 0.37733003, 1)
+albedo_color = Color(0.11, 0.09331666, 0.033, 1)
 roughness = 0.0
 stencil_flags = 2
 stencil_color = Color(0, 0.4117647, 0, 1)
@@ -8274,6 +8272,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.021827, 0.7202852, -3.0098
 [node name="Money" type="Node" parent="." groups=["Money"]]
 unique_name_in_owner = true
 script = ExtResource("21_s4lgs")
+starting_money = 50000
 
 [node name="MoneySound" type="AudioStreamPlayer" parent="Money"]
 stream = ExtResource("22_qqyv7")
@@ -8303,3 +8302,48 @@ script = ExtResource("36_eqlt2")
 
 [node name="EconomyConfig" parent="." instance=ExtResource("35_eqlt2")]
 config = null
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 17.513107, 11.131, 20.24451)
+light_color = Color(1, 0.73, 0.39999998, 1)
+light_energy = 1.531
+light_indirect_energy = 16.0
+light_size = 1.0
+light_specular = 16.0
+spot_range = 31.116169
+spot_angle = 80.41067
+
+[node name="SpotLight3D3" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 17.513107, 11.131, -20.565851)
+light_color = Color(1, 0.73, 0.39999998, 1)
+light_energy = 1.531
+light_indirect_energy = 16.0
+light_size = 1.0
+light_specular = 16.0
+spot_range = 31.116169
+spot_angle = 80.41067
+
+[node name="SpotLight3D7" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -16.067062, 11.131, 20.24451)
+light_color = Color(1, 0.73, 0.39999998, 1)
+light_energy = 1.531
+light_indirect_energy = 16.0
+light_size = 1.0
+light_specular = 16.0
+spot_range = 31.116169
+spot_angle = 80.41067
+
+[node name="SpotLight3D9" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -16.067062, 11.131, -20.565851)
+light_color = Color(1, 0.73, 0.39999998, 1)
+light_energy = 1.531
+light_indirect_energy = 16.0
+light_size = 1.0
+light_specular = 16.0
+spot_range = 31.116169
+spot_angle = 80.41067
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.017993389, 0.9998381, 0, -0.9998381, 0.017993389, 0, 31.04889, 0)
+
+[editable path="Enviroment/BoxHoles/JFK D-Hole"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://duf1brj2l4iyn"]
 
-[ext_resource type="ArrayMesh" uid="uid://cq7gsepfx4nj0" path="res://Art_Assets/Models/Voxel/Test/Corner2-1-Corner.obj" id="1_gmghc"]
+[ext_resource type="ArrayMesh" uid="uid://dr2hy434us44i" path="res://Art_Assets/Models/Voxel/OBJ/Factory Bits-2-Corner.obj" id="1_efco4"]
 [ext_resource type="Shape3D" uid="uid://bx5uqv58s0hum" path="res://Objects/Conveyor Belts/1x1/ConveyorWallHitbox.tres" id="2_gmghc"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gmghc"]
@@ -9,15 +9,15 @@ size = Vector3(0.14994812, 1.1010742, 0.15035248)
 [node name="1x1" type="Node3D"]
 
 [node name="Offset" type="Node3D" parent="."]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0.049, 0, -0.099)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Offset" groups=["ConveyorMesh"]]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
-mesh = ExtResource("1_gmghc")
+mesh = ExtResource("1_efco4")
 skeleton = NodePath("")
 
 [node name="Left Wall" type="StaticBody3D" parent="Offset"]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0.049712893, 0.5, 1.0225672)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0.09912467, 0.5, 0.9237439)
 visible = false
 collision_layer = 536870912
 collision_mask = 536870912
@@ -27,7 +27,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00017344952, 0.05029297, 0
 shape = ExtResource("2_gmghc")
 
 [node name="Left Belt" type="StaticBody3D" parent="Offset" groups=["Belt"]]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0.049712893, 0.5, 1.0225672)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0.09912467, 0.5, 0.9237439)
 collision_layer = 256
 collision_mask = 256
 
@@ -36,7 +36,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.003, 0.05, 0.1)
 shape = ExtResource("2_gmghc")
 
 [node name="Right Wall" type="StaticBody3D" parent="Offset"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.97628975, 0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.926878, 0.5, -0.09882325)
 visible = false
 collision_layer = 536870912
 collision_mask = 536870912
@@ -46,7 +46,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.001, 0, 0.1)
 shape = ExtResource("2_gmghc")
 
 [node name="Right Belt" type="StaticBody3D" parent="Offset" groups=["Belt"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.97628975, 0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.926878, 0.5, -0.09882325)
 collision_layer = 256
 collision_mask = 256
 
@@ -55,6 +55,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.001, 0, 0.1)
 shape = ExtResource("2_gmghc")
 
 [node name="Tower" type="StaticBody3D" parent="Offset"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.049411774, 0, -0.09882325)
 visible = false
 collision_layer = 536870912
 collision_mask = 536870912
@@ -64,6 +65,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.87991685, 0.55122125, -0.82
 shape = SubResource("BoxShape3D_gmghc")
 
 [node name="Tower Belt" type="StaticBody3D" parent="Offset" groups=["Belt", "Booster"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.049411774, 0, -0.09882325)
 collision_layer = 256
 collision_mask = 256
 

@@ -6,6 +6,11 @@ class_name Box
 @export var box_size: Vector3 = Vector3(1, 1, 1)
 @export var box_color: Color = Color.BROWN
 
+@export var sad_dissolve_highligh_collor: Color = Color.from_rgba8(255, 97, 97, 1)
+@export var happy_dissolve_highligh_collor: Color = Color.from_rgba8(123, 246, 0, 1)
+
+var box_shader = preload("res://Art_Assets/Shaders/Box Dissolve/box_dissolve.tres")
+
 @export var value: int = 10
 @export var international: bool = false
 @export var disposeable: bool = false
@@ -47,8 +52,7 @@ var corner_positions = {
 }
 
 # Highlighting system
-var original_material: StandardMaterial3D
-var highlight_material: StandardMaterial3D
+var original_material: ShaderMaterial
 var is_highlighted: bool = false
 var just_loaded: bool = false
 
@@ -91,10 +95,6 @@ func _ready():
 	# Add to Box group for pickup detection
 	add_to_group("Box")
 	
-	# Setup basic physics properties
-	mass = 1.0
-	gravity_scale = 1.0
-	
 	# Create visual mesh if not already present
 	if not has_node("MeshInstance3D"):
 		create_box_visual()
@@ -103,8 +103,6 @@ func _ready():
 	if not has_node("CollisionShape3D"):
 		create_box_collision()
 	
-	# Create highlight materials after visual is ready
-	create_highlight_materials()
 	create_destination_label()
 	create_approval_icons()
 	
@@ -135,42 +133,25 @@ func create_box_visual():
 	var mesh_instance = MeshInstance3D.new()
 	var box_mesh = BoxMesh.new()
 	box_mesh.size = box_size
-	
+	print("Noooo")
 	mesh_instance.mesh = box_mesh
 	mesh_instance.name = "MeshInstance3D"
-	
-	# Create and store original material
-	original_material = StandardMaterial3D.new()
-	original_material.albedo_color = box_color
-	original_material.roughness = 0.8
+
+	original_material = ShaderMaterial.new()
+	original_material.shader = box_shader.duplicate()
+	original_material.set_shader_parameter("Box_Color", box_color)
 	mesh_instance.material_override = original_material
 	
 	add_child(mesh_instance)
-
-func create_highlight_materials():
-	# Create highlight material with stencil outline
-	highlight_material = StandardMaterial3D.new()
-	highlight_material.albedo_color = box_color
-	highlight_material.roughness = 0.8
-	
-	# Add cyan emission for highlighting
-	highlight_material.emission_enabled = true
-	highlight_material.emission = Color.CYAN
-	highlight_material.emission_energy = 0.5
-	
-	# Try to use Godot 4.5 stencil features
-	#highlight_material.stencil_mode = StandardMaterial3D.STENCIL_MODE_OUTLINE
-	#highlight_material.stencil_color = Color.CYAN
-	#highlight_material.stencil_outline_thickness = 2.0
 
 func set_highlighted(highlighted: bool):
 	is_highlighted = highlighted
 	var mesh_instance = get_node("MeshInstance3D")
 	if mesh_instance:
 		if highlighted:
-			mesh_instance.material_override = highlight_material
+			mesh_instance.material_override.set_shader_parameter("Box_Color", Color.CYAN)
 		else:
-			mesh_instance.material_override = original_material
+			mesh_instance.material_override.set_shader_parameter("Box_Color", box_color)
 
 func create_box_collision():
 	var collision_shape = CollisionShape3D.new()
@@ -263,7 +244,7 @@ func create_icon_label(icon: Dictionary):
 	position_label_at_corner(icon_label, corner)
 	add_child(icon_label)
 	
-func _physics_process(delta):
+func _physics_process(_delta: float):
 	# Respawn if fallen through map
 	if global_position.y < -50:
 		global_position = Vector3(0, 5, 0)
@@ -327,3 +308,22 @@ func select_available_corner() -> String:
 	var selected_corner = available_corners[randi() % available_corners.size()]
 	occupied_corners.append(selected_corner)  # Mark as occupied
 	return selected_corner
+	
+func dissolve(target_value: float, target_color: Color = sad_dissolve_highligh_collor):
+	original_material.set_shader_parameter("Light_Color", target_color)
+	if target_value < 0:
+		original_material.set_shader_parameter("Progress", 1.0)
+	else:
+		original_material.set_shader_parameter("Progress", -0.15)
+	
+	var tween = create_tween()
+	tween.tween_property(original_material, "shader_parameter/Progress", target_value, 1.2)
+	return tween.finished
+
+func die(was_legit: bool):
+	gravity_scale = -0.5
+	if was_legit:
+		await dissolve(1, happy_dissolve_highligh_collor)
+	else:
+		await dissolve(1, sad_dissolve_highligh_collor)
+	queue_free()

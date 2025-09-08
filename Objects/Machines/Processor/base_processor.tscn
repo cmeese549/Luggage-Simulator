@@ -1,13 +1,19 @@
-[gd_scene load_steps=6 format=3 uid="uid://ck74iel6gyc81"]
+[gd_scene load_steps=11 format=3 uid="uid://ck74iel6gyc81"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_0yr2o"]
-size = Vector3(6, 2, 2)
+[ext_resource type="ArrayMesh" uid="uid://cbmxfcb7cm8jm" path="res://Art_Assets/Models/Voxel/OBJ/Factory Bits-3-ProcessorInput.obj" id="1_5uiax"]
+[ext_resource type="ArrayMesh" uid="uid://cdpwdb5o17xdq" path="res://Art_Assets/Models/Voxel/OBJ/Factory Bits-4-ProcessorMiddle.obj" id="2_25aho"]
+[ext_resource type="PackedScene" uid="uid://cnmqv3skkj3nv" path="res://Art_Assets/Shaders/Portals/in_portal.tscn" id="2_0281g"]
+[ext_resource type="ArrayMesh" uid="uid://b16vsu3b6yfcj" path="res://Art_Assets/Models/Voxel/OBJ/Factory Bits-5-ProcessorOut.obj" id="3_0281g"]
+[ext_resource type="PackedScene" uid="uid://jbmu4u16unfp" path="res://Art_Assets/Shaders/Portals/out_portal.tscn" id="5_b8hqp"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_bik5l"]
 points = PackedVector3Array(3, 1, 1, 3, 1, -1, -3, 1, 1, 3, -1, 1, 3, -1, -1, -3, 1, -1, -3, -1, 1, -3, -1, -1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4dub8"]
 size = Vector3(5.77948, 1.8399658, 1.7530365)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0281g"]
+size = Vector3(0.121917725, 1.0979004, 1.5144958)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ri7ab"]
 size = Vector3(1.0775757, 1.4753418, 1.90271)
@@ -17,20 +23,38 @@ size = Vector3(6.2596436, 2.004242, 2.0903015)
 
 [node name="BaseProcessor" type="Node3D"]
 
+[node name="Meshz" type="Node3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+
+[node name="Input" type="MeshInstance3D" parent="Meshz"]
+mesh = ExtResource("1_5uiax")
+skeleton = NodePath("../../..")
+
+[node name="In Portal" parent="Meshz/Input" instance=ExtResource("2_0281g")]
+transform = Transform3D(-1.4993006e-07, 0, -3.43, 0, 3.43, 0, 3.43, 0, -1.4993006e-07, -5.9871325, -0.5896935, 0)
+
+[node name="Middle" type="MeshInstance3D" parent="Meshz"]
+mesh = ExtResource("2_25aho")
+skeleton = NodePath("../../..")
+
+[node name="Output" type="MeshInstance3D" parent="Meshz"]
+mesh = ExtResource("3_0281g")
+skeleton = NodePath("../../..")
+
+[node name="OutPortal" parent="Meshz/Output" instance=ExtResource("5_b8hqp")]
+transform = Transform3D(-1.4993006e-07, 0, 3.43, 0, 3.43, 0, -3.43, 0, -1.4993006e-07, 5.9948974, -0.59, 0)
+
 [node name="Building" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.013537884, 1, -0.009413004)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Building"]
-mesh = SubResource("BoxMesh_0yr2o")
-skeleton = NodePath("../../..")
+visible = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Building"]
 shape = SubResource("ConvexPolygonShape3D_bik5l")
 
 [node name="Output Icon Label" type="Label3D" parent="."]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 3.033, 1.282, 0)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 3.033, 1.4953845, 0)
 text = "✔️❌"
-font_size = 157
+font_size = 114
 
 [node name="InputArrow" type="Label3D" parent="."]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -2.9910781, 0.544646, -0.008230448)
@@ -38,12 +62,13 @@ text = "IN"
 font_size = 62
 
 [node name="OutputArrow" type="Label3D" parent="."]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 3.033, 0.545, 0)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 2.9944143, 0.545, 0)
 text = "OUT"
 font_size = 62
 
 [node name="BuildingCollider" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1185379, 0, -1.009413)
+visible = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="BuildingCollider"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1238098, 0.98773193, 0.9937973)
@@ -53,6 +78,7 @@ debug_color = Color(0.82, 0.29520002, 0.7062933, 1)
 
 [node name="Box Detectors" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1185379, 0, -1.009413)
+visible = false
 
 [node name="Input" type="Area3D" parent="Box Detectors"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.3030453, 0.56461024, 1.0015585)
@@ -60,8 +86,8 @@ collision_layer = 524288
 collision_mask = 524288
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Box Detectors/Input"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.72476196, 0.16223145, 0.007507324)
-shape = SubResource("BoxShape3D_ri7ab")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.202591, -0.026489258, 0.011489868)
+shape = SubResource("BoxShape3D_0281g")
 debug_color = Color(0, 0.62, 0.52699995, 1)
 
 [node name="Sorted Output" type="Area3D" parent="Box Detectors"]
@@ -76,6 +102,7 @@ debug_color = Color(0, 0.62, 0.52699995, 1)
 
 [node name="Box Droppers" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1185379, 0, -1.009413)
+visible = false
 
 [node name="Sorted" type="Marker3D" parent="Box Droppers"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.669, 0.884, 1)
@@ -83,30 +110,31 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.669, 0.884, 1)
 [node name="County Labels" type="Node3D" parent="."]
 
 [node name="County 1" type="Label3D" parent="County Labels"]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 1.287, 1.103, -1.0137951)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 2.0407805, 1.4578655, -1.0137951)
 text = "1/10"
 font_size = 147
 
 [node name="County 2" type="Label3D" parent="County Labels"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.287, 1.103, 1.014)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0776858, 1.4408861, 1.014)
 text = "1/10"
 font_size = 147
 
 [node name="Turned Off Labels" type="Node3D" parent="."]
 
 [node name="Turned Off 1" type="Label3D" parent="Turned Off Labels"]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -1.133, 0.886, -1.014)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -2.2413273, 1.4633989, -1.014)
 visible = false
 text = "⛔"
-font_size = 262
+font_size = 112
 
 [node name="Turned Off 2" type="Label3D" parent="Turned Off Labels"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.133, 0.886, 1.014)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2417145, 1.463, 1.014)
 visible = false
 text = "⛔"
-font_size = 262
+font_size = 112
 
 [node name="Interact" type="Area3D" parent="." groups=["Interactable"]]
+visible = false
 collision_layer = 2148532224
 collision_mask = 2148532224
 

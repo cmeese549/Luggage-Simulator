@@ -1,0 +1,9 @@
+extends Resource
+
+class_name RunSaveData
+
+@export var buildables: Array[Dictionary] = []
+@export var boxes: Array[Dictionary] = []
+@export var money: Dictionary = {}
+@export var run_orchestrator_data: Dictionary = {}
+@export var box_spawners: Array[Dictionary] = []

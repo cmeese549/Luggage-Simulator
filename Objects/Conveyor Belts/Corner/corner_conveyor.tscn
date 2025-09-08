@@ -7,14 +7,13 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_6qs70"]
 size = Vector3(1.8860602, 0.96832275, 1.6546476)
 
-[node name="1x1 Conveyor" type="Node3D"]
+[node name="Corner Conveyor" type="Node3D"]
 script = ExtResource("1_5gshr")
 is_corner = true
 corner_pull_strength = 1.2
 building_name = "Corner Conveyor"
 
 [node name="1x1" parent="." instance=ExtResource("2_gtre6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.052334785, 0, 0.14927998)
 
 [node name="Belt" type="StaticBody3D" parent="." groups=["Belt"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.09415537, 0)

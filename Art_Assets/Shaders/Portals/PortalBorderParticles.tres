@@ -1,0 +1,43 @@
+[gd_resource type="ParticleProcessMaterial" load_steps=9 format=3 uid="uid://cfspfq3teikn3"]
+
+[sub_resource type="Curve" id="Curve_60c3f"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.03790614, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.18722787, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_ecd17"]
+curve = SubResource("Curve_60c3f")
+
+[sub_resource type="Gradient" id="Gradient_dlb8w"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_o3x6r"]
+gradient = SubResource("Gradient_dlb8w")
+
+[sub_resource type="Curve" id="Curve_dlb8w"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_o3x6r"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_cd44h"]
+_limits = [-2.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_60c3f"]
+curve_x = SubResource("Curve_dlb8w")
+curve_y = SubResource("Curve_o3x6r")
+curve_z = SubResource("Curve_cd44h")
+
+[resource]
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+direction = Vector3(0, 0, -1)
+initial_velocity_min = 0.39999998
+initial_velocity_max = 1.0
+orbit_velocity_curve = SubResource("CurveXYZTexture_60c3f")
+gravity = Vector3(0, 0, 0)
+color_ramp = SubResource("GradientTexture1D_o3x6r")
+alpha_curve = SubResource("CurveTexture_ecd17")

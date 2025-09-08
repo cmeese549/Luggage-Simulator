@@ -92,16 +92,17 @@ func sfx_slider_changed(value: float) -> void:
 	store_config("sfx_volume", value)
 	
 func update_inventory_items() -> void:
-	var old_items : Array[Node] = inventory_dad.get_children()
-	for item: Node in old_items:
-		item.call_deferred("queue_free")
-	
-	for item: InventoryItem in player.inventory:
-		var new_item : Button = inventory_item.instantiate()
-		new_item.find_child("ItemName").text = item.item_name
-		new_item.find_child("ItemDescription").text = item.item_description
-		new_item.find_child("ItemIcon").texture = item.item_icon
-		inventory_dad.add_child(new_item)
+	pass
+	#var old_items : Array[Node] = inventory_dad.get_children()
+	#for item: Node in old_items:
+		#item.call_deferred("queue_free")
+	#
+	#for item: InventoryItem in player.inventory:
+		#var new_item : Button = inventory_item.instantiate()
+		#new_item.find_child("ItemName").text = item.item_name
+		#new_item.find_child("ItemDescription").text = item.item_description
+		#new_item.find_child("ItemIcon").texture = item.item_icon
+		#inventory_dad.add_child(new_item)
 	
 func _unhandled_input(event):	
 	if Input.is_action_just_pressed("Pause") and ui.pauseable and !player.building_system.building_mode_active and !player.building_system.destroy_mode_active:

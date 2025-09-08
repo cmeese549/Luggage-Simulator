@@ -1,8 +1,7 @@
-[gd_scene load_steps=20 format=3 uid="uid://exdhmbr43ger"]
+[gd_scene load_steps=18 format=3 uid="uid://exdhmbr43ger"]
 
 [ext_resource type="Script" uid="uid://dic75q4o378w6" path="res://UI/UI.gd" id="1_6dd3c"]
 [ext_resource type="Theme" uid="uid://b3kq74llqlv3x" path="res://UI/Theme/MinimalUI.tres" id="1_dhe1o"]
-[ext_resource type="Texture2D" uid="uid://dsu4otkk2qt0g" path="res://icon.svg" id="3_q0uhn"]
 [ext_resource type="PackedScene" uid="uid://bbiv7n10cddy3" path="res://UI/Hotkeys/hotkeys.tscn" id="3_qhxh2"]
 [ext_resource type="PackedScene" uid="uid://ebs3x8yehb0t" path="res://UI/BuildMode/BuildMode.tscn" id="3_r2vy3"]
 [ext_resource type="Script" uid="uid://b6jifj4bjajmg" path="res://UI/Killfeed/killfeed.gd" id="4_017wa"]
@@ -12,7 +11,6 @@
 [ext_resource type="Script" uid="uid://bsyahvddt84hi" path="res://UI/delta_fade.gd" id="6_wtdy7"]
 [ext_resource type="Script" uid="uid://cmqb4oi3mfhb4" path="res://UI/HUD/hud.gd" id="7_017wa"]
 [ext_resource type="FontFile" uid="uid://dqa66k6g8kp0j" path="res://UI/Theme/C&C Red Alert [INET].ttf" id="8_nxoi0"]
-[ext_resource type="PackedScene" uid="uid://dth0cukoj3ajb" path="res://UI/PauseMenu/InventoryItem.tscn" id="10_npmjx"]
 
 [sub_resource type="Animation" id="Animation_017wa"]
 length = 0.001
@@ -257,16 +255,19 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -223.0
+offset_left = -258.65002
+offset_top = 23.0
+offset_right = -33.234985
 offset_bottom = 97.0
 grow_horizontal = 0
 
 [node name="PanelContainer" type="PanelContainer" parent="HUD/Money"]
-layout_mode = 0
-offset_left = 24.795
-offset_top = 32.915
-offset_right = 193.795
-offset_bottom = 104.91508
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HUD/Money/PanelContainer"]
 layout_mode = 2
@@ -287,7 +288,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 20.0
 theme_override_font_sizes/font_size = 52
-text = "$1,000"
+text = "$15,000"
 horizontal_alignment = 1
 
 [node name="Control2" type="Control" parent="HUD/Money/PanelContainer/HBoxContainer"]
@@ -469,7 +470,7 @@ horizontal_alignment = 1
 
 [node name="SensitivitySlider" type="HSlider" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/VBoxContainer/Sensitivity"]
 layout_mode = 2
-focus_neighbor_right = NodePath("../../../Rows/ScrollContainer/GridContainer")
+focus_neighbor_right = NodePath("../../../Profiles/ScrollContainer/GridContainer")
 focus_neighbor_bottom = NodePath("../../FOV/FOVSlider")
 min_value = 0.01
 max_value = 10.0
@@ -488,7 +489,7 @@ horizontal_alignment = 1
 [node name="FOVSlider" type="HSlider" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/VBoxContainer/FOV"]
 layout_mode = 2
 focus_neighbor_top = NodePath("../../Sensitivity/SensitivitySlider")
-focus_neighbor_right = NodePath("../../../Rows/ScrollContainer/GridContainer")
+focus_neighbor_right = NodePath("../../../Profiles/ScrollContainer/GridContainer")
 focus_neighbor_bottom = NodePath("../../Volume/VolumeSlider")
 min_value = 60.0
 max_value = 120.0
@@ -507,7 +508,7 @@ horizontal_alignment = 1
 [node name="VolumeSlider" type="HSlider" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/VBoxContainer/Volume"]
 layout_mode = 2
 focus_neighbor_top = NodePath("../../FOV/FOVSlider")
-focus_neighbor_right = NodePath("../../../Rows/ScrollContainer/GridContainer")
+focus_neighbor_right = NodePath("../../../Profiles/ScrollContainer/GridContainer")
 focus_neighbor_bottom = NodePath("../../MusicVolume/MusicVolumeSlider")
 max_value = 3.0
 step = 0.01
@@ -525,7 +526,7 @@ horizontal_alignment = 1
 [node name="MusicVolumeSlider" type="HSlider" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/VBoxContainer/MusicVolume"]
 layout_mode = 2
 focus_neighbor_top = NodePath("../../Volume/VolumeSlider")
-focus_neighbor_right = NodePath("../../../Rows/ScrollContainer/GridContainer")
+focus_neighbor_right = NodePath("../../../Profiles/ScrollContainer/GridContainer")
 focus_neighbor_bottom = NodePath("../../SfxVolume/SfxVolumeSlider")
 max_value = 1.0
 step = 0.01
@@ -543,280 +544,37 @@ horizontal_alignment = 1
 [node name="SfxVolumeSlider" type="HSlider" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/VBoxContainer/SfxVolume"]
 layout_mode = 2
 focus_neighbor_top = NodePath("../../MusicVolume/MusicVolumeSlider")
-focus_neighbor_right = NodePath("../../../Rows/ScrollContainer/GridContainer")
+focus_neighbor_right = NodePath("../../../Profiles/ScrollContainer/GridContainer")
 focus_neighbor_bottom = NodePath("../../../../Close/Resume")
 max_value = 1.0
 step = 0.01
 value = 0.8
 
-[node name="Rows" type="VBoxContainer" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad"]
+[node name="Profiles" type="VBoxContainer" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.3
 
-[node name="Label" type="Label" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Rows"]
+[node name="Label" type="Label" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Profiles"]
 layout_mode = 2
 size_flags_stretch_ratio = 0.0
 theme_override_font_sizes/font_size = 58
-text = "Inventory"
+text = "Profiles"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ScrollContainer" type="ScrollContainer" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Rows"]
+[node name="ScrollContainer" type="ScrollContainer" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Profiles"]
 layout_mode = 2
 size_flags_vertical = 3
 follow_focus = true
 
-[node name="GridContainer" type="GridContainer" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Rows/ScrollContainer"]
+[node name="GridContainer" type="HBoxContainer" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Profiles/ScrollContainer" groups=["ProfileUI"]]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 focus_neighbor_left = NodePath("../../../VBoxContainer/Sensitivity/SensitivitySlider")
 focus_neighbor_bottom = NodePath("../../../../Close/Resume")
-theme_override_constants/h_separation = 50
-theme_override_constants/v_separation = 50
-columns = 3
-
-[node name="InventoryItem" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Rows/ScrollContainer/GridContainer" instance=ExtResource("10_npmjx")]
-layout_mode = 2
-
-[node name="Button2" type="Button" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Rows/ScrollContainer/GridContainer"]
-custom_minimum_size = Vector2(389.59, 440)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Rows/ScrollContainer/GridContainer/Button2"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="ItemName" type="Label" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Rows/ScrollContainer/GridContainer/Button2/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 41
-text = "Epic Inventory Item"
-horizontal_alignment = 1
-
-[node name="TextureRect" type="TextureRect" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Rows/ScrollContainer/GridContainer/Button2/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-texture = ExtResource("3_q0uhn")
-stretch_mode = 5
-
-[node name="Label" type="Label" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Rows/ScrollContainer/GridContainer/Button2/VBoxContainer"]
-custom_minimum_size = Vector2(0, 60)
-layout_mode = 2
-theme_override_font_sizes/font_size = 21
-text = "This is a super awesome epic shop item"
-horizontal_alignment = 1
-autowrap_mode = 2
-
-[node name="Button3" type="Button" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Rows/ScrollContainer/GridContainer"]
-custom_minimum_size = Vector2(389.59, 440)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Rows/ScrollContainer/GridContainer/Button3"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="ItemName" type="Label" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Rows/ScrollContainer/GridContainer/Button3/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 41
-text = "Epic Inventory Item"
-horizontal_alignment = 1
-
-[node name="TextureRect" type="TextureRect" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Rows/ScrollContainer/GridContainer/Button3/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-texture = ExtResource("3_q0uhn")
-stretch_mode = 5
-
-[node name="Label" type="Label" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Rows/ScrollContainer/GridContainer/Button3/VBoxContainer"]
-custom_minimum_size = Vector2(0, 60)
-layout_mode = 2
-theme_override_font_sizes/font_size = 21
-text = "This is a super awesome epic shop item"
-horizontal_alignment = 1
-autowrap_mode = 2
-
-[node name="Button4" type="Button" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Rows/ScrollContainer/GridContainer"]
-custom_minimum_size = Vector2(389.59, 440)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Rows/ScrollContainer/GridContainer/Button4"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="ItemName" type="Label" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Rows/ScrollContainer/GridContainer/Button4/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 41
-text = "Epic Inventory Item"
-horizontal_alignment = 1
-
-[node name="TextureRect" type="TextureRect" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Rows/ScrollContainer/GridContainer/Button4/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-texture = ExtResource("3_q0uhn")
-stretch_mode = 5
-
-[node name="Label" type="Label" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Rows/ScrollContainer/GridContainer/Button4/VBoxContainer"]
-custom_minimum_size = Vector2(0, 60)
-layout_mode = 2
-theme_override_font_sizes/font_size = 21
-text = "This is a super awesome epic shop item"
-horizontal_alignment = 1
-autowrap_mode = 2
-
-[node name="Button5" type="Button" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Rows/ScrollContainer/GridContainer"]
-custom_minimum_size = Vector2(389.59, 440)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Rows/ScrollContainer/GridContainer/Button5"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="ItemName" type="Label" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Rows/ScrollContainer/GridContainer/Button5/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 41
-text = "Epic Inventory Item"
-horizontal_alignment = 1
-
-[node name="TextureRect" type="TextureRect" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Rows/ScrollContainer/GridContainer/Button5/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-texture = ExtResource("3_q0uhn")
-stretch_mode = 5
-
-[node name="Label" type="Label" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Rows/ScrollContainer/GridContainer/Button5/VBoxContainer"]
-custom_minimum_size = Vector2(0, 60)
-layout_mode = 2
-theme_override_font_sizes/font_size = 21
-text = "This is a super awesome epic shop item"
-horizontal_alignment = 1
-autowrap_mode = 2
-
-[node name="Button6" type="Button" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Rows/ScrollContainer/GridContainer"]
-custom_minimum_size = Vector2(389.59, 440)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Rows/ScrollContainer/GridContainer/Button6"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="ItemName" type="Label" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Rows/ScrollContainer/GridContainer/Button6/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 41
-text = "Epic Inventory Item"
-horizontal_alignment = 1
-
-[node name="TextureRect" type="TextureRect" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Rows/ScrollContainer/GridContainer/Button6/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-texture = ExtResource("3_q0uhn")
-stretch_mode = 5
-
-[node name="Label" type="Label" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Rows/ScrollContainer/GridContainer/Button6/VBoxContainer"]
-custom_minimum_size = Vector2(0, 60)
-layout_mode = 2
-theme_override_font_sizes/font_size = 21
-text = "This is a super awesome epic shop item"
-horizontal_alignment = 1
-autowrap_mode = 2
-
-[node name="Button7" type="Button" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Rows/ScrollContainer/GridContainer"]
-custom_minimum_size = Vector2(389.59, 440)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Rows/ScrollContainer/GridContainer/Button7"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="ItemName" type="Label" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Rows/ScrollContainer/GridContainer/Button7/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 41
-text = "Epic Inventory Item"
-horizontal_alignment = 1
-
-[node name="TextureRect" type="TextureRect" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Rows/ScrollContainer/GridContainer/Button7/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-texture = ExtResource("3_q0uhn")
-stretch_mode = 5
-
-[node name="Label" type="Label" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Rows/ScrollContainer/GridContainer/Button7/VBoxContainer"]
-custom_minimum_size = Vector2(0, 60)
-layout_mode = 2
-theme_override_font_sizes/font_size = 21
-text = "This is a super awesome epic shop item"
-horizontal_alignment = 1
-autowrap_mode = 2
-
-[node name="Button8" type="Button" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Rows/ScrollContainer/GridContainer"]
-custom_minimum_size = Vector2(389.59, 440)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Rows/ScrollContainer/GridContainer/Button8"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="ItemName" type="Label" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Rows/ScrollContainer/GridContainer/Button8/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 41
-text = "Epic Inventory Item"
-horizontal_alignment = 1
-
-[node name="TextureRect" type="TextureRect" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Rows/ScrollContainer/GridContainer/Button8/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-texture = ExtResource("3_q0uhn")
-stretch_mode = 5
-
-[node name="Label" type="Label" parent="PauseMenu/PanelContainer/MarginContainer/Rows/PauseDad/Rows/ScrollContainer/GridContainer/Button8/VBoxContainer"]
-custom_minimum_size = Vector2(0, 60)
-layout_mode = 2
-theme_override_font_sizes/font_size = 21
-text = "This is a super awesome epic shop item"
-horizontal_alignment = 1
-autowrap_mode = 2
+theme_override_constants/separation = 35
 
 [node name="Tutorial" type="HBoxContainer" parent="PauseMenu/PanelContainer/MarginContainer/Rows"]
 visible = false
@@ -927,7 +685,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.4
 focus_neighbor_left = NodePath("../Resume")
-focus_neighbor_top = NodePath("../../PauseDad/Rows/ScrollContainer/GridContainer")
+focus_neighbor_top = NodePath("../../PauseDad/Profiles/ScrollContainer/GridContainer")
 focus_neighbor_right = NodePath("../Unstick")
 theme_override_fonts/font = ExtResource("8_nxoi0")
 theme_override_font_sizes/font_size = 46
@@ -939,7 +697,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.4
 focus_neighbor_left = NodePath("../HowToPlay")
-focus_neighbor_top = NodePath("../../PauseDad/Rows/ScrollContainer/GridContainer")
+focus_neighbor_top = NodePath("../../PauseDad/Profiles/ScrollContainer/GridContainer")
 focus_neighbor_right = NodePath("../Quit")
 theme_override_fonts/font = ExtResource("8_nxoi0")
 theme_override_font_sizes/font_size = 46
@@ -952,7 +710,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.4
 focus_neighbor_left = NodePath("../Unstick")
-focus_neighbor_top = NodePath("../../PauseDad/Rows/ScrollContainer/GridContainer")
+focus_neighbor_top = NodePath("../../PauseDad/Profiles/ScrollContainer/GridContainer")
 theme_override_fonts/font = ExtResource("8_nxoi0")
 theme_override_font_sizes/font_size = 46
 text = "Quit To Desktop

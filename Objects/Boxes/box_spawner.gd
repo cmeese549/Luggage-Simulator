@@ -66,7 +66,6 @@ func spawn_box_with_properties(properties: Dictionary) -> void:
 		randf_range(min_box_size.z, max_box_size.z)
 	)
 	box.box_color = colors[randi() % colors.size()]
-	
 	# Override with specific properties from LevelManager
 	if properties.has("destination"):
 		box.destination = properties.destination

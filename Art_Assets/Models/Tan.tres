@@ -3,7 +3,7 @@
 [resource]
 diffuse_mode = 3
 specular_mode = 1
-albedo_color = Color(0.65098, 0.627451, 0.552941, 1)
+albedo_color = Color(0.26, 0.2509, 0.221, 1)
 roughness = 0.0
 stencil_flags = 2
 stencil_color = Color(0, 0.4117647, 0, 1)

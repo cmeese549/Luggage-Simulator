@@ -33,7 +33,7 @@ func start_game():
 func _process(_delta: float) -> void:	
 	if interact_crosshair != null and !player.building_system.building_mode_active and !player.building_system.destroy_mode_active and !player.held_box:
 		var looked_at_object = check_for_interactable()
-		if looked_at_object != null and (looked_at_object.has_method("interact") or looked_at_object.has_method("secondary_interact")):
+		if looked_at_object != null and check_interactive(looked_at_object):
 			if !interact_crosshair.visible:
 				interact_crosshair.visible = true
 		else:
@@ -58,6 +58,12 @@ func equip_next_tool(old_tool):
 	equipped_tool.visible = false
 	equipped_tool = next_tool
 	equipped_tool.unlock()
+	
+func check_interactive(node: Node3D) -> bool:
+	var is_interactive: bool = node.has_method("interact") or node.has_method("secondary_interact")
+	if not is_interactive:
+		is_interactive = node.get_parent().has_method("interact") or node.get_parent().has_method("secondary_interact")
+	return is_interactive
 
 func _unhandled_input(event):
 	if !player.building_system.building_mode_active and !player.building_system.destroy_mode_active and !player.held_box:

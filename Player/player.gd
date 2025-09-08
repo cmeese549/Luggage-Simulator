@@ -102,6 +102,9 @@ var rail_grind_node = null
 
 func get_save_data() -> Dictionary:
 	var data: Dictionary = {}
+	data.cur_move_tech = cur_move_tech
+	data.roller_unlocked = roller_unlocked
+	data.skate_unlocked = skate_unlocked
 	data.global_position = global_position
 	data.neck_rotation = neck.rotation
 	data.camera_rotation = camera.rotation
@@ -111,6 +114,9 @@ func load_save_data(data: Dictionary) -> void:
 	global_position = data.global_position
 	neck.rotation = data.neck_rotation
 	camera.rotation = data.camera_rotation
+	cur_move_tech = data.cur_move_tech
+	roller_unlocked = data.roller_unlocked
+	skate_unlocked = data.skate_unlocked
 
 func _ready():
 	camera.current = true
@@ -216,13 +222,13 @@ func _unhandled_input(event):
 
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("save_game"):
-		if SaveManager.save_game():
+		if ProfileManager.save_current_run():
 			print("Game saved successfully!")
 		else:
 			print("Failed to save game")
 	
 	if Input.is_action_just_pressed("load_game"):
-		if SaveManager.load_game():
+		if ProfileManager.load_current_run():
 			print("Game loaded successfully!")
 		else:
 			print("Failed to load game or no save file found")

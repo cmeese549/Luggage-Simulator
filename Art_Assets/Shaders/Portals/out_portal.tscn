@@ -1,0 +1,85 @@
+[gd_scene load_steps=16 format=3 uid="uid://jbmu4u16unfp"]
+
+[ext_resource type="Shader" uid="uid://b7xbq46md3mje" path="res://Art_Assets/Shaders/Portals/PortalShader.tres" id="1_msdmx"]
+[ext_resource type="Texture2D" uid="uid://sfrnyfpjrym5" path="res://Art_Assets/Shaders/Portals/T_VFX_Flare_16.PNG" id="3_23oxu"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_f7s7c"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3q35a"]
+render_priority = 0
+shader = ExtResource("1_msdmx")
+shader_parameter/Color_Intensity = 3.465
+shader_parameter/Portal_Color = Color(0.39607844, 0.2, 0.14117648, 1)
+shader_parameter/Speed = Vector2(-0.3, 0.3)
+
+[sub_resource type="Curve" id="Curve_60c3f"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.03790614, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.18722787, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_ecd17"]
+curve = SubResource("Curve_60c3f")
+
+[sub_resource type="Gradient" id="Gradient_dlb8w"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_o3x6r"]
+gradient = SubResource("Gradient_dlb8w")
+
+[sub_resource type="Curve" id="Curve_dlb8w"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_o3x6r"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_cd44h"]
+_limits = [-2.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_60c3f"]
+curve_x = SubResource("Curve_dlb8w")
+curve_y = SubResource("Curve_o3x6r")
+curve_z = SubResource("Curve_cd44h")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_73n2m"]
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+direction = Vector3(0, 0, 1)
+initial_velocity_min = 0.39999998
+initial_velocity_max = 1.0
+orbit_velocity_curve = SubResource("CurveXYZTexture_60c3f")
+gravity = Vector3(0, 0, 0)
+color_ramp = SubResource("GradientTexture1D_o3x6r")
+alpha_curve = SubResource("CurveTexture_ecd17")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f7s7c"]
+transparency = 1
+blend_mode = 1
+cull_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.7490196, 0.4117647, 0.29411766, 1)
+albedo_texture = ExtResource("3_23oxu")
+use_particle_trails = true
+
+[sub_resource type="RibbonTrailMesh" id="RibbonTrailMesh_f7s7c"]
+material = SubResource("StandardMaterial3D_f7s7c")
+size = 0.2
+
+[node name="OutPortal" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("QuadMesh_f7s7c")
+surface_material_override/0 = SubResource("ShaderMaterial_3q35a")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, 0, 0.53153914, 0.32192075)
+amount = 150
+fixed_fps = 60
+trail_enabled = true
+trail_lifetime = 0.5
+process_material = SubResource("ParticleProcessMaterial_73n2m")
+draw_pass_1 = SubResource("RibbonTrailMesh_f7s7c")

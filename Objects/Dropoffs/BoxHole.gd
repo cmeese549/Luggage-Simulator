@@ -39,7 +39,7 @@ func _on_deposit_zone_body_entered(body):
 		
 		if run_orchestrator and run_orchestrator.has_method("on_box_processed"):
 			run_orchestrator.on_box_processed(is_legit)
-		body.queue_free()
+		body.die(is_legit)
 
 func check_box_legit(box: Box) -> bool:
 	#print("=== BOX VALIDATION DEBUG ===")

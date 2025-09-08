@@ -91,6 +91,7 @@ func interact() -> void:
 	
 func new_box_available(box: Box) -> void:
 	if queue.size() < max_queue_size and not turned_off:
+		await box.dissolve(1)
 		queue.append(box)
 		get_tree().root.get_node("MainLevel").remove_child(box)
 		
@@ -109,8 +110,10 @@ func attempt_export() -> void:
 	if not blocked:
 		get_tree().root.get_node("MainLevel").add_child(queue[0])
 		queue[0].global_position = sorted_spawn_point.global_position
+		queue[0].dissolve(-0.15)
 		queue.remove_at(0)
 		waiting_to_export = false
+
 		attempt_import()
 		processing_progress = processing_time
 		

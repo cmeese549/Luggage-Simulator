@@ -19,8 +19,9 @@ config/icon="res://icon.svg"
 [autoload]
 
 Events="*res://Game_Management/Events.gd"
-SaveManager="*res://Game_Management/SaveManager.gd"
+RunSaveManager="*res://Game_Management/Save/RunSaveManager.gd"
 Economy="*res://Game_Management/Economy/economy_config.tscn"
+ProfileManager="*res://Game_Management/Save/Profiles/ProfileManager.gd"
 
 [display]
 

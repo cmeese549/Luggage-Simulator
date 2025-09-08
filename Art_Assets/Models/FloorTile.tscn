@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://dtp6lwwlku6aq"]
+[gd_scene load_steps=6 format=3 uid="uid://dtp6lwwlku6aq"]
 
 [ext_resource type="ArrayMesh" uid="uid://55ocb4gef65v" path="res://Art_Assets/Models/SM_FloorTile.obj" id="1_3at3r"]
 [ext_resource type="Material" uid="uid://37mt5doucssn" path="res://Art_Assets/Models/MediumGrey.tres" id="2_hl02p"]
 [ext_resource type="Material" uid="uid://di1d7jiujbale" path="res://Art_Assets/Models/Tan.tres" id="3_1twna"]
+[ext_resource type="ArrayMesh" uid="uid://cmpe1xb2cpq1y" path="res://Art_Assets/Models/Voxel/OBJ/Factory Bits-0-Ground1.obj" id="4_hl02p"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_abqxk"]
 size = Vector3(2, 4, 2)
@@ -10,15 +11,21 @@ size = Vector3(2, 4, 2)
 [node name="FloorTile" type="Node3D"]
 
 [node name="SmFloorTile" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.10869789, 0)
 mesh = ExtResource("1_3at3r")
 surface_material_override/0 = ExtResource("2_hl02p")
 surface_material_override/1 = ExtResource("2_hl02p")
 surface_material_override/2 = ExtResource("3_1twna")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="SmFloorTile"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.108775675, 0)
 collision_layer = 1024
 collision_mask = 1024
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SmFloorTile/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
 shape = SubResource("BoxShape3D_abqxk")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 1, 0, 0, 0, 0.5, 0, -0.10869789, 0)
+mesh = ExtResource("4_hl02p")

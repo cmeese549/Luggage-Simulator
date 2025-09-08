@@ -1,0 +1,79 @@
+[gd_scene load_steps=3 format=3 uid="uid://dyf0w6cdmqpei"]
+
+[ext_resource type="Theme" uid="uid://b3kq74llqlv3x" path="res://UI/Theme/MinimalUI.tres" id="1_n8s10"]
+[ext_resource type="Script" uid="uid://cr1xe62ht3war" path="res://UI/Profiles/profile_entry.gd" id="2_8t1oc"]
+
+[node name="ProfileEntry" type="Panel" groups=["ProfileEntry"]]
+custom_minimum_size = Vector2(389.59, 440)
+offset_right = 389.59
+offset_bottom = 440.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("1_n8s10")
+script = ExtResource("2_8t1oc")
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 8.0
+
+[node name="Profile Name" type="Label" parent="VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 41
+text = "Profile 1"
+horizontal_alignment = 1
+
+[node name="ActiveRun" type="Label" parent="VBoxContainer2/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 9.85
+theme_override_font_sizes/font_size = 32
+text = "No Active Run"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="LifetimeMoney" type="Label" parent="VBoxContainer2/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 9.85
+theme_override_font_sizes/font_size = 32
+text = "Lifetime $:"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Load" type="Button" parent="VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 31
+text = "Load☑️"
+
+[node name="Create" type="Button" parent="VBoxContainer2/HBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 31
+text = "Create⏩"
+
+[node name="Delete" type="Button" parent="VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 0.120000005, 0.120000005, 1)
+theme_override_font_sizes/font_size = 31
+text = "Delete💣
+"
