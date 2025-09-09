@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://cp0minb2i8x1p"]
+[gd_scene load_steps=9 format=3 uid="uid://cp0minb2i8x1p"]
 
 [ext_resource type="Script" uid="uid://0l4gpjrpo56p" path="res://Objects/Dropoffs/BoxHole.gd" id="1_6bv5a"]
 [ext_resource type="AudioStream" uid="uid://b16op18gd5aiw" path="res://Audio/Sfx/Alerts/cant afford corn.mp3" id="2_630jq"]
+[ext_resource type="FontFile" uid="uid://dkfdn86ejvdw0" path="res://Art_Assets/Fonts/DARUNE.otf" id="2_fbloh"]
 [ext_resource type="AudioStream" uid="uid://bdm7p1ssjxe5w" path="res://UI/Dialogue/bloop.ogg" id="3_ptrfe"]
 [ext_resource type="ArrayMesh" uid="uid://dgiy0tvk3c461" path="res://Art_Assets/Models/Voxel/OBJ/Factory Bits-0-PENTA.obj" id="4_qh3sb"]
 
@@ -32,6 +33,7 @@ shape = SubResource("BoxShape3D_fbloh")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8521357, 0)
 billboard = 2
 text = "DEN"
+font = ExtResource("2_fbloh")
 
 [node name="Rejection" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_630jq")

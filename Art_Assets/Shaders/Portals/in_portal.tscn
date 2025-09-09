@@ -1,31 +1,25 @@
-[gd_scene load_steps=8 format=3 uid="uid://cnmqv3skkj3nv"]
+[gd_scene load_steps=7 format=3 uid="uid://cnmqv3skkj3nv"]
 
 [ext_resource type="Shader" uid="uid://b7xbq46md3mje" path="res://Art_Assets/Shaders/Portals/PortalShader.tres" id="1_gpft7"]
 [ext_resource type="Material" uid="uid://cfspfq3teikn3" path="res://Art_Assets/Shaders/Portals/PortalBorderParticles.tres" id="2_f7s7c"]
-[ext_resource type="Texture2D" uid="uid://sfrnyfpjrym5" path="res://Art_Assets/Shaders/Portals/T_VFX_Flare_16.PNG" id="3_3q35a"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_f7s7c"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3q35a"]
 render_priority = 0
 shader = ExtResource("1_gpft7")
-shader_parameter/Color_Intensity = 3.465
+shader_parameter/Color_Intensity = 13.525
 shader_parameter/Portal_Color = Color(0.39607844, 0.2, 0.14117648, 1)
 shader_parameter/Speed = Vector2(-0.3, 0.3)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f7s7c"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k453b"]
 transparency = 1
-blend_mode = 1
-cull_mode = 2
-shading_mode = 0
 vertex_color_use_as_albedo = true
-albedo_color = Color(0.7490196, 0.4117647, 0.29411766, 1)
-albedo_texture = ExtResource("3_3q35a")
-use_particle_trails = true
+albedo_color = Color(0.65, 0.17712498, 0.01949998, 1)
 
-[sub_resource type="RibbonTrailMesh" id="RibbonTrailMesh_f7s7c"]
-material = SubResource("StandardMaterial3D_f7s7c")
-size = 0.2
+[sub_resource type="BoxMesh" id="BoxMesh_6452y"]
+material = SubResource("StandardMaterial3D_k453b")
+size = Vector3(0.03, 0.03, 0.03)
 
 [node name="In Portal" type="Node3D"]
 
@@ -41,4 +35,4 @@ fixed_fps = 60
 trail_enabled = true
 trail_lifetime = 0.5
 process_material = ExtResource("2_f7s7c")
-draw_pass_1 = SubResource("RibbonTrailMesh_f7s7c")
+draw_pass_1 = SubResource("BoxMesh_6452y")

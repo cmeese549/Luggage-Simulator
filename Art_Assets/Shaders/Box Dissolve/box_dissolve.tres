@@ -1,4 +1,4 @@
-[gd_resource type="VisualShader" load_steps=13 format=3 uid="uid://bc23ih7carn81"]
+[gd_resource type="VisualShader" load_steps=16 format=3 uid="uid://bc23ih7carn81"]
 
 [sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_st1x7"]
 default_input_values = [0, 0.0, 1, 0.1]
@@ -35,6 +35,18 @@ default_value = -0.15
 
 [sub_resource type="VisualShaderNodeColorParameter" id="VisualShaderNodeColorParameter_fh0yq"]
 parameter_name = "Box_Color"
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_es7qp"]
+default_input_values = [0, Vector2(0, 0), 1, Vector2(0.5, 0.5)]
+op_type = 0
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_st1x7"]
+default_input_values = [0, Vector2(0, 0), 1, Vector2(0.5, 0.5)]
+op_type = 0
+operator = 2
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_st1x7"]
+input_name = "uv"
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_st1x7"]
 
@@ -132,4 +144,10 @@ nodes/fragment/17/node = SubResource("VisualShaderNodeFloatParameter_st1x7")
 nodes/fragment/17/position = Vector2(-1340, 1680)
 nodes/fragment/18/node = SubResource("VisualShaderNodeColorParameter_fh0yq")
 nodes/fragment/18/position = Vector2(-520, -120)
-nodes/fragment/connections = PackedInt32Array(4, 0, 0, 1, 4, 1, 11, 0, 12, 0, 13, 1, 10, 0, 13, 2, 13, 0, 11, 1, 14, 0, 15, 0, 14, 0, 15, 1, 14, 0, 15, 2, 11, 0, 16, 1, 15, 0, 16, 0, 16, 0, 0, 5, 18, 0, 0, 0, 17, 0, 0, 19, 17, 0, 10, 0)
+nodes/fragment/23/node = SubResource("VisualShaderNodeVectorOp_es7qp")
+nodes/fragment/23/position = Vector2(-2600, -120)
+nodes/fragment/24/node = SubResource("VisualShaderNodeVectorOp_st1x7")
+nodes/fragment/24/position = Vector2(-2100, -120)
+nodes/fragment/25/node = SubResource("VisualShaderNodeInput_st1x7")
+nodes/fragment/25/position = Vector2(-3340, 180)
+nodes/fragment/connections = PackedInt32Array(12, 0, 13, 1, 10, 0, 13, 2, 13, 0, 11, 1, 14, 0, 15, 0, 14, 0, 15, 1, 14, 0, 15, 2, 11, 0, 16, 1, 15, 0, 16, 0, 16, 0, 0, 5, 18, 0, 0, 0, 17, 0, 10, 0, 23, 0, 24, 0, 25, 0, 23, 0, 4, 1, 11, 0, 4, 0, 0, 1, 17, 0, 0, 19)

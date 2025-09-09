@@ -92,6 +92,8 @@ func interact() -> void:
 func new_box_available(box: Box) -> void:
 	if queue.size() < max_queue_size and not turned_off:
 		await box.dissolve(1)
+		box.inward_particles.emitting = false
+		await get_tree().create_timer(box.inward_particles.lifetime + 0.1).timeout
 		queue.append(box)
 		get_tree().root.get_node("MainLevel").remove_child(box)
 		
@@ -108,14 +110,17 @@ func attempt_export() -> void:
 	var export_zone = sorted_output_detector
 	var blocked = export_zone.get_overlapping_bodies().size() > 0
 	if not blocked:
-		get_tree().root.get_node("MainLevel").add_child(queue[0])
-		queue[0].global_position = sorted_spawn_point.global_position
-		queue[0].dissolve(-0.15)
+		var box_to_add : Box = queue[0]
 		queue.remove_at(0)
-		waiting_to_export = false
-
 		attempt_import()
 		processing_progress = processing_time
+		get_tree().root.get_node("MainLevel").add_child(box_to_add)
+		box_to_add.global_position = sorted_spawn_point.global_position
+		waiting_to_export = false
+		await box_to_add.dissolve(-0.15)
+		box_to_add.inward_particles.emitting = false
+		await get_tree().create_timer(box_to_add.inward_particles.lifetime + 0.1).timeout
+
 		
 func attempt_import() -> void:
 	var waiting_boxes = input_detector.get_overlapping_bodies()

@@ -1,0 +1,18 @@
+[gd_scene load_steps=8 format=3 uid="uid://06ttyi6xppri"]
+
+[ext_resource type="Script" uid="uid://c05ttjt04ybv3" path="res://Objects/Boxes/destination_sticker.gd" id="1_cwsik"]
+[ext_resource type="ArrayMesh" uid="uid://dmxtc4h0lt8db" path="res://Art_Assets/Models/Voxel/OBJ/Factory Bits-7-Rune3.obj" id="1_k0gmh"]
+[ext_resource type="ArrayMesh" uid="uid://bufycmfgv6frl" path="res://Art_Assets/Models/Voxel/OBJ/Factory Bits-5-Rune5.obj" id="2_isb64"]
+[ext_resource type="ArrayMesh" uid="uid://8fr0g4hrcvlv" path="res://Art_Assets/Models/Voxel/OBJ/Factory Bits-8-Rune2.obj" id="4_3psx7"]
+[ext_resource type="ArrayMesh" uid="uid://c63ahllf3ml1p" path="res://Art_Assets/Models/Voxel/OBJ/Factory Bits-9-Rune1.obj" id="5_namgx"]
+[ext_resource type="ArrayMesh" uid="uid://11adtb17qtku" path="res://Art_Assets/Models/Voxel/OBJ/Factory Bits-4-Rune 6.obj" id="6_2dvgb"]
+[ext_resource type="ArrayMesh" uid="uid://cw2nakqvapj4w" path="res://Art_Assets/Models/Voxel/OBJ/Factory Bits-6-Rune 4.obj" id="7_8d47m"]
+
+[node name="DestinationSticker" type="Node3D"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
+script = ExtResource("1_cwsik")
+destination_stickers = Array[Mesh]([ExtResource("2_isb64"), ExtResource("1_k0gmh"), ExtResource("4_3psx7"), ExtResource("5_namgx"), ExtResource("6_2dvgb"), ExtResource("7_8d47m")])
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, -2, 6)
+mesh = ExtResource("1_k0gmh")

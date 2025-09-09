@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://brbhba3lve53w"]
+[gd_scene load_steps=5 format=3 uid="uid://brbhba3lve53w"]
 
 [ext_resource type="Shader" uid="uid://bc23ih7carn81" path="res://Art_Assets/Shaders/Box Dissolve/box_dissolve.tres" id="1_to8rh"]
+[ext_resource type="PackedScene" uid="uid://c2ptrqkmw456s" path="res://Art_Assets/Shaders/Box Dissolve/outward_box_particles.tscn" id="3_jrxy2"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_v8lin"]
 
@@ -11,9 +12,16 @@ shader_parameter/Box_Color = Color(0.3292153, 0.18145376, 0, 1)
 shader_parameter/Light_Strength = 2.5
 shader_parameter/Light_Color = Color(0.48235294, 0.9647059, 0, 1)
 shader_parameter/Progress = -0.15000000596046
+shader_parameter/Opacity = 0.0
 
 [node name="DissolveTester" type="Node3D"]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_v8lin")
 surface_material_override/0 = SubResource("ShaderMaterial_rsiy4")
+
+[node name="BoxParticles" parent="." instance=ExtResource("3_jrxy2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.119200945, 0)
+emitting = true
+amount = 1525
+randomness = 0.29

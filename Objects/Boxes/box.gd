@@ -8,8 +8,14 @@ class_name Box
 
 @export var sad_dissolve_highligh_collor: Color = Color.from_rgba8(255, 97, 97, 1)
 @export var happy_dissolve_highligh_collor: Color = Color.from_rgba8(123, 246, 0, 1)
+@export var sticker_color: Color = Color.from_rgba8(240, 94, 28, 1)
 
 var box_shader = preload("res://Art_Assets/Shaders/Box Dissolve/box_dissolve.tres")
+var destination_mesh = preload("res://Objects/Boxes/destination_sticker.tscn")
+@onready var outward_particles : GPUParticles3D = $OutwardBoxParticles
+@onready var inward_particles : GPUParticles3D = $InwardBoxParticles
+var dissolve_duration = 2
+var stickers_to_kill : Array[MeshInstance3D] = []
 
 @export var value: int = 10
 @export var international: bool = false
@@ -103,7 +109,7 @@ func _ready():
 	if not has_node("CollisionShape3D"):
 		create_box_collision()
 	
-	create_destination_label()
+	create_destination_mesh()
 	create_approval_icons()
 	
 	if just_loaded:
@@ -133,7 +139,6 @@ func create_box_visual():
 	var mesh_instance = MeshInstance3D.new()
 	var box_mesh = BoxMesh.new()
 	box_mesh.size = box_size
-	print("Noooo")
 	mesh_instance.mesh = box_mesh
 	mesh_instance.name = "MeshInstance3D"
 
@@ -142,6 +147,9 @@ func create_box_visual():
 	original_material.set_shader_parameter("Box_Color", box_color)
 	mesh_instance.material_override = original_material
 	
+	inward_particles.process_material.emission_box_extents = box_size
+	outward_particles.process_material.emission_box_extents = box_size * 0.7
+	#particles.emitting = false
 	add_child(mesh_instance)
 
 func set_highlighted(highlighted: bool):
@@ -173,7 +181,6 @@ func create_approval_icons():
 	
 	# Create icons on the 4 main faces (front, back, left, right)
 	var face_configs = [
-		{"pos": Vector3(0, 0, half.z + offset), "rot": Vector3(0, 0, 0)},    # front
 		{"pos": Vector3(0, 0, -half.z - offset), "rot": Vector3(0, 180, 0)}, # back  
 		{"pos": Vector3(-half.x - offset, 0, 0), "rot": Vector3(0, 270, 0)}, # left
 		{"pos": Vector3(half.x + offset, 0, 0), "rot": Vector3(0, 90, 0)}    # right
@@ -203,26 +210,59 @@ func update_approval_icons():
 			icon.visible = true
 			icon.text = "✔️" if approval_state == ApprovalState.APPROVED else "❌"
 	
-func create_destination_label():
-	var label = Label3D.new()
-	label.name = "DestinationLabel"
-	label.text = destination
-
-	label.font_size = 24
-	label.modulate = Color(0.1, 0.1, 0.1)
-	label.outline_size = 1
-	label.outline_modulate = Color.WHITE
-
-	label.scale = Vector3(1, 1, 1)
-	label.billboard = BaseMaterial3D.BILLBOARD_DISABLED
-
-	# Use corner system
-	var corner = select_available_corner()
-	if corner == "":
-		return  # No available corners
+#func create_destination_label():
+	#var label = Label3D.new()
+	#label.name = "DestinationLabel"
+	#label.text = destination
+#
+	#label.font_size = 24
+	#label.modulate = Color(0.1, 0.1, 0.1)
+	#label.outline_size = 1
+	#label.outline_modulate = Color.WHITE
+#
+	#label.scale = Vector3(1, 1, 1)
+	#label.billboard = BaseMaterial3D.BILLBOARD_DISABLED
+#
+	## Use corner system
+	#var corner = select_available_corner()
+	#if corner == "":
+		#return  # No available corners
+	#
+	#position_label_at_corner(label, corner)
+	#add_child(label)
 	
-	position_label_at_corner(label, corner)
-	add_child(label)
+func create_destination_mesh():
+	var mesh_instance = destination_mesh.instantiate()
+	add_child(mesh_instance)
+	mesh_instance.name = "DestinationMesh"
+	
+	# Center on front face
+	var half = box_size * 0.5
+	var offset = 0
+	mesh_instance.position = Vector3(0, 0, half.z + offset)
+	mesh_instance.rotation_degrees = Vector3(0, 0, 0)
+	
+	# Scale to fit face while maintaining aspect ratio
+	scale_mesh_to_face(mesh_instance)
+	
+	stickers_to_kill.append(mesh_instance.get_child(0))
+	
+
+
+func scale_mesh_to_face(mesh_parent: Node3D):
+	var mesh_child = mesh_parent.get_child(0)
+	var mesh_aabb = mesh_child.mesh.get_aabb()
+	
+	# Apply transform to get actual bounds
+	var transformed_aabb = mesh_child.transform * mesh_aabb
+	
+	var face_size = Vector2(box_size.x, box_size.y) * 0.8
+	
+	var scale_x = face_size.x / transformed_aabb.size.x
+	var scale_y = face_size.y / transformed_aabb.size.y
+	var uniform_scale = min(scale_x, scale_y)
+	
+	mesh_parent.scale = Vector3(uniform_scale, uniform_scale, uniform_scale)
 	
 func create_icon_label(icon: Dictionary):
 	var icon_label = Label3D.new()
@@ -296,34 +336,54 @@ func position_label_at_corner(label: Label3D, corner: String):
 func select_available_corner() -> String:
 	var available_corners: Array[String] = []
 	
-	# Get all corners that aren't occupied
+	# Get all corners that aren't occupied and not on front face (face 1)
 	for corner_key in corner_positions.keys():
-		if corner_key not in occupied_corners:
+		if corner_key not in occupied_corners and not corner_key.begins_with("1_"):
 			available_corners.append(corner_key)
 	
-	# Return a random available corner, or empty string if none available
 	if available_corners.is_empty():
 		return ""
 	
 	var selected_corner = available_corners[randi() % available_corners.size()]
-	occupied_corners.append(selected_corner)  # Mark as occupied
+	occupied_corners.append(selected_corner)
 	return selected_corner
 	
-func dissolve(target_value: float, target_color: Color = sad_dissolve_highligh_collor):
+func dissolve(target_value: float, inward: bool = true, target_color: Color = sad_dissolve_highligh_collor):
+	var particles : GPUParticles3D = inward_particles if inward else outward_particles
+	particles.emitting = true
+	var tween = create_tween()
 	original_material.set_shader_parameter("Light_Color", target_color)
 	if target_value < 0:
 		original_material.set_shader_parameter("Progress", 1.0)
 	else:
 		original_material.set_shader_parameter("Progress", -0.15)
-	
+
+	tween.tween_property(original_material, "shader_parameter/Progress", target_value, dissolve_duration)
+	return get_tree().create_timer(dissolve_duration - particles.lifetime + 0.1).timeout
+
+func kill_stickers():
 	var tween = create_tween()
-	tween.tween_property(original_material, "shader_parameter/Progress", target_value, 1.2)
+	
+	for mesh in stickers_to_kill:
+		mesh.reparent(get_tree().root.get_node("MainLevel"))
+		tween.parallel().tween_property(mesh, "transparency", 1, 1.6)
+		tween.parallel().tween_property(mesh, "scale", mesh.scale * 24, 1.7)
+		
+	tween.tween_callback(func(): 
+		for mesh in stickers_to_kill:
+			mesh.queue_free()
+	)
+	
+	
 	return tween.finished
 
-func die(was_legit: bool):
-	gravity_scale = -0.5
+func die(was_legit: bool):  # Recursively check nested children
+	gravity_scale = -0.1
+	kill_stickers()
 	if was_legit:
-		await dissolve(1, happy_dissolve_highligh_collor)
+		await dissolve(1, false, happy_dissolve_highligh_collor)
 	else:
-		await dissolve(1, sad_dissolve_highligh_collor)
+		await dissolve(1, false, sad_dissolve_highligh_collor)
+	outward_particles.emitting = false
+	await get_tree().create_timer(outward_particles.lifetime + 0.1).timeout
 	queue_free()

@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://11adtb17qtku"
+path="res://.godot/imported/Factory Bits-4-Rune 6.obj-4b6ea32dd1cbe45ff27dfd280e7131e3.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Factory Bits-4-Rune 6.obj-4b6ea32dd1cbe45ff27dfd280e7131e3.mesh"]
+
+source_file="res://Art_Assets/Models/Voxel/OBJ/Factory Bits-4-Rune 6.obj"
+dest_files=["res://.godot/imported/Factory Bits-4-Rune 6.obj-4b6ea32dd1cbe45ff27dfd280e7131e3.mesh", "res://.godot/imported/Factory Bits-4-Rune 6.obj-4b6ea32dd1cbe45ff27dfd280e7131e3.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false
