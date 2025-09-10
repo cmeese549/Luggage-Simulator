@@ -43,7 +43,7 @@ func _on_deposit_zone_body_entered(body):
 
 func check_box_legit(box: Box) -> bool:
 	#print("=== BOX VALIDATION DEBUG ===")
-	#print("Box: dest=", box.destination, " intl=", box.international, " disposable=", box.disposeable, " valid_dest=", box.has_valid_destination, " approval=", box.approval_state)
+	#print("Box: dest=", box.destination, " intl=", box.international, " disposable=", box.disposable, " valid_dest=", box.has_valid_destination, " approval=", box.approval_state)
 	#print("Hole: dest=", destination, " intl=", international, " is_disposal=", is_disposal)
 	
 	if box.approval_state == Box.ApprovalState.NONE:
@@ -52,7 +52,7 @@ func check_box_legit(box: Box) -> bool:
 	
 	if is_disposal and box.international == international:
 		#print("Checking disposal hole logic...")
-		if box.disposeable or not box.has_valid_destination:
+		if box.disposable or not box.has_valid_destination:
 			if box.approval_state == Box.ApprovalState.REJECTED:
 				#print("ACCEPTED: Disposal hole - rejected box with disposable/invalid dest")
 				return true
@@ -64,7 +64,7 @@ func check_box_legit(box: Box) -> bool:
 			return false
 	elif box.destination == destination and box.international == international:
 		#print("Checking regular hole logic...")
-		if not box.disposeable:
+		if not box.disposable:
 			if box.approval_state == Box.ApprovalState.APPROVED:
 				#print("ACCEPTED: Regular hole - approved non-disposable box")
 				return true

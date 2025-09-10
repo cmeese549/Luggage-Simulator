@@ -3,7 +3,7 @@
 [ext_resource type="ArrayMesh" uid="uid://55ocb4gef65v" path="res://Art_Assets/Models/SM_FloorTile.obj" id="1_3at3r"]
 [ext_resource type="Material" uid="uid://37mt5doucssn" path="res://Art_Assets/Models/MediumGrey.tres" id="2_hl02p"]
 [ext_resource type="Material" uid="uid://di1d7jiujbale" path="res://Art_Assets/Models/Tan.tres" id="3_1twna"]
-[ext_resource type="ArrayMesh" uid="uid://cmpe1xb2cpq1y" path="res://Art_Assets/Models/Voxel/OBJ/Factory Bits-0-Ground1.obj" id="4_hl02p"]
+[ext_resource type="ArrayMesh" uid="uid://dxog6k2ic14vy" path="res://Art_Assets/Models/Voxel/OBJ/Factory Bits-1-Ground1.obj" id="4_hl02p"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_abqxk"]
 size = Vector3(2, 4, 2)

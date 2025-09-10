@@ -6,7 +6,8 @@ class_name RunGenerator
 @export var possible_destinations: Array[String] = ["DEN", "LAX", "JFK", "ORD", "ATL", "SFO", "BOS", "TOR"]
 @export var min_box_holes: int = 4
 @export var max_box_holes: int = 8
-@export var international_chance: float = 0.3
+@export var international_chance: float = 0.4
+@export var disposable_chance: float = 0.15
 
 # Difficulty scaling
 @export var starting_boxes: int = 10
@@ -88,7 +89,34 @@ func generate_box_holes(rng: RandomNumberGenerator) -> Array[BoxHoleConfig]:
 	var used_combinations: Array[String] = []
 	var activation_schedule = [1, 1, 1, 8, 16, 24]  # Days when each regular hole activates
 	
-	for i in range(6):
+	# Force first hole to be domestic (day 1)
+	var first_hole = BoxHoleConfig.new()
+	first_hole.destination = possible_destinations[rng.randi() % possible_destinations.size()]
+	first_hole.international = false
+	first_hole.activation_day = 1
+	first_hole.active = true
+	first_hole.value_multiplier = rng.randf_range(0.8, 1.2)
+	var first_pos_index = get_unused_position_index(used_positions, rng)
+	first_hole.position = preset_hole_positions[first_pos_index]
+	used_positions.append(first_pos_index)
+	holes.append(first_hole)
+	used_combinations.append(first_hole.destination + "_dom")
+	
+	# Force second hole to be international (day 1) 
+	var second_hole = BoxHoleConfig.new()
+	second_hole.destination = possible_destinations[rng.randi() % possible_destinations.size()]
+	second_hole.international = true
+	second_hole.activation_day = 1
+	second_hole.active = true
+	second_hole.value_multiplier = rng.randf_range(0.8, 1.2)
+	var second_pos_index = get_unused_position_index(used_positions, rng)
+	second_hole.position = preset_hole_positions[second_pos_index]
+	used_positions.append(second_pos_index)
+	holes.append(second_hole)
+	used_combinations.append(second_hole.destination + "_intl")
+	
+	# Generate remaining 4 holes normally
+	for i in range(2, 6):
 		var hole = BoxHoleConfig.new()
 		
 		# Try to find unique destination+international combination
@@ -132,6 +160,13 @@ func generate_box_holes(rng: RandomNumberGenerator) -> Array[BoxHoleConfig]:
 	
 	return holes
 
+func get_unused_position_index(used_positions: Array, rng: RandomNumberGenerator) -> int:
+	var available_positions = []
+	for j in range(preset_hole_positions.size()):
+		if j not in used_positions:
+			available_positions.append(j)
+	return available_positions[rng.randi() % available_positions.size()]
+
 func generate_daily_configs(rng: RandomNumberGenerator) -> Array[DayConfig]:
 	var days: Array[DayConfig] = []
 	
@@ -158,11 +193,11 @@ func generate_box_type_probabilities(_rng: RandomNumberGenerator, progress: floa
 	var probabilities: Array[Dictionary] = []
 	
 	# Base probability for international boxes increases over time
-	var international_prob = lerp(0.1, 0.4, progress)
+	var international_prob = lerp(0.3, 0.5, progress)
 	probabilities.append({"type": "international", "chance": international_prob})
 	
 	# Disposable boxes increase over time
-	var disposable_prob = lerp(0.05, 0.25, progress)
+	var disposable_prob = lerp(0.3, 0.35, progress)
 	probabilities.append({"type": "disposable", "chance": disposable_prob})
 	
 	return probabilities

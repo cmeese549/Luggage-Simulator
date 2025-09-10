@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://ce8lbmypv81xg"]
+
+[ext_resource type="ArrayMesh" uid="uid://bpx41q4slg8l4" path="res://Art_Assets/Models/Voxel/OBJ/Factory Bits-3-Sticker1.obj" id="1_7smmh"]
+
+[node name="disposableSticker" type="Node3D"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, -2, 6)
+mesh = ExtResource("1_7smmh")

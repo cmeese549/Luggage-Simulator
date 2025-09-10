@@ -37,7 +37,10 @@ func _process(_delta: float) -> void:
 			if !interact_crosshair.visible:
 				interact_crosshair.visible = true
 		else:
-			if interact_crosshair.visible:
+			looked_at_object = check_for_box()
+			if looked_at_object != null and looked_at_object is Box:
+				interact_crosshair.visible = true
+			elif interact_crosshair.visible:
 				interact_crosshair.visible = false
 	elif interact_crosshair != null and interact_crosshair.visible and (player.held_box or player.building_system.building_mode_active or player.building_system.destroy_mode_active):
 		interact_crosshair.visible = false
@@ -90,4 +93,10 @@ func check_for_interactable():
 		#print("Looking at "+col.name)
 		if col and "Interactable" in col.get_groups():
 			return col.get_parent()
+			
+func check_for_box():
+	if box_cast.is_colliding():
+		var col = box_cast.get_collider()
+		if col and col is Box:
+			return col
 	

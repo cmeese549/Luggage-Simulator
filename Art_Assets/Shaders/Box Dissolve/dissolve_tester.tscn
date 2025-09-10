@@ -11,8 +11,7 @@ shader = ExtResource("1_to8rh")
 shader_parameter/Box_Color = Color(0.3292153, 0.18145376, 0, 1)
 shader_parameter/Light_Strength = 2.5
 shader_parameter/Light_Color = Color(0.48235294, 0.9647059, 0, 1)
-shader_parameter/Progress = -0.15000000596046
-shader_parameter/Opacity = 0.0
+shader_parameter/Progress = 0.30500001565204005
 
 [node name="DissolveTester" type="Node3D"]
 
@@ -22,6 +21,5 @@ surface_material_override/0 = SubResource("ShaderMaterial_rsiy4")
 
 [node name="BoxParticles" parent="." instance=ExtResource("3_jrxy2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.119200945, 0)
-emitting = true
 amount = 1525
 randomness = 0.29

@@ -231,7 +231,7 @@ func generate_box_properties(day_config: DayConfig) -> Dictionary:
 		# If we have invalid destinations available, use one
 		if invalid_destinations.size() > 0:
 			properties["destination"] = invalid_destinations[randi() % invalid_destinations.size()]
-			properties["international"] = randf() < 0.3  # Can be international too
+			properties["international"] = randf() < 0.5  # Can be international too
 			return properties  # Return early, this box is invalid
 	
 	# Otherwise, pick a valid destination from active holes
@@ -303,6 +303,7 @@ func apply_special_modifiers(modifiers: Array[String]) -> void:
 
 # Add health depletion handler
 func _on_health_depleted() -> void:
+	return
 	print("FAILED: Health depleted on day %d" % current_day)
 	is_day_active = false
 	health_system.stop_draining()

@@ -12,6 +12,8 @@ class_name Box
 
 var box_shader = preload("res://Art_Assets/Shaders/Box Dissolve/box_dissolve.tres")
 var destination_mesh = preload("res://Objects/Boxes/destination_sticker.tscn")
+var disposable_mesh = preload("res://Objects/Boxes/disposable_sticker.tscn")
+var international_mesh = preload("res://Objects/Boxes/international_sticker.tscn")
 @onready var outward_particles : GPUParticles3D = $OutwardBoxParticles
 @onready var inward_particles : GPUParticles3D = $InwardBoxParticles
 var dissolve_duration = 2
@@ -19,11 +21,11 @@ var stickers_to_kill : Array[MeshInstance3D] = []
 
 @export var value: int = 10
 @export var international: bool = false
-@export var disposeable: bool = false
+@export var disposable: bool = false
 @export var destination: String = "DEN"
 var has_valid_destination: bool = false
 var all_qualification_icons: Array[Dictionary] = [
-	{ "icon": "⚠", "text": "Disposeable", "chance": 0.2 },
+	{ "icon": "⚠", "text": "Disposable", "chance": 1 },
 	{ "icon": "🌐", "text": "International", "chance": 0.4 },
 ]
 var active_qualification_icons: Array[Dictionary] = []
@@ -70,7 +72,7 @@ func get_save_data() -> Dictionary:
 	data.box_color = box_color
 	data.value = value
 	data.international = international
-	data.disposeable = disposeable
+	data.disposable = disposable
 	data.destination = destination
 	data.has_valid_destination = has_valid_destination
 	data.approval_state = approval_state
@@ -87,7 +89,7 @@ func load_save_data(data: Dictionary) -> void:
 	box_color = data.box_color
 	value = data.value
 	international = data.international
-	disposeable = data.disposeable
+	disposable = data.disposable
 	destination = data.destination
 	has_valid_destination = data.has_valid_destination
 	approval_state = data.approval_state
@@ -114,25 +116,29 @@ func _ready():
 	
 	if just_loaded:
 		# Create stickers for explicitly set properties only
+		#print("loady woady")
+		#print ("International: ", international)
+		#print("Disposable: ", disposable)
+		#print("======================================")
 		if international:
 			var intl_icon = {"icon": "🌐", "text": "International"}
 			active_qualification_icons.append(intl_icon)
-			create_icon_label(intl_icon)
-		if disposeable:
-			var disp_icon = {"icon": "⚠", "text": "Disposeable"}
+			create_international_mesh()
+		if disposable:
+			var disp_icon = {"icon": "⚠", "text": "Disposable"}
 			active_qualification_icons.append(disp_icon)
-			create_icon_label(disp_icon)
-		update_approval_icons()
+			create_disposable_mesh()
 	else:
 		# Original random generation logic
 		for icon in all_qualification_icons:
 			if randf() < icon.chance:
 				active_qualification_icons.append(icon)
-				if icon.text == "Disposeable":
-					disposeable = true
+				if icon.text == "Disposable":
+					disposable = true
+					create_disposable_mesh()
 				elif icon.text == "International":
 					international = true
-				create_icon_label(icon)
+					create_international_mesh()
 		update_approval_icons()
 
 func create_box_visual():
@@ -153,6 +159,7 @@ func create_box_visual():
 	add_child(mesh_instance)
 
 func set_highlighted(highlighted: bool):
+	return
 	is_highlighted = highlighted
 	var mesh_instance = get_node("MeshInstance3D")
 	if mesh_instance:
@@ -210,27 +217,6 @@ func update_approval_icons():
 			icon.visible = true
 			icon.text = "✔️" if approval_state == ApprovalState.APPROVED else "❌"
 	
-#func create_destination_label():
-	#var label = Label3D.new()
-	#label.name = "DestinationLabel"
-	#label.text = destination
-#
-	#label.font_size = 24
-	#label.modulate = Color(0.1, 0.1, 0.1)
-	#label.outline_size = 1
-	#label.outline_modulate = Color.WHITE
-#
-	#label.scale = Vector3(1, 1, 1)
-	#label.billboard = BaseMaterial3D.BILLBOARD_DISABLED
-#
-	## Use corner system
-	#var corner = select_available_corner()
-	#if corner == "":
-		#return  # No available corners
-	#
-	#position_label_at_corner(label, corner)
-	#add_child(label)
-	
 func create_destination_mesh():
 	var mesh_instance = destination_mesh.instantiate()
 	add_child(mesh_instance)
@@ -247,7 +233,33 @@ func create_destination_mesh():
 	
 	stickers_to_kill.append(mesh_instance.get_child(0))
 	
+func create_disposable_mesh():
+	disposable = true
+	var mesh_instance = disposable_mesh.instantiate()
+	add_child(mesh_instance)
+	mesh_instance.name = "disposableMesh"
+	
+	# Use corner system like the old labels
+	var corner = select_available_corner()
+	if corner == "":
+		return  # No available corners
+		
+	position_mesh_at_corner(mesh_instance, corner)
+	stickers_to_kill.append(mesh_instance.get_child(0))
 
+func create_international_mesh():
+	international = true
+	var mesh_instance = international_mesh.instantiate()
+	add_child(mesh_instance)
+	mesh_instance.name = "InternationalMesh"
+	
+	# Use corner system like the old labels
+	var corner = select_available_corner()
+	if corner == "":
+		return  # No available corners
+		
+	position_mesh_at_corner(mesh_instance, corner)
+	stickers_to_kill.append(mesh_instance.get_child(0))
 
 func scale_mesh_to_face(mesh_parent: Node3D):
 	var mesh_child = mesh_parent.get_child(0)
@@ -264,36 +276,10 @@ func scale_mesh_to_face(mesh_parent: Node3D):
 	
 	mesh_parent.scale = Vector3(uniform_scale, uniform_scale, uniform_scale)
 	
-func create_icon_label(icon: Dictionary):
-	var icon_label = Label3D.new()
-	icon_label.name = "IconLabel"
-	icon_label.text = icon.icon
-	
-	icon_label.font_size = 32
-	#icon_label.modulate = Color.ORANGE
-	#icon_label.outline_size = 1
-	icon_label.outline_modulate = Color.BLACK
-	
-	icon_label.scale = Vector3(1, 1, 1)
-	icon_label.billboard = BaseMaterial3D.BILLBOARD_DISABLED
-	
-	var corner = select_available_corner()
-	if corner == "":
-		return  # No available corners
-		
-	position_label_at_corner(icon_label, corner)
-	add_child(icon_label)
-	
-func _physics_process(_delta: float):
-	# Respawn if fallen through map
-	if global_position.y < -50:
-		global_position = Vector3(0, 5, 0)
-		linear_velocity = Vector3.ZERO
-	
-func position_label_at_corner(label: Label3D, corner: String):
+func position_mesh_at_corner(mesh_instance: Node3D, corner: String):
 	var half = box_size * 0.5
-	var offset = 0.02
-	var inset = 0.15  # Pull labels towards center of face
+	var offset = 0
+	var inset = 0.15  # Pull meshes towards center of face
 	
 	var parts = corner.split("_")
 	var face = int(parts[0])
@@ -305,33 +291,51 @@ func position_label_at_corner(label: Label3D, corner: String):
 	
 	match face:
 		0: # back
-			label.position = Vector3(
+			mesh_instance.position = Vector3(
 				((-half.x + inset) if is_left else (half.x - inset)), 
 				((-half.y + inset) if is_bottom else (half.y - inset)), 
 				-half.z - offset
 			)
-			label.rotation_degrees = Vector3(0, 180, 0)
-		1: # front  
-			label.position = Vector3(
-				((-half.x + inset) if is_left else (half.x - inset)), 
-				((-half.y + inset) if is_bottom else (half.y - inset)), 
-				half.z + offset
-			)
-			label.rotation_degrees = Vector3(0, 0, 0)
+			mesh_instance.rotation_degrees = Vector3(0, 180, 0)
 		2: # left
-			label.position = Vector3(
+			mesh_instance.position = Vector3(
 				-half.x - offset, 
 				((-half.y + inset) if is_bottom else (half.y - inset)), 
 				((-half.z + inset) if is_left else (half.z - inset))
 			)
-			label.rotation_degrees = Vector3(0, 270, 0)
+			mesh_instance.rotation_degrees = Vector3(0, 270, 0)
 		3: # right
-			label.position = Vector3(
+			mesh_instance.position = Vector3(
 				half.x + offset, 
 				((-half.y + inset) if is_bottom else (half.y - inset)), 
-				((half.z - inset) if is_left else (-half.z + inset))
+				((-half.z + inset) if is_left else (half.z - inset))
 			)
-			label.rotation_degrees = Vector3(0, 90, 0)
+			mesh_instance.rotation_degrees = Vector3(0, 90, 0)
+	
+	# Scale mesh to appropriate corner size
+	scale_mesh_to_corner(mesh_instance)
+	
+func scale_mesh_to_corner(mesh_parent: Node3D):
+	var mesh_child = mesh_parent.get_child(0)
+	var mesh_aabb = mesh_child.mesh.get_aabb()
+	
+	# Apply transform to get actual bounds
+	var transformed_aabb = mesh_child.transform * mesh_aabb
+	
+	# Corner size should be smaller than face size
+	var corner_size = Vector2(box_size.x, box_size.y) * 0.3  # 30% of face size
+	
+	var scale_x = corner_size.x / transformed_aabb.size.x
+	var scale_y = corner_size.y / transformed_aabb.size.y
+	var uniform_scale = min(scale_x, scale_y)
+	
+	mesh_parent.scale = Vector3(uniform_scale, uniform_scale, uniform_scale)
+	
+func _physics_process(_delta: float):
+	# Respawn if fallen through map
+	if global_position.y < -50:
+		global_position = Vector3(0, 5, 0)
+		linear_velocity = Vector3.ZERO
 
 func select_available_corner() -> String:
 	var available_corners: Array[String] = []
@@ -373,7 +377,6 @@ func kill_stickers():
 		for mesh in stickers_to_kill:
 			mesh.queue_free()
 	)
-	
 	
 	return tween.finished
 

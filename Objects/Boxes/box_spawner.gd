@@ -10,7 +10,7 @@ signal clicked(spawner: BoxSpawner)
 # Randomization ranges
 @export var min_box_size: Vector3 = Vector3(0.4, 0.4, 0.4)
 @export var max_box_size: Vector3 = Vector3(0.8, 0.8, 0.8)
-@export var colors: Array[Color] = [Color.PALE_VIOLET_RED, Color.DODGER_BLUE, Color.FOREST_GREEN, Color.SANDY_BROWN]
+@export var colors: Array[Color] = [Color.BLACK, Color.MIDNIGHT_BLUE, Color.SLATE_GRAY, Color.DIM_GRAY]
 var destinations: Array[String] = ["DEN", "LAX", "JFK", "ORD"]
 var active_destinations: Array[String] =  ["DEN", "LAX", "JFK"]
 
@@ -78,9 +78,9 @@ func spawn_box_with_properties(properties: Dictionary) -> void:
 		box.international = false
 	
 	if properties.has("disposable"):
-		box.disposeable = properties.disposable
+		box.disposable = properties.disposable
 	else:
-		box.disposeable = false
+		box.disposable = false
 	
 	# Set validity based on active destinations
 	if run_orchestrator and run_orchestrator.current_run_config:
