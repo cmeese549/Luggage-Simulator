@@ -1,4 +1,4 @@
-[gd_resource type="VisualShader" load_steps=13 format=3 uid="uid://bc23ih7carn81"]
+[gd_resource type="VisualShader" load_steps=30 format=3 uid="uid://bc23ih7carn81"]
 
 [sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_st1x7"]
 default_input_values = [0, 0.0, 1, 0.1]
@@ -36,6 +36,68 @@ default_value = -0.15
 [sub_resource type="VisualShaderNodeColorParameter" id="VisualShaderNodeColorParameter_fh0yq"]
 parameter_name = "Box_Color"
 
+[sub_resource type="VisualShaderNodeBooleanParameter" id="VisualShaderNodeBooleanParameter_st1x7"]
+parameter_name = "Use_Nebula_Effect"
+default_value_enabled = true
+default_value = true
+
+[sub_resource type="VisualShaderNodeMix" id="VisualShaderNodeMix_fh0yq"]
+default_input_values = [0, Vector3(0, 0, 0), 1, Vector3(1, 1, 1), 2, Vector3(0.5, 0.5, 0.5)]
+op_type = 3
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_st1x7"]
+input_name = "screen_uv"
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_fh0yq"]
+frequency = 0.0126
+fractal_gain = 35.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_8awen"]
+width = 1024
+height = 1024
+generate_mipmaps = false
+noise = SubResource("FastNoiseLite_fh0yq")
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_es7qp"]
+expanded_output_ports = [0]
+texture = SubResource("NoiseTexture2D_8awen")
+
+[sub_resource type="VisualShaderNodeVec2Parameter" id="VisualShaderNodeVec2Parameter_st1x7"]
+parameter_name = "Parallax_Offset"
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_st1x7"]
+default_input_values = [0, Vector2(0, 0), 1, Vector2(0, 0)]
+op_type = 0
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_fh0yq"]
+default_input_values = [0, 0.0, 1, 6.0]
+operator = 5
+
+[sub_resource type="VisualShaderNodeSmoothStep" id="VisualShaderNodeSmoothStep_st1x7"]
+default_input_values = [0, 0.4, 1, 0.7, 2, 0.5]
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_8awen"]
+
+[sub_resource type="VisualShaderNodeVectorCompose" id="VisualShaderNodeVectorCompose_es7qp"]
+
+[sub_resource type="VisualShaderNodeVec3Parameter" id="VisualShaderNodeVec3Parameter_st1x7"]
+parameter_name = "Nebula_Color"
+default_value_enabled = true
+default_value = Vector3(-0.1, -0.1, -0.1)
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_fh0yq"]
+input_name = "time"
+
+[sub_resource type="VisualShaderNodeVec2Parameter" id="VisualShaderNodeVec2Parameter_8awen"]
+parameter_name = "Star_Pan_Speed"
+default_value_enabled = true
+default_value = Vector2(0, 0.015)
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_es7qp"]
+operator = 2
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_nwr8i"]
+
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_st1x7"]
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_st1x7"]
@@ -51,6 +113,10 @@ code = "shader_type spatial;
 render_mode blend_mix, depth_draw_opaque, depth_test_default, cull_back, diffuse_lambert, specular_schlick_ggx;
 
 uniform vec4 Box_Color : source_color;
+uniform vec3 Nebula_Color = vec3(-0.100000, -0.100000, -0.100000);
+uniform vec2 Parallax_Offset;
+uniform sampler2D tex_frg_24;
+uniform bool Use_Nebula_Effect = true;
 uniform sampler2D tex_frg_4;
 uniform float Light_Strength = 2.5;
 uniform vec4 Light_Color : source_color = vec4(1.000000, 0.380392, 0.380392, 1.000000);
@@ -61,6 +127,54 @@ uniform float Progress : hint_range(-0.15000000596046, 1.0) = -0.15000000596046;
 void fragment() {
 // ColorParameter:18
 	vec4 n_out18p0 = Box_Color;
+
+
+// Vector3Parameter:31
+	vec3 n_out31p0 = Nebula_Color;
+
+
+// Vector2Parameter:25
+	vec2 n_out25p0 = Parallax_Offset;
+
+
+// Input:23
+	vec2 n_out23p0 = SCREEN_UV;
+
+
+// VectorOp:26
+	vec2 n_out26p0 = n_out25p0 + n_out23p0;
+
+
+// Texture2D:24
+	vec4 n_out24p0 = texture(tex_frg_24, n_out26p0);
+	float n_out24p1 = n_out24p0.r;
+
+
+// FloatOp:27
+	float n_in27p1 = 6.00000;
+	float n_out27p0 = pow(n_out24p1, n_in27p1);
+
+
+// SmoothStep:28
+	float n_in28p0 = 0.40000;
+	float n_in28p1 = 0.70000;
+	float n_out28p0 = smoothstep(n_in28p0, n_in28p1, n_out27p0);
+
+
+// VectorCompose:30
+	vec3 n_out30p0 = vec3(n_out28p0, n_out28p0, n_out28p0);
+
+
+// VectorOp:29
+	vec3 n_out29p0 = n_out31p0 + n_out30p0;
+
+
+// BooleanParameter:19
+	bool n_out19p0 = Use_Nebula_Effect;
+
+
+// Mix:22
+	vec3 n_out22p0 = mix(vec3(n_out18p0.xyz), n_out29p0, vec3(n_out19p0 ? 1.0 : 0.0));
 
 
 // Texture2D:4
@@ -103,7 +217,7 @@ void fragment() {
 
 
 // Output:0
-	ALBEDO = vec3(n_out18p0.xyz);
+	ALBEDO = n_out22p0;
 	ALPHA = n_out4p0.x;
 	EMISSION = n_out16p0;
 	ALPHA_SCISSOR_THRESHOLD = n_out17p0;
@@ -131,5 +245,35 @@ nodes/fragment/16/position = Vector2(760, 860)
 nodes/fragment/17/node = SubResource("VisualShaderNodeFloatParameter_st1x7")
 nodes/fragment/17/position = Vector2(-1340, 1680)
 nodes/fragment/18/node = SubResource("VisualShaderNodeColorParameter_fh0yq")
-nodes/fragment/18/position = Vector2(-520, -120)
-nodes/fragment/connections = PackedInt32Array(12, 0, 13, 1, 10, 0, 13, 2, 13, 0, 11, 1, 14, 0, 15, 0, 14, 0, 15, 1, 14, 0, 15, 2, 11, 0, 16, 1, 15, 0, 16, 0, 16, 0, 0, 5, 18, 0, 0, 0, 17, 0, 10, 0, 4, 1, 11, 0, 4, 0, 0, 1, 17, 0, 0, 19)
+nodes/fragment/18/position = Vector2(-300, -320)
+nodes/fragment/19/node = SubResource("VisualShaderNodeBooleanParameter_st1x7")
+nodes/fragment/19/position = Vector2(-300, 0)
+nodes/fragment/22/node = SubResource("VisualShaderNodeMix_fh0yq")
+nodes/fragment/22/position = Vector2(760, -320)
+nodes/fragment/23/node = SubResource("VisualShaderNodeInput_st1x7")
+nodes/fragment/23/position = Vector2(-2960, -740)
+nodes/fragment/24/node = SubResource("VisualShaderNodeTexture_es7qp")
+nodes/fragment/24/position = Vector2(-1760, -1040)
+nodes/fragment/25/node = SubResource("VisualShaderNodeVec2Parameter_st1x7")
+nodes/fragment/25/position = Vector2(-2920, -1320)
+nodes/fragment/26/node = SubResource("VisualShaderNodeVectorOp_st1x7")
+nodes/fragment/26/position = Vector2(-2500, -1160)
+nodes/fragment/27/node = SubResource("VisualShaderNodeFloatOp_fh0yq")
+nodes/fragment/27/position = Vector2(-1380, -680)
+nodes/fragment/28/node = SubResource("VisualShaderNodeSmoothStep_st1x7")
+nodes/fragment/28/position = Vector2(-1100, -800)
+nodes/fragment/29/node = SubResource("VisualShaderNodeVectorOp_8awen")
+nodes/fragment/29/position = Vector2(40, -940)
+nodes/fragment/30/node = SubResource("VisualShaderNodeVectorCompose_es7qp")
+nodes/fragment/30/position = Vector2(-320, -720)
+nodes/fragment/31/node = SubResource("VisualShaderNodeVec3Parameter_st1x7")
+nodes/fragment/31/position = Vector2(-1120, -1180)
+nodes/fragment/32/node = SubResource("VisualShaderNodeInput_fh0yq")
+nodes/fragment/32/position = Vector2(-2980, -1540)
+nodes/fragment/33/node = SubResource("VisualShaderNodeVec2Parameter_8awen")
+nodes/fragment/33/position = Vector2(-2960, -1980)
+nodes/fragment/34/node = SubResource("VisualShaderNodeVectorOp_es7qp")
+nodes/fragment/34/position = Vector2(-2240, -1840)
+nodes/fragment/35/node = SubResource("VisualShaderNodeVectorOp_nwr8i")
+nodes/fragment/35/position = Vector2(-2060, -1420)
+nodes/fragment/connections = PackedInt32Array(12, 0, 13, 1, 10, 0, 13, 2, 13, 0, 11, 1, 14, 0, 15, 0, 14, 0, 15, 1, 14, 0, 15, 2, 11, 0, 16, 1, 15, 0, 16, 0, 16, 0, 0, 5, 17, 0, 10, 0, 4, 1, 11, 0, 4, 0, 0, 1, 17, 0, 0, 19, 19, 0, 22, 2, 22, 0, 0, 0, 18, 0, 22, 0, 25, 0, 26, 0, 24, 1, 27, 0, 27, 0, 28, 2, 30, 0, 29, 1, 29, 0, 22, 1, 31, 0, 29, 0, 32, 0, 34, 1, 33, 0, 34, 0, 26, 0, 35, 1, 34, 0, 35, 0, 28, 0, 30, 0, 28, 0, 30, 1, 28, 0, 30, 2, 23, 0, 26, 1, 26, 0, 24, 0)

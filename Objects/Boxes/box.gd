@@ -66,6 +66,11 @@ var just_loaded: bool = false
 
 var spawn_location: Vector3
 
+@onready var camera = get_viewport().get_camera_3d()
+var star_offset: Vector2 = Vector2.ZERO
+var last_camera_position: Vector3
+var last_camera_rotation: Vector3
+
 func get_save_data() -> Dictionary:
 	var data: Dictionary = {}
 	data.box_size = box_size
@@ -100,6 +105,9 @@ func load_save_data(data: Dictionary) -> void:
 	just_loaded = true
 
 func _ready():
+	if camera:
+		last_camera_position = camera.global_position
+		last_camera_rotation = camera.global_rotation
 	# Add to Box group for pickup detection
 	add_to_group("Box")
 	
@@ -330,6 +338,27 @@ func scale_mesh_to_corner(mesh_parent: Node3D):
 	var uniform_scale = min(scale_x, scale_y)
 	
 	mesh_parent.scale = Vector3(uniform_scale, uniform_scale, uniform_scale)
+	
+func _process(_delta: float):
+	if camera:
+		var current_cam_pos = camera.global_position
+		var current_cam_rot = camera.global_rotation
+		
+		var camera_movement = current_cam_pos - last_camera_position
+		var camera_rotation_delta = current_cam_rot - last_camera_rotation
+		
+		# Movement affects stars
+		star_offset.x += camera_movement.x * 0.02
+		star_offset.y += camera_movement.z * 0.02
+		
+		# Rotation also affects stars (spinning in place)
+		star_offset.x += camera_rotation_delta.y * -0.05  # Y rotation (left/right spin)
+		star_offset.y += camera_rotation_delta.x * 0.05  # X rotation (up/down look)
+		
+		original_material.set_shader_parameter("Parallax_Offset", star_offset)
+		
+		last_camera_position = current_cam_pos
+		last_camera_rotation = current_cam_rot
 	
 func _physics_process(_delta: float):
 	# Respawn if fallen through map

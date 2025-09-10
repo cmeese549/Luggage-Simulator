@@ -9,9 +9,12 @@
 render_priority = 0
 shader = ExtResource("1_to8rh")
 shader_parameter/Box_Color = Color(0.3292153, 0.18145376, 0, 1)
+shader_parameter/Nebula_Color = Vector3(-0.1, -0.011, -0.1)
+shader_parameter/Parallax_Offset = Vector2(0, 0)
+shader_parameter/Use_Nebula_Effect = true
 shader_parameter/Light_Strength = 2.5
 shader_parameter/Light_Color = Color(0.48235294, 0.9647059, 0, 1)
-shader_parameter/Progress = 0.30500001565204005
+shader_parameter/Progress = -0.15000000596046
 
 [node name="DissolveTester" type="Node3D"]
 
