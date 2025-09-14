@@ -3,10 +3,10 @@ extends Node3D
 class_name RunGenerator
 
 # Configuration parameters
-@export var possible_destinations: Array[String] = ["DEN", "LAX", "JFK", "ORD", "ATL", "SFO", "BOS", "TOR"]
+@export var possible_destinations: Array[Destination] = []
 @export var min_box_holes: int = 4
 @export var max_box_holes: int = 8
-@export var international_chance: float = 0.4
+@export var inspection_chance: float = 0.4
 @export var disposable_chance: float = 0.15
 
 # Difficulty scaling
@@ -17,21 +17,20 @@ class_name RunGenerator
 
 
 
-var preset_hole_positions: Array[Vector3] = []
+var preset_hole_data: Array[Dictionary] = []
 
 func collect_preset_positions() -> void:
-	preset_hole_positions.clear()
+	preset_hole_data.clear()
 	var existing_holes = get_tree().get_nodes_in_group("BoxHole")
 	for hole in existing_holes:
-		preset_hole_positions.append(hole.global_position)
+		preset_hole_data.append({
+			"position": hole.global_position,
+			"rotation": hole.rotation
+		})
 		hole.queue_free()
 
-func get_preset_hole_position(rng: RandomNumberGenerator, index: int) -> Vector3:
-	if index < preset_hole_positions.size():
-		return preset_hole_positions[index]
-	else:
-		# Fallback to grid if we need more positions than presets
-		return get_random_hole_position(rng, index)
+func get_preset_hole_position(rng: RandomNumberGenerator, index: int) -> Dictionary:
+	return preset_hole_data[index]
 
 func generate_run_config(_seed: int = -1) -> RunConfig:
 	var config = RunConfig.new()
@@ -59,31 +58,33 @@ func generate_box_holes(rng: RandomNumberGenerator) -> Array[BoxHoleConfig]:
 	# Always add both disposal holes first (active from day 1)
 	var disposal_domestic = BoxHoleConfig.new()
 	disposal_domestic.is_disposal = true
-	disposal_domestic.international = false
-	disposal_domestic.destination = ""  # Empty destination for disposal holes
+	disposal_domestic.needs_inspection = false
+	disposal_domestic.destination = null
 	disposal_domestic.active = true
 	disposal_domestic.activation_day = 1
 	
 	# Randomly select position for domestic disposal
-	var domestic_pos_index = rng.randi() % preset_hole_positions.size()
-	disposal_domestic.position = preset_hole_positions[domestic_pos_index]
+	var domestic_pos_index = rng.randi() % preset_hole_data.size()
+	disposal_domestic.position = preset_hole_data[domestic_pos_index].position
+	disposal_domestic.rotation = preset_hole_data[domestic_pos_index].rotation
 	used_positions.append(domestic_pos_index)
 	holes.append(disposal_domestic)
 	
-	var disposal_international = BoxHoleConfig.new()
-	disposal_international.is_disposal = true
-	disposal_international.international = true
-	disposal_international.destination = ""  # Empty destination for disposal holes
-	disposal_international.active = true
-	disposal_international.activation_day = 1
+	var disposal_inspection = BoxHoleConfig.new()
+	disposal_inspection.is_disposal = true
+	disposal_inspection.needs_inspection = true
+	disposal_inspection.destination = null
+	disposal_inspection.active = true
+	disposal_inspection.activation_day = 1
 	
 	# Randomly select different position for international disposal
-	var intl_pos_index = domestic_pos_index
-	while intl_pos_index == domestic_pos_index:
-		intl_pos_index = rng.randi() % preset_hole_positions.size()
-	disposal_international.position = preset_hole_positions[intl_pos_index]
-	used_positions.append(intl_pos_index)
-	holes.append(disposal_international)
+	var insp_pos_index = domestic_pos_index
+	while insp_pos_index == domestic_pos_index:
+		insp_pos_index = rng.randi() % preset_hole_data.size()
+	disposal_inspection.position = preset_hole_data[insp_pos_index].position
+	disposal_inspection.rotation = preset_hole_data[insp_pos_index].rotation
+	used_positions.append(insp_pos_index)
+	holes.append(disposal_inspection)
 	
 	# Generate 6 regular holes (8 total - 2 disposal = 6 regular)
 	var used_combinations: Array[String] = []
@@ -92,28 +93,30 @@ func generate_box_holes(rng: RandomNumberGenerator) -> Array[BoxHoleConfig]:
 	# Force first hole to be domestic (day 1)
 	var first_hole = BoxHoleConfig.new()
 	first_hole.destination = possible_destinations[rng.randi() % possible_destinations.size()]
-	first_hole.international = false
+	first_hole.needs_inspection = false
 	first_hole.activation_day = 1
 	first_hole.active = true
 	first_hole.value_multiplier = rng.randf_range(0.8, 1.2)
 	var first_pos_index = get_unused_position_index(used_positions, rng)
-	first_hole.position = preset_hole_positions[first_pos_index]
+	first_hole.position = preset_hole_data[first_pos_index].position
+	first_hole.rotation = preset_hole_data[first_pos_index].rotation
 	used_positions.append(first_pos_index)
 	holes.append(first_hole)
-	used_combinations.append(first_hole.destination + "_dom")
+	used_combinations.append(str(first_hole.destination.id) + "_dom")
 	
 	# Force second hole to be international (day 1) 
 	var second_hole = BoxHoleConfig.new()
 	second_hole.destination = possible_destinations[rng.randi() % possible_destinations.size()]
-	second_hole.international = true
+	second_hole.needs_inspection = true
 	second_hole.activation_day = 1
 	second_hole.active = true
 	second_hole.value_multiplier = rng.randf_range(0.8, 1.2)
 	var second_pos_index = get_unused_position_index(used_positions, rng)
-	second_hole.position = preset_hole_positions[second_pos_index]
+	second_hole.position = preset_hole_data[second_pos_index].position
+	second_hole.rotation = preset_hole_data[second_pos_index].rotation
 	used_positions.append(second_pos_index)
 	holes.append(second_hole)
-	used_combinations.append(second_hole.destination + "_intl")
+	used_combinations.append(str(second_hole.destination.id) + "_insp")
 	
 	# Generate remaining 4 holes normally
 	for i in range(2, 6):
@@ -126,9 +129,9 @@ func generate_box_holes(rng: RandomNumberGenerator) -> Array[BoxHoleConfig]:
 		while attempts < 50:  # Prevent infinite loops
 			# Pick destination
 			hole.destination = possible_destinations[rng.randi() % possible_destinations.size()]
-			hole.international = rng.randf() < international_chance
+			hole.needs_inspection = rng.randf() < inspection_chance
 			
-			combination_key = hole.destination + ("_intl" if hole.international else "_dom")
+			combination_key = str(hole.destination.id) + ("_insp" if hole.needs_inspection else "_dom")
 			
 			if combination_key not in used_combinations:
 				break
@@ -138,17 +141,14 @@ func generate_box_holes(rng: RandomNumberGenerator) -> Array[BoxHoleConfig]:
 		
 		# Select random unused position
 		var available_positions = []
-		for j in range(preset_hole_positions.size()):
+		for j in range(preset_hole_data.size()):
 			if j not in used_positions:
 				available_positions.append(j)
 		
-		if available_positions.size() > 0:
-			var selected_index = available_positions[rng.randi() % available_positions.size()]
-			hole.position = preset_hole_positions[selected_index]
-			used_positions.append(selected_index)
-		else:
-			# Fallback to grid if we run out of preset positions
-			hole.position = get_random_hole_position(rng, holes.size())
+		var selected_index = available_positions[rng.randi() % available_positions.size()]
+		hole.position = preset_hole_data[selected_index].position
+		hole.rotation = preset_hole_data[selected_index].rotation
+		used_positions.append(selected_index)
 		
 		hole.value_multiplier = rng.randf_range(0.8, 1.2)
 		
@@ -162,7 +162,7 @@ func generate_box_holes(rng: RandomNumberGenerator) -> Array[BoxHoleConfig]:
 
 func get_unused_position_index(used_positions: Array, rng: RandomNumberGenerator) -> int:
 	var available_positions = []
-	for j in range(preset_hole_positions.size()):
+	for j in range(preset_hole_data.size()):
 		if j not in used_positions:
 			available_positions.append(j)
 	return available_positions[rng.randi() % available_positions.size()]
@@ -193,8 +193,8 @@ func generate_box_type_probabilities(_rng: RandomNumberGenerator, progress: floa
 	var probabilities: Array[Dictionary] = []
 	
 	# Base probability for international boxes increases over time
-	var international_prob = lerp(0.3, 0.5, progress)
-	probabilities.append({"type": "international", "chance": international_prob})
+	var needs_inspection_prob = lerp(0.3, 0.5, progress)
+	probabilities.append({"type": "needs_inspection", "chance": needs_inspection_prob})
 	
 	# Disposable boxes increase over time
 	var disposable_prob = lerp(0.3, 0.35, progress)
@@ -216,16 +216,3 @@ func generate_special_modifiers(rng: RandomNumberGenerator, day: int) -> Array[S
 		modifiers.append("stricter_inspection")
 	
 	return modifiers
-
-func get_random_hole_position(rng: RandomNumberGenerator, index: int) -> Vector3:
-	# Simple grid-based positioning for now
-	var spacing = 4.0
-	var per_row = 3
-	var row = index / per_row
-	var col = index % per_row
-	
-	# Add some random offset
-	var offset_x = rng.randf_range(-1.0, 1.0)
-	var offset_z = rng.randf_range(-1.0, 1.0)
-	
-	return Vector3(col * spacing + offset_x, 0, row * spacing + offset_z)

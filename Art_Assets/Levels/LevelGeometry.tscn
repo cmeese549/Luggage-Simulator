@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://ddwtbnyshxxj3"]
 
-[ext_resource type="PackedScene" uid="uid://qgfbm7o67k0q" path="res://Art_Assets/Models/SkatePark/HalfPipe.tscn" id="7_kg5dk"]
-[ext_resource type="PackedScene" uid="uid://b1rpqtghxtk7v" path="res://Art_Assets/Models/SkatePark/StraightRail.tscn" id="12_vkket"]
-[ext_resource type="PackedScene" uid="uid://saigtfv4gdv4" path="res://Art_Assets/Models/SkatePark/WiggleRail.tscn" id="13_twxhu"]
-[ext_resource type="PackedScene" uid="uid://dfwilyex83qk5" path="res://Art_Assets/Models/SkatePark/CurvedRail.tscn" id="14_u8fre"]
+[ext_resource type="PackedScene" uid="uid://qgfbm7o67k0q" path="res://Art_Assets/SkatePark/HalfPipe.tscn" id="7_kg5dk"]
+[ext_resource type="PackedScene" uid="uid://b1rpqtghxtk7v" path="res://Art_Assets/SkatePark/StraightRail.tscn" id="12_vkket"]
+[ext_resource type="PackedScene" uid="uid://saigtfv4gdv4" path="res://Art_Assets/SkatePark/WiggleRail.tscn" id="13_twxhu"]
+[ext_resource type="PackedScene" uid="uid://dfwilyex83qk5" path="res://Art_Assets/SkatePark/CurvedRail.tscn" id="14_u8fre"]
 
 [sub_resource type="Environment" id="Environment_u4jfv"]
 background_mode = 1

@@ -16,19 +16,17 @@ var disposable_mesh = preload("res://Objects/Boxes/disposable_sticker.tscn")
 var international_mesh = preload("res://Objects/Boxes/international_sticker.tscn")
 @onready var outward_particles : GPUParticles3D = $OutwardBoxParticles
 @onready var inward_particles : GPUParticles3D = $InwardBoxParticles
+@onready var approval_particles : GPUParticles3D = $ApprovalParticles
+@onready var rejection_particles : GPUParticles3D = $RejectionParticles
 var dissolve_duration = 2
 var stickers_to_kill : Array[MeshInstance3D] = []
 
 @export var value: int = 10
-@export var international: bool = false
+@export var needs_inspection: bool = false
 @export var disposable: bool = false
-@export var destination: String = "DEN"
+@export var destination: Destination
 var has_valid_destination: bool = false
-var all_qualification_icons: Array[Dictionary] = [
-	{ "icon": "⚠", "text": "Disposable", "chance": 1 },
-	{ "icon": "🌐", "text": "International", "chance": 0.4 },
-]
-var active_qualification_icons: Array[Dictionary] = []
+
 enum ApprovalState {
 	NONE,
 	APPROVED, 
@@ -62,6 +60,7 @@ var corner_positions = {
 # Highlighting system
 var original_material: ShaderMaterial
 var is_highlighted: bool = false
+var fog_tween: Tween
 var just_loaded: bool = false
 
 var spawn_location: Vector3
@@ -76,12 +75,11 @@ func get_save_data() -> Dictionary:
 	data.box_size = box_size
 	data.box_color = box_color
 	data.value = value
-	data.international = international
+	data.needs_inspection = needs_inspection
 	data.disposable = disposable
 	data.destination = destination
 	data.has_valid_destination = has_valid_destination
 	data.approval_state = approval_state
-	data.active_qualification_icons = active_qualification_icons
 	data.occupied_corners = occupied_corners
 	data.scene_path = scene_file_path
 	data.global_position = global_position
@@ -93,12 +91,11 @@ func load_save_data(data: Dictionary) -> void:
 	box_size = data.box_size
 	box_color = data.box_color
 	value = data.value
-	international = data.international
+	needs_inspection = data.needs_inspection
 	disposable = data.disposable
 	destination = data.destination
 	has_valid_destination = data.has_valid_destination
 	approval_state = data.approval_state
-	active_qualification_icons = data.active_qualification_icons
 	occupied_corners = data.occupied_corners
 	global_position = data.global_position
 	rotation = data.rotation
@@ -120,34 +117,12 @@ func _ready():
 		create_box_collision()
 	
 	create_destination_mesh()
-	create_approval_icons()
 	
 	if just_loaded:
-		# Create stickers for explicitly set properties only
-		#print("loady woady")
-		#print ("International: ", international)
-		#print("Disposable: ", disposable)
-		#print("======================================")
-		if international:
-			var intl_icon = {"icon": "🌐", "text": "International"}
-			active_qualification_icons.append(intl_icon)
+		if needs_inspection:
 			create_international_mesh()
 		if disposable:
-			var disp_icon = {"icon": "⚠", "text": "Disposable"}
-			active_qualification_icons.append(disp_icon)
 			create_disposable_mesh()
-	else:
-		# Original random generation logic
-		for icon in all_qualification_icons:
-			if randf() < icon.chance:
-				active_qualification_icons.append(icon)
-				if icon.text == "Disposable":
-					disposable = true
-					create_disposable_mesh()
-				elif icon.text == "International":
-					international = true
-					create_international_mesh()
-		update_approval_icons()
 
 func create_box_visual():
 	var mesh_instance = MeshInstance3D.new()
@@ -163,6 +138,8 @@ func create_box_visual():
 	
 	inward_particles.process_material.emission_box_extents = box_size
 	outward_particles.process_material.emission_box_extents = box_size * 0.7
+	approval_particles.process_material.emission_box_extents = box_size
+	rejection_particles.process_material.emission_box_extents = box_size
 	#particles.emitting = false
 	add_child(mesh_instance)
 
@@ -188,46 +165,43 @@ func create_box_collision():
 	
 func set_approval_state(state: ApprovalState):
 	approval_state = state
-	update_approval_icons()
-	
-func create_approval_icons():
-	var half = box_size * 0.5
-	var offset = 0.01
-	
-	# Create icons on the 4 main faces (front, back, left, right)
-	var face_configs = [
-		{"pos": Vector3(0, 0, -half.z - offset), "rot": Vector3(0, 180, 0)}, # back  
-		{"pos": Vector3(-half.x - offset, 0, 0), "rot": Vector3(0, 270, 0)}, # left
-		{"pos": Vector3(half.x + offset, 0, 0), "rot": Vector3(0, 90, 0)}    # right
-	]
-	
-	for i in range(face_configs.size()):
-		var icon_label = Label3D.new()
-		icon_label.name = "ApprovalIcon" + str(i)
-		icon_label.font_size = 48
-		icon_label.outline_size = 2
-		icon_label.outline_modulate = Color.BLACK
-		icon_label.billboard = BaseMaterial3D.BILLBOARD_DISABLED
-		icon_label.visible = false  # Start hidden
-		
-		icon_label.position = face_configs[i].pos
-		icon_label.rotation_degrees = face_configs[i].rot
-		
-		add_child(icon_label)
+	update_approval_state()
 
-func update_approval_icons():
-	var approval_icons = get_children().filter(func(child): return child.name.begins_with("ApprovalIcon"))
+func update_approval_state():
+	match approval_state:
+		ApprovalState.APPROVED:
+			set_fog_color_animated(Color.GREEN)
+			approval_particles.restart()
+			approval_particles.emitting = true
+		ApprovalState.REJECTED:
+			set_fog_color_animated(Color.RED)
+			rejection_particles.restart()
+			rejection_particles.emitting = true
+		_:
+			set_fog_color_animated(Color.BLACK)
+			
+func set_fog_color_animated(target_color: Color, duration: float = 1.0):
+	# Kill existing tween if running
+	if fog_tween:
+		fog_tween.kill()
 	
-	for icon in approval_icons:
-		if approval_state == ApprovalState.NONE:
-			icon.visible = false
-		else:
-			icon.visible = true
-			icon.text = "✔️" if approval_state == ApprovalState.APPROVED else "❌"
+	fog_tween = create_tween()
+	var current_color = original_material.get_shader_parameter("Fog_Color")
+	
+	if current_color == null:
+		current_color = Vector3(0, 0, 0)
+	
+	fog_tween.tween_method(
+		func(color): original_material.set_shader_parameter("Fog_Color", color),
+		current_color,
+		Vector3(target_color.r, target_color.g, target_color.b),
+		duration
+	)
 	
 func create_destination_mesh():
 	var mesh_instance = destination_mesh.instantiate()
 	add_child(mesh_instance)
+	mesh_instance.mesh_instance.mesh = destination.symbol_mesh 
 	mesh_instance.name = "DestinationMesh"
 	
 	# Center on front face
@@ -256,7 +230,7 @@ func create_disposable_mesh():
 	stickers_to_kill.append(mesh_instance.get_child(0))
 
 func create_international_mesh():
-	international = true
+	needs_inspection = true
 	var mesh_instance = international_mesh.instantiate()
 	add_child(mesh_instance)
 	mesh_instance.name = "InternationalMesh"
@@ -345,15 +319,16 @@ func _process(_delta: float):
 		var current_cam_rot = camera.global_rotation
 		
 		var camera_movement = current_cam_pos - last_camera_position
-		var camera_rotation_delta = current_cam_rot - last_camera_rotation
+		var rotation_delta_x = angle_difference(last_camera_rotation.x, current_cam_rot.x)
+		var rotation_delta_y = angle_difference(last_camera_rotation.y, current_cam_rot.y)
 		
 		# Movement affects stars
 		star_offset.x += camera_movement.x * 0.02
 		star_offset.y += camera_movement.z * 0.02
 		
 		# Rotation also affects stars (spinning in place)
-		star_offset.x += camera_rotation_delta.y * -0.05  # Y rotation (left/right spin)
-		star_offset.y += camera_rotation_delta.x * 0.05  # X rotation (up/down look)
+		star_offset.x += rotation_delta_y * -0.05
+		star_offset.y += rotation_delta_x * 0.05
 		
 		original_material.set_shader_parameter("Parallax_Offset", star_offset)
 		

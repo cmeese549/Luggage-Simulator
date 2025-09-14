@@ -7,3 +7,4 @@ class_name RunSaveData
 @export var money: Dictionary = {}
 @export var run_orchestrator_data: Dictionary = {}
 @export var box_spawners: Array[Dictionary] = []
+@export var current_day: int = 0

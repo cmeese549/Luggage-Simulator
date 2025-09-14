@@ -2,28 +2,19 @@ extends Node
 
 const SAVE_FILE_PATH = "user://factory_save.tres"
 
-func save_game() -> bool:
+func collect_run_save_data() -> RunSaveData:
 	var save_data = RunSaveData.new()
-	
-	# Save buildables
 	save_data.buildables = collect_buildable_data()
 	save_data.boxes = collect_all_boxes()
 	save_data.money = collect_money_data()
 	save_data.box_spawners = collect_box_spawners()
 	save_data.run_orchestrator_data = collect_run_data()
-	
-	# Save to file
-	return ResourceSaver.save(save_data, SAVE_FILE_PATH) == OK
+	return save_data
 
-func load_game() -> bool:
-	if not FileAccess.file_exists(SAVE_FILE_PATH):
-		return false
-	
-	var save_data = ResourceLoader.load(SAVE_FILE_PATH) as RunSaveData
+func load_from_run_save_data(save_data: RunSaveData) -> bool:
 	if not save_data:
 		return false
 	
-	# Clear existing buildables and restore from save
 	clear_existing_buildables()
 	clear_existing_boxes()
 	clear_existing_spawners()
@@ -35,6 +26,7 @@ func load_game() -> bool:
 	
 	Events.game_loaded.emit()
 	return true
+	
 	
 func collect_run_data() -> Dictionary:
 	return get_tree().get_first_node_in_group("RunOrchestrator").get_save_data()

@@ -11,8 +11,6 @@ signal clicked(spawner: BoxSpawner)
 @export var min_box_size: Vector3 = Vector3(0.4, 0.4, 0.4)
 @export var max_box_size: Vector3 = Vector3(0.8, 0.8, 0.8)
 @export var colors: Array[Color] = [Color.BLACK, Color.MIDNIGHT_BLUE, Color.SLATE_GRAY, Color.DIM_GRAY]
-var destinations: Array[String] = ["DEN", "LAX", "JFK", "ORD"]
-var active_destinations: Array[String] =  ["DEN", "LAX", "JFK"]
 
 @onready var spawn_area : Area3D = $Area3D
 @onready var label : Label3D = $Label3D
@@ -25,8 +23,6 @@ var active: bool = false
 func get_save_data() -> Dictionary:
 	var data: Dictionary = {}
 	data.spawn_rate = spawn_rate
-	data.destinations = destinations
-	data.active_destinations = active_destinations
 	data.boxes_spawned = boxes_spawned
 	data.spawn_timer = spawn_timer
 	data.active = active
@@ -36,8 +32,6 @@ func get_save_data() -> Dictionary:
 
 func load_save_data(data: Dictionary) -> void:
 	spawn_rate = data.spawn_rate
-	destinations = data.destinations
-	active_destinations = data.active_destinations
 	boxes_spawned = data.boxes_spawned
 	spawn_timer = data.spawn_timer
 	active = data.active
@@ -66,16 +60,14 @@ func spawn_box_with_properties(properties: Dictionary) -> void:
 		randf_range(min_box_size.z, max_box_size.z)
 	)
 	box.box_color = colors[randi() % colors.size()]
-	# Override with specific properties from LevelManager
-	if properties.has("destination"):
-		box.destination = properties.destination
-	else:
-		box.destination = destinations[randi() % destinations.size()]
 	
-	if properties.has("international"):
-		box.international = properties.international
+	# Override with specific properties from LevelManager
+	box.destination = properties.destination
+	
+	if properties.has("needs_inspection"):
+		box.needs_inspection = properties.needs_inspection
 	else:
-		box.international = false
+		box.needs_inspection = false
 	
 	if properties.has("disposable"):
 		box.disposable = properties.disposable
@@ -84,8 +76,9 @@ func spawn_box_with_properties(properties: Dictionary) -> void:
 	
 	# Set validity based on active destinations
 	if run_orchestrator and run_orchestrator.current_run_config:
+		# FIXED:
 		var matching_holes = run_orchestrator.current_run_config.box_holes.filter(func(hole):
-			return hole.active and hole.destination == box.destination and hole.international == box.international and not hole.is_disposal
+			return hole.active and hole.destination != null and box.destination != null and hole.destination.id == box.destination.id and hole.needs_inspection == box.needs_inspection and not hole.is_disposal
 			)
 		box.has_valid_destination = not matching_holes.is_empty()
 	else:

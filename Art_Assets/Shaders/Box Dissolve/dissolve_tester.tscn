@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://brbhba3lve53w"]
+[gd_scene load_steps=7 format=3 uid="uid://brbhba3lve53w"]
 
 [ext_resource type="Shader" uid="uid://bc23ih7carn81" path="res://Art_Assets/Shaders/Box Dissolve/box_dissolve.tres" id="1_to8rh"]
+[ext_resource type="PackedScene" uid="uid://dv64iu7yyaryl" path="res://Art_Assets/Shaders/Box Dissolve/approval_particles.tscn" id="3_08uqe"]
 [ext_resource type="PackedScene" uid="uid://c2ptrqkmw456s" path="res://Art_Assets/Shaders/Box Dissolve/outward_box_particles.tscn" id="3_jrxy2"]
+[ext_resource type="PackedScene" uid="uid://bw2ctjlokwb4f" path="res://Art_Assets/Shaders/Box Dissolve/rejection_particles.tscn" id="4_3j46p"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_v8lin"]
 
@@ -9,8 +11,9 @@
 render_priority = 0
 shader = ExtResource("1_to8rh")
 shader_parameter/Box_Color = Color(0.3292153, 0.18145376, 0, 1)
-shader_parameter/Nebula_Color = Vector3(-0.1, -0.011, -0.1)
-shader_parameter/Parallax_Offset = Vector2(0, 0)
+shader_parameter/Fog_Color = Vector3(0, 1, 0)
+shader_parameter/Parallax_Offset = Vector2(0.265, 0)
+shader_parameter/Nebula_Color = Vector3(-0.1, -0.1, -0.1)
 shader_parameter/Use_Nebula_Effect = true
 shader_parameter/Light_Strength = 2.5
 shader_parameter/Light_Color = Color(0.48235294, 0.9647059, 0, 1)
@@ -26,3 +29,7 @@ surface_material_override/0 = SubResource("ShaderMaterial_rsiy4")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.119200945, 0)
 amount = 1525
 randomness = 0.29
+
+[node name="ApprovalParticles" parent="." instance=ExtResource("3_08uqe")]
+
+[node name="RejectionParticles" parent="." instance=ExtResource("4_3j46p")]

@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://b8js4tiuw5jeg"]
+[gd_scene load_steps=7 format=3 uid="uid://b8js4tiuw5jeg"]
 
 [ext_resource type="Script" uid="uid://cd2m2pbtilfkb" path="res://Objects/Boxes/box.gd" id="1_5d80p"]
+[ext_resource type="PackedScene" uid="uid://dv64iu7yyaryl" path="res://Art_Assets/Shaders/Box Dissolve/approval_particles.tscn" id="2_0680c"]
 [ext_resource type="PackedScene" uid="uid://c2ptrqkmw456s" path="res://Art_Assets/Shaders/Box Dissolve/outward_box_particles.tscn" id="2_yqyg2"]
 [ext_resource type="PackedScene" uid="uid://dso5iwklb3tje" path="res://Art_Assets/Shaders/Box Dissolve/inward_box_particles.tscn" id="3_ottx1"]
+[ext_resource type="PackedScene" uid="uid://bw2ctjlokwb4f" path="res://Art_Assets/Shaders/Box Dissolve/rejection_particles.tscn" id="3_pkkbn"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_tcp6c"]
 friction = 0.5
@@ -16,6 +18,10 @@ mass = 5.0
 physics_material_override = SubResource("PhysicsMaterial_tcp6c")
 can_sleep = false
 script = ExtResource("1_5d80p")
+
+[node name="ApprovalParticles" parent="." instance=ExtResource("2_0680c")]
+
+[node name="RejectionParticles" parent="." instance=ExtResource("3_pkkbn")]
 
 [node name="OutwardBoxParticles" parent="." instance=ExtResource("2_yqyg2")]
 

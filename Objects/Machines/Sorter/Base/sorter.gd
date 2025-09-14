@@ -5,7 +5,7 @@ class_name Sorter
 @export var max_queue_size: int = 10
 @export var processing_time: float = 2.0
 @export var output_icon: String = "🌐"
-@export var expected_destination: String = "DEN"
+@export var expected_destination: Destination
 
 @onready var input_detector: Area3D = $"BaseSorter/Box Detectors/Input"
 @onready var other_output_detector: Area3D = $"BaseSorter/Box Detectors/Other Output"

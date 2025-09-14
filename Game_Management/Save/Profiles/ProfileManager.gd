@@ -46,6 +46,7 @@ func create_new_profile(profile_id: int) -> PlayerProfile:
 	profile.active_run_data = null
 	
 	save_profile(profile)
+	refresh_profile_ui()
 	return profile
 
 func save_profile(profile: PlayerProfile) -> bool:
@@ -63,7 +64,21 @@ func select_profile(profile_id: int) -> bool:
 	current_profile = profile
 	current_profile_id = profile_id
 	restore_hotkeys_to_building_system()
-	player.load_save_data(profile.player_data)
+	if not profile.player_data.is_empty():
+		player.load_save_data(profile.player_data)
+		
+	if profile.active_run_data:
+		# Load existing run
+		RunSaveManager.load_from_run_save_data(profile.active_run_data)
+		print("Loaded existing run - Day ", profile.active_run_data.run_orchestrator_data.current_day)
+	else:
+		# Start new run
+		get_tree().get_first_node_in_group("RunOrchestrator").start_new_run()
+		print("Started new run for profile ", profile_id)
+
+	if get_tree().paused:
+		get_tree().get_first_node_in_group("PauseMenu").unpause()
+	
 	return true
 	
 func update_hotkeys(hotkeys_data: Dictionary) -> void:
@@ -92,7 +107,7 @@ func save_current_profile() -> bool:
 	
 func delete_profile(profile_id: int, entry: ProfileEntry):
 	DirAccess.remove_absolute(get_profile_path(profile_id))
-	show_empty_profile_data(profile_id, entry)
+	refresh_profile_ui()
 	
 func show_empty_profile_data(profile_id: int, entry: ProfileEntry):
 	entry.active_run_label.text = ""
@@ -110,6 +125,7 @@ func clear_active_run() -> void:
 	if current_profile:
 		current_profile.active_run_data = null
 		save_current_profile()
+		refresh_profile_ui()
 		
 func populate_profile_data():
 	var profile_summaries = get_all_profile_summaries()
@@ -119,16 +135,75 @@ func populate_profile_data():
 		profile_container.add_child(entry)
 		await get_tree().process_frame
 		if summary.exists:
-			entry.active_run_label.text = "Day " + summary.active_run_day if summary.has_active_run else "No Active Run"
+			entry.active_run_label.text = "Day " + str(summary.active_run_day) if summary.has_active_run else "No Active Run"
 			entry.name_label.text = "Profile " + str(i)
 			entry.lifetime_money_label.text = "Lifetime $: " + str(summary.lifetime_money)
 			entry.load_button.pressed.connect(select_profile.bind(i))
 			entry.create_button.visible = false
-			entry.delete_button.pressed.connect(delete_profile.bind(i))
+			entry.delete_button.pressed.connect(delete_profile.bind(i, entry))
 		else:
 			show_empty_profile_data(i, entry)
 		i += 1
-		
+
+func refresh_profile_ui() -> void:
+	var profile_summaries = get_all_profile_summaries()
+	var entries = profile_container.get_children()
+	
+	for i in range(entries.size()):
+		if i < profile_summaries.size():
+			var entry = entries[i] as ProfileEntry
+			var summary = profile_summaries[i]
+			update_profile_entry(entry, summary, i + 1)
+
+func update_profile_entry(entry: ProfileEntry, summary: Dictionary, profile_id: int) -> void:
+	# Disconnect existing signals to avoid duplicates
+	if entry.load_button.pressed.is_connected(select_profile):
+		entry.load_button.pressed.disconnect(select_profile)
+	if entry.delete_button.pressed.is_connected(delete_profile):
+		entry.delete_button.pressed.disconnect(delete_profile)
+	if entry.create_button.pressed.is_connected(create_new_profile):
+		entry.create_button.pressed.disconnect(create_new_profile)
+	
+	if summary.exists:
+		entry.active_run_label.text = "Day " + str(summary.active_run_day) if summary.has_active_run else "No Active Run"
+		entry.name_label.text = "Profile " + str(profile_id)
+		entry.lifetime_money_label.text = "Lifetime $: " + str(summary.lifetime_money)
+		entry.load_button.pressed.connect(select_profile.bind(profile_id))
+		entry.create_button.visible = false
+		entry.load_button.visible = true
+		entry.delete_button.visible = true
+		entry.delete_button.pressed.connect(delete_profile.bind(profile_id, entry))
+	else:
+		entry.active_run_label.text = ""
+		entry.name_label.text = "Empty"
+		entry.lifetime_money_label.text = ""
+		entry.load_button.visible = false
+		entry.create_button.visible = true
+		entry.delete_button.visible = false
+		entry.create_button.pressed.connect(create_new_profile.bind(profile_id))
+
+func save_current_run() -> bool:
+	# Auto-create Profile 1 if no profile selected
+	if not current_profile:
+		if not select_profile(1):
+			return false
+	
+	# Now save the run data
+	if current_profile:
+		current_profile.active_run_data = RunSaveManager.collect_run_save_data()
+		current_profile.player_data = player.get_save_data()
+		var success: bool = save_current_profile()
+		if success:
+			refresh_profile_ui()
+		return success
+	return false
+
+func load_current_run() -> bool:
+	if not current_profile or not current_profile.active_run_data:
+		return false
+	
+	return RunSaveManager.load_from_run_save_data(current_profile.active_run_data)
+	
 
 func get_all_profile_summaries() -> Array[Dictionary]:
 	var summaries: Array[Dictionary] = []

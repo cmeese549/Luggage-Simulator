@@ -2,22 +2,36 @@ extends StaticBody3D
 
 class_name BoxHole
 
-@export var destination: String = "DEN"
-@export var international: bool = false
+@export var destination: Destination
+@export var needs_inspection: bool = false
 @export var is_disposal: bool = false
+@export var disposable_mesh: Mesh = preload("res://Art_Assets/Models/Voxel/OBJ/Factory Bits-3-Sticker1.obj")
 
 @onready var run_orchestrator = get_tree().get_first_node_in_group("RunOrchestrator")
 @onready var money: Money = get_tree().get_first_node_in_group("Money")
 
 @onready var rejection_sound : AudioStreamPlayer = $Rejection
 @onready var acceptance_sound : AudioStreamPlayer = $Acceptance
+@onready var symbol_mesh: MeshInstance3D = $SymbolMesh
+@onready var inspection_mesh: MeshInstance3D = $InspectionMesh
+
+var active: bool = false
 
 func _ready():
-	$Label3D.text = destination
-	if is_disposal:
-		$Label3D.text = "❌"
-	if international:
-		$Label3D.text += " 🌐"
+	set_icon()
+	
+func set_icon():
+	if destination != null:
+		symbol_mesh.mesh = destination.symbol_mesh
+	else:
+		symbol_mesh.mesh = disposable_mesh
+	if needs_inspection:
+		inspection_mesh.visible = true
+	
+	if !active:
+		symbol_mesh.visible = false
+		inspection_mesh.visible = false
+
 
 func _on_deposit_zone_body_entered(body):
 	if body is Box:
@@ -25,10 +39,7 @@ func _on_deposit_zone_body_entered(body):
 		if is_legit:
 			acceptance_sound.pitch_scale = randf_range(0.75, 1.1)
 			acceptance_sound.play()
-			var total_stickers: int = body.active_qualification_icons.size()
 			var value = Economy.config.base_box_value
-			if total_stickers > 0:
-				value *= pow(Economy.config.sticker_multiplier, total_stickers)
 			money.make_money(value)
 			Events.box_deposited.emit(value, body, true)
 		else:
@@ -50,7 +61,7 @@ func check_box_legit(box: Box) -> bool:
 		#print("REJECTED: Box has no approval state")
 		return false
 	
-	if is_disposal and box.international == international:
+	if is_disposal and box.needs_inspection == needs_inspection:
 		#print("Checking disposal hole logic...")
 		if box.disposable or not box.has_valid_destination:
 			if box.approval_state == Box.ApprovalState.REJECTED:
@@ -62,7 +73,7 @@ func check_box_legit(box: Box) -> bool:
 		else:
 			#print("REJECTED: Disposal hole - box is not disposable and has valid destination")
 			return false
-	elif box.destination == destination and box.international == international:
+	elif box.destination == destination and box.needs_inspection == needs_inspection:
 		#print("Checking regular hole logic...")
 		if not box.disposable:
 			if box.approval_state == Box.ApprovalState.APPROVED:

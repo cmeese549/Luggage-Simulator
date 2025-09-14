@@ -48,3 +48,5 @@ func try_buy(amount: float) -> bool:
 	else:
 		print("Not enough money, need "+str(amount)+" have "+str(cur_money))
 		return false
+
+

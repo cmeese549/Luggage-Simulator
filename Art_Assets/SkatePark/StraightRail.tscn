@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://b1rpqtghxtk7v"]
 
-[ext_resource type="ArrayMesh" uid="uid://bmue2va1paafr" path="res://Art_Assets/Models/SkatePark/StraightRail.obj" id="1_6c0uh"]
+[ext_resource type="ArrayMesh" uid="uid://bmue2va1paafr" path="res://Art_Assets/SkatePark/StraightRail.obj" id="1_6c0uh"]
 [ext_resource type="Script" uid="uid://du36ad1m5n61t" path="res://Objects/Rail/rail.gd" id="1_mjrcg"]
 [ext_resource type="Material" uid="uid://37mt5doucssn" path="res://Art_Assets/Models/MediumGrey.tres" id="3_mjrcg"]
 

@@ -44,6 +44,9 @@ func load_save_data(data: Dictionary) -> void:
 		if is_day_active:
 			var day_config = get_current_day_config()
 			current_spawn_interval = 1.0 / day_config.boxes_per_second
+			
+func auto_save_run() -> void:
+	ProfileManager.save_current_run()
 
 func _ready():
 	await get_tree().process_frame
@@ -59,20 +62,27 @@ func start_new_run() -> void:
 	start_day(1)
 
 func setup_box_holes() -> void:
+	# Clear existing box holes first
+	var existing_holes = get_tree().get_nodes_in_group("BoxHole")
+	for hole in existing_holes:
+		hole.queue_free()
+	
+	# Wait a frame for cleanup  
+	await get_tree().process_frame
+	
 	for i in range(current_run_config.box_holes.size()):
 		var hole_config = current_run_config.box_holes[i]
-		
 		var hole_instance = box_hole_scene.instantiate()
 		hole_instance.destination = hole_config.destination
-		hole_instance.international = hole_config.international
+		hole_instance.needs_inspection = hole_config.needs_inspection
 		hole_instance.is_disposal = hole_config.is_disposal
+		hole_instance.active = hole_config.active
 		
 		get_tree().root.get_node("MainLevel").add_child(hole_instance)
 		hole_instance.global_position = hole_config.position
+		hole_instance.rotation = hole_config.rotation
 		hole_instance.scale = Vector3(6, 6, 6)
-		# Update label based on active state
-		if not hole_config.active:
-			hole_instance.get_node("Label3D").text = "Inactive"
+
 
 func start_day(day_number: int) -> void:
 	if day_number > 31:  
@@ -215,23 +225,23 @@ func generate_box_properties(day_config: DayConfig) -> Dictionary:
 	if randf() < invalid_chance:
 		# Pick a destination that has NO active holes
 		var all_destinations = run_generator.possible_destinations
-		var active_destinations = []
+		var active_destination_ids = []
 		
 		# Collect all active destinations from holes
 		for hole in current_run_config.box_holes:
-			if hole.active and not hole.is_disposal and hole.destination not in active_destinations:
-				active_destinations.append(hole.destination)
+			if hole.active and not hole.is_disposal and hole.destination.id not in active_destination_ids:
+				active_destination_ids.append(hole.destination.id)
 		
 		# Find destinations that don't have active holes
 		var invalid_destinations = []
 		for dest in all_destinations:
-			if dest not in active_destinations:
+			if dest not in active_destination_ids:
 				invalid_destinations.append(dest)
 		
 		# If we have invalid destinations available, use one
 		if invalid_destinations.size() > 0:
 			properties["destination"] = invalid_destinations[randi() % invalid_destinations.size()]
-			properties["international"] = randf() < 0.5  # Can be international too
+			properties["needs_inspection"] = randf() < 0.5  # Can be international too
 			return properties  # Return early, this box is invalid
 	
 	# Otherwise, pick a valid destination from active holes
@@ -242,7 +252,7 @@ func generate_box_properties(day_config: DayConfig) -> Dictionary:
 	if valid_holes.size() > 0:
 		var selected_hole = valid_holes[randi() % valid_holes.size()]
 		properties["destination"] = selected_hole.destination
-		properties["international"] = selected_hole.international
+		properties["needs_inspection"] = selected_hole.needs_inspection
 	
 	# Apply box type probabilities for disposable flag
 	for box_type in day_config.box_types:
@@ -280,9 +290,11 @@ func complete_day() -> void:
 			spawner.label.text = ""
 		await get_tree().create_timer(2.0).timeout
 		start_day(current_day + 1)
+	auto_save_run()
 
 func complete_run(success: bool) -> void:
 	run_completed.emit(success)
+	ProfileManager.clear_active_run()
 	if success:
 		print("Run completed successfully!")
 	else:

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Destination" load_steps=3 format=3 uid="uid://dhfxvd84jkugt"]
+
+[ext_resource type="Script" uid="uid://daqqbmcarrwso" path="res://Objects/Dropoffs/destination.gd" id="1_vjsfb"]
+[ext_resource type="ArrayMesh" uid="uid://8fr0g4hrcvlv" path="res://Art_Assets/Models/Voxel/OBJ/Factory Bits-8-Rune2.obj" id="2_vjsfb"]
+
+[resource]
+script = ExtResource("1_vjsfb")
+id = 2
+symbol_mesh = ExtResource("2_vjsfb")
+metadata/_custom_type_script = "uid://daqqbmcarrwso"

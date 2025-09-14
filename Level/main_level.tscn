@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://bpisaxbeyscs7"]
+[gd_scene load_steps=49 format=3 uid="uid://bpisaxbeyscs7"]
 
 [ext_resource type="Script" uid="uid://bu07i0b06sujv" path="res://Game_Management/main_level.gd" id="1_romof"]
 [ext_resource type="PackedScene" uid="uid://exdhmbr43ger" path="res://UI/UI.tscn" id="2_bblu0"]
@@ -14,7 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://dbu3dnmlljrlq" path="res://Objects/Conveyor Belts/1x1/1x1_raised.tscn" id="17_swadt"]
 [ext_resource type="PackedScene" uid="uid://h6r74mt2iyu4" path="res://Objects/Conveyor Belts/Corner/corner_conveyor.tscn" id="18_dbttc"]
 [ext_resource type="AudioStream" uid="uid://babm51jmu7wc5" path="res://Audio/Sfx/Ambience/nature_ambience.ogg" id="18_hhlvi"]
-[ext_resource type="PackedScene" uid="uid://cp0minb2i8x1p" path="res://Objects/Dropoffs/BoxHole.tscn" id="19_giak0"]
+[ext_resource type="PackedScene" uid="uid://cp0minb2i8x1p" path="res://Art_Assets/SkatePark/BoxHole.tscn" id="19_giak0"]
 [ext_resource type="Script" uid="uid://c6ov71035nkfo" path="res://Audio/Music/Band.gd" id="19_qqyv7"]
 [ext_resource type="PackedScene" uid="uid://dqgxn0rseema5" path="res://Objects/Boxes/box_spawner.tscn" id="20_qqyv7"]
 [ext_resource type="AudioStream" uid="uid://c0waf3078ni8q" path="res://Audio/Music/Song1.mp3" id="20_s4lgs"]
@@ -26,16 +26,23 @@
 [ext_resource type="AudioStream" uid="uid://57dmf87xry8d" path="res://Audio/Sfx/Alerts/spend_money.mp3" id="22_qqyv7"]
 [ext_resource type="PackedScene" uid="uid://cwk27w4wexnsb" path="res://Objects/Machines/Processor/RejectionProcessor.tscn" id="22_t5u5v"]
 [ext_resource type="PackedScene" uid="uid://cxs2llho6fkuu" path="res://Objects/Machines/Sorter/International/InternationalSorter.tscn" id="23_xpqtb"]
-[ext_resource type="PackedScene" uid="uid://qgfbm7o67k0q" path="res://Art_Assets/Models/SkatePark/HalfPipe.tscn" id="24_txu36"]
-[ext_resource type="PackedScene" uid="uid://dfwilyex83qk5" path="res://Art_Assets/Models/SkatePark/CurvedRail.tscn" id="25_mgrxx"]
-[ext_resource type="PackedScene" uid="uid://b1rpqtghxtk7v" path="res://Art_Assets/Models/SkatePark/StraightRail.tscn" id="26_s43jd"]
-[ext_resource type="PackedScene" uid="uid://saigtfv4gdv4" path="res://Art_Assets/Models/SkatePark/WiggleRail.tscn" id="27_6wem4"]
+[ext_resource type="PackedScene" uid="uid://qgfbm7o67k0q" path="res://Art_Assets/SkatePark/HalfPipe.tscn" id="24_txu36"]
+[ext_resource type="PackedScene" uid="uid://dfwilyex83qk5" path="res://Art_Assets/SkatePark/CurvedRail.tscn" id="25_mgrxx"]
+[ext_resource type="PackedScene" uid="uid://b1rpqtghxtk7v" path="res://Art_Assets/SkatePark/StraightRail.tscn" id="26_s43jd"]
+[ext_resource type="PackedScene" uid="uid://saigtfv4gdv4" path="res://Art_Assets/SkatePark/WiggleRail.tscn" id="27_6wem4"]
 [ext_resource type="PackedScene" uid="uid://dstl1q7emqroo" path="res://Objects/Machines/Sorter/ValidDestination/ValidDestinationSorter.tscn" id="28_mgrxx"]
 [ext_resource type="PackedScene" uid="uid://d300ama6b8ua7" path="res://Objects/Conveyor Belts/Corner/raised_corner_conveyor.tscn" id="29_6wem4"]
 [ext_resource type="Script" uid="uid://kcbtemwpdm7r" path="res://Game_Management/Runs/RunOrchestrator.gd" id="33_s43jd"]
+[ext_resource type="Script" uid="uid://daqqbmcarrwso" path="res://Objects/Dropoffs/destination.gd" id="35_b7v7w"]
 [ext_resource type="PackedScene" uid="uid://dps87o4w0r5im" path="res://Game_Management/Economy/economy_config.tscn" id="35_eqlt2"]
 [ext_resource type="Script" uid="uid://dxnt8ieb7667d" path="res://Game_Management/Runs/RunGenerator.gd" id="35_w50gc"]
 [ext_resource type="Script" uid="uid://tyykda81wqtq" path="res://Game_Management/Health/health_system.gd" id="36_eqlt2"]
+[ext_resource type="Resource" uid="uid://dvieq5u6612tv" path="res://Objects/Dropoffs/Destinations/destination_0.tres" id="36_i652s"]
+[ext_resource type="Resource" uid="uid://df2kf440tvdx3" path="res://Objects/Dropoffs/Destinations/destination_1.tres" id="37_27k5n"]
+[ext_resource type="Resource" uid="uid://dhfxvd84jkugt" path="res://Objects/Dropoffs/Destinations/destination_2.tres" id="38_3wtvd"]
+[ext_resource type="Resource" uid="uid://7hjke06osnfy" path="res://Objects/Dropoffs/Destinations/destination_3.tres" id="39_13deq"]
+[ext_resource type="Resource" uid="uid://d2e5bya3lhr8j" path="res://Objects/Dropoffs/Destinations/destination_4.tres" id="40_2pfsd"]
+[ext_resource type="Resource" uid="uid://bwgatpbpxjx3u" path="res://Objects/Dropoffs/Destinations/destination_5.tres" id="41_k3djo"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_bblu0"]
 
@@ -8200,39 +8207,29 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 0, 49)
 [node name="BoxHoles" type="Node3D" parent="Enviroment"]
 
 [node name="DEN D-Hole" parent="Enviroment/BoxHoles" instance=ExtResource("19_giak0")]
-transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, -1.004872, -0.039516926, 19.012526)
+transform = Transform3D(-6, 0, -5.2453663e-07, 0, 6, 0, 5.2453663e-07, 0, -6, -1.004872, -0.039516926, 19.012526)
 
 [node name="LAX D-Hole" parent="Enviroment/BoxHoles" instance=ExtResource("19_giak0")]
-transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, -19.012047, -0.039516926, 19.012526)
-destination = "LAX"
+transform = Transform3D(-6, 0, -5.2453663e-07, 0, 6, 0, 5.2453663e-07, 0, -6, -19.012047, -0.039516926, 19.012526)
 
 [node name="JFK D-Hole" parent="Enviroment/BoxHoles" instance=ExtResource("19_giak0")]
-transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 17.003094, -0.039516926, 19.012526)
-destination = "JFK"
+transform = Transform3D(-6, 0, -5.2453663e-07, 0, 6, 0, 5.2453663e-07, 0, -6, 17.003094, -0.039516926, 19.012526)
 
 [node name="LAX I-Hole" parent="Enviroment/BoxHoles" instance=ExtResource("19_giak0")]
 transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, -18.980398, -0.039516926, -16.996803)
-destination = "LAX"
-international = true
 
 [node name="DEN I-Hole" parent="Enviroment/BoxHoles" instance=ExtResource("19_giak0")]
 transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, -0.99677944, -0.039516926, -16.965155)
-international = true
 
 [node name="JFK I-Hole" parent="Enviroment/BoxHoles" instance=ExtResource("19_giak0")]
 transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 17.003162, -0.039516926, -16.996803)
-destination = "JFK"
-international = true
 
 [node name="Rejected I-Hole" parent="Enviroment/BoxHoles" instance=ExtResource("19_giak0")]
-transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 34.9864, -0.039516926, -4.9983754)
-destination = ""
-international = true
+transform = Transform3D(-2.6226832e-07, 0, -5.9999995, 0, 6, 0, 5.9999995, 0, -2.6226832e-07, 34.9864, -0.039516926, -4.9983754)
 is_disposal = true
 
 [node name="Rejected D-Hole" parent="Enviroment/BoxHoles" instance=ExtResource("19_giak0")]
-transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 35.014084, -0.039516926, 7.00597)
-destination = ""
+transform = Transform3D(-2.6226832e-07, 0, -6, 0, 6, 0, 6, 0, -2.6226832e-07, 35.014084, -0.039516926, 7.00597)
 is_disposal = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Enviroment"]
@@ -8296,6 +8293,7 @@ box_hole_scene = ExtResource("19_giak0")
 
 [node name="RunGenerator" type="Node3D" parent="RunOrchestrator"]
 script = ExtResource("35_w50gc")
+possible_destinations = Array[ExtResource("35_b7v7w")]([ExtResource("36_i652s"), ExtResource("37_27k5n"), ExtResource("38_3wtvd"), ExtResource("39_13deq"), ExtResource("40_2pfsd"), ExtResource("41_k3djo")])
 
 [node name="Health" type="Node" parent="RunOrchestrator"]
 script = ExtResource("36_eqlt2")

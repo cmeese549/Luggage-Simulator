@@ -7,4 +7,4 @@ class_name PlayerProfile
 @export var hotkeys: Dictionary = {}
 @export var lifetime_money: int = 0
 
-var active_run_data
+@export var active_run_data : RunSaveData
