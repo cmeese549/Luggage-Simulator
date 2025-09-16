@@ -13,8 +13,8 @@ func setup(money_amount: int, box: Box, success: bool):
 	var sign = "+" if money_amount > 0 else ""
 	var status = "✔️" if success else "❌"
 	bg.color = green_bg if color == "green" else red_bg
-	var destination = box.destination if (box.has_valid_destination or not box.disposable) else "Trash"
-	rich_label.text = "[font_size=28][color=%s]%s$%d[/color] %s %s[/font_size]" % [color, sign, money_amount, destination, status]
+	var destination = box.destination.id if (box.has_valid_destination or not box.disposable) else "Trash"
+	rich_label.text = "[font_size=28][color=%s]%s$%d[/color] %s[/font_size]" % [color, sign, money_amount, status]
 	# Start wrapper offscreen to the left
 	wrapper.position.x = -300
 	modulate.a = 0

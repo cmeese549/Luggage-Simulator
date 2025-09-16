@@ -29,6 +29,8 @@ func get_save_data() -> Dictionary:
 	data.boxes_processed_correctly = boxes_processed_correctly
 	data.is_day_active = is_day_active
 	data.boxes_spawned_today = boxes_spawned_today
+	data.health_system_data = health_system.get_save_data()
+	data.economy_seed = Economy.config._seed
 	return data
 
 func load_save_data(data: Dictionary) -> void:
@@ -39,11 +41,39 @@ func load_save_data(data: Dictionary) -> void:
 	is_day_active = data.is_day_active
 	boxes_spawned_today = data.boxes_spawned_today
 	
+	if not is_day_active:
+		boxes_spawned_today = 0
+		boxes_processed_today = 0
+		boxes_processed_correctly = 0
+	
 	if current_run_config:
+		var day_config = get_current_day_config()
+		if day_config:
+			box_counter.text = "Boxes: " + str(boxes_processed_today) + "/" + str(day_config.total_boxes)
+		
 		setup_box_holes()
 		if is_day_active:
-			var day_config = get_current_day_config()
 			current_spawn_interval = 1.0 / day_config.boxes_per_second
+		
+		Economy.config._seed = data.economy_seed
+		health_system.load_save_data(data.health_system_data)
+		
+		await get_tree().process_frame  # Wait for spawners to be restored
+		var box_spawners = get_tree().get_nodes_in_group("BoxSpawner")
+		for spawner in box_spawners:
+			# Reconnect the click signal
+			if not spawner.clicked.is_connected(_on_spawner_clicked):
+				spawner.clicked.connect(_on_spawner_clicked)
+			# Update spawner label based on current state
+			if is_day_active:
+				if boxes_spawned_today >= day_config.total_boxes:
+					spawner.label.text = "Quota reached - finish processing!"
+				elif spawner.active:
+					spawner.label.text = "Click to pause box spawning"
+				else:
+					spawner.label.text = "Click to resume box spawning"
+			else:
+				spawner.label.text = "Click to start day"
 			
 func auto_save_run() -> void:
 	ProfileManager.save_current_run()
@@ -278,10 +308,12 @@ func complete_day() -> void:
 	print("Day ", current_day, " complete - Processed: ", boxes_processed_correctly, "/", day_config.quota_target)
 	
 	day_completed.emit(current_day, success)
-	
+	current_day += 1
+	auto_save_run()
+			
 	if not success:
 		complete_run(false)
-	elif current_day >= 10:
+	elif current_day > 10:
 		complete_run(true)
 	else:
 		# Start next day after a brief delay
@@ -289,8 +321,7 @@ func complete_day() -> void:
 		for spawner in box_spawners:
 			spawner.label.text = ""
 		await get_tree().create_timer(2.0).timeout
-		start_day(current_day + 1)
-	auto_save_run()
+		start_day(current_day)
 
 func complete_run(success: bool) -> void:
 	run_completed.emit(success)

@@ -11,6 +11,7 @@ var debug_auto_select_profile: bool = false  # Set to true for testing
 
 @onready var profile_container : HBoxContainer = get_tree().get_first_node_in_group("ProfileUI")
 @onready var player : Player = get_tree().get_first_node_in_group("Player")
+@onready var money_system = get_tree().get_first_node_in_group("Money")
 var profile_entry : PackedScene = preload("res://UI/Profiles/profile_entry.tscn")
 
 func _ready():
@@ -40,20 +41,21 @@ func load_profile(profile_id: int) -> PlayerProfile:
 func create_new_profile(profile_id: int) -> PlayerProfile:
 	var profile = PlayerProfile.new()
 	profile.profile_id = profile_id
-	# Initialize default values
 	profile.player_data = {}
 	profile.hotkeys = {}
 	profile.active_run_data = null
-	
 	save_profile(profile)
+	select_profile(profile_id)
 	refresh_profile_ui()
 	return profile
 
 func save_profile(profile: PlayerProfile) -> bool:
 	var path = get_profile_path(profile.profile_id)
-	return ResourceSaver.save(profile, path) == OK
+	var save = ResourceSaver.save(profile, path)
+	print(save)
+	return save == OK
 
-func select_profile(profile_id: int) -> bool:
+func select_profile(profile_id: int, load_run_data: bool = true) -> bool:
 	if profile_id < 1 or profile_id > 3:
 		return false
 	
@@ -66,18 +68,20 @@ func select_profile(profile_id: int) -> bool:
 	restore_hotkeys_to_building_system()
 	if not profile.player_data.is_empty():
 		player.load_save_data(profile.player_data)
-		
-	if profile.active_run_data:
-		# Load existing run
-		RunSaveManager.load_from_run_save_data(profile.active_run_data)
-		print("Loaded existing run - Day ", profile.active_run_data.run_orchestrator_data.current_day)
-	else:
-		# Start new run
-		get_tree().get_first_node_in_group("RunOrchestrator").start_new_run()
-		print("Started new run for profile ", profile_id)
+	
+	# Only load run data if requested
+	if load_run_data:
+		if profile.active_run_data:
+			# Load existing run
+			RunSaveManager.load_from_run_save_data(profile.active_run_data)
+			print("Loaded existing run - Day ", profile.active_run_data.run_orchestrator_data.current_day)
+		else:
+			# Start new run
+			get_tree().get_first_node_in_group("RunOrchestrator").start_new_run()
+			print("Started new run for profile ", profile_id)
 
-	if get_tree().paused:
-		get_tree().get_first_node_in_group("PauseMenu").unpause()
+		if get_tree().paused:
+			get_tree().get_first_node_in_group("PauseMenu").unpause()
 	
 	return true
 	
@@ -135,7 +139,7 @@ func populate_profile_data():
 		profile_container.add_child(entry)
 		await get_tree().process_frame
 		if summary.exists:
-			entry.active_run_label.text = "Day " + str(summary.active_run_day) if summary.has_active_run else "No Active Run"
+			entry.active_run_label.text = "Day " + str(summary.active_run_day) if summary.has_active_run else "Day 1"
 			entry.name_label.text = "Profile " + str(i)
 			entry.lifetime_money_label.text = "Lifetime $: " + str(summary.lifetime_money)
 			entry.load_button.pressed.connect(select_profile.bind(i))
@@ -165,7 +169,7 @@ func update_profile_entry(entry: ProfileEntry, summary: Dictionary, profile_id: 
 		entry.create_button.pressed.disconnect(create_new_profile)
 	
 	if summary.exists:
-		entry.active_run_label.text = "Day " + str(summary.active_run_day) if summary.has_active_run else "No Active Run"
+		entry.active_run_label.text = "Day " + str(summary.active_run_day) if summary.has_active_run else "Day 1"
 		entry.name_label.text = "Profile " + str(profile_id)
 		entry.lifetime_money_label.text = "Lifetime $: " + str(summary.lifetime_money)
 		entry.load_button.pressed.connect(select_profile.bind(profile_id))
@@ -183,17 +187,19 @@ func update_profile_entry(entry: ProfileEntry, summary: Dictionary, profile_id: 
 		entry.create_button.pressed.connect(create_new_profile.bind(profile_id))
 
 func save_current_run() -> bool:
-	# Auto-create Profile 1 if no profile selected
+	# Auto-create Profile 1 if no profile selected, but don't load run data
 	if not current_profile:
-		if not select_profile(1):
+		if not select_profile(1, false):  # Pass false to skip loading
 			return false
 	
 	# Now save the run data
 	if current_profile:
 		current_profile.active_run_data = RunSaveManager.collect_run_save_data()
 		current_profile.player_data = player.get_save_data()
+		current_profile.lifetime_money = money_system.lifetime_money
 		var success: bool = save_current_profile()
 		if success:
+			print("Run Saved")
 			refresh_profile_ui()
 		return success
 	return false
@@ -223,7 +229,7 @@ func get_all_profile_summaries() -> Array[Dictionary]:
 				summary.has_active_run = profile.active_run_data != null
 				summary.lifetime_money = profile.lifetime_money
 				if profile.active_run_data:
-					summary.active_run_day = profile.active_run_data.current_day
+					summary.active_run_day = profile.active_run_data.run_orchestrator_data.current_day
 				else:
 					summary.active_run_day = 0
 		

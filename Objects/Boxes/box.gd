@@ -100,7 +100,7 @@ func load_save_data(data: Dictionary) -> void:
 	global_position = data.global_position
 	rotation = data.rotation
 	just_loaded = true
-
+	
 func _ready():
 	if camera:
 		last_camera_position = camera.global_position
@@ -123,6 +123,8 @@ func _ready():
 			create_international_mesh()
 		if disposable:
 			create_disposable_mesh()
+		update_approval_state()
+
 
 func create_box_visual():
 	var mesh_instance = MeshInstance3D.new()
@@ -385,6 +387,7 @@ func kill_stickers():
 	return tween.finished
 
 func die(was_legit: bool):  # Recursively check nested children
+	remove_from_group("Box")
 	gravity_scale = -0.1
 	kill_stickers()
 	if was_legit:

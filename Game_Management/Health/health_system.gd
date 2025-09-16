@@ -16,6 +16,27 @@ var penalty_per_wrong: float = 20.0
 var is_draining: bool = false
 var is_critical: bool = false
 
+func get_save_data() -> Dictionary:
+	var data = {}
+	data.current_health = current_health
+	data.max_health = max_health
+	data.drain_per_second = drain_per_second
+	data.recovery_per_correct = recovery_per_correct
+	data.penalty_per_wrong = penalty_per_wrong
+	data.is_draining = is_draining
+	data.is_critical = is_critical
+	return data
+
+func load_save_data(data: Dictionary) -> void:
+	current_health = data.current_health
+	max_health = data.max_health
+	drain_per_second = data.drain_per_second
+	recovery_per_correct = data.recovery_per_correct
+	penalty_per_wrong = data.penalty_per_wrong
+	is_draining = data.is_draining
+	is_critical = data.is_critical
+	update_ui()
+
 func setup_for_day(day: int) -> void:
 	var config = Economy.config.get_health_config(day)
 	max_health = config.max_health
