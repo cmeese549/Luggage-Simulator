@@ -24,6 +24,14 @@ func _ready():
 	cur_money = starting_money
 	lifetime_money = starting_money
 	Events.make_money.connect(make_money)
+	
+func start_new_run():
+	if ProfileManager.current_profile:
+		starting_money = ProfileManager.current_profile.get_starting_money()
+		cur_money = starting_money
+		print("Starting new run with $", starting_money, " (progression bonus: +$", ProfileManager.current_profile.get_starting_money() - ProfileManager.current_profile.base_starting_money, ")")
+	else:
+		cur_money = 0
 
 func make_money(amount, notify=false):
 	if notify:
@@ -38,7 +46,17 @@ func check_can_buy(amount: float) -> bool:
 	else:
 		return false
 	
-
+func try_buy_gold_stars(amount: float) -> bool:
+	var stars: int = ProfileManager.current_profile.gold_stars
+	if stars >= amount:
+		stars -= amount
+		print("Paid "+str(amount))
+		money_sound.play()
+		return true
+	else:
+		print("Not enough stars, need "+str(amount)+" have "+str(stars))
+		return false
+		
 func try_buy(amount: float) -> bool:
 	if roundi(cur_money) >= amount:
 		cur_money -= amount
@@ -48,5 +66,3 @@ func try_buy(amount: float) -> bool:
 	else:
 		print("Not enough money, need "+str(amount)+" have "+str(cur_money))
 		return false
-
-

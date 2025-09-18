@@ -11,13 +11,20 @@ var invalid_ghost_material : StandardMaterial3D
 @export var building_name: String = "4x1 Conveyor"
 
 var price: float = 0:
-	get : return Economy.config.get_buildable_price(category, building_name)
+	get : return get_buildable_price()
 
 func get_save_data() -> Dictionary:
 	return {}
 
 func load_save_data(_data: Dictionary) -> void:
 	pass
+	
+func get_buildable_price() -> float:
+	var base_price = Economy.config.get_buildable_price(category, building_name)
+	if ProfileManager.current_profile:
+		return ProfileManager.current_profile.calculate_build_cost(base_price)
+	else:
+		return base_price
 	
 func die():
 	money.make_money(price)

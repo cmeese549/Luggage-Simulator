@@ -5,6 +5,8 @@
 
 [node name="ShopItem" type="Button"]
 custom_minimum_size = Vector2(0, 440)
+offset_right = 2.0
+offset_bottom = 577.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("1_qtpk1")
@@ -47,14 +49,29 @@ text = "This is a super awesome epic shop "
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="ItemRequirements" type="RichTextLabel" parent="VBoxContainer"]
-custom_minimum_size = Vector2(0, 111)
+[node name="ItemLevel" type="Label" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 55.55)
 layout_mode = 2
-theme_override_font_sizes/normal_font_size = 34
-bbcode_enabled = true
-text = "Required Items:
-f
-f"
-scroll_active = false
-autowrap_mode = 2
+theme = ExtResource("1_qtpk1")
+theme_override_font_sizes/font_size = 26
+text = "Current Level: 1"
 horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="ItemValue" type="Label" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 55.55)
+layout_mode = 2
+theme = ExtResource("1_qtpk1")
+theme_override_font_sizes/font_size = 26
+text = "Current value: 67"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="ItemValue2" type="Label" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 55.55)
+layout_mode = 2
+theme = ExtResource("1_qtpk1")
+theme_override_font_sizes/font_size = 26
+text = "Click to add 1 level"
+horizontal_alignment = 1
+autowrap_mode = 2

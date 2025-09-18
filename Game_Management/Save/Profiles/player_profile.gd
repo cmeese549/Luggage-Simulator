@@ -22,13 +22,13 @@ class_name PlayerProfile
 @export var health_recovery_per_level: float = 0.75  # 15.0 + (20 * 0.75) = 30.0
 @export var box_value_bonus_per_level: float = 0.1
 @export var build_cost_reduction_per_level: float = 0.025  # 1.0 - (20 * 0.025) = 0.5 (50% cost)
-@export var starting_money_per_level: int = 500
+@export var starting_money_per_level: int = 250
 @export var gold_stars_per_day_per_level: int = 1
 
 # Level-based upgrades
 @export var upgrade_levels: Dictionary = {
-	"belt_speed": 20,
-	"machine_speed": 20, 
+	"belt_speed": 0,
+	"machine_speed": 0, 
 	"health_drain_rate": 0,
 	"health_recovery_rate": 0,
 	"box_value_bonus": 0,
@@ -51,7 +51,7 @@ class_name PlayerProfile
 
 # Boolean unlocks
 @export var unlocks: Dictionary = {
-	"roller_skates": false,
+	"roller_skates": true,
 	"skateboard": false
 }
 

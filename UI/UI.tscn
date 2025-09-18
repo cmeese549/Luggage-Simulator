@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://exdhmbr43ger"]
+[gd_scene load_steps=21 format=3 uid="uid://exdhmbr43ger"]
 
 [ext_resource type="Script" uid="uid://dic75q4o378w6" path="res://UI/UI.gd" id="1_6dd3c"]
 [ext_resource type="Theme" uid="uid://b3kq74llqlv3x" path="res://UI/Theme/MinimalUI.tres" id="1_dhe1o"]
@@ -11,6 +11,9 @@
 [ext_resource type="Script" uid="uid://bsyahvddt84hi" path="res://UI/delta_fade.gd" id="6_wtdy7"]
 [ext_resource type="Script" uid="uid://cmqb4oi3mfhb4" path="res://UI/HUD/hud.gd" id="7_017wa"]
 [ext_resource type="FontFile" uid="uid://dqa66k6g8kp0j" path="res://UI/Theme/C&C Red Alert [INET].ttf" id="8_nxoi0"]
+[ext_resource type="Script" uid="uid://vcecdqq511h1" path="res://UI/PermanentUpgradeShop/Shop.gd" id="12_npmjx"]
+[ext_resource type="Script" uid="uid://b1lecmjr7r5pu" path="res://UI/PermanentUpgradeShop/ShopItems/ShopItem.gd" id="13_6q2ik"]
+[ext_resource type="Resource" uid="uid://cmeql7rts03ml" path="res://UI/PermanentUpgradeShop/ShopItems/belt_speed.tres" id="14_t31p1"]
 
 [sub_resource type="Animation" id="Animation_017wa"]
 length = 0.001
@@ -759,3 +762,45 @@ text = "Quit To Desktop
 [node name="Control2" type="Control" parent="PauseMenu/PanelContainer/MarginContainer/Rows/QuitConfirm"]
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="Shop" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("12_npmjx")
+shop_items = Array[ExtResource("13_6q2ik")]([ExtResource("14_t31p1")])
+
+[node name="PanelContainer" type="PanelContainer" parent="Shop"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Shop/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="Rows" type="VBoxContainer" parent="Shop/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Shop/PanelContainer/MarginContainer/Rows"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 71
+text = "Permanent Upgrades"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="Shop/PanelContainer/MarginContainer/Rows"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Shop/PanelContainer/MarginContainer/Rows"]
+layout_mode = 2
+size_flags_vertical = 3
+follow_focus = true
+
+[node name="GridContainer" type="GridContainer" parent="Shop/PanelContainer/MarginContainer/Rows/ScrollContainer"]
+layout_mode = 2

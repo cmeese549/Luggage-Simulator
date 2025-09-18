@@ -19,16 +19,17 @@ var buildable_preview: PackedScene = preload("res://UI/BuildMode/buildable_previ
 var buildable_textures: Dictionary = {}
 
 func _ready():
+	hide() # Start hidden
 	building_system = get_tree().get_first_node_in_group("BuildingSystem")
+	Events.all_ready.connect(_all_ready)
+	
+func _all_ready():
 	setup_categories()
 	generate_buildable_textures() 
 	populate_category_row()
 	populate_buildable_row()
 	update_building_system_active_buildables()
-	hide() # Start hidden
-	await get_tree().process_frame
 	update_category_colors()
-	
 	
 func _input(event):
 	if not visible:
@@ -40,7 +41,19 @@ func _input(event):
 		
 func show_ui():
 	show()
+	update_prices()
 	animation_player.play("slide_up")
+	
+func update_prices():
+	# Update price labels on existing previews
+	var current_buildables = categories[current_category_index].buildables
+	var i = 0
+	for preview in buildable_row.get_children():
+		if preview is BuildablePreview and i < current_buildables.size():
+			var buildable = current_buildables[i].instantiate()
+			preview.price_label.text = "$" + str(roundi(buildable.price))
+			buildable.queue_free()
+			i += 1
 
 func hide_ui():
 	animation_player.play_backwards("slide_up")

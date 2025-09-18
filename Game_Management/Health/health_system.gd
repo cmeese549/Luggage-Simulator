@@ -39,10 +39,14 @@ func load_save_data(data: Dictionary) -> void:
 
 func setup_for_day(day: int) -> void:
 	var config = Economy.config.get_health_config(day)
+	var profile = ProfileManager.current_profile
+	
 	max_health = config.max_health
 	current_health = max_health * config.starting_health_percent
-	drain_per_second = config.drain_per_second
-	recovery_per_correct = config.recovery_per_correct
+	
+	# Apply progression upgrades to base values
+	drain_per_second = config.drain_per_second * profile.get_health_drain_rate()
+	recovery_per_correct = config.recovery_per_correct * profile.get_health_recovery_rate()
 	penalty_per_wrong = config.penalty_per_wrong
 	
 	update_ui()

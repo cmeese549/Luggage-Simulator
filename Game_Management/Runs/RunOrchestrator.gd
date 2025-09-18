@@ -8,6 +8,7 @@ signal run_completed(success: bool)
 @onready var run_generator: RunGenerator = $RunGenerator
 @onready var health_system: HealthSystem = $Health
 @onready var box_counter: Label = get_tree().get_first_node_in_group("BoxCounter")
+@onready var money_system = get_tree().get_first_node_in_group("Money")
 @export var box_hole_scene: PackedScene  # Assign your BoxHole scene in inspector
 
 var current_run_config: RunConfig
@@ -89,6 +90,7 @@ func start_new_run() -> void:
 	current_run_config = run_generator.generate_run_config(Economy.config._seed)
 	current_day = 1
 	setup_box_holes()
+	money_system.start_new_run()
 	start_day(1)
 
 func setup_box_holes() -> void:
@@ -307,6 +309,11 @@ func complete_day() -> void:
 	
 	print("Day ", current_day, " complete - Processed: ", boxes_processed_correctly, "/", day_config.quota_target)
 	
+	var stars_earned = ProfileManager.current_profile.get_gold_stars_per_day()
+	ProfileManager.current_profile.gold_stars += stars_earned
+	ProfileManager.save_current_profile()
+	print("Earned ", stars_earned, " gold stars! Total: ", ProfileManager.current_profile.gold_stars)
+		
 	day_completed.emit(current_day, success)
 	current_day += 1
 	auto_save_run()
