@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ShopItem" load_steps=4 format=3 uid="uid://rfqbqk3flrts"]
+
+[ext_resource type="PackedScene" uid="uid://cbdult74gyte2" path="res://Objects/Machines/Sorter/Disposable/DisposableSorter.tscn" id="1_iqivm"]
+[ext_resource type="Texture2D" uid="uid://dsu4otkk2qt0g" path="res://icon.svg" id="2_m2c5c"]
+[ext_resource type="Script" uid="uid://b1lecmjr7r5pu" path="res://UI/PermanentUpgradeShop/ShopItem.gd" id="3_sk7ef"]
+
+[resource]
+script = ExtResource("3_sk7ef")
+item_name = "Disposable Sorter"
+item_description = "Sorts out boxes marked for disposal"
+buildable_scenes = Array[PackedScene]([ExtResource("1_iqivm")])
+category = "Sorters"
+stat_target = "disposable_sorter"
+metadata/_custom_type_script = "uid://b1lecmjr7r5pu"

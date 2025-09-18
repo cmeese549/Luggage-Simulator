@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ShopItem" load_steps=4 format=3 uid="uid://bmall3nv10qhf"]
+
+[ext_resource type="PackedScene" uid="uid://dstl1q7emqroo" path="res://Objects/Machines/Sorter/ValidDestination/ValidDestinationSorter.tscn" id="1_rpini"]
+[ext_resource type="Texture2D" uid="uid://dsu4otkk2qt0g" path="res://icon.svg" id="2_ftcfg"]
+[ext_resource type="Script" uid="uid://b1lecmjr7r5pu" path="res://UI/PermanentUpgradeShop/ShopItem.gd" id="3_tjwa6"]
+
+[resource]
+script = ExtResource("3_tjwa6")
+item_name = "Valid Destination Sorter"
+item_description = "Sorts boxes by if they have a valid destination rune"
+buildable_scenes = Array[PackedScene]([ExtResource("1_rpini")])
+category = "Sorters"
+stat_target = "valid_destination_sorter"
+metadata/_custom_type_script = "uid://b1lecmjr7r5pu"

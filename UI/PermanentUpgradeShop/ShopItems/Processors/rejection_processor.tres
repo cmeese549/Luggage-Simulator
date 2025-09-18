@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ShopItem" load_steps=4 format=3 uid="uid://bn2ve068p8bgq"]
+
+[ext_resource type="PackedScene" uid="uid://cwk27w4wexnsb" path="res://Objects/Machines/Processor/RejectionProcessor.tscn" id="1_vwb7v"]
+[ext_resource type="Texture2D" uid="uid://dsu4otkk2qt0g" path="res://icon.svg" id="2_48w0i"]
+[ext_resource type="Script" uid="uid://b1lecmjr7r5pu" path="res://UI/PermanentUpgradeShop/ShopItem.gd" id="3_3x17t"]
+
+[resource]
+script = ExtResource("3_3x17t")
+item_name = "Rejection Processor"
+item_description = "Marks boxes rejected"
+buildable_scenes = Array[PackedScene]([ExtResource("1_vwb7v")])
+category = "Processors"
+stat_target = "rejection_processor"
+metadata/_custom_type_script = "uid://b1lecmjr7r5pu"

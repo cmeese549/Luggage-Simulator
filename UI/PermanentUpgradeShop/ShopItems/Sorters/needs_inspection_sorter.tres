@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ShopItem" load_steps=4 format=3 uid="uid://dksar1klh7sod"]
+
+[ext_resource type="PackedScene" uid="uid://cxs2llho6fkuu" path="res://Objects/Machines/Sorter/Needs Inspection/NeedsInspectionSorter.tscn" id="1_2rvmq"]
+[ext_resource type="Texture2D" uid="uid://dsu4otkk2qt0g" path="res://icon.svg" id="2_2htto"]
+[ext_resource type="Script" uid="uid://b1lecmjr7r5pu" path="res://UI/PermanentUpgradeShop/ShopItem.gd" id="3_u0pbd"]
+
+[resource]
+script = ExtResource("3_u0pbd")
+item_name = "Needs Inspection Sorter"
+item_description = "Sorts out boxes that are flagged for further inspection"
+buildable_scenes = Array[PackedScene]([ExtResource("1_2rvmq")])
+category = "Sorters"
+stat_target = "needs_inspection_sorter"
+metadata/_custom_type_script = "uid://b1lecmjr7r5pu"

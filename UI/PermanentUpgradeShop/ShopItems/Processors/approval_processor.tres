@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ShopItem" load_steps=4 format=3 uid="uid://ue8ulkulqs3k"]
+
+[ext_resource type="PackedScene" uid="uid://deaet6jbk5mve" path="res://Objects/Machines/Processor/ApprovalProcessor.tscn" id="1_nldt4"]
+[ext_resource type="Texture2D" uid="uid://dsu4otkk2qt0g" path="res://icon.svg" id="2_13sr0"]
+[ext_resource type="Script" uid="uid://b1lecmjr7r5pu" path="res://UI/PermanentUpgradeShop/ShopItem.gd" id="3_518vc"]
+
+[resource]
+script = ExtResource("3_518vc")
+item_name = "Approval Processor"
+item_description = "Marks boxes approved"
+buildable_scenes = Array[PackedScene]([ExtResource("1_nldt4")])
+category = "Processors"
+stat_target = "approval_processor"
+metadata/_custom_type_script = "uid://b1lecmjr7r5pu"

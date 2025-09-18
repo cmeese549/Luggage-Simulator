@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://exdhmbr43ger"]
+[gd_scene load_steps=20 format=3 uid="uid://exdhmbr43ger"]
 
 [ext_resource type="Script" uid="uid://dic75q4o378w6" path="res://UI/UI.gd" id="1_6dd3c"]
 [ext_resource type="Theme" uid="uid://b3kq74llqlv3x" path="res://UI/Theme/MinimalUI.tres" id="1_dhe1o"]
@@ -12,17 +12,6 @@
 [ext_resource type="Script" uid="uid://cmqb4oi3mfhb4" path="res://UI/HUD/hud.gd" id="7_017wa"]
 [ext_resource type="FontFile" uid="uid://dqa66k6g8kp0j" path="res://UI/Theme/C&C Red Alert [INET].ttf" id="8_nxoi0"]
 [ext_resource type="Script" uid="uid://vcecdqq511h1" path="res://UI/PermanentUpgradeShop/Shop.gd" id="12_npmjx"]
-[ext_resource type="Script" uid="uid://b1lecmjr7r5pu" path="res://UI/PermanentUpgradeShop/ShopItems/ShopItem.gd" id="13_6q2ik"]
-[ext_resource type="Resource" uid="uid://cmeql7rts03ml" path="res://UI/PermanentUpgradeShop/ShopItems/belt_speed.tres" id="14_t31p1"]
-[ext_resource type="Resource" uid="uid://x600qrpsoqdj" path="res://UI/PermanentUpgradeShop/ShopItems/machine_speed.tres" id="15_rjxvo"]
-[ext_resource type="Resource" uid="uid://cd3amck3nfiox" path="res://UI/PermanentUpgradeShop/ShopItems/health_drain_rate.tres" id="16_uk6e0"]
-[ext_resource type="Resource" uid="uid://cvyid18tyln6s" path="res://UI/PermanentUpgradeShop/ShopItems/health_recovery_rate.tres" id="17_idhk4"]
-[ext_resource type="Resource" uid="uid://dsumkq6331gf1" path="res://UI/PermanentUpgradeShop/ShopItems/box_value_bonus.tres" id="18_vh35o"]
-[ext_resource type="Resource" uid="uid://bpdikie7ud11b" path="res://UI/PermanentUpgradeShop/ShopItems/build_cost_reduction.tres" id="19_2jerp"]
-[ext_resource type="Resource" uid="uid://dgcpl5y45fhue" path="res://UI/PermanentUpgradeShop/ShopItems/starting_money.tres" id="20_nxoi0"]
-[ext_resource type="Resource" uid="uid://c8xcwbyng7y5x" path="res://UI/PermanentUpgradeShop/ShopItems/gold_stars_per_day.tres" id="21_jf3kf"]
-[ext_resource type="Resource" uid="uid://bi2kmqqu7jvty" path="res://UI/PermanentUpgradeShop/ShopItems/roller_skates.tres" id="22_idhk4"]
-[ext_resource type="Resource" uid="uid://jpwuk6gd15hy" path="res://UI/PermanentUpgradeShop/ShopItems/skateboard.tres" id="23_vh35o"]
 
 [sub_resource type="Animation" id="Animation_017wa"]
 length = 0.001
@@ -106,6 +95,9 @@ border_blend = true
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rbg2s"]
 bg_color = Color(0.18, 0.18, 0.18, 0.803922)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_idhk4"]
+bg_color = Color(0.25808161, 0.25808164, 0.25808156, 1)
+
 [node name="UI" type="Control"]
 process_mode = 3
 z_index = 1
@@ -120,6 +112,7 @@ theme = ExtResource("1_dhe1o")
 script = ExtResource("1_6dd3c")
 
 [node name="HUD" type="Control" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -867,7 +860,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="Shop" type="MarginContainer" parent="." groups=["Shop"]]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -875,7 +867,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("12_npmjx")
-shop_items = Array[ExtResource("13_6q2ik")]([ExtResource("14_t31p1"), ExtResource("15_rjxvo"), ExtResource("16_uk6e0"), ExtResource("17_idhk4"), ExtResource("18_vh35o"), ExtResource("19_2jerp"), ExtResource("20_nxoi0"), ExtResource("21_jf3kf"), ExtResource("22_idhk4"), ExtResource("23_vh35o")])
 
 [node name="PanelContainer" type="PanelContainer" parent="Shop"]
 layout_mode = 2
@@ -906,11 +897,43 @@ layout_mode = 2
 size_flags_vertical = 3
 follow_focus = true
 
-[node name="GridContainer" type="GridContainer" parent="Shop/PanelContainer/MarginContainer/Rows/ScrollContainer"]
+[node name="TabContainer" type="TabContainer" parent="Shop/PanelContainer/MarginContainer/Rows/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_idhk4")
+current_tab = 0
+
+[node name="QOL" type="GridContainer" parent="Shop/PanelContainer/MarginContainer/Rows/ScrollContainer/TabContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 columns = 4
+metadata/_tab_index = 0
+
+[node name="Conveyors" type="GridContainer" parent="Shop/PanelContainer/MarginContainer/Rows/ScrollContainer/TabContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 4
+metadata/_tab_index = 1
+
+[node name="Sorters" type="GridContainer" parent="Shop/PanelContainer/MarginContainer/Rows/ScrollContainer/TabContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 4
+metadata/_tab_index = 2
+
+[node name="Processors" type="GridContainer" parent="Shop/PanelContainer/MarginContainer/Rows/ScrollContainer/TabContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 4
+metadata/_tab_index = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Shop/PanelContainer/MarginContainer/Rows"]
 layout_mode = 2

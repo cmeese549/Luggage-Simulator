@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ShopItem" load_steps=4 format=3 uid="uid://b00040dgln847"]
+
+[ext_resource type="PackedScene" uid="uid://h6r74mt2iyu4" path="res://Objects/Conveyor Belts/Corner/corner_conveyor.tscn" id="1_80oyi"]
+[ext_resource type="Texture2D" uid="uid://dsu4otkk2qt0g" path="res://icon.svg" id="1_jrlf0"]
+[ext_resource type="Script" uid="uid://b1lecmjr7r5pu" path="res://UI/PermanentUpgradeShop/ShopItem.gd" id="2_80oyi"]
+
+[resource]
+script = ExtResource("2_80oyi")
+item_name = "Corner Ground Conveyor"
+item_description = "Second most basic of shit"
+buildable_scenes = Array[PackedScene]([ExtResource("1_80oyi")])
+stat_target = "corner_ground_conveyor"
+metadata/_custom_type_script = "uid://b1lecmjr7r5pu"

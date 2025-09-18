@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ShopItem" load_steps=4 format=3 uid="uid://bceaaq5b7qae3"]
+
+[ext_resource type="PackedScene" uid="uid://c2cubt8v14jn2" path="res://Objects/Machines/Sorter/Destination/DestinationSorter.tscn" id="1_61mao"]
+[ext_resource type="Texture2D" uid="uid://dsu4otkk2qt0g" path="res://icon.svg" id="2_kejmu"]
+[ext_resource type="Script" uid="uid://b1lecmjr7r5pu" path="res://UI/PermanentUpgradeShop/ShopItem.gd" id="3_bdr0j"]
+
+[resource]
+script = ExtResource("3_bdr0j")
+item_name = "Destination Sorter"
+item_description = "Sorts boxes by a specific destination rune (right click built machine to change that rune)"
+buildable_scenes = Array[PackedScene]([ExtResource("1_61mao")])
+category = "Sorters"
+stat_target = "destination_sorter"
+metadata/_custom_type_script = "uid://b1lecmjr7r5pu"

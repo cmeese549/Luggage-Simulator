@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ShopItem" load_steps=6 format=3 uid="uid://1dvrqn57fx4k"]
+
+[ext_resource type="PackedScene" uid="uid://dbu3dnmlljrlq" path="res://Objects/Conveyor Belts/1x1/1x1_raised.tscn" id="1_s51qg"]
+[ext_resource type="PackedScene" uid="uid://ddx1802cmq06h" path="res://Objects/Conveyor Belts/5x1/5x1_raised.tscn" id="2_8340k"]
+[ext_resource type="PackedScene" uid="uid://cvtsl1w5dvdxx" path="res://Objects/Conveyor Belts/Ramp.tscn" id="3_jas2f"]
+[ext_resource type="Texture2D" uid="uid://dsu4otkk2qt0g" path="res://icon.svg" id="4_jbdjp"]
+[ext_resource type="Script" uid="uid://b1lecmjr7r5pu" path="res://UI/PermanentUpgradeShop/ShopItem.gd" id="5_3fvrj"]
+
+[resource]
+script = ExtResource("5_3fvrj")
+item_name = "Straight Sky Conveyor"
+item_description = "Basic but up"
+buildable_scenes = Array[PackedScene]([ExtResource("1_s51qg"), ExtResource("2_8340k"), ExtResource("3_jas2f")])
+stat_target = "straight_sky_conveyor"
+metadata/_custom_type_script = "uid://b1lecmjr7r5pu"

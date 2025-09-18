@@ -1,14 +1,17 @@
 [gd_resource type="Resource" script_class="ShopItem" load_steps=3 format=3 uid="uid://dgcpl5y45fhue"]
 
-[ext_resource type="Script" uid="uid://b1lecmjr7r5pu" path="res://UI/PermanentUpgradeShop/ShopItems/ShopItem.gd" id="1_0md4d"]
+[ext_resource type="Script" uid="uid://b1lecmjr7r5pu" path="res://UI/PermanentUpgradeShop/ShopItem.gd" id="1_1qhho"]
 
 [sub_resource type="Resource" id="Resource_70at3"]
 metadata/__load_path__ = "res://Art_Assets/Textures/HandTools/Bucket_Full.png"
 
 [resource]
-script = ExtResource("1_0md4d")
+script = ExtResource("1_1qhho")
 item_name = "Starting Money"
 item_description = "The one you're upgrading second"
 item_icon = SubResource("Resource_70at3")
+is_boolean_unlock = false
+is_buildable_unlock = false
+category = "QOL"
 stat_target = "starting_money"
 metadata/_custom_type_script = "uid://b1lecmjr7r5pu"

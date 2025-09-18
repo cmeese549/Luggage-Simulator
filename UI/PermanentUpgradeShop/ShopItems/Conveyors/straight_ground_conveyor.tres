@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ShopItem" load_steps=5 format=3 uid="uid://d3xtve3go5ajh"]
+
+[ext_resource type="PackedScene" uid="uid://c5r0xmqtlub67" path="res://Objects/Conveyor Belts/1x1/1x1_conveyor.tscn" id="1_2bteg"]
+[ext_resource type="PackedScene" uid="uid://bxke2df04lpet" path="res://Objects/Conveyor Belts/5x1/5x1_conveyor.tscn" id="2_2d37s"]
+[ext_resource type="Texture2D" uid="uid://dsu4otkk2qt0g" path="res://icon.svg" id="3_0ki7o"]
+[ext_resource type="Script" uid="uid://b1lecmjr7r5pu" path="res://UI/PermanentUpgradeShop/ShopItem.gd" id="4_7sl4j"]
+
+[resource]
+script = ExtResource("4_7sl4j")
+item_name = "Straight Ground Conveyor"
+item_description = "Most basic of shit"
+buildable_scenes = Array[PackedScene]([ExtResource("1_2bteg"), ExtResource("2_2d37s")])
+stat_target = "straight_ground_conveyor"
+metadata/_custom_type_script = "uid://b1lecmjr7r5pu"

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ShopItem" load_steps=4 format=3 uid="uid://cwadhheix13p0"]
+
+[ext_resource type="PackedScene" uid="uid://d300ama6b8ua7" path="res://Objects/Conveyor Belts/Corner/raised_corner_conveyor.tscn" id="1_dnjxb"]
+[ext_resource type="Texture2D" uid="uid://dsu4otkk2qt0g" path="res://icon.svg" id="1_uqle8"]
+[ext_resource type="Script" uid="uid://b1lecmjr7r5pu" path="res://UI/PermanentUpgradeShop/ShopItem.gd" id="2_dnjxb"]
+
+[resource]
+script = ExtResource("2_dnjxb")
+item_name = "Corner Sky Conveyor"
+item_description = "Basic but up x2"
+buildable_scenes = Array[PackedScene]([ExtResource("1_dnjxb")])
+stat_target = "corner_sky_conveyor"
+metadata/_custom_type_script = "uid://b1lecmjr7r5pu"
