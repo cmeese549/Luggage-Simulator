@@ -123,7 +123,7 @@ func _ready():
 			create_international_mesh()
 		if disposable:
 			create_disposable_mesh()
-		update_approval_state()
+	update_approval_state()
 
 
 func create_box_visual():
@@ -167,7 +167,8 @@ func create_box_collision():
 	
 func set_approval_state(state: ApprovalState):
 	approval_state = state
-	update_approval_state()
+	if original_material != null:
+		update_approval_state()
 
 func update_approval_state():
 	match approval_state:

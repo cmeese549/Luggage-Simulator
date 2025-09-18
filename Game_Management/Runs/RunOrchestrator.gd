@@ -80,7 +80,7 @@ func auto_save_run() -> void:
 
 func _ready():
 	await get_tree().process_frame
-	start_new_run()
+	ProfileManager.auto_load()
 
 func start_new_run() -> void:
 	run_generator.collect_preset_positions()

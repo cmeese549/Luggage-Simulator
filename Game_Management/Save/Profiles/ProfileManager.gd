@@ -7,8 +7,6 @@ const PROFILE_3_PATH = "user://player_profile_3.tres"
 var current_profile: PlayerProfile
 var current_profile_id: int = -1
 
-var debug_auto_select_profile: bool = false  # Set to true for testing
-
 @onready var profile_container : HBoxContainer = get_tree().get_first_node_in_group("ProfileUI")
 @onready var player : Player = get_tree().get_first_node_in_group("Player")
 @onready var money_system = get_tree().get_first_node_in_group("Money")
@@ -16,8 +14,35 @@ var profile_entry : PackedScene = preload("res://UI/Profiles/profile_entry.tscn"
 
 func _ready():
 	populate_profile_data()
-	if debug_auto_select_profile:
-		select_profile(1)
+	
+func auto_load():
+	# Auto-load logic for seamless gameplay
+	var found_profile = false
+	
+	# First, try to find a profile with an active run
+	for i in range(1, 4):
+		if profile_exists(i):
+			var profile = load_profile(i)
+			if profile and profile.active_run_data:
+				print("Auto-loading profile ", i, " with active run")
+				select_profile(i)
+				found_profile = true
+				break
+	
+	# If no profile with active run, load the first existing profile
+	if not found_profile:
+		for i in range(1, 4):
+			if profile_exists(i):
+				print("Auto-loading profile ", i)
+				#select_profile(i)
+				found_profile = true
+				break
+	
+	# If no profiles exist, create one and start a run
+	if not found_profile:
+		print("No profiles found, creating new profile")
+		create_new_profile(1)
+		# create_new_profile already calls select_profile which starts a run
 
 func get_profile_path(profile_id: int) -> String:
 	match profile_id:
