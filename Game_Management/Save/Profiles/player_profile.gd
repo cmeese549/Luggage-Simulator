@@ -51,7 +51,7 @@ class_name PlayerProfile
 
 # Boolean unlocks
 @export var unlocks: Dictionary = {
-	"roller_skates": true,
+	"roller_skates": false,
 	"skateboard": false
 }
 
@@ -64,7 +64,10 @@ func can_upgrade(stat_name: String) -> bool:
 
 func get_upgrade_cost(stat_name: String) -> int:
 	var current_level = upgrade_levels.get(stat_name, 0)
-	return (current_level + 1) * 5  # Gets more expensive each level
+	if current_level == 0:
+		return 1  # First upgrade always costs 1 star
+	else:
+		return current_level * 5
 
 func get_belt_speed() -> float:
 	return base_belt_speed + (upgrade_levels.belt_speed * belt_speed_per_level)

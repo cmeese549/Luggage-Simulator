@@ -11,5 +11,5 @@ sorter_prices = {
 "International Sorter": 300,
 "Valid Destinatoin Sorter": 500
 }
-starting_boxes = 1
+starting_boxes = 15
 metadata/_custom_type_script = "uid://d2e5r47avqehj"

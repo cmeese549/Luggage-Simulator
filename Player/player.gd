@@ -131,7 +131,6 @@ func _ready():
 	
 	item_pickup_range.area_entered.connect(pickup_item)
 	Events.tool_purchased.connect(unlock_new_tool)
-	Events.speed_purchased.connect(apply_upgrade)
 	
 	for stream: Node in jump_land_sounds:
 		stream.finished.connect(ready_to_land_again)
@@ -549,9 +548,21 @@ func _process(delta : float) -> void:
 	else:
 		camera_sway_weapon(delta, bob_this_frame)
 		camera_movement_this_frame = Vector2.ZERO
+		
+func apply_profile_unlocks():
+	if ProfileManager.current_profile:
+		var profile = ProfileManager.current_profile
+		
+		# Apply roller skates if unlocked
+		if profile.has_roller_skates() and not roller_unlocked:
+			apply_upgrade_by_name("Rollerskates")
+			
+		# Apply skateboard if unlocked  
+		if profile.has_skateboard() and not skate_unlocked:
+			apply_upgrade_by_name("Skateboard")
 
-func apply_upgrade(upgrade: ShopItem):
-	match upgrade.item_name:
+func apply_upgrade_by_name(upgrade_name: String):
+	match upgrade_name:
 		"Rollerskates":
 			slidy = true
 			SPEED = 10
@@ -559,6 +570,7 @@ func apply_upgrade(upgrade: ShopItem):
 			accelartion = 3
 			deceleration = 2
 			roller_unlocked = true
+			print("Applied Rollerskates upgrade")
 		
 		"Skateboard":
 			slidy = true
@@ -567,6 +579,7 @@ func apply_upgrade(upgrade: ShopItem):
 			accelartion = 5
 			deceleration = 3 
 			skate_unlocked = true
+			print("Applied Skateboard upgrade")
 
 func do_jump_sway(delta: float) -> void:
 	if not tool_sys.equipped_tool:

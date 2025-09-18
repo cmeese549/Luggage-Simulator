@@ -44,7 +44,7 @@ func _on_deposit_zone_body_entered(body):
 			Events.box_deposited.emit(value, body, true)
 		else:
 			rejection_sound.play()
-			var penalty = ProfileManager.current_profile.calculate_box_value(Economy.config.base_box_value) * Economy.config.penalty_multiplier
+			var penalty = Economy.config.base_box_value * Economy.config.penalty_multiplier
 			Events.box_deposited.emit(penalty, body, false)
 			money.make_money(penalty)
 		# Notify LevelManager about box processing

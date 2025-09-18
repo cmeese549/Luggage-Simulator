@@ -34,7 +34,7 @@ func auto_load():
 		for i in range(1, 4):
 			if profile_exists(i):
 				print("Auto-loading profile ", i)
-				#select_profile(i)
+				select_profile(i)
 				found_profile = true
 				break
 	
@@ -93,6 +93,7 @@ func select_profile(profile_id: int, load_run_data: bool = true) -> bool:
 	restore_hotkeys_to_building_system()
 	if not profile.player_data.is_empty():
 		player.load_save_data(profile.player_data)
+	player.apply_profile_unlocks()
 	
 	# Only load run data if requested
 	if load_run_data:

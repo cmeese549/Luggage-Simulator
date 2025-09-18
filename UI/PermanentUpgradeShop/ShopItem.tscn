@@ -5,6 +5,7 @@
 
 [node name="ShopItem" type="Button"]
 custom_minimum_size = Vector2(0, 440)
+offset_left = -444.0
 offset_right = 2.0
 offset_bottom = 577.0
 size_flags_horizontal = 3
@@ -27,6 +28,7 @@ text = "Epic Shop Item"
 horizontal_alignment = 1
 
 [node name="ItemIcon" type="TextureRect" parent="VBoxContainer"]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 1.72
@@ -67,7 +69,7 @@ text = "Current value: 67"
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="ItemValue2" type="Label" parent="VBoxContainer"]
+[node name="nuttin" type="Label" parent="VBoxContainer"]
 custom_minimum_size = Vector2(0, 55.55)
 layout_mode = 2
 theme = ExtResource("1_qtpk1")
