@@ -318,7 +318,139 @@ text = "+1"
 horizontal_alignment = 1
 script = ExtResource("6_wtdy7")
 
-[node name="Killfeed" type="Control" parent="HUD"]
+[node name="Stars" type="Control" parent="HUD"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -415.0
+offset_top = 23.0
+offset_right = -274.0
+offset_bottom = 97.0
+grow_horizontal = 0
+
+[node name="PanelContainer" type="PanelContainer" parent="HUD/Stars"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/Stars/PanelContainer"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="HUD/Stars/PanelContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="HUD/Stars/PanelContainer/HBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Money: "
+vertical_alignment = 1
+
+[node name="MoneyLabel" type="Label" parent="HUD/Stars/PanelContainer/HBoxContainer" groups=["StarCounter"]]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 20.0
+theme_override_font_sizes/font_size = 52
+text = "X343"
+horizontal_alignment = 1
+
+[node name="Control2" type="Control" parent="HUD/Stars/PanelContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="DeltaFade" type="Label" parent="HUD/Stars"]
+layout_mode = 0
+offset_left = 49.0
+offset_top = 118.0
+offset_right = 193.0
+offset_bottom = 187.0
+theme_override_font_sizes/font_size = 50
+text = "+1"
+horizontal_alignment = 1
+script = ExtResource("6_wtdy7")
+
+[node name="BoxCounter" type="Control" parent="HUD"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -417.0
+offset_top = 107.775
+offset_right = -31.0
+offset_bottom = 188.77524
+grow_horizontal = 0
+
+[node name="PanelContainer" type="PanelContainer" parent="HUD/BoxCounter"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/BoxCounter/PanelContainer"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="HUD/BoxCounter/PanelContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="HUD/BoxCounter/PanelContainer/HBoxContainer" groups=["BoxCounter"]]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 20.0
+theme_override_font_sizes/font_size = 52
+text = "Boxes: 133/103"
+horizontal_alignment = 1
+
+[node name="Control2" type="Control" parent="HUD/BoxCounter/PanelContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Day" type="Control" parent="HUD"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -417.0
+offset_top = 207.925
+offset_right = -31.0
+offset_bottom = 288.92438
+grow_horizontal = 0
+
+[node name="PanelContainer" type="PanelContainer" parent="HUD/Day"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/Day/PanelContainer"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="HUD/Day/PanelContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="HUD/Day/PanelContainer/HBoxContainer" groups=["DayCounter"]]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 20.0
+theme_override_font_sizes/font_size = 52
+text = "Day 1/30"
+horizontal_alignment = 1
+
+[node name="Control2" type="Control" parent="HUD/Day/PanelContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Killfeed" type="Control" parent="HUD" groups=["Killfeed"]]
 layout_mode = 1
 anchors_preset = 0
 offset_left = 77.655
@@ -378,44 +510,6 @@ theme_override_font_sizes/font_size = 56
 text = "KPI-o-meter"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="BoxCounter" type="Control" parent="HUD"]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -417.0
-offset_top = 114.935
-offset_right = -31.0
-offset_bottom = 195.93518
-grow_horizontal = 0
-
-[node name="PanelContainer" type="PanelContainer" parent="HUD/BoxCounter"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="HUD/BoxCounter/PanelContainer"]
-layout_mode = 2
-
-[node name="Control" type="Control" parent="HUD/BoxCounter/PanelContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Label" type="Label" parent="HUD/BoxCounter/PanelContainer/HBoxContainer" groups=["BoxCounter"]]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 20.0
-theme_override_font_sizes/font_size = 52
-text = "Boxes: 133/103"
-horizontal_alignment = 1
-
-[node name="Control2" type="Control" parent="HUD/BoxCounter/PanelContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
 
 [node name="PauseMenu" type="MarginContainer" parent="." groups=["PauseMenu"]]
 process_mode = 3

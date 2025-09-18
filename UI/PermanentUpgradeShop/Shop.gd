@@ -12,6 +12,8 @@ var shop_item : PackedScene = preload("res://UI/PermanentUpgradeShop/ShopItem.ts
 @onready var close_button : Button = $PanelContainer/MarginContainer/Rows/HBoxContainer/CloseButton
 @onready var your_money : Label = $PanelContainer/MarginContainer/Rows/HBoxContainer/StarsLabel
 
+@onready var star_counter: Label = get_tree().get_first_node_in_group("StarCounter")
+
 @export var shop_items : Array[ShopItem]
 
 @onready var scroll_container = $PanelContainer/MarginContainer/Rows/ScrollContainer
@@ -137,6 +139,7 @@ func attempt_purchase(item: ShopItem, button: Button) -> void:
 			
 		if profile.gold_stars >= item.fixed_price:
 			profile.gold_stars -= item.fixed_price
+			star_counter.text = "⭐ " + str(profile.gold_stars)
 			profile.unlocks[item.stat_target] = true
 			ProfileManager.save_current_profile()
 			
@@ -157,6 +160,7 @@ func attempt_purchase(item: ShopItem, button: Button) -> void:
 		
 		if profile.gold_stars >= current_price:
 			profile.gold_stars -= current_price
+			star_counter.text = "⭐ " + str(profile.gold_stars)
 			profile.upgrade_levels[item.stat_target] += 1
 			ProfileManager.save_current_profile()
 			

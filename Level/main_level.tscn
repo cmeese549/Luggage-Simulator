@@ -25,7 +25,7 @@
 [ext_resource type="PackedScene" uid="uid://c2cubt8v14jn2" path="res://Objects/Machines/Sorter/Destination/DestinationSorter.tscn" id="21_t5u5v"]
 [ext_resource type="AudioStream" uid="uid://57dmf87xry8d" path="res://Audio/Sfx/Alerts/spend_money.mp3" id="22_qqyv7"]
 [ext_resource type="PackedScene" uid="uid://cwk27w4wexnsb" path="res://Objects/Machines/Processor/RejectionProcessor.tscn" id="22_t5u5v"]
-[ext_resource type="PackedScene" uid="uid://cxs2llho6fkuu" path="res://Objects/Machines/Sorter/International/InternationalSorter.tscn" id="23_xpqtb"]
+[ext_resource type="PackedScene" uid="uid://cxs2llho6fkuu" path="res://Objects/Machines/Sorter/Needs Inspection/NeedsInspectionSorter.tscn" id="23_xpqtb"]
 [ext_resource type="PackedScene" uid="uid://qgfbm7o67k0q" path="res://Art_Assets/SkatePark/HalfPipe.tscn" id="24_txu36"]
 [ext_resource type="PackedScene" uid="uid://dfwilyex83qk5" path="res://Art_Assets/SkatePark/CurvedRail.tscn" id="25_mgrxx"]
 [ext_resource type="PackedScene" uid="uid://b1rpqtghxtk7v" path="res://Art_Assets/SkatePark/StraightRail.tscn" id="26_s43jd"]
@@ -8275,7 +8275,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.021827, 0.7202852, -3.0098
 [node name="Money" type="Node" parent="." groups=["Money"]]
 unique_name_in_owner = true
 script = ExtResource("21_s4lgs")
-starting_money = 50000
 
 [node name="MoneySound" type="AudioStreamPlayer" parent="Money"]
 stream = ExtResource("22_qqyv7")
@@ -8305,7 +8304,6 @@ possible_destinations = Array[ExtResource("35_b7v7w")]([ExtResource("36_i652s"),
 script = ExtResource("36_eqlt2")
 
 [node name="EconomyConfig" parent="." instance=ExtResource("35_eqlt2")]
-config = null
 
 [node name="SpotLight3D" type="SpotLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 17.513107, 11.131, 20.24451)

@@ -1,11 +1,11 @@
 [gd_scene load_steps=3 format=3 uid="uid://cxs2llho6fkuu"]
 
-[ext_resource type="Script" uid="uid://c2os4pei1y3k7" path="res://Objects/Machines/Sorter/International/international_sorter.gd" id="1_4fjmd"]
+[ext_resource type="Script" uid="uid://c2os4pei1y3k7" path="res://Objects/Machines/Sorter/Needs Inspection/needs_inspection_sorter.gd" id="1_4fjmd"]
 [ext_resource type="PackedScene" uid="uid://bi2kps5vge088" path="res://Objects/Machines/Sorter/Base/base_sorter.tscn" id="2_4fjmd"]
 
 [node name="InternationalSorter" type="Node3D"]
 script = ExtResource("1_4fjmd")
 category = "Sorters"
-building_name = "International Sorter"
+building_name = "Needs Inspection Sorter"
 
 [node name="BaseSorter" parent="." instance=ExtResource("2_4fjmd")]

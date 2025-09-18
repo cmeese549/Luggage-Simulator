@@ -8,7 +8,10 @@ signal run_completed(success: bool)
 @onready var run_generator: RunGenerator = $RunGenerator
 @onready var health_system: HealthSystem = $Health
 @onready var box_counter: Label = get_tree().get_first_node_in_group("BoxCounter")
+@onready var star_counter: Label = get_tree().get_first_node_in_group("StarCounter")
+@onready var day_counter: Label = get_tree().get_first_node_in_group("DayCounter")
 @onready var money_system = get_tree().get_first_node_in_group("Money")
+@onready var killfeed = get_tree().get_first_node_in_group("Killfeed")
 @export var box_hole_scene: PackedScene  # Assign your BoxHole scene in inspector
 
 var current_run_config: RunConfig
@@ -41,6 +44,10 @@ func load_save_data(data: Dictionary) -> void:
 	boxes_processed_correctly = data.boxes_processed_correctly
 	is_day_active = data.is_day_active
 	boxes_spawned_today = data.boxes_spawned_today
+
+	star_counter.text = "⭐ " + str(ProfileManager.current_profile.gold_stars)
+	day_counter.text = "Day " + str(current_day) + "/30"
+	# Reset daily counters if day is not active
 	
 	if not is_day_active:
 		boxes_spawned_today = 0
@@ -84,6 +91,44 @@ func _ready():
 	ProfileManager.auto_load()
 
 func start_new_run() -> void:
+	print("Starting new run - clearing existing game state...")
+	
+	# Clear existing game objects (but NOT spawners for new runs)
+	RunSaveManager.clear_existing_buildables()
+	RunSaveManager.clear_existing_boxes()
+	# DON'T clear spawners for new runs - they're part of default scene
+	
+	# Clear UI states
+	var killfeed = get_tree().get_first_node_in_group("Killfeed")
+	if killfeed:
+		for entry in killfeed.entries_container.get_children():
+			entry.queue_free()
+	
+	# Reset building system state
+	var building_system = get_tree().get_first_node_in_group("BuildingSystem")
+	if building_system:
+		building_system.building_mode_active = false
+		building_system.destroy_mode_active = false
+		if building_system.ghost_object:
+			building_system.ghost_object.queue_free()
+			building_system.ghost_object = null
+	
+	# Hide build UI if open
+	var build_ui = get_tree().get_first_node_in_group("BuildingUI")
+	if build_ui and build_ui.visible:
+		build_ui.hide_ui()
+	
+	# Reset existing spawners to default state instead of clearing them
+	var box_spawners = get_tree().get_nodes_in_group("BoxSpawner")
+	for spawner in box_spawners:
+		spawner.active = false
+		spawner.boxes_spawned = 0
+		spawner.spawn_timer = 0.0
+	
+	# Wait a frame for cleanup
+	await get_tree().process_frame
+	
+	# Now set up the new run
 	run_generator.collect_preset_positions()
 	if Economy.config._seed == 0:
 		Economy.config._seed = randi()
@@ -153,6 +198,7 @@ func start_day(day_number: int) -> void:
 	apply_special_modifiers(day_config.special_modifiers)
 	
 	day_started.emit(day_number)
+	day_counter.text = "Day " + str(day_number) + "/30"
 	print("Day ", day_number, " started - Target: ", day_config.quota_target, " boxes")
 	
 func _on_spawner_clicked(spawner) -> void:
@@ -306,17 +352,26 @@ func complete_day() -> void:
 	health_system.stop_draining()
 	var day_config = get_current_day_config()
 	var success = true
+	var accuracy = float(boxes_processed_correctly) / float(boxes_processed_today) * 100 if boxes_processed_today > 0 else 0
 	
-	print("Day ", current_day, " complete - Processed: ", boxes_processed_correctly, "/", day_config.quota_target)
+	print("Day ", current_day, " complete - Accuracy: ", accuracy)
+	killfeed.add_notification("Day Complete!", "white")
 	
 	var stars_earned = ProfileManager.current_profile.get_gold_stars_per_day()
 	ProfileManager.current_profile.gold_stars += stars_earned
+	star_counter.text = "⭐ " + str(ProfileManager.current_profile.gold_stars)
+
 	ProfileManager.save_current_profile()
 	print("Earned ", stars_earned, " gold stars! Total: ", ProfileManager.current_profile.gold_stars)
+	killfeed.add_notification("⭐ %d" % stars_earned, "yellow")
+	
+	var daily_bonus = calculate_daily_bonus(accuracy)
+	money_system.make_money(daily_bonus)
+	print("Daily bonus earned: $", daily_bonus)
+	killfeed.add_notification("Bonus: $%d" % daily_bonus, "green")
 		
 	day_completed.emit(current_day, success)
 	current_day += 1
-	auto_save_run()
 			
 	if not success:
 		complete_run(false)
@@ -329,6 +384,14 @@ func complete_day() -> void:
 			spawner.label.text = ""
 		await get_tree().create_timer(2.0).timeout
 		start_day(current_day)
+		auto_save_run()
+		
+func calculate_daily_bonus(accuracy_percent: float) -> int:
+	var health_percent = (health_system.current_health / health_system.max_health) * 100
+	var bonus = Economy.config.base_daily_bonus + \
+				int(health_percent * Economy.config.health_bonus_per_percent) + \
+				int(accuracy_percent * Economy.config.accuracy_bonus_per_percent)
+	return bonus
 
 func complete_run(success: bool) -> void:
 	run_completed.emit(success)

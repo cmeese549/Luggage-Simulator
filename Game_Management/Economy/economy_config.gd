@@ -8,9 +8,14 @@ class_name EconomyConfig
 
 # Box Value Settings
 @export_group("Box Values")
-@export var base_box_value: int = 1
+@export var base_box_value: int = 12
 @export var sticker_multiplier: float = 1.5  # Each sticker adds 50% value
 @export var penalty_multiplier: float = -2.0  # Mistakes cost double
+
+@export_group("Daily Bonus System")
+@export var base_daily_bonus: int = 50
+@export var health_bonus_per_percent: float = 2.0
+@export var accuracy_bonus_per_percent: float = 1.5
 
 # ==================== HEALTH/PRESSURE SYSTEM ====================
 @export_group("Health System")
@@ -46,10 +51,10 @@ class_name EconomyConfig
 }
 
 @export var sorter_prices: Dictionary = {
-	"Destination Sorter": 500,
-	"International Sorter": 300,
+	"Destination Sorter": 400,
+	"Needs Inspection Sorter": 300,
 	"Disposable Sorter": 400,
-	"Valid Destination Sorter": 300
+	"Valid Destination Sorter": 500
 }
 
 @export var processor_prices: Dictionary = {
@@ -67,7 +72,7 @@ class_name EconomyConfig
 # 31-Day Progression Settings
 @export_group("Progression Curve")
 @export var total_days: int = 31
-@export var starting_boxes: int = 20
+@export var starting_boxes: int = 15
 @export var ending_boxes: int = 600
 @export var starting_spawn_rate: float = 0.3
 @export var ending_spawn_rate: float = 5.0

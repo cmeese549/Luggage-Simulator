@@ -10,6 +10,8 @@ var current_profile_id: int = -1
 @onready var profile_container : HBoxContainer = get_tree().get_first_node_in_group("ProfileUI")
 @onready var player : Player = get_tree().get_first_node_in_group("Player")
 @onready var money_system = get_tree().get_first_node_in_group("Money")
+@onready var star_counter: Label = get_tree().get_first_node_in_group("StarCounter")
+@onready var day_counter: Label = get_tree().get_first_node_in_group("DayCounter")
 var profile_entry : PackedScene = preload("res://UI/Profiles/profile_entry.tscn")
 
 func _ready():
@@ -94,6 +96,8 @@ func select_profile(profile_id: int, load_run_data: bool = true) -> bool:
 	if not profile.player_data.is_empty():
 		player.load_save_data(profile.player_data)
 	player.apply_profile_unlocks()
+
+	star_counter.text = "⭐ " + str(current_profile.gold_stars)
 	
 	# Only load run data if requested
 	if load_run_data:
@@ -101,6 +105,7 @@ func select_profile(profile_id: int, load_run_data: bool = true) -> bool:
 			# Load existing run
 			RunSaveManager.load_from_run_save_data(profile.active_run_data)
 			print("Loaded existing run - Day ", profile.active_run_data.run_orchestrator_data.current_day)
+			day_counter.text = "Day " + str(profile.active_run_data.run_orchestrator_data.current_day) + "/30"
 		else:
 			# Start new run
 			get_tree().get_first_node_in_group("RunOrchestrator").start_new_run()
@@ -136,7 +141,34 @@ func save_current_profile() -> bool:
 	return save_profile(current_profile)
 	
 func delete_profile(profile_id: int, entry: ProfileEntry):
-	DirAccess.remove_absolute(get_profile_path(profile_id))
+	# Check if we're deleting the currently active profile
+	if current_profile and current_profile.profile_id == profile_id:
+		print("Deleting active profile - stopping current run...")
+		
+		# Stop the current run
+		var run_orchestrator = get_tree().get_first_node_in_group("RunOrchestrator")
+		if run_orchestrator:
+			run_orchestrator.is_day_active = false
+			run_orchestrator.health_system.stop_draining()
+			
+			# Stop box spawners
+			var box_spawners = get_tree().get_nodes_in_group("BoxSpawner")
+			for spawner in box_spawners:
+				spawner.active = false
+		
+		# Delete the file
+		DirAccess.remove_absolute(get_profile_path(profile_id))
+		
+		# Create fresh profile and start new run
+		print("Creating fresh profile ", profile_id, " and starting new run...")
+		var new_profile = create_new_profile(profile_id)
+		select_profile(profile_id)  # This will start a new run automatically
+		
+	else:
+		# Just deleting a non-active profile - simple cleanup
+		print("Deleting non-active profile ", profile_id)
+		DirAccess.remove_absolute(get_profile_path(profile_id))
+	
 	refresh_profile_ui()
 	
 func show_empty_profile_data(profile_id: int, entry: ProfileEntry):

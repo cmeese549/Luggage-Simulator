@@ -36,6 +36,21 @@ func process_queue():
 	await get_tree().create_timer(batch_delay).timeout
 	process_queue()
 
+func add_notification(message: String, color: String = "white", lifetime: float = 4.0):
+	var entry = entry_scene.instantiate()
+	entries_container.add_child(entry)
+	entry.setup_notification(message, color)
+	
+	# Remove oldest if exceeding max
+	while entries_container.get_child_count() > max_entries:
+		var oldest = entries_container.get_child(0)
+		remove_entry_smoothly(oldest)
+	
+	# Auto-remove after custom lifetime
+	get_tree().create_timer(lifetime).timeout.connect(func(): 
+		if is_instance_valid(entry):
+			remove_entry_smoothly(entry)
+	)
 
 func add_entry(money_amount: int, box: Box, success: bool):
 	var entry = entry_scene.instantiate()

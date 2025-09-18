@@ -13,7 +13,7 @@ class_name Box
 var box_shader = preload("res://Art_Assets/Shaders/Box Dissolve/box_dissolve.tres")
 var destination_mesh = preload("res://Objects/Boxes/destination_sticker.tscn")
 var disposable_mesh = preload("res://Objects/Boxes/disposable_sticker.tscn")
-var international_mesh = preload("res://Objects/Boxes/international_sticker.tscn")
+var international_mesh = preload("res://Objects/Boxes/needs_inspection_sticker.tscn")
 @onready var outward_particles : GPUParticles3D = $OutwardBoxParticles
 @onready var inward_particles : GPUParticles3D = $InwardBoxParticles
 @onready var approval_particles : GPUParticles3D = $ApprovalParticles

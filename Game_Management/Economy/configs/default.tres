@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="EconomyConfig" load_steps=2 format=3 uid="uid://d8fmieb5yd3h"]
+
+[ext_resource type="Script" uid="uid://d2e5r47avqehj" path="res://Game_Management/Economy/economy_config.gd" id="1_q7atx"]
+
+[resource]
+script = ExtResource("1_q7atx")
+metadata/_custom_type_script = "uid://d2e5r47avqehj"

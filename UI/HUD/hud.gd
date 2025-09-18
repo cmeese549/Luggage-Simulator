@@ -1,6 +1,7 @@
 extends Control
 
 @onready var money_label : Label = $Money/PanelContainer/HBoxContainer/MoneyLabel
+
 @onready var ui : Control = $".."
 
 func _process(delta):

@@ -20,6 +20,23 @@ func setup(money_amount: int, box: Box, success: bool):
 	modulate.a = 0
 	animate_in()
 
+func setup_notification(message: String, color: String = "white"):
+	var bg_colors = {
+		"green": green_bg,
+		"red": red_bg,
+		"blue": Color(0.0, 0.4, 0.8, 0.32),
+		"yellow": Color(0.8, 0.7, 0.0, 0.32),
+		"white": Color(0.2, 0.2, 0.2, 0.32)
+	}
+	
+	bg.color = bg_colors.get(color, bg_colors.white)
+	rich_label.text = "[font_size=28][color=%s]%s[/color][/font_size]" % [color, message]
+	
+	# Start wrapper offscreen to the left
+	wrapper.position.x = -300
+	modulate.a = 0
+	animate_in()
+
 func animate_in():
 	var tween = create_tween()
 	tween.parallel().tween_property(wrapper, "position:x", 0, 0.3).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)

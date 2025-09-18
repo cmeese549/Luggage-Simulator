@@ -87,7 +87,6 @@ func stored_hotkey(index: int) -> void:
 		hotkeys_ui.update_hotkeys()
 		ProfileManager.update_hotkeys(get_save_data())
 
-
 func toggle_building_mode():
 	building_mode_active = !building_mode_active
 	
