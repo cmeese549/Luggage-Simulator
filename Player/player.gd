@@ -81,7 +81,7 @@ var handled_skateboard_stop : bool = false
 var inventory : Array[InventoryItem] = []
 
 var held_box: RigidBody3D = null
-var box_hold_offset: Vector3 = Vector3(0, -0.25, -2)
+var box_hold_offset: Vector3 = Vector3(0, 0.25, -2)
 var pickup_range: float = 3.0
 var box_carry_smoothing: float = 15.0
 var currently_highlighted_box: Box = null
@@ -768,41 +768,30 @@ func try_pickup_box():
 func pickup_box(box: RigidBody3D):
 	held_box = box
 	box_relative_rotation = box.rotation - neck.rotation
-	# Switch to kinematic mode to stop physics
-	box.freeze_mode = RigidBody3D.FREEZE_MODE_KINEMATIC
-	held_box = box
-	held_box.rotation = Vector3.ZERO
-	held_box.set_freeze_enabled(true)
-	
-	# Disable collision with player to prevent conflicts
+	box_needs_uprighting = true
 	box.set_collision_layer_value(1, false)
-	box.set_collision_layer_value(9, false)
-	box.set_collision_layer_value(11, false)
-	box.set_collision_layer_value(20, false)
-	box.set_collision_layer_value(21, false)
-	
+	box.set_collision_layer_value(11, false) 
+
 func drop_box():
 	if not held_box:
 		return
-		
-	# Re-enable physics (velocity is already set from camera movement)
-	held_box.freeze = false
-	held_box.lock_rotation = false
-	# Re-enable collision
 	held_box.set_collision_layer_value(1, true)
-	held_box.set_collision_layer_value(9, true)
 	held_box.set_collision_layer_value(11, true)
-	held_box.set_collision_layer_value(20, true)
-	held_box.set_collision_layer_value(21, true)
+
+	var camera_forward = -camera.global_basis.z.normalized()
+	var camera_component = camera_forward * throw_power  # Keep full throw_power
+	
+	var throw_velocity = Vector3(camera_component.x, camera_component.y + 5, camera_component.z)
+	held_box.linear_velocity = throw_velocity
 	
 	held_box = null
-
+	
 func start_box_rotation():
 	if not held_box:
 		return
 	
 	is_rotating_box = true
-	held_box.freeze = false
+	#held_box.freeze = false
 	box_original_rotation = held_box.rotation
 	held_box.lock_rotation = true
 	held_box.angular_velocity = Vector3.ZERO
@@ -823,7 +812,7 @@ func stop_box_rotation():
 	is_rotating_box = false
 	if held_box:
 		held_box.lock_rotation = false
-		held_box.freeze = true
+		#held_box.freeze = true
 	var tween = create_tween()
 	tween.parallel().tween_property(camera, "fov", default_fov, 0.2)
 	
@@ -845,30 +834,36 @@ func rotate_held_box(mouse_delta: Vector2):
 	# Apply rotation to the relative rotation (not absolute)
 	box_relative_rotation += rotation_delta
 
+@export var box_upright_speed: float = 6.0
+var box_needs_uprighting: bool = false
+var throw_power: float = 8.0
+
 func update_held_box_position(delta: float):
 	if not held_box:
 		return
-		
-	# Store old position to calculate velocity
-	var old_position = held_box.global_position
 	
-	# Calculate target position in front of camera
 	var target_position = camera.global_position + camera.global_basis * box_hold_offset
+	var position_error = target_position - held_box.global_position
+	var velocity_error = Vector3.ZERO - held_box.linear_velocity
 	
-	# Always update position - box should follow player even during rotation
-	held_box.global_position = held_box.global_position.lerp(target_position, box_carry_smoothing * delta)
+	var spring_force = position_error * 600.0
+	var damping_force = velocity_error * 250.0
+	var total_force = spring_force + damping_force
+	total_force *= delta * 60.0
 	
-	# Always make box rotate with camera + any relative rotation from inspect mode
+	if held_box.linear_velocity.length() > 10.0:
+		held_box.linear_velocity = held_box.linear_velocity.normalized() * 10.0
+	
+	held_box.apply_central_force(total_force)
+	
+	if box_needs_uprighting and not is_rotating_box:
+		box_relative_rotation = box_relative_rotation.lerp(Vector3.ZERO, box_upright_speed * delta)
+		if box_relative_rotation.length() < 0.1:
+			box_needs_uprighting = false
+	
 	held_box.rotation = neck.rotation + box_relative_rotation
-	
-	
-	# Calculate and store the velocity from camera movement
-	var movement_velocity = (held_box.global_position - old_position) / delta
-	var clamped_velocity = movement_velocity.normalized() * 0.005
-	clamped_velocity = clamped_velocity.limit_length(1)  # Max speed of 1 unit
-	held_box.linear_velocity = clamped_velocity
 
-# Add this function:
+
 func update_box_highlighting():
 	var new_highlighted_box: Box = null
 	
