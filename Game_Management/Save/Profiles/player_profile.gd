@@ -41,7 +41,7 @@ class_name PlayerProfile
 	"rejection_processor": false
 }
 
-@export var gold_stars: int = 0 
+@export var gold_stars: int = 100 
 @export var active_run_data : RunSaveData
 
 # Helper functions
@@ -67,3 +67,20 @@ func has_roller_skates() -> bool:
 
 func has_skateboard() -> bool:
 	return qol_unlocks.skateboard
+	
+	# Calculate price for any shop item  
+func get_item_price(item: ShopItem) -> int:
+	return 1  # Placeholder as requested
+
+# Apply purchased upgrade
+func apply_item_purchase(item: ShopItem) -> void:
+	if item.is_buildable_unlock:
+		buildable_unlocks[item.stat_target] = true
+		print("Unlocked buildable: ", item.item_name)
+	elif item.category == "QOL":
+		qol_unlocks[item.stat_target] = true  
+		print("Unlocked QOL item: ", item.item_name)
+	else:
+		# Stat upgrade 
+		upgrade_levels[item.stat_target] += 1
+		print("Upgraded stat: ", item.stat_target)

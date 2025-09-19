@@ -45,14 +45,11 @@ func setup_for_day(day_number: int) -> void:
 	current_health = max_health * config.starting_health_percent
 	
 	# Use profile values directly (they're already calculated final values)
-	drain_per_second = config.drain_per_second * profile.get_health_drain_rate()
-	recovery_per_correct = profile.get_health_recovery_rate()  # Don't multiply!
+	drain_per_second = config.drain_per_second
+	recovery_per_correct = config.recovery_per_correct  # Don't multiply!
 	penalty_per_wrong = config.penalty_per_wrong
 	
 	update_ui()
-	print("Health System Day %d: Max %.0f, Starting %.0f, Drain %.1f/s (%.1fx), Recovery %.1f" % 
-		[day_number, max_health, current_health, drain_per_second, profile.get_health_drain_rate(), 
-		recovery_per_correct])
 
 func start_draining() -> void:
 	is_draining = true
