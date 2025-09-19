@@ -2,12 +2,12 @@ extends MarginContainer
 
 class_name Shop
 
+@onready var building_system = get_tree().get_first_node_in_group("BuildingSystem")
 @onready var player : Player = get_tree().get_first_node_in_group("Player")
 
 var shop_item : PackedScene = preload("res://UI/PermanentUpgradeShop/ShopItem.tscn")
 
 @onready var ui : UI = $".."
-@onready var items_dad : GridContainer = $PanelContainer/MarginContainer/Rows/ScrollContainer/GridContainer
 @onready var hud : Control = $"../HUD"
 @onready var close_button : Button = $PanelContainer/MarginContainer/Rows/HBoxContainer/CloseButton
 @onready var your_money : Label = $PanelContainer/MarginContainer/Rows/HBoxContainer/StarsLabel
@@ -53,64 +53,46 @@ func setup_dynamic_tabs() -> void:
 	for child in tab_container.get_children():
 		child.queue_free()
 	
-	# Scan ShopItems folders
-	var dir = DirAccess.open("res://UI/PermanentUpgradeShop/ShopItems/")
-	if not dir:
-		push_error("Failed to access ShopItems directory")
-		return
+	# Use registry instead of folder scanning
+	var categories = ShopItemRegistry.get_all_categories()
 	
-	dir.list_dir_begin()
-	var folder_name = dir.get_next()
-	
-	while folder_name != "":
-		if dir.current_is_dir() and not folder_name.begins_with("."):
-			# Create new tab with GridContainer
-			var grid_container = GridContainer.new()
-			grid_container.columns = 4
-			grid_container.name = folder_name
-			
-			tab_container.add_child(grid_container)
+	for category_name in categories:
+		# Create new tab with GridContainer
+		var grid_container = GridContainer.new()
+		grid_container.columns = 4
+		grid_container.name = category_name
 		
-		folder_name = dir.get_next()
+		tab_container.add_child(grid_container)
 	
-	dir.list_dir_end()
 	populate_tabs_with_items()
-	
+
 func populate_tabs_with_items() -> void:
 	var tab_container = $PanelContainer/MarginContainer/Rows/ScrollContainer/TabContainer
 	
 	for tab in tab_container.get_children():
 		var grid_container = tab as GridContainer
-		var folder_name = grid_container.name
+		var category_name = grid_container.name
 		
-		# Scan folder for .tres files
-		var folder_path = "res://UI/PermanentUpgradeShop/ShopItems/" + folder_name + "/"
-		var dir = DirAccess.open(folder_path)
-		if not dir:
-			print("Failed to access folder: ", folder_path)
-			continue
+		# Get items from registry
+		var items_in_category = ShopItemRegistry.get_items_by_category(category_name)
 		
-		dir.list_dir_begin()
-		var file_name = dir.get_next()
-		
-		while file_name != "":
-			if file_name.ends_with(".tres"):
-				var item_path = folder_path + file_name
-				var shop_item_resource = ResourceLoader.load(item_path) as ShopItem
-				
-				if shop_item_resource:
-					create_shop_item_button(shop_item_resource, grid_container)
-			
-			file_name = dir.get_next()
-		
-		dir.list_dir_end()
+		for shop_item in items_in_category:
+			create_shop_item_button(shop_item, grid_container)
 		
 func create_shop_item_button(item: ShopItem, parent_container: GridContainer) -> void:
 	var new_shop_item : Button = shop_item.instantiate()
 	new_shop_item.find_child("VBoxContainer").find_child("ItemName").text = item.item_name
-	new_shop_item.find_child("VBoxContainer").find_child("ItemIcon").texture = item.item_icon
 	new_shop_item.find_child("VBoxContainer").find_child("ItemDescription").text = item.item_description
 	new_shop_item.pressed.connect(attempt_purchase.bind(item, new_shop_item))
+	
+	# Generate buildable icon using centralized system
+	var icon_texture: Texture2D
+	if item.is_buildable_unlock and not item.buildable_scenes.is_empty():
+		icon_texture = BuildableIconGenerator.get_buildable_icon(item.buildable_scenes[0])
+	else:
+		icon_texture = item.item_icon
+	
+	new_shop_item.find_child("VBoxContainer").find_child("ItemIcon").texture = icon_texture
 	
 	# Store the ShopItem reference in dictionary
 	shop_items_by_button[new_shop_item] = item
@@ -140,8 +122,19 @@ func attempt_purchase(item: ShopItem, button: Button) -> void:
 		profile.apply_item_purchase(item)
 		ProfileManager.save_current_profile()
 		
+		# Refresh building system if we just unlocked a buildable
+		if item.is_buildable_unlock:
+			var building_system = get_tree().get_first_node_in_group("BuildingSystem")
+			if building_system:
+				building_system.refresh_buildables_for_profile()
+			
+			# Refresh ALL shop items since category pricing changed
+			refresh_shop_display()
+		else:
+			# For non-buildables, just update this single item
+			update_shop_item_display(item, button)
+		
 		your_money.text = 'Gold Stars: ' + add_comma_to_int(profile.gold_stars)
-		update_shop_item_display(item, button)
 		print("Purchased ", item.item_name)
 	else:
 		print("Not enough gold stars! Need ", item_price, ", have ", profile.gold_stars)
@@ -150,21 +143,26 @@ func is_item_owned(item: ShopItem, profile: PlayerProfile) -> bool:
 	if item.is_buildable_unlock:
 		return profile.buildable_unlocks.get(item.stat_target, false)
 	elif item.category == "QOL":
-		return profile.qol_unlocks.get(item.stat_target, false)
+		if item.is_boolean_unlock:
+			# Boolean QOL items (rollerskates, skateboard)
+			return profile.qol_unlocks.get(item.stat_target, false)
+		else:
+			# Stat upgrades in QOL (starting_money, gold_stars_per_day) use max level logic
+			return not profile.can_upgrade(item.stat_target)
 	else:
-		# Stat upgrades use max level logic, not "owned"
+		# Other stat upgrades use max level logic, not "owned"
 		return not profile.can_upgrade(item.stat_target)
-
+	
 func update_shop_item_display(item: ShopItem, button: Button) -> void:
 	var profile = ProfileManager.current_profile
-	
 	
 	var level_label = button.find_child("VBoxContainer").find_child("ItemLevel")
 	var value_label = button.find_child("VBoxContainer").find_child("ItemValue")
 	var price_label = button.find_child("VBoxContainer").find_child("ItemPrice")
 	var action_label = button.find_child("VBoxContainer").find_child("nuttin")
 	
-	if item.is_buildable_unlock or item.category == "QOL":
+	if item.is_buildable_unlock or (item.category == "QOL" and item.is_boolean_unlock):
+		# Boolean unlocks (buildables + QOL booleans like rollerskates)
 		level_label.visible = false
 		value_label.visible = false
 		action_label.visible = true
@@ -180,7 +178,7 @@ func update_shop_item_display(item: ShopItem, button: Button) -> void:
 			button.disabled = false
 			
 	else:
-		# Stat upgrade - show all labels with existing logic
+		# Stat upgrades (including QOL stat upgrades like starting_money/gold_stars_per_day)
 		level_label.visible = true
 		value_label.visible = true
 		action_label.visible = true
@@ -193,7 +191,7 @@ func update_shop_item_display(item: ShopItem, button: Button) -> void:
 		value_label.text = "Current value: " + get_current_stat_value(item.stat_target, profile)
 		
 		if can_upgrade:
-			var next_price = profile.get_upgrade_cost(item.stat_target)
+			var next_price = profile.get_item_price(item)  # Use the new pricing function
 			price_label.text = str(next_price) + " ⭐"
 			action_label.text = "Click to add 1 level"
 			button.disabled = false

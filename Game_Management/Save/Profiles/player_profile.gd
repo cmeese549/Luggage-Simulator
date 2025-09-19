@@ -41,6 +41,8 @@ class_name PlayerProfile
 	"rejection_processor": false
 }
 
+var buildable_categories: Dictionary = {}
+
 @export var gold_stars: int = 100 
 @export var active_run_data : RunSaveData
 
@@ -67,20 +69,50 @@ func has_roller_skates() -> bool:
 
 func has_skateboard() -> bool:
 	return qol_unlocks.skateboard
-	
-	# Calculate price for any shop item  
+	  
 func get_item_price(item: ShopItem) -> int:
-	return 1  # Placeholder as requested
+	if item.category == "QOL":
+		# Check if it's a boolean unlock or stat upgrade
+		if item.is_boolean_unlock:
+			# Boolean QOL items (rollerskates, skateboard) use fixed price
+			return item.fixed_price
+		else:
+			# Stat upgrades in QOL (starting_money, gold_stars_per_day) use progressive pricing
+			return get_upgrade_cost(item.stat_target)
+	elif item.is_buildable_unlock:
+		# Buildable unlocks: base price of 1 + 5 per already unlocked item in same category
+		var unlocked_count_in_category = count_unlocked_buildables_in_category(item.category)
+		return 1 + (unlocked_count_in_category * 5)
+	else:
+		# Fallback to progressive pricing
+		return get_upgrade_cost(item.stat_target)
 
-# Apply purchased upgrade
+func count_unlocked_buildables_in_category(category: String) -> int:
+	var count = 0
+	
+	var items_in_category = ShopItemRegistry.get_items_by_category(category)
+	
+	for item in items_in_category:
+		if item.is_buildable_unlock and buildable_unlocks.get(item.stat_target, false):
+			count += 1
+	
+	return count
+
 func apply_item_purchase(item: ShopItem) -> void:
 	if item.is_buildable_unlock:
 		buildable_unlocks[item.stat_target] = true
+		buildable_categories[item.stat_target] = item.category  # Cache the category
 		print("Unlocked buildable: ", item.item_name)
 	elif item.category == "QOL":
-		qol_unlocks[item.stat_target] = true  
-		print("Unlocked QOL item: ", item.item_name)
+		if item.is_boolean_unlock:
+			# Boolean QOL items (rollerskates, skateboard)
+			qol_unlocks[item.stat_target] = true  
+			print("Unlocked QOL item: ", item.item_name)
+		else:
+			# Stat upgrades in QOL (starting_money, gold_stars_per_day)
+			upgrade_levels[item.stat_target] += 1
+			print("Upgraded stat: ", item.stat_target, " to level ", upgrade_levels[item.stat_target])
 	else:
-		# Stat upgrade 
+		# Other stat upgrades 
 		upgrade_levels[item.stat_target] += 1
 		print("Upgraded stat: ", item.stat_target)

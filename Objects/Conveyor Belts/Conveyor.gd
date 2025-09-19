@@ -58,7 +58,6 @@ func load_save_data(_data: Dictionary) -> void:
 
 func _ready():
 	store_original_materials(self)
-	belt_speed = ProfileManager.current_profile.get_belt_speed()
 	var shapes = find_children("*", "CollisionShape3D", true, false)
 	for shape in shapes:
 		if shape.get_parent().is_in_group("Belt"):

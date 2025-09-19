@@ -22,6 +22,8 @@ Events="*res://Game_Management/Events.gd"
 RunSaveManager="*res://Game_Management/Save/RunSaveManager.gd"
 Economy="*res://Game_Management/Economy/economy_config.tscn"
 ProfileManager="*res://Game_Management/Save/Profiles/ProfileManager.gd"
+BuildableIconGenerator="*res://Game_Management/BuildingSystem/BuildableIconGenerator.gd"
+ShopItemRegistry="*res://UI/PermanentUpgradeShop/ShopItemRegistry.gd"
 
 [display]
 

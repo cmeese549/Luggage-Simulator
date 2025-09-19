@@ -16,7 +16,6 @@ var buildable_preview: PackedScene = preload("res://UI/BuildMode/buildable_previ
 @export var active_category_color: Color 
 @export var inactive_category_color: Color
 
-var buildable_textures: Dictionary = {}
 
 func _ready():
 	hide() # Start hidden
@@ -25,7 +24,6 @@ func _ready():
 	
 func _all_ready():
 	setup_categories()
-	generate_buildable_textures() 
 	populate_category_row()
 	populate_buildable_row()
 	update_building_system_active_buildables()
@@ -137,10 +135,11 @@ func populate_buildable_row():
 	
 	for i in range(current_buildables.size()):
 		var buildable = current_buildables[i].instantiate()
-		var cached_texture = buildable_textures.get(current_buildables[i].resource_path)
-		var container = buildable_preview.instantiate()  # Use ColorRect for highlighting
+		# Use BuildableIconGenerator instead of cached_texture
+		var icon_texture = BuildableIconGenerator.get_buildable_icon(current_buildables[i])
+		var container = buildable_preview.instantiate()
 		buildable_row.add_child(container)
-		container.setup(buildable, cached_texture, i == building_system.selected_object_index)
+		container.setup(buildable, icon_texture, i == building_system.selected_object_index)
 		buildable.queue_free()
 		
 func update_buildable_selection():
@@ -173,23 +172,7 @@ func update_category_colors():
 	for i in range(category_row.get_child_count()):
 		var category = category_row.get_child(i)
 		category.color = active_category_color if i == current_category_index else inactive_category_color
-		
-func generate_buildable_textures():
-	for category in categories:
-		for buildable_scene in category.buildables:
-			var instance = buildable_scene.instantiate()
-			var packed_scene = PackedScene.new()
-			packed_scene.pack(instance)
-			
-			var scene_texture = SceneTexture.new()
-			scene_texture.scene = packed_scene
-			scene_texture.camera_position = Vector3(5, 5, 5)
-			var look_at_transform = Transform3D().looking_at(Vector3.ZERO - scene_texture.camera_position, Vector3.UP)
-			scene_texture.camera_rotation = look_at_transform.basis.get_euler()
-			scene_texture.size = Vector2(256, 256)
-			
-			buildable_textures[buildable_scene.resource_path] = scene_texture
-			instance.queue_free()
+
 			
 func select_buildable_by_scene_path(scene_path: String):
 	# Find the category and index

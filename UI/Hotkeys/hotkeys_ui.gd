@@ -17,10 +17,10 @@ func update_hotkeys() -> void:
 		var buildable: PackedScene = building_system.hotkeys[i]
 		if buildable:
 			texture_rext.show()
-			var cached_texture = building_ui.buildable_textures.get(buildable.resource_path)
-			if cached_texture:
-				if texture_rext:
-					texture_rext.texture = cached_texture
+			# Use BuildableIconGenerator instead of cached textures
+			var icon_texture = BuildableIconGenerator.get_buildable_icon(buildable)
+			if texture_rext:
+				texture_rext.texture = icon_texture
 		else:
 			texture_rext.hide()
 			

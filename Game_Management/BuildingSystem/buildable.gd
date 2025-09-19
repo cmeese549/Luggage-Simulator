@@ -21,10 +21,7 @@ func load_save_data(_data: Dictionary) -> void:
 	
 func get_buildable_price() -> float:
 	var base_price = Economy.config.get_buildable_price(category, building_name)
-	if ProfileManager.current_profile:
-		return ProfileManager.current_profile.calculate_build_cost(base_price)
-	else:
-		return base_price
+	return base_price
 	
 func die():
 	money.make_money(price)

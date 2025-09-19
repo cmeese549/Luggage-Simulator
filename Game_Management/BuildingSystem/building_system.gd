@@ -367,3 +367,25 @@ func clear_destroy_preview():
 	if ghost_object and ghost_object.is_built:
 		ghost_object.set_destroy_preview(false)
 		ghost_object = null
+		
+func refresh_buildables_for_profile():
+	# Clear all buildables
+	buildable_objects.clear()
+	
+	# Add shop unlocked buildables using registry
+	var profile = ProfileManager.current_profile
+	if not profile:
+		return
+	
+	# Check all shop items for unlocked buildables
+	for shop_item in ShopItemRegistry.all_shop_items:
+		if shop_item.is_buildable_unlock and profile.buildable_unlocks.get(shop_item.stat_target, false):
+			# Add the buildable scenes
+			for scene in shop_item.buildable_scenes:
+				buildable_objects.append(scene)
+	
+	# Refresh building UI
+	if building_ui:
+		building_ui.setup_categories()
+		building_ui.populate_category_row() 
+		building_ui.populate_buildable_row()

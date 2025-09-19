@@ -27,16 +27,11 @@ class_name PauseMenu
 @onready var sfx_slider : HSlider = $PanelContainer/MarginContainer/Rows/PauseDad/VBoxContainer/SfxVolume/SfxVolumeSlider
 
 @onready var pause_dad : HBoxContainer = $PanelContainer/MarginContainer/Rows/PauseDad
-@onready var tutorial_dad : HBoxContainer = $PanelContainer/MarginContainer/Rows/Tutorial
-
-var inventory_item : PackedScene = preload("res://UI/PauseMenu/InventoryItem.tscn")
-@onready var inventory_dad : GridContainer = $PanelContainer/MarginContainer/Rows/PauseDad/Rows/ScrollContainer/GridContainer
 
 func _ready() -> void:
 	quit_button.pressed.connect(prompt_quit)
 	resume_button.pressed.connect(unpause)
 	unstick_button.pressed.connect(unstick)
-	help_button.pressed.connect(show_tutorial)
 	actually_quit_button.pressed.connect(quit)
 	nevermind_button.pressed.connect(cancel_quit)
 
@@ -117,14 +112,9 @@ func toggle_pause() -> void:
 		unpause()
 	else:
 		pause()
-		
-func show_tutorial() -> void:
-	pause_dad.visible = false
-	tutorial_dad.visible = true
 
 func pause() -> void:
 	pause_dad.visible = true
-	tutorial_dad.visible = false
 	update_inventory_items()
 	self.visible = true
 	hud.visible = false

@@ -55,7 +55,6 @@ func _ready() -> void:
 		input_detector.body_entered.connect(new_box_available)
 	update_county_labels()
 	$"BaseProcessor/Output Icon Label".text = output_icon
-	processing_time = ProfileManager.current_profile.get_machine_speed()
 	
 func _process(delta: float) -> void:
 	if turned_off: 

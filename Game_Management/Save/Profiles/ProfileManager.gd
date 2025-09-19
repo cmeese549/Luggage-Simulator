@@ -12,6 +12,9 @@ var current_profile_id: int = -1
 @onready var money_system = get_tree().get_first_node_in_group("Money")
 @onready var star_counter: Label = get_tree().get_first_node_in_group("StarCounter")
 @onready var day_counter: Label = get_tree().get_first_node_in_group("DayCounter")
+
+@onready var building_system = get_tree().get_first_node_in_group("BuildingSystem")
+@onready var shop = get_tree().get_first_node_in_group("Shop")
 var profile_entry : PackedScene = preload("res://UI/Profiles/profile_entry.tscn")
 
 func _ready():
@@ -96,6 +99,8 @@ func select_profile(profile_id: int, load_run_data: bool = true) -> bool:
 	if not profile.player_data.is_empty():
 		player.load_save_data(profile.player_data)
 	player.apply_profile_unlocks()
+	building_system.refresh_buildables_for_profile()
+	shop.refresh_shop_display()
 
 	star_counter.text = "⭐ " + str(current_profile.gold_stars)
 	
