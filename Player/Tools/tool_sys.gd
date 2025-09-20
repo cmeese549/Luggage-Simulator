@@ -39,7 +39,8 @@ func _process(_delta: float) -> void:
 		else:
 			looked_at_object = check_for_box()
 			if looked_at_object != null and looked_at_object is Box:
-				interact_crosshair.visible = true
+				#interact_crosshair.visible = true
+				pass
 			elif interact_crosshair.visible:
 				interact_crosshair.visible = false
 	elif interact_crosshair != null and interact_crosshair.visible and (player.held_box or player.building_system.building_mode_active or player.building_system.destroy_mode_active):

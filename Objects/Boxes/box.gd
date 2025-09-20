@@ -9,6 +9,7 @@ class_name Box
 @export var sad_dissolve_highligh_collor: Color = Color.from_rgba8(255, 97, 97, 1)
 @export var happy_dissolve_highligh_collor: Color = Color.from_rgba8(123, 246, 0, 1)
 @export var sticker_color: Color = Color.from_rgba8(240, 94, 28, 1)
+@export var outline_color: Color = Color.from_rgba8(240, 96, 29, 255)
 
 var box_shader = preload("res://Art_Assets/Shaders/Box Dissolve/box_dissolve.tres")
 var destination_mesh = preload("res://Objects/Boxes/destination_sticker.tscn")
@@ -25,7 +26,11 @@ var stickers_to_kill : Array[MeshInstance3D] = []
 @export var needs_inspection: bool = false
 @export var disposable: bool = false
 @export var destination: Destination
+
+
 var has_valid_destination: bool = false
+@export var outline_thickness : float = 0.03
+var outline_mesh: MeshInstance3D = null
 
 enum ApprovalState {
 	NONE,
@@ -144,8 +149,33 @@ func create_box_visual():
 	rejection_particles.process_material.emission_box_extents = box_size
 	#particles.emitting = false
 	add_child(mesh_instance)
+	create_outline_mesh(mesh_instance)
+	
+func create_outline_mesh(mesh_instance: MeshInstance3D):
+	outline_mesh = MeshInstance3D.new()
+	var outline_box = BoxMesh.new()
+	outline_box.size = box_size + Vector3(outline_thickness, outline_thickness, outline_thickness)
+	outline_mesh.mesh = outline_box
+	outline_mesh.name = "OutlineMesh"
+	
+	# Create outline material with flipped normals
+	var outline_material = StandardMaterial3D.new()
+	outline_material.albedo_color = outline_color
+	outline_material.cull_mode = BaseMaterial3D.CULL_FRONT  # This flips the normals
+	outline_material.no_depth_test = false
+	outline_material.flags_unshaded = true
+	outline_mesh.material_override = outline_material
+	
+	# Add as child so it moves with the box
+	mesh_instance.add_child(outline_mesh)
+	outline_mesh.visible = false
+	# Set slightly behind the main mesh in render order
+	outline_mesh.set_layer_mask_value(1, true)
+	
+	return outline_mesh
 
 func set_highlighted(highlighted: bool):
+	outline_mesh.visible = highlighted
 	return
 	is_highlighted = highlighted
 	var mesh_instance = get_node("MeshInstance3D")
@@ -158,7 +188,8 @@ func set_highlighted(highlighted: bool):
 func create_box_collision():
 	var collision_shape = CollisionShape3D.new()
 	var box_shape = BoxShape3D.new()
-	box_shape.size = box_size
+	# Add outline thickness to collision shape so box hovers slightly above surfaces
+	box_shape.size = box_size + Vector3(outline_thickness + 0.015, outline_thickness + 0.015, outline_thickness + 0.015)
 	
 	collision_shape.shape = box_shape
 	collision_shape.name = "CollisionShape3D"
