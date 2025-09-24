@@ -18,6 +18,7 @@ var current_profile_id: int = -1
 var profile_entry : PackedScene = preload("res://UI/Profiles/profile_entry.tscn")
 
 func _ready():
+	return
 	populate_profile_data()
 	
 func auto_load():

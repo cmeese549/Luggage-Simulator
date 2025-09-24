@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://el3o4lxb8uob"]
+
+[ext_resource type="Script" uid="uid://4n5roxpssfxh" path="res://UI/Minigames/PentagramPuzzle/pentagram_generator.gd" id="1_efdw0"]
+[ext_resource type="Script" uid="uid://du8rnv2doj23s" path="res://UI/Minigames/PentagramPuzzle/chaos_renderer.gd" id="2_a61xl"]
+[ext_resource type="Script" uid="uid://dslwugqt3cqa0" path="res://UI/Minigames/PentagramPuzzle/proximity_detector.gd" id="2_gomw4"]
+
+[node name="PentagramPuzzle" type="Node2D"]
+
+[node name="PentagramGenerator" type="Node2D" parent="."]
+script = ExtResource("1_efdw0")
+
+[node name="ProximityDetector" type="Node2D" parent="."]
+script = ExtResource("2_gomw4")
+
+[node name="ChaosRenderer" type="Node2D" parent="."]
+script = ExtResource("2_a61xl")
+chaos_intensity = 100.0
+lines_per_point = 20
+max_line_length = 450.0
+
+[node name="UI" type="CanvasLayer" parent="."]
