@@ -6,10 +6,16 @@ class_name ChaosRenderer
 @export var line_segments: int = 15
 @export var lines_per_point: int = 6
 @export var max_line_length: float = 80.0
-@export var chaos_color: Color = Color(0.3, 0.8, 0.3, 0.7)
 @export var line_width: float = 2.0
 @export var animation_speed: float = 2.0
-@export var disappear_threshold: float = 0.95
+@export var disappear_threshold: float = 0.92
+
+# Color settings
+@export var target_color: Color = Color.ORANGE  # Color for current target point
+@export var inactive_color: Color = Color.PURPLE  # Color for non-target points
+@export var completed_color: Color = Color.GREEN  # Color for completed points
+var current_target_point: int = -1  # Which point is currently the target (-1 = none)
+var completed_points: Array[bool] = []  # Track which points have been completed
 
 var noise_instances: Array[FastNoiseLite] = []
 var pentagram_generator: PentagramGenerator
@@ -18,13 +24,6 @@ var time_elapsed: float = 0.0
 var chaos_lines: Array[Array] = []
 var point_order_levels: Array[float] = []
 var tuned_points: Array[bool] = []
-var point_colors: Array[Color] = [
-	Color.RED,
-	Color.GREEN, 
-	Color.BLUE,
-	Color.YELLOW,
-	Color.MAGENTA
-]
 
 func _ready() -> void:
 	# Setup separate noise instances for each pentagram point
@@ -41,9 +40,11 @@ func _ready() -> void:
 	pentagram_generator = get_parent().get_node("PentagramGenerator")
 	proximity_detector = get_parent().get_node("ProximityDetector")
 	
-	# Initialize tuned points array
+	# Initialize arrays
 	tuned_points.resize(5)  # 5 pentagram points
 	tuned_points.fill(false)
+	completed_points.resize(5)
+	completed_points.fill(false)
 	
 	# Generate initial chaos lines
 	generate_chaos_lines()
@@ -70,8 +71,9 @@ func _draw() -> void:
 		# Skip drawing if this point is too ordered (tuned)
 		if local_order_level >= disappear_threshold:
 			continue
-			
-		var line_color: Color = point_colors[point_index % point_colors.size()]
+		
+		# Determine line color based on game state
+		var line_color: Color = get_point_color(point_index)
 		
 		for i in range(line_points.size() - 1):
 			var start: Vector2 = line_points[i]
@@ -82,6 +84,42 @@ func _draw() -> void:
 			var transformed_end: Vector2 = transform_point(end, i + 1, line_index)
 			
 			draw_line(transformed_start, transformed_end, line_color, line_width)
+
+func get_point_color(point_index: int) -> Color:
+	# Check if this point is completed
+	if point_index < completed_points.size() and completed_points[point_index]:
+		return completed_color
+	
+	# Check if this is the current target
+	if point_index == current_target_point:
+		return target_color
+	
+	# Otherwise it's inactive
+	return inactive_color
+
+func set_target_point(point_index: int) -> void:
+	current_target_point = point_index
+	queue_redraw()
+
+func mark_point_completed(point_index: int) -> void:
+	if point_index >= 0 and point_index < completed_points.size():
+		completed_points[point_index] = true
+		queue_redraw()
+
+func reset_all_points() -> void:
+	# Ensure arrays are properly sized
+	tuned_points.resize(5)
+	tuned_points.fill(false)
+	
+	point_order_levels.resize(5)
+	for i in range(5):
+		point_order_levels[i] = 0.2
+	
+	completed_points.resize(5)
+	completed_points.fill(false)
+	
+	current_target_point = -1
+	queue_redraw()
 
 func generate_chaos_lines() -> void:
 	chaos_lines.clear()
@@ -135,7 +173,8 @@ func update_point_order_levels() -> void:
 		order_level = clamp(order_level, 0.2, 1.0)
 		
 		# Check if this point should become permanently tuned
-		if order_level >= disappear_threshold:
+		# ONLY if it's the current target
+		if order_level >= disappear_threshold and i == current_target_point:
 			tuned_points[i] = true
 			point_order_levels[i] = 1.0
 		else:
@@ -149,30 +188,27 @@ func transform_point(base_position: Vector2, segment_index: int, line_index: int
 	if point_index < point_order_levels.size():
 		local_order_level = point_order_levels[point_index]
 	
-	# Get the actual pentagram point this line belongs to
-	var pentagram_points: Array[Vector2] = pentagram_generator.get_pentagram_points()
-	var pentagram_point: Vector2 = pentagram_points[point_index]
+	# When near full order, just return the straight line
+	if local_order_level > 0.95:
+		return base_position
 	
-	# Calculate chaotic point with reduced chaos as mouse gets closer
-	var chaotic_point: Vector2 = apply_extreme_chaos(base_position, segment_index, local_order_level, line_index)
+	# Get ONLY the chaos offset (not base + offset)
+	var chaos_offset: Vector2 = get_chaos_offset(base_position, segment_index, line_index)
 	
-	# Calculate straight/ordered point (converging toward pentagram point)  
-	var straight_point: Vector2 = lerp(base_position, pentagram_point, local_order_level)
+	# Scale chaos by inverse of order level (exponential for smooth transition)
+	var chaos_strength: float = pow(1.0 - local_order_level, 2.0)
 	
-	# Smoothly interpolate between chaos and straightness
-	var chaos_strength: float = 1.0 - local_order_level
-	return lerp(straight_point, chaotic_point, chaos_strength)
+	# Add scaled chaos to the base straight line position
+	return base_position + (chaos_offset * chaos_strength)
 
-func apply_extreme_chaos(base_position: Vector2, segment_index: int, local_order_level: float, line_index: int = 0) -> Vector2:
-	var chaos_factor: float = base_chaos_intensity * pow(1.0 - local_order_level, 0.7)
-	
+func get_chaos_offset(base_position: Vector2, segment_index: int, line_index: int = 0) -> Vector2:
 	# Get the correct noise instance for this line's pentagram point
 	var point_index: int = line_index / lines_per_point
 	var noise: FastNoiseLite = noise_instances[point_index % noise_instances.size()]
 
 	# Add both point-specific and line-specific offsets
-	var point_offset: float = point_index * 5000.0  # Different regions for each pentagram point
-	var line_offset: float = line_index * 1000.0   # Different regions for each line
+	var point_offset: float = point_index * 5000.0
+	var line_offset: float = line_index * 1000.0
 
 	# Time-based coordinate drift for evolving patterns
 	var time_drift_x: float = time_elapsed * 5
@@ -196,7 +232,7 @@ func apply_extreme_chaos(base_position: Vector2, segment_index: int, local_order
 	var spiral_x: float = sin(spiral_time) * cos(spiral_time * 1.7) * 1.5
 	var spiral_y: float = cos(spiral_time) * sin(spiral_time * 1.3) * 1.5
 
-	# Layer 3: High frequency writhing - faster time drift
+	# Layer 3: High frequency writhing
 	var writhe_x: float = noise.get_noise_3d(
 		base_position.x * 0.05 + point_offset + time_drift_x * 3.0 + 2000.0, 
 		base_position.y * 0.05 + line_offset + time_drift_y * 2.5 + 2000.0, 
@@ -215,10 +251,8 @@ func apply_extreme_chaos(base_position: Vector2, segment_index: int, local_order
 	var loop_x: float = cos(loop_time * 2.3) * loop_radius
 	var loop_y: float = sin(loop_time * 1.9) * loop_radius
 	
-	# Combine all chaos layers
-	var total_chaos: Vector2 = Vector2(
-		(sweep_x + spiral_x + writhe_x + loop_x) * chaos_factor,
-		(sweep_y + spiral_y + writhe_y + loop_y) * chaos_factor
+	# Return ONLY the chaos offset, not base + offset
+	return Vector2(
+		(sweep_x + spiral_x + writhe_x + loop_x) * base_chaos_intensity,
+		(sweep_y + spiral_y + writhe_y + loop_y) * base_chaos_intensity
 	)
-	
-	return base_position + total_chaos
