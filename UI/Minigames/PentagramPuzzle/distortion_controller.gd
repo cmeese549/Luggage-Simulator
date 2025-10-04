@@ -14,6 +14,8 @@ var average_order_level: float = 0.0
 
 @onready var vignette_overlay: ColorRect = $"../VignetteOverlay"
 @onready var chromatic_overlay: ColorRect = $"../ChromaticAberrationOverlay"
+@onready var dark_matter_overlay: ColorRect = $"../DarkMatterOverlay"
+@onready var reality_tears_overlay: ColorRect = $"../RealityTearsOverlay"
 
 func _ready() -> void:
 	# Set up the shader material
@@ -76,10 +78,17 @@ func _update_shader_params(_vignette_chaos: float) -> void:
 	
 	# Update center position to viewport center
 	shader_material.set_shader_parameter("center_position", Vector2(0.5, 0.5))
-	var vignette_chaos = max(_vignette_chaos, 0.4)
+	var vignette_chaos = max(_vignette_chaos, 0.5)
 	vignette_overlay.material.set_shader_parameter("chaos_level", vignette_chaos)
-	var chromatic_chaos = max(_vignette_chaos, 0.2)
+	
+	var chromatic_chaos = max(_vignette_chaos, 0.3)
 	chromatic_overlay.material.set_shader_parameter("chaos_level", chromatic_chaos)
+	
+	var dark_matter_chaos = max(_vignette_chaos, 0.8)
+	dark_matter_overlay.material.set_shader_parameter("chaos_intensity", dark_matter_chaos)
+	
+	var tears_chaos = 1.0 - average_order_level
+	reality_tears_overlay.material.set_shader_parameter("chaos_level", tears_chaos)
 
 func get_average_order_level() -> float:
 	return average_order_level

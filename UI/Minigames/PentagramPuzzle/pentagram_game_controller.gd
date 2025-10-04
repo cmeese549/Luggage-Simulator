@@ -18,6 +18,7 @@ var completion_particle_scene: PackedScene = preload("res://UI/Minigames/Pentagr
 var active_particles: Dictionary = {}
 
 @onready var hover_particles: GPUParticles2D = $HoverParticles
+@onready var ethereal_orbs: GPUParticles2D = $EtherealOrbs
 
 func _ready() -> void:
 	# Start completely invisible
@@ -42,6 +43,9 @@ func _ready() -> void:
 	generate_random_sequence()
 	start_game()
 	
+	_create_background_polygon()
+	var size = get_viewport().get_visible_rect().size
+	ethereal_orbs.global_position = size / 2.0
 	# Fade in
 	fade_from_black(0.8)
 	
@@ -53,6 +57,10 @@ func _on_viewport_resized() -> void:
 	for point_idx in active_particles:
 		if point_idx < pentagram_points.size():
 			active_particles[point_idx].global_position = pentagram_points[point_idx]
+			
+	var size = get_viewport().get_visible_rect().size
+	ethereal_orbs.process_material.emission_box_extents = Vector3(size.x * 0.6, size.y * 0.6, 0)
+	ethereal_orbs.global_position = size / 2.0
 
 func _process(_delta: float) -> void:
 	if current_state == GameState.PLAYING:
@@ -207,3 +215,20 @@ func fade_from_black(duration: float) -> void:
 	
 	await tween.finished
 	
+func _create_background_polygon() -> void:
+	var bg = Polygon2D.new()
+	bg.name = "Background"
+	add_child(bg)
+	move_child(bg, 0)  # Move to first position
+	bg.color = Color.BLACK
+	_resize_background(bg)
+	get_viewport().size_changed.connect(func(): _resize_background(bg))
+
+func _resize_background(bg: Polygon2D) -> void:
+	var size = get_viewport().get_visible_rect().size
+	bg.polygon = PackedVector2Array([
+		Vector2(0, 0),
+		Vector2(size.x, 0),
+		Vector2(size.x, size.y),
+		Vector2(0, size.y)
+	])
