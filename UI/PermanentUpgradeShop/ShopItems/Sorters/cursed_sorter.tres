@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ShopItem" load_steps=4 format=3 uid="uid://do364blvm0c8x"]
+
+[ext_resource type="PackedScene" uid="uid://ctvgb0g81iaf3" path="res://Objects/Machines/Sorter/Cursed/CursedSorter.tscn" id="1_e3rdr"]
+[ext_resource type="Texture2D" uid="uid://dsu4otkk2qt0g" path="res://icon.svg" id="2_t8qrs"]
+[ext_resource type="Script" uid="uid://b1lecmjr7r5pu" path="res://UI/PermanentUpgradeShop/ShopItem.gd" id="3_rf7wp"]
+
+[resource]
+script = ExtResource("3_rf7wp")
+item_name = "Cursed Sorter"
+item_description = "Sorts boxes by whether or not they are cursed"
+buildable_scenes = Array[PackedScene]([ExtResource("1_e3rdr")])
+category = "Sorters"
+stat_target = "cursed_sorter"
+metadata/_custom_type_script = "uid://b1lecmjr7r5pu"

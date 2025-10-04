@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://1uy6lq1obv1h"]
+
+[ext_resource type="Script" uid="uid://c4un8gsn0y0e4" path="res://Objects/Machines/Processor/decurser.gd" id="1_dblke"]
+[ext_resource type="PackedScene" uid="uid://ck74iel6gyc81" path="res://Objects/Machines/Processor/base_processor.tscn" id="2_76eqt"]
+
+[node name="Decurser" type="Node3D"]
+script = ExtResource("1_dblke")
+category = "Processors"
+building_name = "Decurser"
+
+[node name="BaseProcessor" parent="." instance=ExtResource("2_76eqt")]

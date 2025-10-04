@@ -332,10 +332,14 @@ func generate_box_properties(day_config: DayConfig) -> Dictionary:
 		properties["destination"] = selected_hole.destination
 		properties["needs_inspection"] = selected_hole.needs_inspection
 	
-	# Apply box type probabilities for disposable flag
 	for box_type in day_config.box_types:
 		if box_type.type == "disposable" and randf() < box_type.chance:
 			properties["disposable"] = true
+			break
+
+	for box_type in day_config.box_types:
+		if box_type.type == "cursed" and randf() < box_type.chance:
+			properties["cursed"] = true
 			break
 	
 	return properties

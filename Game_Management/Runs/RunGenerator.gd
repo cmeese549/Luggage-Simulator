@@ -8,6 +8,7 @@ class_name RunGenerator
 @export var max_box_holes: int = 8
 @export var inspection_chance: float = 0.4
 @export var disposable_chance: float = 0.15
+@export var cursed_chance: float = 0.2
 
 # Difficulty scaling
 @export var starting_boxes: int = 10
@@ -184,7 +185,6 @@ func generate_daily_configs(rng: RandomNumberGenerator) -> Array[DayConfig]:
 		var progress = Economy.config.calculate_day_progression(day)
 		day_config.box_types = generate_box_type_probabilities(rng, progress)
 		day_config.special_modifiers = generate_special_modifiers(rng, day)
-		
 		days.append(day_config)
 	
 	return days
@@ -199,6 +199,9 @@ func generate_box_type_probabilities(_rng: RandomNumberGenerator, progress: floa
 	# Disposable boxes increase over time
 	var disposable_prob = lerp(0.3, 0.35, progress)
 	probabilities.append({"type": "disposable", "chance": disposable_prob})
+	
+	var cursed_prob = lerp(0.3, 0.35, progress)
+	probabilities.append({"type": "cursed", "chance": cursed_prob})
 	
 	return probabilities
 

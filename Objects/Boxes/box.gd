@@ -26,6 +26,7 @@ var stickers_to_kill : Array[MeshInstance3D] = []
 @export var needs_inspection: bool = false
 @export var disposable: bool = false
 @export var destination: Destination
+@export var cursed: bool = false
 
 
 var has_valid_destination: bool = false
@@ -82,6 +83,7 @@ func get_save_data() -> Dictionary:
 	data.value = value
 	data.needs_inspection = needs_inspection
 	data.disposable = disposable
+	data.cursed = cursed
 	data.destination = destination
 	data.has_valid_destination = has_valid_destination
 	data.approval_state = approval_state
@@ -98,6 +100,7 @@ func load_save_data(data: Dictionary) -> void:
 	value = data.value
 	needs_inspection = data.needs_inspection
 	disposable = data.disposable
+	cursed = data.cursed
 	destination = data.destination
 	has_valid_destination = data.has_valid_destination
 	approval_state = data.approval_state
@@ -128,8 +131,15 @@ func _ready():
 			create_international_mesh()
 		if disposable:
 			create_disposable_mesh()
+		if cursed:
+			set_cursed_visual_state()
 	update_approval_state()
 
+func set_cursed_visual_state() -> void:
+	if cursed:
+		set_fog_color_animated(Color.PURPLE)
+	else:
+		set_fog_color_animated(Color.BLACK)
 
 func create_box_visual():
 	var mesh_instance = MeshInstance3D.new()
@@ -150,6 +160,7 @@ func create_box_visual():
 	#particles.emitting = false
 	add_child(mesh_instance)
 	create_outline_mesh(mesh_instance)
+	set_cursed_visual_state()
 	
 func create_outline_mesh(mesh_instance: MeshInstance3D):
 	outline_mesh = MeshInstance3D.new()
@@ -197,11 +208,15 @@ func create_box_collision():
 	add_child(collision_shape)
 	
 func set_approval_state(state: ApprovalState):
+	if cursed:
+		return
 	approval_state = state
 	if original_material != null:
 		update_approval_state()
 
 func update_approval_state():
+	if cursed:
+		return
 	match approval_state:
 		ApprovalState.APPROVED:
 			set_fog_color_animated(Color.GREEN)

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ShopItem" load_steps=4 format=3 uid="uid://nai6xe8w0q6x"]
+
+[ext_resource type="PackedScene" uid="uid://1uy6lq1obv1h" path="res://Objects/Machines/Processor/Decurser.tscn" id="1_rxsnb"]
+[ext_resource type="Texture2D" uid="uid://dsu4otkk2qt0g" path="res://icon.svg" id="2_jf8ve"]
+[ext_resource type="Script" uid="uid://b1lecmjr7r5pu" path="res://UI/PermanentUpgradeShop/ShopItem.gd" id="3_m7afl"]
+
+[resource]
+script = ExtResource("3_m7afl")
+item_name = "Decurser"
+item_description = "Decurser time babyyy"
+buildable_scenes = Array[PackedScene]([ExtResource("1_rxsnb")])
+category = "Processors"
+stat_target = "decurser"
+metadata/_custom_type_script = "uid://b1lecmjr7r5pu"

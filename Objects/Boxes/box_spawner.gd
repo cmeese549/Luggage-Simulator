@@ -73,10 +73,14 @@ func spawn_box_with_properties(properties: Dictionary) -> void:
 		box.disposable = properties.disposable
 	else:
 		box.disposable = false
+
+	if properties.has("cursed"):
+		box.cursed = properties.cursed
+	else:
+		box.cursed = false
 	
 	# Set validity based on active destinations
 	if run_orchestrator and run_orchestrator.current_run_config:
-		# FIXED:
 		var matching_holes = run_orchestrator.current_run_config.box_holes.filter(func(hole):
 			return hole.active and hole.destination != null and box.destination != null and hole.destination.id == box.destination.id and hole.needs_inspection == box.needs_inspection and not hole.is_disposal
 			)

@@ -61,6 +61,10 @@ func check_box_legit(box: Box) -> bool:
 	if box.approval_state == Box.ApprovalState.NONE:
 		#print("REJECTED: Box has no approval state")
 		return false
+		
+	if box.cursed:
+		#print("REJECTED: Box is cursed")
+		return false
 	
 	if is_disposal and box.needs_inspection == needs_inspection:
 		#print("Checking disposal hole logic...")

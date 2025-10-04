@@ -36,9 +36,11 @@ class_name PlayerProfile
 	"valid_destination_sorter": false,
 	"destination_sorter": false,
 	"disposable_sorter": false,
+	"cursed_sorter": false,
 	"needs_inspection_sorter": false,
 	"approval_processor": false,
-	"rejection_processor": false
+	"rejection_processor": false,
+	"decurser": false
 }
 
 var buildable_categories: Dictionary = {}
@@ -58,6 +60,7 @@ func get_upgrade_cost(stat_name: String) -> int:
 		return current_level * 5
 
 func get_starting_money() -> int:
+	return 1000000;
 	return base_starting_money + (upgrade_levels.starting_money * starting_money_per_level)
 
 func get_gold_stars_per_day() -> int:

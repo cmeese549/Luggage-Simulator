@@ -13,6 +13,7 @@ func register_all_shop_items():
 		# Processors
 		preload("res://UI/PermanentUpgradeShop/ShopItems/Processors/approval_processor.tres"),
 		preload("res://UI/PermanentUpgradeShop/ShopItems/Processors/rejection_processor.tres"),
+		preload("res://UI/PermanentUpgradeShop/ShopItems/Processors/decurser.tres"),
 		
 		# Conveyors  
 		preload("res://UI/PermanentUpgradeShop/ShopItems/Conveyors/corner_ground_conveyor.tres"),
@@ -25,6 +26,7 @@ func register_all_shop_items():
 		preload("res://UI/PermanentUpgradeShop/ShopItems/Sorters/disposable_sorter.tres"),
 		preload("res://UI/PermanentUpgradeShop/ShopItems/Sorters/valid_destination_sorter.tres"),
 		preload("res://UI/PermanentUpgradeShop/ShopItems/Sorters/destination_sorter.tres"),
+		preload("res://UI/PermanentUpgradeShop/ShopItems/Sorters/cursed_sorter.tres"),
 		
 		# QOL
 		preload("res://UI/PermanentUpgradeShop/ShopItems/QOL/roller_skates.tres"),
