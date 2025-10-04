@@ -8,7 +8,7 @@ class_name ChaosRenderer
 @export var max_line_length: float = 80.0
 @export var line_width: float = 2.0
 @export var animation_speed: float = 2.0
-@export var disappear_threshold: float = 0.92
+@export var disappear_threshold: float = 1.3
 
 # Color settings
 @export var target_color: Color = Color.ORANGE  # Color for current target point
@@ -48,11 +48,17 @@ func _ready() -> void:
 	
 	# Generate initial chaos lines
 	generate_chaos_lines()
+	get_viewport().size_changed.connect(_on_viewport_resized)
 
 func _process(delta: float) -> void:
 	time_elapsed += delta * animation_speed
 	update_point_order_levels()
 	queue_redraw()
+	
+func _on_viewport_resized() -> void:
+	# Wait a frame for pentagram to recalculate
+	await get_tree().process_frame
+	generate_chaos_lines()
 
 func _draw() -> void:
 	if chaos_lines.is_empty():
@@ -72,18 +78,22 @@ func _draw() -> void:
 		if local_order_level >= disappear_threshold:
 			continue
 		
-		# Determine line color based on game state
-		var line_color: Color = get_point_color(point_index)
+		# Determine base line color
+		var base_color: Color = get_point_color(point_index)
 		
 		for i in range(line_points.size() - 1):
 			var start: Vector2 = line_points[i]
 			var end: Vector2 = line_points[i + 1]
 			
+			# Calculate gradient fade (darker toward tips)
+			var gradient_t: float = float(i) / float(line_points.size() - 1)
+			var segment_color: Color = base_color.lerp(Color(base_color, 0.2), gradient_t)
+			
 			# Apply chaos/order transformation
 			var transformed_start: Vector2 = transform_point(start, i, line_index)
 			var transformed_end: Vector2 = transform_point(end, i + 1, line_index)
 			
-			draw_line(transformed_start, transformed_end, line_color, line_width)
+			draw_line(transformed_start, transformed_end, segment_color, line_width)
 
 func get_point_color(point_index: int) -> Color:
 	# Check if this point is completed
@@ -202,7 +212,6 @@ func transform_point(base_position: Vector2, segment_index: int, line_index: int
 	return base_position + (chaos_offset * chaos_strength)
 
 func get_chaos_offset(base_position: Vector2, segment_index: int, line_index: int = 0) -> Vector2:
-	# Get the correct noise instance for this line's pentagram point
 	var point_index: int = line_index / lines_per_point
 	var noise: FastNoiseLite = noise_instances[point_index % noise_instances.size()]
 
@@ -214,7 +223,6 @@ func get_chaos_offset(base_position: Vector2, segment_index: int, line_index: in
 	var time_drift_x: float = time_elapsed * 5
 	var time_drift_y: float = time_elapsed * 2
 
-	# Layer 1: Large sweeping movements
 	var sweep_x: float = noise.get_noise_3d(
 		base_position.x * 0.003 + point_offset + time_drift_x, 
 		base_position.y * 0.003 + line_offset + time_drift_y, 
@@ -227,12 +235,10 @@ func get_chaos_offset(base_position: Vector2, segment_index: int, line_index: in
 		time_elapsed * 0.5 + segment_index * 0.1
 	) * 2.0
 
-	# Layer 2: Spiraling chaos
 	var spiral_time: float = time_elapsed * 3.0 + segment_index * 0.5 + point_offset * 0.001 + line_offset * 0.0001
 	var spiral_x: float = sin(spiral_time) * cos(spiral_time * 1.7) * 1.5
 	var spiral_y: float = cos(spiral_time) * sin(spiral_time * 1.3) * 1.5
 
-	# Layer 3: High frequency writhing
 	var writhe_x: float = noise.get_noise_3d(
 		base_position.x * 0.05 + point_offset + time_drift_x * 3.0 + 2000.0, 
 		base_position.y * 0.05 + line_offset + time_drift_y * 2.5 + 2000.0, 
@@ -245,13 +251,11 @@ func get_chaos_offset(base_position: Vector2, segment_index: int, line_index: in
 		time_elapsed * 2.0 + segment_index * 0.7
 	) * 0.8
 
-	# Layer 4: Tentacle-like loops
 	var loop_time: float = time_elapsed * 1.5 + segment_index * 0.3 + point_offset * 0.0005 + line_offset * 0.00005
 	var loop_radius: float = sin(loop_time * 0.7) * 40.0
 	var loop_x: float = cos(loop_time * 2.3) * loop_radius
 	var loop_y: float = sin(loop_time * 1.9) * loop_radius
 	
-	# Return ONLY the chaos offset, not base + offset
 	return Vector2(
 		(sweep_x + spiral_x + writhe_x + loop_x) * base_chaos_intensity,
 		(sweep_y + spiral_y + writhe_y + loop_y) * base_chaos_intensity

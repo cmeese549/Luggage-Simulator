@@ -1,10 +1,50 @@
-[gd_scene load_steps=6 format=3 uid="uid://el3o4lxb8uob"]
+[gd_scene load_steps=15 format=3 uid="uid://el3o4lxb8uob"]
 
 [ext_resource type="Script" uid="uid://4n5roxpssfxh" path="res://UI/Minigames/PentagramPuzzle/pentagram_generator.gd" id="1_efdw0"]
 [ext_resource type="Script" uid="uid://o06nf7m3p1hh" path="res://UI/Minigames/PentagramPuzzle/pentagram_game_controller.gd" id="1_hpf6w"]
 [ext_resource type="Script" uid="uid://du8rnv2doj23s" path="res://UI/Minigames/PentagramPuzzle/chaos_renderer.gd" id="2_a61xl"]
 [ext_resource type="Script" uid="uid://dslwugqt3cqa0" path="res://UI/Minigames/PentagramPuzzle/proximity_detector.gd" id="2_gomw4"]
+[ext_resource type="Shader" uid="uid://bjg2gxgh3mgft" path="res://UI/Minigames/background_fog.gdshader" id="2_sg2l5"]
 [ext_resource type="Script" uid="uid://gvo28ahjo8j7" path="res://UI/Minigames/PentagramPuzzle/distortion_controller.gd" id="4_agh81"]
+[ext_resource type="Shader" uid="uid://2xt3mgoijrp5" path="res://UI/Minigames/PentagramPuzzle/vignette.gdshader" id="7_hjesn"]
+[ext_resource type="Shader" uid="uid://bayc44fng4om6" path="res://UI/Minigames/PentagramPuzzle/chromatic_aberration.gdshader" id="7_x83ud"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x83ud"]
+shader = ExtResource("7_hjesn")
+shader_parameter/chaos_level = 1.0
+shader_parameter/vignette_strength = 3.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kxjiw"]
+shader = ExtResource("7_x83ud")
+shader_parameter/chaos_level = 0.2950000140125
+shader_parameter/aberration_strength = 0.2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sg2l5"]
+shader = ExtResource("2_sg2l5")
+shader_parameter/time_speed = 0.3
+shader_parameter/fog_color = Color(0.05, 0, 0.1, 1)
+shader_parameter/fog_intensity = 0.4
+
+[sub_resource type="Curve" id="Curve_sg2l5"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.5577617, 0.9834255), -0.28109145, -0.28109145, 0, 0, Vector2(1, 0), -3.5071409, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_hjesn"]
+curve = SubResource("Curve_sg2l5")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sg2l5"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 200.0
+initial_velocity_max = 700.0
+gravity = Vector3(0, -50, 0)
+damping_min = 2.0
+damping_max = 4.0
+scale_min = 3.0
+scale_max = 6.0
+color = Color(1, 0.64705884, 0, 1)
+alpha_curve = SubResource("CurveTexture_hjesn")
+turbulence_enabled = true
 
 [node name="PentagramPuzzle" type="Node2D"]
 script = ExtResource("1_hpf6w")
@@ -26,6 +66,35 @@ disappear_threshold = 0.95
 
 [node name="UI" type="CanvasLayer" parent="."]
 
+[node name="VignetteOverlay" type="ColorRect" parent="UI"]
+material = SubResource("ShaderMaterial_x83ud")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ChromaticAberrationOverlay" type="ColorRect" parent="UI"]
+material = SubResource("ShaderMaterial_kxjiw")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ColorRect" type="ColorRect" parent="UI"]
+material = SubResource("ShaderMaterial_sg2l5")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+
 [node name="BackBufferCopy" type="BackBufferCopy" parent="UI"]
 position = Vector2(960, 540)
 scale = Vector2(1080, 1080)
@@ -42,3 +111,10 @@ script = ExtResource("4_agh81")
 base_distortion_strength = 0.015
 max_distortion_strength = 0.07
 chaos_color = Color(0.7969998, 0.13, 1, 1)
+
+[node name="HoverParticles" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 100
+lifetime = 1.48
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_sg2l5")

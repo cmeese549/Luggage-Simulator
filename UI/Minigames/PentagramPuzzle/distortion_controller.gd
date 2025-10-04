@@ -12,6 +12,9 @@ var pentagram_generator: PentagramGenerator
 var shader_material: ShaderMaterial
 var average_order_level: float = 0.0
 
+@onready var vignette_overlay: ColorRect = $"../VignetteOverlay"
+@onready var chromatic_overlay: ColorRect = $"../ChromaticAberrationOverlay"
+
 func _ready() -> void:
 	# Set up the shader material
 	shader_material = ShaderMaterial.new()
@@ -26,7 +29,7 @@ func _ready() -> void:
 		pentagram_generator = puzzle_root.get_node("PentagramGenerator")
 	
 	# Set initial shader parameters
-	_update_shader_params()
+	_update_shader_params(1)
 
 func _process(_delta: float) -> void:
 	if not chaos_renderer:
@@ -43,9 +46,16 @@ func _process(_delta: float) -> void:
 	if point_count > 0:
 		average_order_level /= float(point_count)
 	
-	_update_shader_params()
+	# Calculate vignette chaos based ONLY on current target point
+	var vignette_chaos: float = 1.0  # Default full chaos
+	var current_target = chaos_renderer.current_target_point
+	
+	if current_target >= 0 and current_target < chaos_renderer.point_order_levels.size():
+		vignette_chaos = 1.0 - chaos_renderer.point_order_levels[current_target]
+	
+	_update_shader_params(vignette_chaos)
 
-func _update_shader_params() -> void:
+func _update_shader_params(_vignette_chaos: float) -> void:
 	if not shader_material:
 		return
 	
@@ -66,6 +76,10 @@ func _update_shader_params() -> void:
 	
 	# Update center position to viewport center
 	shader_material.set_shader_parameter("center_position", Vector2(0.5, 0.5))
+	var vignette_chaos = max(_vignette_chaos, 0.4)
+	vignette_overlay.material.set_shader_parameter("chaos_level", vignette_chaos)
+	var chromatic_chaos = max(_vignette_chaos, 0.2)
+	chromatic_overlay.material.set_shader_parameter("chaos_level", chromatic_chaos)
 
 func get_average_order_level() -> float:
 	return average_order_level

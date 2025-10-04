@@ -7,6 +7,8 @@ var center_position: Vector2
 @export var line_width: float = 3.0
 @export var pentagram_color: Color = Color.WHITE
 
+var pulse_time: float = 0.0
+
 var pentagram_points: Array[Vector2] = []
 var pentagram_lines: Array[Array] = []
 
@@ -15,6 +17,10 @@ func _ready() -> void:
 	_recalculate_pentagram()
 	calculate_pentagram_points()
 	calculate_pentagram_lines()
+	
+func _process(delta: float) -> void:
+	pulse_time += delta
+	queue_redraw()
 	
 func _recalculate_pentagram() -> void:
 	# Calculate center based on actual viewport size
@@ -26,16 +32,25 @@ func _recalculate_pentagram() -> void:
 	queue_redraw()  # Force redraw with new calculations
 
 func _draw() -> void:
-	# Draw the pentagram lines
+	var pulse = 1.0 + sin(pulse_time * 2.0) * 0.3  # Increased from 0.15
+	
+	# Draw glow layer (outer) - pulses more
 	for line_pair in pentagram_lines:
 		var start: Vector2 = line_pair[0]
 		var end: Vector2 = line_pair[1]
-		draw_line(start, end, pentagram_color, line_width)
+		var glow_color = Color(pentagram_color, 0.4 * pulse)  # Increased base alpha
+		draw_line(start, end, glow_color, line_width * 4.0 * pulse)  # Wider glow
+	
+	# Draw the pentagram lines (main) - also pulses slightly
+	for line_pair in pentagram_lines:
+		var start: Vector2 = line_pair[0]
+		var end: Vector2 = line_pair[1]
+		draw_line(start, end, pentagram_color, line_width * pulse)
 	
 	# Draw points as small circles for debugging
 	for point in pentagram_points:
-		draw_circle(point, 8.0, Color.RED)
-
+		draw_circle(point, 8.0, Color.ORANGE)
+		
 func calculate_pentagram_points() -> void:
 	pentagram_points.clear()
 	
