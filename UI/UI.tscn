@@ -111,7 +111,7 @@ mouse_filter = 2
 theme = ExtResource("1_dhe1o")
 script = ExtResource("1_6dd3c")
 
-[node name="HUD" type="Control" parent="."]
+[node name="HUD" type="Control" parent="." groups=["HUD"]]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

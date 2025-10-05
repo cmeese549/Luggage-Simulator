@@ -1,10 +1,11 @@
-[gd_scene load_steps=22 format=3 uid="uid://el3o4lxb8uob"]
+[gd_scene load_steps=23 format=3 uid="uid://el3o4lxb8uob"]
 
 [ext_resource type="Script" uid="uid://4n5roxpssfxh" path="res://UI/Minigames/PentagramPuzzle/pentagram_generator.gd" id="1_efdw0"]
 [ext_resource type="Script" uid="uid://o06nf7m3p1hh" path="res://UI/Minigames/PentagramPuzzle/pentagram_game_controller.gd" id="1_hpf6w"]
 [ext_resource type="Script" uid="uid://du8rnv2doj23s" path="res://UI/Minigames/PentagramPuzzle/chaos_renderer.gd" id="2_a61xl"]
 [ext_resource type="Script" uid="uid://dslwugqt3cqa0" path="res://UI/Minigames/PentagramPuzzle/proximity_detector.gd" id="2_gomw4"]
 [ext_resource type="Shader" uid="uid://bjg2gxgh3mgft" path="res://UI/Minigames/background_fog.gdshader" id="2_sg2l5"]
+[ext_resource type="PackedScene" uid="uid://ik5ldrjbhuyt" path="res://Objects/Boxes/needs_inspection_sticker.tscn" id="2_xwl8y"]
 [ext_resource type="Script" uid="uid://gvo28ahjo8j7" path="res://UI/Minigames/PentagramPuzzle/distortion_controller.gd" id="4_agh81"]
 [ext_resource type="Shader" uid="uid://cigpnt4b17rdd" path="res://UI/Minigames/PentagramPuzzle/reality_tears.gdshader" id="5_1uaox"]
 [ext_resource type="Shader" uid="uid://c0vffyhk4ra4o" path="res://UI/Minigames/PentagramPuzzle/starfield.gdshader" id="5_yyfpv"]
@@ -87,6 +88,7 @@ color = Color(0.7292209, 0.30034077, 0.9074475, 1)
 
 [node name="PentagramPuzzle" type="Node2D"]
 script = ExtResource("1_hpf6w")
+cursor_3d_scene = ExtResource("2_xwl8y")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -177,16 +179,16 @@ lines_per_point = 20
 max_line_length = 10.0
 line_width = 1.0
 animation_speed = 1.0
-disappear_threshold = 0.95
+disappear_threshold = 0.89
 
-[node name="HoverParticles" type="GPUParticles2D" parent="."]
+[node name="HoverParticles" type="GPUParticles2D" parent="." groups=["preserve"]]
 emitting = false
 amount = 100
 lifetime = 1.48
 fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_sg2l5")
 
-[node name="EtherealOrbs" type="GPUParticles2D" parent="."]
+[node name="EtherealOrbs" type="GPUParticles2D" parent="." groups=["preserve"]]
 amount = 800
 lifetime = 15.0
 preprocess = 5.0

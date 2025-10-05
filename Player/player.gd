@@ -8,7 +8,8 @@ class_name Player
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var building_system: BuildingSystem = get_tree().get_first_node_in_group("BuildingSystem")
 
-@onready var hud : Control = $"../../UI/HUD"
+@onready var ui : Control = $"../UI"
+@onready var hud : Control = get_tree().get_first_node_in_group("HUD")
 
 @onready var look_at_cast : RayCast3D = $Neck/Camera3D/LookAtCast
 @onready var box_cast : RayCast3D = $Neck/Camera3D/BoxCast
@@ -29,6 +30,12 @@ var rng = RandomNumberGenerator.new()
 @onready var skateboard_fade_audio : AudioStreamPlayer = $Audio/Footsteps/SkateboardFade
 @onready var jump_splash_audio : AudioStreamPlayer = $Audio/Footsteps/JumpSplash
 @onready var cant_afford : AudioStreamPlayer = $Audio/CantAfford
+
+# Pentagram game
+@onready var pentagram_puzzle = $"../PentagramPuzzle"
+var pending_approval_state = null  # Store which button was pressed
+
+var is_playing_minigame: bool = false
 
 enum MOVE_TECH {
 	NONE,
@@ -202,7 +209,7 @@ func remove_inventory_items(items: Array[String]) -> void:
 		inventory.erase(item)
 
 func _unhandled_input(event):
-	if event is InputEventMouseButton:
+	if event is InputEventMouseButton and not is_playing_minigame:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	if event.is_action_pressed("roller"):
 		slidy = true
@@ -317,6 +324,11 @@ func handle_hotkey_inputs() -> void:
 		building_system.stored_hotkey(9)
 	
 func _physics_process(delta):
+	if is_playing_minigame:
+		velocity.y += get_gravity().y * delta  # Still apply gravity
+		move_and_slide()
+		return
+		
 	current_footstep_cooldown -= delta
 	
 	if is_on_floor() and is_piping and velocity.y <= 0:
@@ -379,9 +391,15 @@ func _physics_process(delta):
 	if held_box:
 		update_held_box_position(delta)
 		if Input.is_action_just_pressed("Approve"):
-			held_box.set_approval_state(Box.ApprovalState.APPROVED)
+			if held_box.cursed:
+				launch_pentagram_puzzle(Box.ApprovalState.APPROVED)
+			else:
+				held_box.set_approval_state(Box.ApprovalState.APPROVED)
 		elif Input.is_action_just_pressed("Reject"):
-			held_box.set_approval_state(Box.ApprovalState.REJECTED)
+			if held_box.cursed:
+				launch_pentagram_puzzle(Box.ApprovalState.REJECTED)
+			else:
+				held_box.set_approval_state(Box.ApprovalState.REJECTED)
 		
 	# Get the input direction and handle the movement/deceleration.
 	var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_back")
@@ -885,3 +903,36 @@ func update_box_highlighting():
 		currently_highlighted_box = new_highlighted_box
 		if currently_highlighted_box:
 			currently_highlighted_box.set_highlighted(true)
+			
+func launch_pentagram_puzzle(approval_state: Box.ApprovalState) -> void:
+	pending_approval_state = approval_state
+	is_playing_minigame = true
+	
+	# Show the puzzle and hide HUD
+	pentagram_puzzle.visible = true
+	hud.visible = false
+	ui.pauseable = false
+	# Unlock mouse for puzzle interaction
+	Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED_HIDDEN)
+	
+	pentagram_puzzle.restart_game()
+	
+	# Connect to win signal (disconnect first to avoid duplicates)
+	if not pentagram_puzzle._game_won.is_connected(_on_pentagram_completed):
+		pentagram_puzzle._game_won.connect(_on_pentagram_completed)
+
+func _on_pentagram_completed() -> void:
+	is_playing_minigame = false
+	
+	hud.visible = true
+	ui.pauseable = true
+	# Re-capture mouse for player movement
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	
+	# Apply the approval state that was pending
+	if held_box and pending_approval_state != null:
+		held_box.cursed = false
+		held_box.set_approval_state(pending_approval_state)
+	
+	pending_approval_state = null
+	drop_box()

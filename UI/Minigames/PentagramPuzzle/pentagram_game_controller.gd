@@ -20,6 +20,11 @@ var active_particles: Dictionary = {}
 @onready var hover_particles: GPUParticles2D = $HoverParticles
 @onready var ethereal_orbs: GPUParticles2D = $EtherealOrbs
 
+@onready var ui_node: CanvasLayer = $UI
+
+@export var cursor_3d_scene: PackedScene  # Assign your 3D cursor scene in inspector
+var cursor_sprite: Sprite2D
+
 func _ready() -> void:
 	# Start completely invisible
 	modulate.a = 0.0
@@ -31,6 +36,7 @@ func _ready() -> void:
 	# Find distortion controller
 	var ui_node = get_node_or_null("UI")
 	if ui_node:
+		ui_node.visible = false
 		distortion_controller = ui_node.get_node_or_null("DistortionOverlay")
 	
 	hover_particles = get_node_or_null("HoverParticles")
@@ -41,13 +47,50 @@ func _ready() -> void:
 	
 	# Generate random sequence and start
 	generate_random_sequence()
-	start_game()
 	
 	_create_background_polygon()
 	var size = get_viewport().get_visible_rect().size
 	ethereal_orbs.global_position = size / 2.0
-	# Fade in
-	fade_from_black(0.8)
+	
+	# Create cursor sprite
+	cursor_sprite = Sprite2D.new()
+	cursor_sprite.z_index = 100
+	add_child(cursor_sprite)
+	cursor_sprite.visible = false
+	
+	# Generate texture from 3D scene
+	if cursor_3d_scene:
+		var scene_texture = SceneTexture.new()
+		scene_texture.scene = cursor_3d_scene
+		scene_texture.camera_position = Vector3(2, 0, 2)
+		var look_at_transform = Transform3D().looking_at(Vector3.ZERO - scene_texture.camera_position, Vector3.UP)
+		scene_texture.camera_rotation = look_at_transform.basis.get_euler()
+		scene_texture.size = Vector2(64, 64)
+		cursor_sprite.texture = scene_texture
+		cursor_sprite.centered = true
+		
+		# Brighten the main cursor significantly
+		cursor_sprite.self_modulate = Color(6.0, 6.0, 6.0, 1.0)
+		
+		# Create multiple glow layers for stronger effect
+		# Outer glow (largest)
+		var outer_glow = Sprite2D.new()
+		outer_glow.texture = scene_texture
+		outer_glow.centered = true
+		outer_glow.modulate = Color(2.0, 1.5, 0.0, 0.4)  # Bright orange
+		outer_glow.scale = Vector2(2.0, 2.0)
+		outer_glow.z_index = 98
+		cursor_sprite.add_child(outer_glow)
+		
+		# Middle glow
+		var mid_glow = Sprite2D.new()
+		mid_glow.texture = scene_texture
+		mid_glow.centered = true
+		mid_glow.modulate = Color(2.5, 2.0, 0.5, 0.6)  # Bright yellow-orange
+		mid_glow.scale = Vector2(1.5, 1.5)
+		mid_glow.z_index = 99
+		cursor_sprite.add_child(mid_glow)
+
 	
 func _on_viewport_resized() -> void:
 	await get_tree().process_frame
@@ -73,6 +116,8 @@ func _process(_delta: float) -> void:
 			chaos_level_changed.emit(avg_chaos)
 		hover_particles.emitting = true
 		hover_particles.global_position = get_global_mouse_position()
+		if cursor_sprite and cursor_sprite.visible:
+			cursor_sprite.global_position = get_global_mouse_position()
 
 func generate_random_sequence() -> void:
 	correct_sequence.clear()
@@ -95,6 +140,8 @@ func start_game() -> void:
 	
 	# Set the first target
 	update_target_point()
+		# Fade in
+	fade_from_black(0.8)
 
 func check_tuned_points() -> void:
 	if not chaos_renderer:
@@ -151,7 +198,8 @@ func game_won() -> void:
 	chaos_renderer.set_target_point(-1)
 	
 	_game_won.emit()
-	
+	if cursor_sprite:
+		cursor_sprite.visible = false
 	# Big success pulse
 	if distortion_controller:
 		distortion_controller.pulse_distortion(0.1, 1.0)
@@ -161,12 +209,9 @@ func game_won() -> void:
 func restart_game() -> void:
 	generate_random_sequence()
 	start_game()
-
-# Call this to restart after win/loss
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("ui_accept"):  # Space or Enter
-		if current_state != GameState.PLAYING:
-			restart_game()
+	fade_from_black(0.8)
+	if cursor_sprite:
+		cursor_sprite.visible = true
 			
 func spawn_completion_particles(point_index: int) -> void:
 	if not pentagram_generator:
@@ -185,35 +230,10 @@ func spawn_completion_particles(point_index: int) -> void:
 
 func stop_all_particles() -> void:
 	for child in get_children():
-		if child is GPUParticles2D:
+		if child is GPUParticles2D and not child.is_in_group("preserve"):
 			child.emitting = false
 			child.queue_free()
 	active_particles.clear()
-
-func fade_to_black(duration: float) -> void:
-	var tween = create_tween()
-	tween.tween_property(self, "modulate:a", 0.0, duration)
-	
-	# Also fade UI layer
-	var ui_node = get_node_or_null("UI")
-	tween.parallel().tween_property(ui_node, "modulate:a", 0.0, duration)
-	
-	await tween.finished
-	visible = false
-	ui_node.visible = false
-
-func fade_from_black(duration: float) -> void:
-	var ui_node = get_node_or_null("UI")
-	var tween = create_tween()
-	visible = true
-	ui_node.visible = true
-	tween.tween_property(self, "modulate:a", 1.0, duration)
-	
-	# Also fade UI layer
-
-	tween.parallel().tween_property(ui_node, "modulate:a", 1.0, duration)
-	
-	await tween.finished
 	
 func _create_background_polygon() -> void:
 	var bg = Polygon2D.new()
@@ -232,3 +252,30 @@ func _resize_background(bg: Polygon2D) -> void:
 		Vector2(size.x, size.y),
 		Vector2(0, size.y)
 	])
+
+func fade_to_black(duration: float) -> void:
+	# Hide UI immediately at the start
+	var ui_node = get_node_or_null("UI")
+	if ui_node:
+		ui_node.visible = false
+	
+	var tween = create_tween()
+	tween.tween_property(self, "modulate:a", 0.0, duration)
+	
+	await tween.finished
+	visible = false
+
+func fade_from_black(duration: float) -> void:
+	# Show UI instantly at the start
+	var ui_node = get_node_or_null("UI")
+	if ui_node:
+		ui_node.visible = true
+	
+	# IMPORTANT: Set visible first, THEN set alpha to 0, THEN tween
+	visible = true
+	modulate.a = 0.0
+	
+	var tween = create_tween()
+	tween.tween_property(self, "modulate:a", 1.0, duration)
+	
+	await tween.finished

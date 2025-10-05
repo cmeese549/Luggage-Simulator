@@ -1,8 +1,9 @@
-[gd_scene load_steps=35 format=3 uid="uid://bpisaxbeyscs7"]
+[gd_scene load_steps=36 format=3 uid="uid://bpisaxbeyscs7"]
 
 [ext_resource type="Script" uid="uid://bu07i0b06sujv" path="res://Game_Management/main_level.gd" id="1_romof"]
 [ext_resource type="PackedScene" uid="uid://exdhmbr43ger" path="res://UI/UI.tscn" id="2_bblu0"]
 [ext_resource type="PackedScene" uid="uid://bk7vc4usjt3od" path="res://Player/player.tscn" id="2_o3roe"]
+[ext_resource type="PackedScene" uid="uid://el3o4lxb8uob" path="res://UI/Minigames/PentagramPuzzle/PentagramPuzzle.tscn" id="2_o73a5"]
 [ext_resource type="PackedScene" uid="uid://dtp6lwwlku6aq" path="res://Art_Assets/Models/FloorTile.tscn" id="5_bblu0"]
 [ext_resource type="PackedScene" uid="uid://cl1amvrtmvb5i" path="res://Art_Assets/Models/Wall_Tall.tscn" id="6_o3roe"]
 [ext_resource type="Script" uid="uid://6boni430y3o" path="res://Level/LevelGenerator.gd" id="7_o3roe"]
@@ -65,6 +66,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4099199, 0)
 [node name="Players" type="Node3D" parent="." groups=["Players"]]
 
 [node name="UI" parent="." instance=ExtResource("2_bblu0")]
+
+[node name="PentagramPuzzle" parent="." instance=ExtResource("2_o73a5")]
+visible = false
 
 [node name="Enviroment" type="Node" parent="."]
 

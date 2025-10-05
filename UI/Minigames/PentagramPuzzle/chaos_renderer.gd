@@ -8,7 +8,7 @@ class_name ChaosRenderer
 @export var max_line_length: float = 80.0
 @export var line_width: float = 2.0
 @export var animation_speed: float = 2.0
-@export var disappear_threshold: float = 1.3
+@export var disappear_threshold: float = 0.9
 
 # Color settings
 @export var target_color: Color = Color.ORANGE  # Color for current target point
